@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#7f13ec",
+                "background-light": "#f7f6f8",
+                "background-dark": "#191022",
+              },
+              fontFamily: {
+                "display": ["Lexend"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 md:px-20 lg:px-40 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">sports_volleyball</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-black leading-tight tracking-tight">I FOLLOW BV</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Coaches</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Training</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Camps</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Events</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden sm:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full bg-primary/5 dark:bg-primary/10 border border-primary/10">
+<div class="text-primary flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 h-full placeholder:text-slate-400 text-sm font-normal px-2" placeholder="Find a coach..." value=""/>
+</div>
+</label>
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile avatar circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMgy6PuxnywGyr__pdJyAcjaNSZcZ5r5--ZD0-z7ISBK_uCPGvL3eFrfLH2I3i55a5YwbhaycFlw5KLRlVIbC39ePSnuaL0qhly3bqZW7eMZTPCstBLh17ECwIC24f0705_MeEbJapDfnD0FoVcI2nWcHZg_fxM47dotwMN4J-cK8kqvmFF-5Vg0v2nsGqAEaaXawqTnOiJ9q20WmgoNVHy4EzbOPpkFYSWZTAflYhFKGdnjU6WXK4u4ImmVZVPVnCX_Vag6Xn0WUu");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center px-6 md:px-20 lg:px-40 py-12">
+<div class="w-full max-w-6xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">The Elite Team</span>
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">Our Expert <span class="text-primary">Coaching Staff</span></h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg mt-4 leading-relaxed">
+                            Train with world-class athletes and Olympic-level strategists. Our coaches bring decades of competitive experience to the sand to elevate your game.
+                        </p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/30 hover:scale-105 transition-transform">
+                            Book Session
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-6">
+<span class="text-white text-xs font-bold bg-primary px-3 py-1 rounded-full">Certified FIVB Level III</span>
+</div>
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Marco Rossi male beach volley coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy0MfY-JOvGT2UhR4-F_SnK4B1Gv7-RNAM0StEzn8M4xQi33RLBCraVGDglYqkNzFZiad4iHcDWJ4AeYzBw5WSQ1ISQFLRNSHrKBjVUlnGMuQSiRdbMEOwN8LJ3FPcTr8TNZXyDgPhXSovfvdPjSCF00Zc3UW4aQT1W3_DTcCATPnIwnTAH5Ys1M18taEbMJbM2Qqmra2yxXcgxr5yLppcTFPJr5THJ2ToO49cklGSRwgWkhcp80kEtSyMUDOeyqPD6_beUe4AjYvb"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Head Coach</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Marco Rossi</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Former Olympic medalist with 15 years experience in international circuits. Specialist in jump-serve mechanics.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Sarah Jenkins female technical director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp26sjA2XVXsDruezx57mvDsLGMLYQ27XE97ZPduyDzyVMT4MIvcYG0U0TvuUZxuArB4uKKDeeUa_0hXbh8LjrqoPNG-0gbELcShbfJFwglocQYkrkWRQltWVq7tClYt_sdp0ydbz1lFT042TF9WbUi8-ds0EKj_2BtzxGjJ59xZkM-fi9vWPzamqwnbCcF2UBssQLkBGHyUHJMDX1m0ejq9wg27ZvZPYw_bdSZCAY5pnqURtkUDANzusMkbNndDmxy8ExQxpoNZI4"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Technical Director</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Sarah Jenkins</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Specializing in defensive transitions and player development. Mastermind behind our elite defensive drills.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Alex Rivera male elite coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArKKYkV87x5RyyK3U-qjrTMNIGEFQoR56qIuoRP5vbZwttbL2TTHORj-y1R_jzg4BdngDOkhgALbTfa2ZhgEySZ-gcw46y6sA47389h87yr2pzM8nFxd-VEBkPi5frf3SmqE7xL8dJ4tpR7t34So8D5p8xI1ARldXZkFuXIbv943qsiq7e4fYMBTEJChhyffXFIkCMNT0bYjsVhYNQwWUZi5owzxxRqzKiTaH-RChQZ8QOk_jQ7nR6vl4qZL0LSseYUuzI3CDEPpLg"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Elite Coach</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Alex Rivera</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Focused on high-performance beach volleyball mechanics and biomechanical analysis for peak efficiency.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Elena Petrova female youth director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJy7ndMJLr_SV1DVCrQ-M8rrovd0jtdH-D2hMcUhPUFmhYnmWKjMCwkvjCA5Q_1_L8u4ZmiVmfiTNLNlGV4iyYbsrqk0KM1vUEtloZynzQVAPS8nvxiZ6PNdTN-DcpM3n9oB1IihgvrSoSCnHXTlZeABqr-2jFpJV3rzhjXn0t-rrME6UeKpCGy4rd8w39XhGG2JYPfsqntOfDbf3hnCEexzk-Wsk40JnEwSVsh6w3CEdnR9uByB5sdQ9Jwq-tet7Lkj-szGE2U0pp"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Youth Director</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Elena Petrova</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Expert in nurturing young talent and building foundational skills through engaging, high-energy sessions.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of David Chen male performance trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeox1f7CtuVK7mZudismnCMTGtgrecdrg3LniRkGn3bhoBABaCD75Chh3sTit_7ht_NtXW2crow_YY4wu4_rt2XqQOfh2aq7Wll2aMVbJpCyInIGMLP6ngrKe_1LfPbKTLQQLwaUfzqu-QkQa0W0qBVScu5H2ca0T0sYrW8S2AhOVpNH0OXcmM7HYayhVVZcLOw284gjlPINCjfYLpY2mUGVWsgxMLfaHgMoWvzo1r7AWrhPfu2vrROZ25MQkuEQnviciZmX72_JBt"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Strength &amp; Conditioning</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">David Chen</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Specialized in sand-specific agility, explosive power, and injury prevention for beach athletes.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Sofia Berg female tactical analyst" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbi6udHJLm-TG8gHKLXAp8Kdx3taBxUIhfT8e8Htpd2xMGZKJ5OBGUesYnA_vwsZjqED1Wa0gM16LIZHi4AIkZDNB3E-T8kZc8-Ta9QraEX11n4Mekh_9QGt_LoVoJ0tYAG2eky97MwEwpq5oIuDAK_mZRkI74aYQpxCLyjrrCZ88YrP5Il8-LLzyz7oj6ZaZtug-9kp9DAgFlQmV9k4IwfWcIsyenbAwkLYYLdh2b6X7qkaPCnxKyiRMNm91Qnutxd-jKy9aGt7iv"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Tactical Analyst</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Sofia Berg</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Expert in match analysis and winning strategies. Uses data-driven insights to outplay opponents.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Lucas Silva male lead coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHAQLmxR3MYA2v3ed-rlNSl7Zkatm92KCK5SZtWTjj9nbimev5REPHZPefqbgvnjUBxoJkpisEHI0ExplYDN7S9uNAPaX40uiP45nQqYFcu8YVucob2eKc8fwdHSGB3LJcvi7DC9G212KOajY4cYo6FPCXU7F4P_jL4Qzpy6WxgSFmYYRLEBsneqAgZY2JrP_Gu40h00JqL3C187xQiT5hucjmNlbZeVDq6vuIIdxeE9Ilyn-VctZ-nSehsYoV0wy0wiTW1QtNxYEH"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Lead Coach</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Lucas Silva</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Dedicated to improving server accuracy and receiving. Former Brazilian national league stand-out.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Emma Wilson female performance coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuCi8LTVnHxTW-UeqGELOiwDbkmIwN4Fb9dr6_36pUy0DYV5Z8164mAvPDil7IjjYBGPJiw-7XzU63l6lhL-OWeJUnUPQKOoLdtL-DCT6PRqy6vU7XPlQ0Ih6IjoEXkUvejF2dEPXtmlIAgCgQguA3EMQ9pyepAfqN2bgdTO7bF7rADi7k-XtNtKFjjbViwQiPe7ic7rMlONUiURsKeA14X6GagT5KtevMSY-UIgY5IoABFWwyJv9u3MrVEacoBwIxLt-1xQxgCpSJ"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Performance Coach</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Emma Wilson</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                MSc in Sports Psychology and professional beach player. Expert in mental toughness and focus.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Tariq Hassan male senior instructor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg_-uH7n9ZDAt56gRDjTV2uorV6m5JYVYRF6dc0nkCvRVNZ0EJeXdub4SUV9bEXTexvFeEs9wM5pzLtHUbFvOmKRajQjt1Qans8fV-4sFsVy0xJScIHbdKQ6pT2F1Y8KM7CT4XKL8SE_V3um1lLKT8cYLV2okzKIISgWx9E-s2iBy6woGjWWA_EqpmWy76gABLyx-zSw-2TUcj7apUqitABZAHSiXm97fr5r3O5iUVbAQIKYJ1NydbMM4tT4qN578nik0JbIcsm1WL"/>
+</div>
+<div class="p-6">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Senior Instructor</p>
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Tariq Hassan</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Veteran coach with international tournament success. Mastering the art of wind-play and court reading.
+                            </p>
+</div>
+</div>
+</div>
+<div class="mt-24 w-full max-w-4xl bg-primary rounded-xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">sports_volleyball</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Ready to elevate your game?</h2>
+<p class="text-lg opacity-90 mb-8 max-w-2xl mx-auto relative z-10">Book a private session with one of our expert coaches today and receive personalized feedback to crush your competition.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+<button class="bg-white text-primary font-bold py-4 px-10 rounded-full hover:scale-105 transition-transform">
+                            Book a Session
+                        </button>
+<button class="bg-primary/20 border-2 border-white/30 text-white font-bold py-4 px-10 rounded-full hover:bg-primary/40 transition-colors">
+                            View Full Schedule
+                        </button>
+</div>
+</div>
+</main>
+<footer class="mt-20 border-t border-primary/10 py-12 px-6 md:px-20 lg:px-40 bg-white dark:bg-slate-900/50">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">sports_volleyball</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-black leading-tight tracking-tight">I FOLLOW BV</h2>
+</div>
+<div class="flex gap-8 text-sm font-medium text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex gap-4">
+<button class="size-10 rounded-full bg-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="size-10 rounded-full bg-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">alternate_email</span>
+</button>
+</div>
+</div>
+<p class="text-center text-slate-400 text-xs mt-8">© 2024 I Follow Beach Volley. All rights reserved.</p>
+</footer>
+</div>
+</div>
+</body></html>

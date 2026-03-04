@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IFB</title>
+<meta content="Entra nella community di beach volley più grande d'Italia" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700", /* Golden Yellow Accent */
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7", /* Light sand beige for alternate sections */
+                        "sand-dark": "#231b2e", /* Darker variant for dark mode sections */
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #7f13ec, #FFD700);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-white antialiased transition-colors duration-300">
+<!-- Navigation -->
+<nav class="fixed w-full z-50 top-0 start-0 border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
+<a class="flex items-center space-x-2 rtl:space-x-reverse" href="#">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-icons">sports_volleyball</span>
+</div>
+<span class="self-center text-xl font-bold whitespace-nowrap text-primary dark:text-white tracking-tight">I Follow Beach Volley</span>
+</a>
+<div class="flex md:order-2 space-x-3 md:space-x-4 rtl:space-x-reverse items-center">
+<a href="members.html" class="text-primary hover:text-white bg-white hover:bg-primary border border-primary focus:ring-4 focus:outline-none focus:ring-primary/30 font-medium rounded-full text-sm px-5 py-2.5 text-center transition-all duration-300 dark:bg-transparent dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-primary inline-block">
+    Area Membri
+</a>
+<button aria-controls="navbar-sticky" aria-expanded="false" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" data-collapse-toggle="navbar-sticky" type="button">
+<span class="sr-only">Open main menu</span>
+<svg aria-hidden="true" class="w-5 h-5" fill="none" viewbox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1h15M1 7h15M1 13h15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+<ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+<li>
+<a aria-current="page" class="block py-2 px-3 text-white bg-primary rounded md:bg-transparent md:text-primary md:p-0 md:dark:text-primary" href="index.html">Home</a>
+</li>
+<li>
+<a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:dark:hover:text-primary dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="eventi.html">Clinic</a>
+</li>
+<li>
+<a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:dark:hover:text-primary dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="eventi.html">Eventi</a>
+</li>
+<li>
+<a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:dark:hover:text-primary dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="contatti.html">Contatti</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
+<div class="absolute inset-0 bg-sand dark:bg-sand-dark -z-20"></div>
+<!-- Decorative blob -->
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl -z-10"></div>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+<!-- Text Content -->
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary dark:text-primary-300 text-sm font-semibold mb-6">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                        Registrazioni Aperte
+                    </div>
+<h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
+                       Passione sulla <span class="text-primary">Sabbia</span>
+</h1>
+<p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
+                       Entra nella community di beach volley più grande d'Italia. Che tu sia un principiante che vuole imparare o un veterano che cerca competizione, abbiamo qualcosa per te. Unisciti a noi sulla sabbia e porta il tuo gioco al livello successivo!
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-center text-white rounded-full bg-primary hover:bg-primary-dark focus:ring-4 focus:ring-primary/30 transition-all shadow-lg shadow-primary/30 hover:-translate-y-1" href="eventi.html">
+                           Trova un camp di beach volley
+                            <span class="material-icons ml-2 text-sm">arrow_forward</span>
+</a>
+<a class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-center text-gray-900 rounded-full border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 transition-all" href="#video">
+<span class="material-icons mr-2 text-primary">play_circle</span>
+                            Guarda gli highlight
+                        </a>
+</div>
+<div class="mt-10 flex items-center gap-4">
+<div class="flex -space-x-3">
+<img alt="Female player portrait" class="w-10 h-10 border-2 border-white dark:border-background-dark rounded-full object-cover" data-alt="Portrait of a smiling female volleyball player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQjgZwuDj1kYRYE1nNYu4kAX3CNKB-wwQFH5-HywGpOLmh0i9JCyRLVMx0c7QbgVfP9CjrxH0mWBRZCi1gW230_twMpfNf3mnXNWCcjeIIT6D1xec0F7XtUL0aZ4BHERPKEdhcF1mvIYyWCguhMKwtvQECFIB_Wkgs_GCEKuS0WuU6Zv5I9tlCejgval5zOX5n53axZbw1VxgORckY9a620sClDFrYRfqPiUmi0_4b0kyd8IE9bu9lMW_kkmQWLiu3KlMis07i2Vgv"/>
+<img alt="Male player portrait" class="w-10 h-10 border-2 border-white dark:border-background-dark rounded-full object-cover" data-alt="Portrait of a smiling male volleyball player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOBteAjr372ReCsLu3lf8wUALbPuwlBz_BtZ6sd-MADmf7RpSt4Oy_JW1l5YqxY7kON5x1O7A_1X3IgYWvoAhtfW_uB_nXGiepjq3K7Qcs9eXFDCHhXGWyLGlaV15h8CG7EUO5qV9I_lnEpWqj4dFDQ-kU3bHG4DNUTIh7MHl_ber2ZTI9qhq_wiWXgb1436YxKpA9N6MQJhCSXTpNmGaR7PYP2T2-N7dMx6V-gW7lWlKsc2h6MhU-01KIiAPykccBz5uHDJldZsiX"/>
+<img alt="Male player portrait 2" class="w-10 h-10 border-2 border-white dark:border-background-dark rounded-full object-cover" data-alt="Portrait of a focused male volleyball player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKwYDRz-6BoW2I4N0s0FOKwYJbOjIEs-MDwfzYoxQ_QWX7U0LARVQrdlzYgVUsEcAG4EuxmuwMu9BayuPrjcgaHBsBk6Lp2UKyQFA4BNq1GmP9nw29uNsi0CqkjtSgp2bgROlK2LAKi7-O-sfP_ZOW8oJW5r_bHFrqxp4jl3dRG9xsfYAcicrjEd_R3jA1_ywPM9zFXXfN5JvFs7M_HqqNT_Ru0sTd9C0wH0JNU9MDzbdcWQ72Ko5sagScZWnVU9XzZ63HA0o3Gl1x"/>
+<div class="w-10 h-10 border-2 border-white dark:border-background-dark rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300">+1k</div>
+</div>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">Membri della community</p>
+</div>
+</div>
+<!-- Hero Image -->
+<div class="relative lg:ml-auto w-full max-w-lg lg:max-w-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full blur-3xl -z-10"></div>
+<div class="relative rounded-xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+<img alt="Spike" class="w-full h-auto object-cover aspect-[4/5] rounded-xl" data-alt="Action shot of a beach volleyball player jumping to spike the ball against a blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqsn2zrvR3uJRqfyM8vriomwgkhkxqwQ0xYbSBhHtzKt7_IglQQZQHmZX5tFXi0FRneE2kF5JNMo_91dpEUVz97vwuWWy1Ag21GmTaqUQUyRkfB7tY-Vufo_WVp0PPNbh2BcQJyUvkiOdi7hJ9g4We_RZqMAeAnYs52V1wNZkeWlPGtRw-z9E2Tgl7k1nnZi9SBowZWRH-2Uvhbitur6hErxr4cI3uqNf2KF-HlBfXLWd4HA0EM5qW4_jQNf1XWjoqPjQrisus7zZ3"/>
+<!-- Floating Badge -->
+<div class="absolute bottom-6 left-6 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-4 py-3 rounded-lg shadow-lg flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-full text-primary">
+<span class="material-icons text-xl">emoji_events</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Prossimo torneo</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features / Values Strip -->
+<section class="py-10 bg-primary">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
+<div class="px-4 py-2">
+<span class="material-icons text-secondary text-4xl mb-3">school</span>
+<h3 class="text-white text-xl font-bold mb-1">Coaching</h3>
+<p class="text-white/80 text-sm">Impara da un gruppo di allenatori formato secondo un metodo preciso</p>
+</div>
+<div class="px-4 py-2">
+<span class="material-icons text-secondary text-4xl mb-3">groups</span>
+<h3 class="text-white text-xl font-bold mb-1">Community</h3>
+<p class="text-white/80 text-sm">Unisciti a una comunità vibrante di giocatori appassionati</p>
+</div>
+<div class="px-4 py-2">
+<span class="material-icons text-secondary text-4xl mb-3">fitness_center</span>
+<h3 class="text-white text-xl font-bold mb-1">Tutti i livelli</h3>
+<p class="text-white/80 text-sm">Dal primo livello fino all'elite</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Events Section -->
+<section class="py-20 bg-background-light dark:bg-background-dark" id="camps">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Vieni in campo!</h2>
+<p class="text-gray-600 dark:text-gray-400">Prossimi eventi</p>
+</div>
+<a class="text-primary font-semibold hover:underline flex items-center" href="eventi.html">
+                    Vedi il calendario completo <span class="material-icons text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 border border-gray-100 dark:border-gray-700">
+<div class="relative h-56 overflow-hidden">
+<img alt="Group of people playing volleyball" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Wide shot of a beach volleyball game in progress on a sunny day" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZyksNvscrA1PfRvzseBoPgnpxtVRzxx6uuGCmUDtnWf2o2N9jPYsPClQV-ahTgpJlNrUVdRiurUpos4ZjGXGYU1JMXETSwrmT0EEoRlXRybKZ8HtUCezcwDccy3jHsynKmmfonPiC7ftnF9q4oZ6bNdlqzScxiq54cv6nuFlnfKvEZmtuxGOcji-a26Ov_rv5TLhOVR3XOhpS3d6ua_9bCxZpO6tPK0B4VA_wY0CGjY9_6xTzDlVyR9dJZGlVG_7weZboqC5wfiIm"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            CAMP
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3 text-sm text-gray-500 dark:text-gray-400">
+<span class="flex items-center gap-1"><span class="material-icons text-base">calendar_today</span> Apr 24-26</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-base">location_on</span> Marina di Massa</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Beach Break alla partaccia</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">Lavoro intensivo sulla gestione del vento con allenatori esperti.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">da €130</span>
+<button class="px-5 py-2 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full text-sm font-semibold transition-colors">
+                                Registrati Ora
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 border border-primary/20 ring-1 ring-primary/20 relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+<div class="relative h-56 overflow-hidden">
+<img alt="Volleyball tournament setup" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Competitive beach volleyball match with spectators in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKoTgw2Hcav9F4GfOx1RLX9rRVF-EWtFQEIlAM7b54qT-XJAhSo2XPQ4gvFTHygzzIZtYbEROXtpFpLtS7sZqPUL-xdy65khn-dKGm97IxRPDSFW6CgQr_mRlD6IokxSGHX5Q3XKFmP70wLijaG2XxsOr4kfy1eS52yIX0AAAUVnLGCxkRQY0yIl3vZA_SXp3rcwmja200X3XATRO0QDhzF9XS-V-A3vmxrHd9ivIPA2CQLbzpwvdcwa-Ilk5mnmDBjh6dCcc7zKHD"/>
+<div class="absolute top-4 right-4 bg-secondary text-gray-900 px-3 py-1 rounded-full text-xs font-bold shadow-sm flex items-center gap-1">
+<span class="material-icons text-xs">star</span> POPULAR
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3 text-sm text-gray-500 dark:text-gray-400">
+<span class="flex items-center gap-1"><span class="material-icons text-base">calendar_today</span> Sep 05</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-base">location_on</span> Marina di Massa</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Partaccia erotica</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">Vol. II del nostro camp più popolare.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">da 100€</span>
+<button class="px-5 py-2 bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-semibold transition-colors shadow-lg shadow-primary/20">
+                                Registrati Ora
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 border border-gray-100 dark:border-gray-700">
+<div class="relative h-56 overflow-hidden">
+<img alt="Two players blocking at the net" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up action shot of two players jumping to block a spike at the net" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhNbrt5m-JM3n1pLcDGtd5euXlLFff_YulUP7cN_tdmTjIQB0d7K7q8En3diF7aKTtVzcAE7EMlItpwYK3sgvf2djQuHCR_31IleqUDMFx7eiOUuBKze4j90VhS6hsEQfOWpOzNJC1vQbLeUHoX1i2WY6a0m2aPZDOb2Ac0hwv4fpPXbckzhHN_8gUHjY3hIMTd1VS1_FvbP4tw7UJuR5f15GeXWh15ndPZTiOowthaKmfETpHTiFExntFyQHz3S-hB2Wf0KRN9hYx"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            FEDERALE
+                        </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3 text-sm text-gray-500 dark:text-gray-400">
+<span class="flex items-center gap-1"><span class="material-icons text-base">calendar_today</span> Mar, 8th</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-base">location_on</span> Basiglio</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Torneo gold maschile</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">Iscrizione aperta per tutti i giocatori</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">€25</span>
+<button class="px-5 py-2 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full text-sm font-semibold transition-colors">
+                                Registrati Ora
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map / Location Section -->
+<section class="py-16 bg-sand dark:bg-sand-dark">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
+<div class="lg:w-1/2 p-10 flex flex-col justify-center">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Il nostro campo di casa</h2>
+<p class="text-gray-600 dark:text-gray-300 mb-6">Il centro presso cui alleniamo e situato a Basiglio, in provincia di Milano</p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+<span class="material-icons text-sm">location_on</span>
+</div>
+<div class="ml-4">
+<h4 class="text-lg font-semibold text-gray-900 dark:text-white">BeachTown</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Piazza Marco Polo, 3 - 20079 Basiglio (MI)</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+<span class="material-icons text-sm">schedule</span>
+</div>
+<div class="ml-4">
+<h4 class="text-lg font-semibold text-gray-900 dark:text-white">Orari di allenamento</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm"> da Lunedì a Venerdì: 18:30 - 23:00 <br/> Sabato e domenica fate tornei!</p>
+</div>
+</li>
+</ul>
+<div>
+<a class="inline-flex items-center text-primary font-bold hover:underline" href="https://www.google.com/maps/dir/?api=1&destination=Piazza+Marco+Polo,+3,+20079+Basiglio+MI" target="_blank" rel="noopener noreferrer">
+    Ottieni indicazioni <span class="material-icons text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:w-1/2 h-80 lg:h-auto bg-gray-200 relative">
+<img alt="Sporting MI3" class="w-full h-full object-cover" data-alt="Visione esterna dello sporting" data-location="Santa Monica, CA" src="https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F5005670%2Flg_kkZbyobDSwCDj23IyuNaF0e-Q5rYElZt.jpg&h=360"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-20 bg-background-light dark:bg-background-dark relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
+<div class="container mx-auto px-4 text-center max-w-3xl">
+<span class="inline-block p-3 rounded-full bg-primary/10 text-primary mb-4">
+<span class="material-icons">mail_outline</span>
+</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Non fare paste!</h2>
+<p class="text-gray-600 dark:text-gray-400 mb-8">Gli ultimi annunci di tornei, i consigli per l'allenamento e le notizie della comunità consegnati direttamente nella tua casella di posta.</p>
+<form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+<input class="flex-1 px-6 py-4 rounded-full border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Enter your email address" required="" type="email"/>
+<button class="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all transform hover:-translate-y-0.5" type="submit">
+                    Subscribe
+                </button>
+</form>
+<p class="mt-4 text-xs text-gray-400">Rispettiamo la tua privacy. Annulla l'iscrizione in qualsiasi momento.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-gray-100 dark:border-gray-800 pt-16 pb-8">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+<!-- Brand -->
+<div>
+<a class="flex items-center space-x-2 mb-6" href="#">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-icons text-sm">sports_volleyball</span>
+</div>
+<span class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">IFBV</span>
+</a>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Portiamo i giocatori di beach volley di tutti i livelli a raggiungere il loro pieno potenziale, in un ambiente divertente e inclusivo. Siamo più di un club, siamo una famiglia sulla sabbia.
+                    </p>
+<div class="flex space-x-4">
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-primary hover:text-white transition-colors" href="https://www.facebook.com/IFOLLOWBV/?locale=it_IT" target="_blank" rel="noopener noreferrer">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-primary hover:text-white transition-colors" href="https://www.instagram.com/ifollowbv/" target="_blank" rel="noopener noreferrer">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.468 2.373c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+<!-- Links -->
+<div>
+<h3 class="text-gray-900 dark:text-white font-bold mb-4">Allenamenti e camp</h3>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="eventi.html">BV Clinics</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Corsi e lezioni</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-gray-900 dark:text-white font-bold mb-4">Società</h3>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="index.html">Su di noi</a></li>
+<li><a class="hover:text-primary transition-colors" href="coaches.html">Allenatori</a></li>
+<li><a class="hover:text-primary transition-colors" href="workwith.html">Lavora con noi</a></li>
+<li><a class="hover:text-primary transition-colors" href="contatti.html">Contatti</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-gray-900 dark:text-white font-bold mb-4">Compliance</h3>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Termini di servizio</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                    © 2026 - I Follow Beach Volley. All rights reserved.
+                </p>
+<div class="flex items-center gap-6">
+<span class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Sponsors</span>
+<div class="flex gap-4 opacity-50 grayscale hover:grayscale-0 transition-all">
+<div class="h-6 w-12 bg-gray-300 dark:bg-gray-700 rounded"></div>
+<div class="h-6 w-12 bg-gray-300 dark:bg-gray-700 rounded"></div>
+<div class="h-6 w-12 bg-gray-300 dark:bg-gray-700 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
