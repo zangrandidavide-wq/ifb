@@ -23,6 +23,8 @@ const els = {
 let currentUser = null;
 let currentProfile = null;
 let coachCourses = [];
+let modalCourseId = null;
+let modalSessionDate = null;
 
 // Initialize
 async function initCoachDashboard() {
@@ -56,6 +58,9 @@ async function initCoachDashboard() {
 
         // Fetch Data
         await loadCourses();
+
+        // Attach modal event
+        document.getElementById('confirm-add-athlete-btn')?.addEventListener('click', handleAddPhantomAthlete);
 
     } catch (err) {
         console.error("Errore inizializzazione coach dashboard:", err);
@@ -225,7 +230,7 @@ async function loadRollCall(courseId) {
         return;
     }
 
-    renderSessionsGrouped(attendanceData);
+    renderSessionsGrouped(attendanceData, courseId);
 }
 
 function processAttendanceData(data) {
@@ -267,7 +272,7 @@ function processAttendanceData(data) {
     }));
 }
 
-function renderSessionsGrouped(rawAttendanceData) {
+function renderSessionsGrouped(rawAttendanceData, courseId) {
     els.sessionsContainer.innerHTML = '';
 
     const sessionsGroups = processAttendanceData(rawAttendanceData);
@@ -290,12 +295,16 @@ function renderSessionsGrouped(rawAttendanceData) {
 
         // Session Header
         let htmlHeader = `
-            <div class="px-5 py-4 bg-gray-50 dark:bg-gray-900/60 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center ${isToday ? 'bg-green-50/50 dark:bg-green-900/10' : ''}">
+            <div class="px-5 py-4 bg-gray-50 dark:bg-gray-900/60 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center flex-wrap gap-2 ${isToday ? 'bg-green-50/50 dark:bg-green-900/10' : ''}">
                 <div class="flex items-center">
                     <span class="material-icons text-gray-400 mr-2">event_note</span>
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">${formatted.dateStr} <span class="font-normal text-gray-500 ml-1">ore ${formatted.timeStr}</span></h3>
                     ${badgeHtml}
                 </div>
+                <button class="add-athlete-btn text-sm bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1" data-date="${group.dateISO}">
+                    <span class="material-icons text-[16px]">person_add</span>
+                    Aggiungi Atleta
+                </button>
             </div>
         `;
 
@@ -388,6 +397,13 @@ function renderSessionsGrouped(rawAttendanceData) {
     document.querySelectorAll('.status-btn').forEach(btn => {
         btn.addEventListener('click', handleStatusToggle);
     });
+
+    document.querySelectorAll('.add-athlete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const dateISO = e.currentTarget.getAttribute('data-date');
+            openAddAthleteModal(courseId, dateISO);
+        });
+    });
 }
 
 async function handleStatusToggle(e) {
@@ -464,6 +480,94 @@ async function handleStatusToggle(e) {
     }
 }
 
+
+async function openAddAthleteModal(courseId, sessionDate) {
+    modalCourseId = courseId;
+    modalSessionDate = sessionDate;
+    
+    document.getElementById('athlete-select').innerHTML = '<option value="">Caricamento atleti...</option>';
+    document.getElementById('add-athlete-modal').classList.remove('hidden');
+    
+    await loadAvailableAthletes(courseId);
+}
+
+async function loadAvailableAthletes(courseId) {
+    const course = coachCourses.find(c => c.id === courseId);
+    if (!course) return;
+    
+    let query = supabase.from('profiles').select('id, full_name, gender').eq('role', 'atleta');
+    
+    if (course.target_gender && course.target_gender !== 'Mix') {
+        query = query.eq('gender', course.target_gender);
+    }
+    
+    const { data: athletes, error } = await query.order('full_name');
+    
+    const selectEl = document.getElementById('athlete-select');
+    if (error) {
+        console.error("Errore caricamento atleti:", error);
+        selectEl.innerHTML = '<option value="">Errore caricamento atleti.</option>';
+        return;
+    }
+    
+    if (!athletes || athletes.length === 0) {
+        selectEl.innerHTML = '<option value="">Nessun atleta disponibile.</option>';
+        return;
+    }
+    
+    selectEl.innerHTML = '<option value="" disabled selected>Seleziona un atleta...</option>';
+    athletes.forEach(a => {
+        const option = document.createElement('option');
+        option.value = a.id;
+        option.textContent = a.full_name;
+        selectEl.appendChild(option);
+    });
+}
+
+async function handleAddPhantomAthlete() {
+    const selectEl = document.getElementById('athlete-select');
+    const athleteId = selectEl.value;
+    
+    if (!athleteId) {
+        alert("Seleziona un atleta.");
+        return;
+    }
+    
+    if (!modalCourseId || !modalSessionDate) return;
+    
+    const btn = document.getElementById('confirm-add-athlete-btn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-icons animate-spin text-sm mr-2">autorenew</span> Salvataggio...';
+    btn.disabled = true;
+    
+    try {
+        const { data: enrollmentObj, error: enrError } = await supabase
+            .from('enrollments')
+            .insert({ course_id: modalCourseId, athlete_id: athleteId, status: 'recovery' })
+            .select()
+            .single();
+            
+        if (enrError) throw enrError;
+        
+        const newEnrollmentId = enrollmentObj.id;
+        
+        const { error: attError } = await supabase
+            .from('attendance')
+            .insert({ enrollment_id: newEnrollmentId, session_date: modalSessionDate, status: 'presente' });
+            
+        if (attError) throw attError;
+        
+        document.getElementById('add-athlete-modal').classList.add('hidden');
+        await loadRollCall(modalCourseId); // Aggiorna viste in tempo reale
+        
+    } catch (err) {
+        console.error("Errore aggiunta atleta recupero:", err);
+        alert("Si è verificato un errore durante l'aggiunta dell'atleta.");
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
 
 // Start Sequence
 if (document.readyState === 'loading') {
