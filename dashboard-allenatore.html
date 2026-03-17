@@ -108,6 +108,10 @@
                             <p id="selected-course-desc" class="text-gray-500 text-sm mt-1 ml-12">Scegli un corso dal
                                 menù laterale per visualizzarne gli allenamenti e fare l'appello.</p>
                         </div>
+                        <button id="global-add-athlete-btn"
+                            class="hidden px-4 py-2 bg-primary text-white font-bold rounded-xl shadow-md hover:bg-primary-dark transition-all flex items-center gap-2">
+                            <span class="material-icons">person_add</span> Aggiungi Recupero
+                        </button>
                     </div>
 
                     <!-- Roll-Call Container -->
@@ -166,6 +170,15 @@
                     <select id="athlete-select"
                         class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-primary focus:border-primary">
                         <option value="">Caricamento atleti...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="session-date-select"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Data della
+                        lezione</label>
+                    <select id="session-date-select"
+                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-primary focus:border-primary">
+                        <option value="">Seleziona una data...</option>
                     </select>
                 </div>
             </div>
