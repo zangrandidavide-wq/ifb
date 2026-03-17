@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dashboard Atleta - I Follow Beach Volley</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+    </style>
+    
+    <!-- Setup Guard to Prevent Unauthenticated Access -->
+    <script type="module" src="guard.js"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-white antialiased min-h-screen flex flex-col pt-24 font-display">
+
+    <!-- Navbar -->
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <div class="mb-10 text-center md:text-left">
+            <h1 class="text-4xl font-extrabold tracking-tight mb-2">Benvenuto, <span id="athlete-firstname">Atleta</span>!</h1>
+            <p class="text-gray-600 dark:text-gray-400">Gestisci il tuo profilo e i tuoi prossimi allenamenti.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Sidebar: Tokens & Profile -->
+            <div class="space-y-8">
+                
+                <!-- Token Counter Widget -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 relative overflow-hidden group hover:shadow-primary/20 transition-all duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-full blur-2xl transform translate-x-8 -translate-y-8 group-hover:bg-secondary/30 transition-all"></div>
+                    <div class="flex items-center gap-4 mb-2 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-yellow-500 ring-4 ring-white dark:ring-gray-800">
+                            <span class="material-icons text-3xl">generating_tokens</span>
+                        </div>
+                        <h2 class="text-xl font-bold">Recovery Tokens</h2>
+                    </div>
+                    <div class="mt-6 flex items-baseline gap-2 pb-2 relative z-10">
+                        <span id="token-count" class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">--</span>
+                        <span class="text-gray-500 dark:text-gray-400 font-medium">disponibili</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 relative z-10">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 flex items-start gap-2">
+                            <span class="material-icons text-primary/70 text-sm">info</span>
+                            Guadagni 1 token segnalando l'assenza con almeno 24h d'anticipo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Profile Form -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                            <span class="material-icons">person</span>
+                        </div>
+                        Dati Profilo
+                    </h2>
+                    <form id="profile-form" class="space-y-5">
+                        <div>
+                            <label for="full_name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Nome Completo</label>
+                            <input type="text" id="full_name" required placeholder="Es. Mario Rossi"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                        </div>
+                        
+                        <!-- Alert message -->
+                        <div id="profile-alert" class="hidden p-3 text-sm rounded-lg font-medium transition-all" role="alert"></div>
+
+                        <button type="submit" id="save-profile-btn"
+                            class="w-full py-3 px-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                            <span>Aggiorna Profilo</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Main Area: Courses + Trainings -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- I Miei Corsi -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900/50">
+                        <h2 class="text-xl font-bold flex items-center gap-3">
+                            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                                <span class="material-icons">school</span>
+                            </div>
+                            I Miei Corsi
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div id="courses-loading" class="text-center py-8 flex flex-col items-center justify-center">
+                            <span class="material-icons animate-spin text-primary text-4xl">autorenew</span>
+                            <p class="text-gray-500 font-medium mt-3 animate-pulse">Caricamento corsi...</p>
+                        </div>
+                        <div id="courses-empty" class="hidden text-center py-10 flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4">
+                                <span class="material-icons text-gray-400 text-3xl">sports_volleyball</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Non sei ancora iscritto a nessun allenamento</h3>
+                            <p class="text-gray-500 text-sm max-w-xs mb-5">Esplora i corsi disponibili e iscriviti per iniziare ad allenarti!</p>
+                            <a href="corsi.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 transform hover:-translate-y-0.5 transition-all">
+                                <span class="material-icons text-[18px]">search</span>
+                                Scopri i Corsi
+                            </a>
+                        </div>
+                        <div id="courses-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- I Tuoi Prossimi Allenamenti -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900/50">
+                        <h2 class="text-xl font-bold flex items-center gap-3">
+                            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                                <span class="material-icons">sports_volleyball</span>
+                            </div>
+                            I Tuoi Prossimi Allenamenti
+                        </h2>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div id="trainings-loading" class="text-center py-12 flex-grow flex flex-col items-center justify-center">
+                            <span class="material-icons animate-spin text-primary text-5xl">autorenew</span>
+                            <p class="text-gray-500 font-medium mt-4 animate-pulse">Caricamento calendario...</p>
+                        </div>
+                        
+                        <div id="trainings-empty" class="hidden text-center py-12 flex-grow flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
+                                <span class="material-icons text-gray-400 text-4xl mb-1">event_busy</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Nessun allenamento in programma</h3>
+                            <p class="text-gray-500 max-w-sm">Non hai file sessioni future o non sei ancora iscritto ai corsi. Riposati prima di tornare in sabbia!</p>
+                        </div>
+
+                        <!-- Trainings list -->
+                        <ul id="trainings-list" class="space-y-4 hidden flex-grow">
+                            <!-- Injected via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+
+    <!-- Page Specific JS -->
+    <script type="module" src="dashboard-atleta.js"></script>
+</body>
+</html>

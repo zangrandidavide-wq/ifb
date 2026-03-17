@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+    <script type="module" src="login.js"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 md:px-20 lg:px-40">
+            <div id="navbar-placeholder"></div>
+
+<script type="module" src="navbar.js"></script>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent">
+<div class="w-full max-w-md">
+<!-- Login Card -->
+<div class="bg-white dark:bg-slate-900/50 backdrop-blur-sm rounded-xl border border-primary/10 p-8 shadow-2xl shadow-primary/5">
+<div class="mb-8 text-center">
+<h1 class="text-3xl font-black mb-2 tracking-tight">Bentornato!</h1>
+<p class="text-slate-500 dark:text-slate-400">Accedi per seguire i tuoi tornei preferiti</p>
+</div>
+<!-- Google Login -->
+<button class="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 h-12 rounded-full px-6 mb-6 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-semibold text-sm">
+<img alt="" class="w-5 h-5" data-alt="Official Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC08KZT0mK1XV8v2s2QhB9KhKHzqgaWf_qH9B5XiyQ8Pf2LSPXxyN62YKU6cO_cGxjYGI-wfl5lh7-nfmDBNGGvRdH-RaK86YYQznQzXn-1GS70ySbuh97bzmgDW8VaxOH0IXM5sFNT33n-hHr6NePxHSs5XNNb0FPHz8NSUQuRWVmtm8Y6zVGGHT4UD9erIS9-Jk9T9xkMT1i-VeO-4rhfCi4IwY6u1WDCFgnISMuGZQl4HFHh3vjOE4xA9BmWNT5qEVBH1EwacwGe"/>
+<span>Accedi con Google</span>
+</button>
+<div class="relative mb-6">
+<div class="absolute inset-0 flex items-center">
+<span class="w-full border-t border-slate-200 dark:border-slate-800"></span>
+</div>
+<div class="relative flex justify-center text-xs uppercase">
+<span class="bg-white dark:bg-slate-900 px-2 text-slate-500">Oppure continua con email</span>
+</div>
+</div>
+<!-- Form -->
+<form id="login-form" class="space-y-4">
+    <div>
+        <label class="block text-sm font-semibold mb-2 ml-1">Email</label>
+        <input id="login-email" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl h-12 px-4 outline-none transition-all placeholder:text-slate-400" placeholder="inserisci la tua email" type="email" required />
+    </div>
+    
+    <div>
+        <label class="block text-sm font-semibold mb-2 ml-1">Password</label>
+        <div class="relative">
+            <input id="login-password" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl h-12 px-4 outline-none transition-all placeholder:text-slate-400" placeholder="inserisci la tua password" type="password" required />
+            <button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary" type="button">
+                <span class="material-symbols-outlined">visibility</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="flex items-center justify-end">
+        <a class="text-xs font-semibold text-primary hover:underline" href="#">Password dimenticata?</a>
+    </div>
+    
+    <button id="login-btn" class="w-full bg-primary hover:bg-primary/90 text-white h-12 rounded-full font-bold shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-2 mt-2" type="submit">
+        <span>Accedi</span>
+        <span class="material-symbols-outlined text-sm">login</span>
+    </button>
+    <p id="login-message" class="text-center mt-4 text-sm hidden font-medium text-red-500"></p>
+</form>
+<div class="mt-8 text-center">
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                        Non hai ancora un account? 
+                        <a class="text-primary font-bold hover:underline" href="iscrizione.html">Registrati</a>
+</p>
+</div>
+</div>
+<!-- Sporty Vibe Badge -->
+<div class="mt-8 flex justify-center">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest">
+<span class="material-symbols-outlined text-base">sports_volleyball</span>
+                    Sporty Vibe
+                </div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+    <ifbv-footer></ifbv-footer>
+
+    <script src="footer.js" defer></script>
+</body></html>

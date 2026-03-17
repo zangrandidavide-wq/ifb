@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-6 lg:px-40 py-4">
+            <div id="navbar-placeholder"></div>
+
+<script type="module" src="navbar.js"></script>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center px-6 lg:px-40 py-12">
+<div class="w-full max-w-4xl">
+<!-- Hero Section / Title -->
+<div class="mb-12">
+<div class="flex items-center gap-2 text-primary mb-4">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-bold uppercase tracking-widest">Documentazione Legale</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Termini di Servizio</h1>
+<div class="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-500 dark:text-slate-400">
+<p class="text-base">Ultimo aggiornamento: <span class="font-semibold">24 Maggio 2024</span></p>
+<span class="hidden sm:block">•</span>
+<p class="text-base italic italic">Versione 2.1.0</p>
+</div>
+</div>
+<!-- Terms Content -->
+<div class="space-y-12">
+<!-- 1. Condizioni Generali -->
+<section class="bg-white dark:bg-background-dark/50 border border-primary/5 p-8 rounded-xl shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="text-2xl font-bold">1. Condizioni Generali</h3>
+</div>
+<div class="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
+<p>Benvenuti su <strong>I Follow Beach Volley</strong>. Accedendo o utilizzando i nostri servizi, l'utente accetta di essere vincolato dai presenti Termini di Servizio. Se non si accettano tali termini, si prega di non utilizzare la piattaforma.</p>
+<p>Il nostro servizio è dedicato alla community del beach volley, facilitando l'organizzazione di allenamenti, la partecipazione a tornei e l'iscrizione a camp tecnici nazionali ed internazionali.</p>
+</div>
+</section>
+<!-- 2. Registrazione e Account -->
+<section class="p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">person_add</span>
+<h3 class="text-2xl font-bold">2. Registrazione e Account</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-primary/5 p-6 rounded-lg border-l-4 border-primary">
+<h4 class="font-bold mb-2">Requisiti Utente</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">La registrazione è consentita a persone di età superiore ai 14 anni. I minori devono avere il consenso dei genitori per partecipare ad eventi fisici.</p>
+</div>
+<div class="bg-primary/5 p-6 rounded-lg border-l-4 border-primary">
+<h4 class="font-bold mb-2">Sicurezza</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">L'utente è responsabile della riservatezza delle proprie credenziali e di tutte le attività svolte tramite il proprio account.</p>
+</div>
+</div>
+</section>
+<!-- 3. Partecipazione a Eventi e Camps -->
+<section class="bg-white dark:bg-background-dark/50 border border-primary/5 p-8 rounded-xl shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">event_available</span>
+<h3 class="text-2xl font-bold">3. Partecipazione a Eventi e Camps</h3>
+</div>
+<div class="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
+<p>L'iscrizione ai tornei e ai beach volley camps segue le seguenti regole:</p>
+<ul class="list-disc pl-6 space-y-2">
+<li><strong>Certificato Medico:</strong> Obbligo di caricare un certificato medico non agonistico in corso di validità per partecipare a qualsiasi attività fisica.</li>
+<li><strong>Politica di Rimborso:</strong> I rimborsi sono possibili fino a 7 giorni prima dell'evento, salvo diversa indicazione specifica nella pagina dell'evento.</li>
+<li><strong>Comportamento:</strong> Ci riserviamo il diritto di escludere partecipanti che non mantengano un comportamento sportivo e rispettoso verso compagni e istruttori.</li>
+</ul>
+</div>
+</section>
+<!-- 4. Responsabilità -->
+<section class="p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">gavel</span>
+<h3 class="text-2xl font-bold">4. Limitazione di Responsabilità</h3>
+</div>
+<div class="bg-slate-900 text-slate-100 p-8 rounded-xl">
+<p class="leading-relaxed opacity-90 italic">
+                                "I Follow Beach Volley declina ogni responsabilità per infortuni derivanti dalla pratica sportiva durante gli eventi organizzati da terzi o caricati autonomamente dagli utenti. Sebbene la piattaforma verifichi l'idoneità dei coach partner, la responsabilità finale della sicurezza sul campo ricade sull'ente organizzatore locale."
+                            </p>
+</div>
+</section>
+<!-- Contact/Support -->
+<div class="bg-primary text-white p-10 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6">
+<div>
+<h3 class="text-2xl font-bold mb-2">Hai domande sui termini?</h3>
+<p class="opacity-80">Il nostro team legale è a tua disposizione per chiarimenti.</p>
+</div>
+<a class="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-slate-100 transition-colors whitespace-nowrap" href="mailto:support@ifollowbeachvolley.it">
+                            Contattaci
+                        </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<ifbv-footer></ifbv-footer>
+<script src="footer.js" defer></script>
+</div>
+</body></html>
