@@ -225,13 +225,23 @@
                     </form>
                 </div>
                 
-                <!-- Ultimi iscritti (opzionale/informativo) -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center justify-center text-center">
-                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4">
-                        <span class="material-icons text-gray-400 text-5xl">fact_check</span>
+                <!-- Gestisci Iscritti -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-icons text-primary">manage_accounts</span>
+                        Gestisci Iscritti
+                    </h2>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Seleziona Corso</label>
+                        <select id="manage-course-select" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-primary/20 outline-none text-sm">
+                            <option value="" disabled selected>-- Scegli un corso per vedere gli iscritti --</option>
+                        </select>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Automazione Attiva</h3>
-                    <p class="text-gray-500 text-sm max-w-xs">Le pre-iscrizioni future tramite sito web verranno gestite automaticamente. Usa questo form solo per inserimenti manuali straordinari.</p>
+
+                    <div id="course-enrollments-list" class="flex-1 space-y-2 mt-2">
+                        <p class="text-gray-400 text-sm text-center py-6">Seleziona un corso per visualizzare gli iscritti.</p>
+                    </div>
                 </div>
 
             </div>

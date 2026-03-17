@@ -82,7 +82,7 @@ async function loadCourses() {
 
     const { data: courses, error } = await supabase
         .from('courses')
-        .select('*')
+        .select('*, enrollments(id)')
         .eq('coach_id', coachId)
         .order('name');
 
@@ -110,16 +110,31 @@ function renderCoursesList() {
     }
 
     coachCourses.forEach(course => {
+        const iscritti = course.enrollments ? course.enrollments.length : 0;
+        const startDate = new Date(course.start_time);
+        const dayName = new Intl.DateTimeFormat('it-IT', { weekday: 'short' }).format(startDate);
+        const startTime = startDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+        const capitalizedDay = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+
         const btn = document.createElement('button');
         btn.className = `w-full text-left p-4 rounded-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/50 hover:shadow-md transition-all flex items-center justify-between group course-select-btn`;
         btn.dataset.id = course.id;
 
         btn.innerHTML = `
-            <div class="flex flex-col">
-                <span class="font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">${course.name}</span>
-                <span class="text-xs text-gray-500 mt-1 line-clamp-1">${course.description || 'Nessuna descrizione'}</span>
+            <div class="flex flex-col w-full gap-2">
+                <div class="flex justify-between items-start w-full">
+                    <span class="font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors text-left leading-tight pr-2">
+                        ${course.name}
+                    </span>
+                    <span class="shrink-0 text-[11px] font-bold px-2 py-0.5 rounded-md ${iscritti >= 8 ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : 'bg-primary/10 text-primary dark:bg-primary/20'}">
+                        ${iscritti}/8
+                    </span>
+                </div>
+                <div class="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                    <span class="material-icons text-[14px]">schedule</span>
+                    <span>${capitalizedDay}, ${startTime}</span>
+                </div>
             </div>
-            <span class="material-icons text-gray-400 group-hover:text-primary transition-colors pr-1">chevron_right</span>
         `;
 
         btn.addEventListener('click', () => selectCourse(course.id));
@@ -397,13 +412,48 @@ async function handleStatusToggle(e) {
             console.error("Errore aggiornamento attendance:", error);
             alert("Non è stato possibile aggiornare la presenza: " + error.message);
         } else {
-            // Re-render the session list automatically to fetch fresh grouping 
-            // Alternative: update CSS DOM locally without full refresh, but full refresh guarantees truth
-            const activeCourseBtn = document.querySelector('.course-select-btn.border-primary');
-            if (activeCourseBtn) {
-                // To prevent jumping scroll context entirely we should theoretically do fine-grained DOM updates,
-                // but for simplicity the `loadRollCall` will rebuild the container.
-                await loadRollCall(activeCourseBtn.dataset.id);
+            // Optimistic UI Update
+            const li = parentContainer.closest('li');
+            
+            // 1. Reset all buttons in this container to neutral state
+            const allBtns = parentContainer.querySelectorAll('.status-btn');
+            allBtns.forEach(b => {
+                const btnStatus = b.getAttribute('data-status');
+                if (btnStatus === 'presente') {
+                    b.className = `status-btn w-12 h-9 rounded-lg flex items-center justify-center transition-all text-gray-500 hover:text-green-600 hover:bg-green-100`;
+                } else if (btnStatus === 'assente') {
+                    b.className = `status-btn w-12 h-9 rounded-lg flex items-center justify-center transition-all text-gray-500 hover:text-red-600 hover:bg-red-100`;
+                }
+            });
+
+            // 2. Add 'active' classes to clicked button
+            if (newStatus === 'presente') {
+                btn.className = `status-btn w-12 h-9 rounded-lg flex items-center justify-center transition-all bg-green-500 text-white shadow-md`;
+            } else if (newStatus === 'assente') {
+                btn.className = `status-btn w-12 h-9 rounded-lg flex items-center justify-center transition-all bg-red-500 text-white shadow-md`;
+            }
+
+            // 3. Update the status dot
+            // Il dot è l'elemento adiacente al parentContainer se guardiamo la struttura HTML
+            const dot = parentContainer.nextElementSibling;
+            if (dot) {
+                // Rimuoviamo tutte le possibili classi di colore/ombra associate agli stati
+                dot.classList.remove(
+                    'bg-green-500', 
+                    'shadow-[0_0_8px_rgba(34,197,94,0.5)]',
+                    'bg-red-500', 
+                    'shadow-[0_0_8px_rgba(239,68,68,0.5)]',
+                    'bg-gray-300', 
+                    'dark:bg-gray-600', 
+                    'animate-pulse'
+                );
+
+                // Aggiungiamo le nuove classi base al newStatus
+                if (newStatus === 'presente') {
+                    dot.classList.add('bg-green-500', 'shadow-[0_0_8px_rgba(34,197,94,0.5)]');
+                } else if (newStatus === 'assente') {
+                    dot.classList.add('bg-red-500', 'shadow-[0_0_8px_rgba(239,68,68,0.5)]');
+                }
             }
         }
     } catch (err) {

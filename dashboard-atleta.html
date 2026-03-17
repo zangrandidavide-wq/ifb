@@ -82,6 +82,11 @@
                             <span class="material-icons text-primary/70 text-sm">info</span>
                             Guadagni 1 token segnalando l'assenza con almeno 24h d'anticipo.
                         </p>
+                        <button id="btn-spend-token"
+                            class="mt-4 w-full py-2.5 px-4 bg-secondary hover:bg-yellow-400 text-gray-900 font-bold rounded-xl transition-all shadow-md shadow-yellow-300/30 hover:shadow-yellow-400/40 transform hover:-translate-y-0.5 flex justify-center items-center gap-2 text-sm">
+                            <span class="material-icons text-[18px]">redeem</span>
+                            Prenota un Recupero
+                        </button>
                     </div>
                 </div>
 
@@ -186,6 +191,93 @@
     <!-- Footer -->
     <ifbv-footer></ifbv-footer>
     <script src="footer.js" defer></script>
+
+    <!-- Recovery Modal -->
+    <div id="recovery-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="recovery-modal-title">
+        <!-- Backdrop -->
+        <div id="recovery-modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+        <!-- Panel -->
+        <div class="relative z-10 w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-6 flex flex-col gap-5">
+
+            <!-- Header -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center text-yellow-500 flex-shrink-0">
+                    <span class="material-icons">redeem</span>
+                </div>
+                <h2 id="recovery-modal-title" class="text-xl font-bold text-gray-900 dark:text-white">Prenota un Recupero</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Corso da recuperare</label>
+                    <select id="recovery-course-select" disabled
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-primary/20 outline-none text-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                        <option value="">Caricamento corsi...</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Data di recupero</label>
+                    <select id="recovery-date-select" disabled
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-primary/20 outline-none text-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                        <option value="">Seleziona prima un corso</option>
+                    </select>
+                </div>
+
+                <div id="recovery-alert" class="hidden p-3 text-sm rounded-xl font-medium" role="alert"></div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex gap-3 pt-1">
+                <button id="btn-cancel-recovery"
+                    class="flex-1 py-2.5 px-4 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-xl transition-all text-sm">
+                    Annulla
+                </button>
+                <button id="btn-confirm-recovery"
+                    class="flex-1 py-2.5 px-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-md shadow-primary/20 text-sm flex items-center justify-center gap-2">
+                    <span class="material-icons text-[18px]">check_circle</span>
+                    Conferma Recupero
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div id="custom-alert-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="relative z-10 w-full max-w-sm bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center transform scale-95 transition-transform duration-300" id="custom-alert-panel">
+            <div id="alert-icon-container" class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 flex-shrink-0">
+                <span id="alert-icon" class="material-icons text-3xl">info</span>
+            </div>
+            <h2 id="alert-title" class="text-xl font-bold text-gray-900 dark:text-white mb-2">Titolo</h2>
+            <p id="alert-message" class="text-gray-600 dark:text-gray-400 mb-6">Messaggio di alert.</p>
+            <button id="btn-alert-ok" class="w-full py-2.5 px-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-md shadow-primary/20 text-sm">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Confirm Modal -->
+    <div id="custom-confirm-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="relative z-10 w-full max-w-sm bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center transform scale-95 transition-transform duration-300" id="custom-confirm-panel">
+            <div class="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-500 mb-4 flex-shrink-0">
+                <span class="material-icons text-3xl">warning</span>
+            </div>
+            <h2 id="confirm-title" class="text-xl font-bold text-gray-900 dark:text-white mb-2">Conferma</h2>
+            <p id="confirm-message" class="text-gray-600 dark:text-gray-400 mb-6">Sei sicuro?</p>
+            <div class="flex gap-3 w-full">
+                <button id="btn-confirm-cancel" class="flex-1 py-2.5 px-4 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-xl transition-all text-sm">
+                    Annulla
+                </button>
+                <button id="btn-confirm-ok" class="flex-1 py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all shadow-md shadow-red-600/20 text-sm">
+                    Conferma
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Page Specific JS -->
     <script type="module" src="dashboard-atleta.js"></script>

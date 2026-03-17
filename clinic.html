@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Spring Beach Camp - I Follow Beach Volley</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#600eb3",
+                        "accent-yellow": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "neutral-tint": "#f0eafc",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white">
+
+<nav class="fixed w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent-yellow flex items-center justify-center text-white font-bold text-xl">
+                    IV
+                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-900 dark:text-white">I Follow <span class="text-primary">Beach Volley</span></span>
+            </div>
+            <div id="navbar-placeholder"></div>
+
+            <script type="module" src="navbar.js"></script>
+            <div class="flex items-center space-x-4">
+                <button class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30 flex items-center gap-2">
+                    <span>Unisciti al Club</span>
+                    <span class="material-icons text-sm">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden shadow-2xl">
+    <div class="absolute inset-0 z-0">
+        <img alt="Giocatori che si allenano in un Camp al mare" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0Y-1REl9Xtuq4BD2e0evjTYOEjD5DhpPB5RTYvOHMb-ZE7ampXXnrwE_x-hm4m8LgCBS6IoUm5z-PdiELYmXakBUwJFUYfNLnTzHCgiewugUc9XV3vL9nQz58WCkWN2HpE98sT0thEdQc9wtV19PhAuzN7ahZ-SSLyWGBVhn4iqZSZN8GouFxXZjxYkaByQo1Z2KNtKT8Dfof6vaGBefe2NmQyzY4whmZLTKSAkXiGivxJD9DQ0nr6j3j4c5Y5mC8I4OF_UrZbD6"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/70 to-primary/40 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 bg-accent-yellow text-background-dark font-bold px-4 py-2 rounded-full text-sm mb-6 shadow-lg shadow-accent-yellow/20 uppercase tracking-widest">
+            <span class="material-icons text-base">sunny</span>
+            Marina di Massa | 24 - 26 Aprile
+        </span>
+        <h1 class="text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight text-shadow">
+            Spring Beach <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">Camp</span>
+        </h1>
+        <p class="text-xl text-gray-200 font-light max-w-2xl mx-auto leading-relaxed">
+            Inizia l'estate nel migliore dei modi. Migliora la tua tecnica in un weekend full-immersion con i migliori coach della scuola.
+        </p>
+    </div>
+</header>
+
+<!-- Contenuto Evento -->
+<section class="py-16 md:py-24 relative bg-background-light dark:bg-background-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            <!-- DETTAGLI (Colonna Sinistra) -->
+            <div class="lg:col-span-7 space-y-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Cosa Include il Pacchetto</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-icons">sports_volleyball</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white mb-1">4 Allenamenti Intensivi</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Sessioni tecniche in campo suddivise per livello di gioco.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 shrink-0">
+                                <span class="material-icons">emoji_events</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Torneo Finale</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Torneo ufficiale la domenica con premi per i vincitori.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 shrink-0">
+                                <span class="material-icons">hotel</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Pernottamento in Hotel</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2 notti in hotel 4 stelle sul lungomare, colazione inclusa.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 shrink-0">
+                                <span class="material-icons">restaurant</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Cene e Party</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2 cene esclusive con tutto il team e i partecipanti.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">A Chi è Rivolto?</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Il Camp è aperto a <strong>tutti i livelli</strong>, dal principiante assoluto (Livello Base) ai giocatori agonisti. Verrete suddivisi in gruppi di allenamento omogenei in modo da massimizzare il divertimento e l'apprendimento didattico.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Programma di Massima</h2>
+                    <div class="border-l-4 border-primary/20 dark:border-primary/40 pl-6 space-y-6">
+                        <div class="relative">
+                            <div class="absolute -left-[35px] w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg border-4 border-background-light dark:border-background-dark">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <h4 class="font-bold text-lg text-primary dark:text-primary-300">Venerdì 24 Aprile</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">Ore 14:00 - Arrivo, Check-in Hotel e Benvenuto.<br>Ore 16:00 - Primo allenamento tecnico.<br>Ore 20:30 - Cena tutti insieme.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[35px] w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg border-4 border-background-light dark:border-background-dark">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <h4 class="font-bold text-lg text-primary dark:text-primary-300">Sabato 25 Aprile</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">Ore 09:30 - Allenamento mattutino: Tattica.<br>Ore 15:30 - Allenamento pomeridiano: Situazionale.<br>Ore 21:00 - Cena e Party in spiaggia.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[35px] w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg border-4 border-background-light dark:border-background-dark">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <h4 class="font-bold text-lg text-primary dark:text-primary-300">Domenica 26 Aprile</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">Ore 09:30 - Riscaldamento e inizio Torneo Ufficiale.<br>Ore 16:00 - Finali, Premiazioni e Saluti Finali.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FORM ISCRIZIONE (Colonna Destra) -->
+            <div class="lg:col-span-5 relative">
+                <div class="bg-white dark:bg-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 rounded-3xl p-8 sticky top-32">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
+                            <span class="material-icons text-3xl">edit_document</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Richiedi Iscrizione / Info</h3>
+                        <p class="text-sm text-gray-500 mt-2">I posti sono limitati. Invia la tua richiesta ora, ti contatteremo a breve per confermare.</p>
+                    </div>
+
+                    <form action="https://formspree.io/f/mnjgodge" method="POST" class="space-y-4">
+                        
+                        <div>
+                            <label for="fullName" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nome Completo <span class="text-red-500">*</span></label>
+                            <input type="text" id="fullName" name="nome_completo" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white transition-all shadow-sm bg-gray-50 dark:bg-gray-800" placeholder="Mario Rossi" />
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Email <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white transition-all shadow-sm bg-gray-50 dark:bg-gray-800" placeholder="mario@email.com" />
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Cellulare <span class="text-red-500">*</span></label>
+                            <input type="tel" id="phone" name="telefono" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white transition-all shadow-sm bg-gray-50 dark:bg-gray-800" placeholder="+39 333 1234567" />
+                        </div>
+
+                        <div>
+                            <label for="level" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Livello di Gioco</label>
+                            <div class="relative">
+                                <select id="level" name="livello_gioco" class="w-full pl-4 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white appearance-none shadow-sm bg-gray-50 dark:bg-gray-800 cursor-pointer transition-all">
+                                    <option value="" disabled selected>Seleziona il tuo livello...</option>
+                                    <option value="Base">Base / Principiante</option>
+                                    <option value="Intermedio">Intermedio</option>
+                                    <option value="Avanzato">Avanzato / Pro</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+                                    <span class="material-icons">arrow_drop_down</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="notes" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Note o richieste speciali</label>
+                            <textarea id="notes" name="note" rows="3" class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white transition-all shadow-sm bg-gray-50 dark:bg-gray-800 resize-none" placeholder="Es. intolleranze alimentari, preferenze stanza..."></textarea>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2 group">
+                                <span>Invia Richiesta</span>
+                                <span class="material-icons group-hover:translate-x-1 transition-transform">send</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<ifbv-footer></ifbv-footer>
+<script src="footer.js" defer></script>
+</body>
+</html>

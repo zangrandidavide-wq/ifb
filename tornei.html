@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Circuito Tornei - I Follow Beach Volley</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#600eb3",
+                        "accent-yellow": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "neutral-tint": "#f0eafc",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+<nav class="fixed w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent-yellow flex items-center justify-center text-white font-bold text-xl">
+                    IV
+                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-900 dark:text-white">I Follow <span class="text-primary">Beach Volley</span></span>
+            </div>
+            <div id="navbar-placeholder"></div>
+
+            <script type="module" src="navbar.js"></script>
+            <div class="flex items-center space-x-4">
+                <button class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30 flex items-center gap-2">
+                    <span>Unisciti al Club</span>
+                    <span class="material-icons text-sm">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Element to push footer down -->
+<main class="flex-grow pt-32 pb-16">
+    
+    <!-- Intestazione Pulita -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary dark:bg-primary/20 font-bold text-sm tracking-widest uppercase mb-6 border border-primary/20">
+            <span class="material-icons text-base">emoji_events</span> Stagione Attuale
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight tracking-tight">
+            Circuito Tornei <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-yellow dark:from-primary dark:to-accent-yellow">I Follow Beach Volley</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light mx-auto">
+            Riservato ai tesserati e corsisti. Mettiti alla prova in un ambiente sano, competitivo e divertente. Scala la classifica sociale e conquista il titolo!
+        </p>
+    </div>
+
+    <!-- Lista Tornei -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Torneo 1 -->
+            <div class="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-6 shadow-xl shadow-gray-200/50 dark:shadow-none hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col h-full group">
+                <div class="flex items-center justify-between text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 pb-4 border-b border-gray-100 dark:border-white/5">
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-primary">calendar_today</span> 14 Maggio 2024</span>
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-gray-400">location_on</span> Marina di Massa</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Tappa di Primavera</h3>
+                
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Maschile</span>
+                    <span class="bg-pink-100 text-pink-800 dark:bg-pink-900/40 dark:text-pink-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Femminile</span>
+                </div>
+                
+                <div class="mt-auto flex items-center justify-between pt-6">
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">Quota Iscrizione</span>
+                        <span class="text-2xl font-bold text-gray-900 dark:text-white">€15<span class="text-sm text-gray-500 font-normal"> /atleta</span></span>
+                    </div>
+                    <button class="btn-iscriviti bg-primary hover:bg-primary-dark text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20" data-tournament-id="1">
+                        Iscriviti al Torneo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Torneo 2 -->
+            <div class="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-6 shadow-xl shadow-gray-200/50 dark:shadow-none hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+                <div class="absolute inset-0 bg-primary/[0.02] dark:bg-primary/[0.05] pointer-events-none"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+                <div class="flex items-center justify-between text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 pb-4 border-b border-gray-100 dark:border-white/5 relative z-10">
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-primary">calendar_today</span> 16 Giugno 2024</span>
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-gray-400">location_on</span> Tirrenia (Pisa)</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors relative z-10">King & Queen of the Court Estivo</h3>
+                
+                <div class="flex flex-wrap items-center gap-2 mb-6 relative z-10">
+                    <span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Misto (2x2)</span>
+                    <span class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">2 Livelli</span>
+                </div>
+                
+                <div class="mt-auto flex items-center justify-between pt-6 relative z-10">
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">Quota Iscrizione</span>
+                        <span class="text-2xl font-bold text-gray-900 dark:text-white">€20<span class="text-sm text-gray-500 font-normal"> /atleta</span></span>
+                    </div>
+                    <button class="btn-iscriviti bg-primary hover:bg-primary-dark text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20" data-tournament-id="2">
+                        Iscriviti al Torneo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Torneo 3 -->
+            <div class="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-6 shadow-xl shadow-gray-200/50 dark:shadow-none hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col h-full group">
+                <div class="flex items-center justify-between text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 pb-4 border-b border-gray-100 dark:border-white/5">
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-primary">calendar_today</span> 15 Settembre 2024</span>
+                    <span class="flex items-center gap-1"><span class="material-icons text-base text-gray-400">location_on</span> Viareggio</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Tappa di Fine Stagione</h3>
+                
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Maschile / Femminile (4x4)</span>
+                </div>
+                
+                <div class="mt-auto flex items-center justify-between pt-6">
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">Quota Iscrizione</span>
+                        <span class="text-2xl font-bold text-gray-900 dark:text-white">€10<span class="text-sm text-gray-500 font-normal"> /atleta</span></span>
+                    </div>
+                    <button class="btn-iscriviti bg-primary hover:bg-primary-dark text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20" data-tournament-id="3">
+                        Iscriviti al Torneo
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<ifbv-footer></ifbv-footer>
+<script src="footer.js" defer></script>
+
+<script>
+    // Event listener per i bottoni Iscriviti
+    document.addEventListener('DOMContentLoaded', () => {
+        const iscrivitiBtns = document.querySelectorAll('.btn-iscriviti');
+        
+        iscrivitiBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tournamentId = e.currentTarget.getAttribute('data-tournament-id');
+                // Al momento è solo un alert di preview
+                alert(`Funzionalità di iscrizione in arrivo! Presto potrai iscriverti (Torneo ${tournamentId}) direttamente dal tuo account atleta.`);
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
