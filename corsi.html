@@ -131,6 +131,50 @@
         </div>
     </div>
 
+    <!-- Modale Dettaglio Corso -->
+    <div id="course-detail-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-lg w-full p-6 transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col">
+            <!-- Header -->
+            <div class="flex justify-between items-start mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                <h3 id="detail-modal-title" class="text-2xl font-bold text-slate-900 dark:text-white">Titolo Corso</h3>
+                <button id="detail-modal-close" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+                    <span class="material-symbols-outlined text-3xl">close</span>
+                </button>
+            </div>
+            
+            <div class="overflow-y-auto flex-1 pr-2">
+                <!-- Dettagli -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Dettagli Allenamento</h4>
+                    <div class="space-y-3 relative">
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                            <span class="material-symbols-outlined text-primary">sports</span>
+                            <span id="detail-modal-coach" class="font-medium">Coach Name</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                            <span class="material-symbols-outlined text-primary">event_repeat</span>
+                            <span id="detail-modal-time" class="font-medium">Orario</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                            <span class="material-symbols-outlined text-primary">fitness_center</span>
+                            <span id="detail-modal-level" class="font-medium">Livello</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Iscritti -->
+                <div>
+                    <div class="flex justify-between items-end mb-4">
+                        <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Atleti Iscritti</h4>
+                        <span id="detail-modal-count" class="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">Partecipanti: 0/8</span>
+                    </div>
+                    <ul id="modal-athletes-list" class="space-y-2">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Modal per avvisi -->
     <div id="custom-modal"
         class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-background-dark/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">

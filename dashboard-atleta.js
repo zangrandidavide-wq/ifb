@@ -20,10 +20,109 @@ const els = {
 
     trainingsLoading: document.getElementById('trainings-loading'),
     trainingsEmpty: document.getElementById('trainings-empty'),
-    trainingsList: document.getElementById('trainings-list')
+    trainingsList: document.getElementById('trainings-list'),
+
+    // Recovery Modal
+    btnSpendToken: document.getElementById('btn-spend-token'),
+    recoveryModal: document.getElementById('recovery-modal'),
+    recoveryModalBackdrop: document.getElementById('recovery-modal-backdrop'),
+    recoveryCourseSelect: document.getElementById('recovery-course-select'),
+    recoveryDateSelect: document.getElementById('recovery-date-select'),
+    recoveryAlert: document.getElementById('recovery-alert'),
+    btnCancelRecovery: document.getElementById('btn-cancel-recovery'),
+    btnConfirmRecovery: document.getElementById('btn-confirm-recovery'),
+
+    // Custom Modals
+    customAlertModal: document.getElementById('custom-alert-modal'),
+    customAlertPanel: document.getElementById('custom-alert-panel'),
+    alertIconContainer: document.getElementById('alert-icon-container'),
+    alertIcon: document.getElementById('alert-icon'),
+    alertTitle: document.getElementById('alert-title'),
+    alertMessage: document.getElementById('alert-message'),
+    btnAlertOk: document.getElementById('btn-alert-ok'),
+
+    customConfirmModal: document.getElementById('custom-confirm-modal'),
+    customConfirmPanel: document.getElementById('custom-confirm-panel'),
+    confirmTitle: document.getElementById('confirm-title'),
+    confirmMessage: document.getElementById('confirm-message'),
+    btnConfirmCancel: document.getElementById('btn-confirm-cancel'),
+    btnConfirmOk: document.getElementById('btn-confirm-ok')
 };
 
 let currentUser = null;
+
+/* -------------------------------------------
+ * CUSTOM MODALS HELPERS
+ * ------------------------------------------- */
+function showCustomAlert(title, message, isSuccess = true) {
+    els.alertTitle.textContent = title;
+    els.alertMessage.textContent = message;
+
+    if (isSuccess) {
+        els.alertIconContainer.className = 'w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 flex-shrink-0';
+        els.alertIcon.textContent = 'check_circle';
+        els.btnAlertOk.className = 'w-full py-2.5 px-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-md shadow-primary/20 text-sm';
+    } else {
+        els.alertIconContainer.className = 'w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-500 mb-4 flex-shrink-0';
+        els.alertIcon.textContent = 'error';
+        els.btnAlertOk.className = 'w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all shadow-md shadow-red-600/20 text-sm';
+    }
+
+    els.customAlertModal.classList.remove('hidden');
+    els.customAlertModal.classList.add('flex');
+    setTimeout(() => {
+        els.customAlertModal.classList.remove('opacity-0');
+        els.customAlertPanel.classList.remove('scale-95');
+        els.customAlertPanel.classList.add('scale-100');
+    }, 10);
+
+    const closeModal = () => {
+        els.customAlertModal.classList.add('opacity-0');
+        els.customAlertPanel.classList.add('scale-95');
+        els.customAlertPanel.classList.remove('scale-100');
+        setTimeout(() => {
+            els.customAlertModal.classList.add('hidden');
+            els.customAlertModal.classList.remove('flex');
+        }, 300);
+        els.btnAlertOk.removeEventListener('click', closeModal);
+    };
+    els.btnAlertOk.addEventListener('click', closeModal);
+}
+
+function showCustomConfirm(title, message) {
+    return new Promise((resolve) => {
+        els.confirmTitle.textContent = title;
+        els.confirmMessage.textContent = message;
+
+        els.customConfirmModal.classList.remove('hidden');
+        els.customConfirmModal.classList.add('flex');
+        setTimeout(() => {
+            els.customConfirmModal.classList.remove('opacity-0');
+            els.customConfirmPanel.classList.remove('scale-95');
+            els.customConfirmPanel.classList.add('scale-100');
+        }, 10);
+
+        const closeModal = (result) => {
+            els.customConfirmModal.classList.add('opacity-0');
+            els.customConfirmPanel.classList.add('scale-95');
+            els.customConfirmPanel.classList.remove('scale-100');
+            setTimeout(() => {
+                els.customConfirmModal.classList.add('hidden');
+                els.customConfirmModal.classList.remove('flex');
+                resolve(result);
+            }, 300);
+
+            els.btnConfirmCancel.removeEventListener('click', handleCancel);
+            els.btnConfirmOk.removeEventListener('click', handleOk);
+        };
+
+        const handleCancel = () => closeModal(false);
+        const handleOk = () => closeModal(true);
+
+        els.btnConfirmCancel.addEventListener('click', handleCancel);
+        els.btnConfirmOk.addEventListener('click', handleOk);
+    });
+}
 
 // Initialize Dashboard
 async function initDashboard() {
@@ -127,7 +226,8 @@ async function loadCourses() {
     const { data: myCourses, error } = await supabase
         .from('courses')
         .select('*, enrollments!inner(id), profiles(full_name)')
-        .eq('enrollments.athlete_id', athleteId);
+        .eq('enrollments.athlete_id', athleteId)
+        .eq('enrollments.status', 'active');
 
     els.coursesLoading.classList.add('hidden');
 
@@ -284,7 +384,7 @@ function renderTrainings(trainings) {
             <div class="sm:text-right shrink-0 mt-2 sm:mt-0 pl-14 sm:pl-0">
                 ${isAssente
                 ? `<span class="bg-red-100 text-red-800 text-sm font-bold px-4 py-2 rounded-xl dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-900/50">Assente</span>`
-                : `<button data-id="${item.id}" class="action-absent-btn px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:text-red-600 hover:border-red-200 hover:bg-red-50 focus:ring-4 focus:ring-red-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-red-900/20 dark:hover:border-red-900/50 dark:hover:text-red-400 text-sm font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
+                : `<button data-id="${item.id}" data-date="${item.session_date}" class="action-absent-btn px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:text-red-600 hover:border-red-200 hover:bg-red-50 focus:ring-4 focus:ring-red-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-red-900/20 dark:hover:border-red-900/50 dark:hover:text-red-400 text-sm font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
                           <span class="material-icons text-[18px]">block</span> Segnala Assenza
                        </button>`
             }
@@ -304,14 +404,38 @@ function renderTrainings(trainings) {
 async function handleAbsenceClick(e) {
     const btn = e.currentTarget;
     const attendanceId = btn.getAttribute('data-id');
+    const sessionDateStr = btn.getAttribute('data-date');
 
-    if (!confirm("Sei sicuro di voler segnalare l'assenza per questo allenamento? Non potrai annullare l'operazione.")) {
+    const isConfirmed = await showCustomConfirm("Attenzione", "Sei sicuro di voler segnalare l'assenza per questo allenamento? Non potrai annullare l'operazione.");
+    if (!isConfirmed) {
         return;
     }
 
     const originalText = btn.innerHTML;
     btn.innerHTML = '<span class="material-icons animate-spin text-[18px]">autorenew</span> Attendere...';
     btn.disabled = true;
+
+    // --- RECOVERY TOKEN LOGIC ---
+    const msIn24h = 24 * 60 * 60 * 1000;
+    const timeDiff = new Date(sessionDateStr).getTime() - new Date().getTime();
+    const earnedToken = timeDiff >= msIn24h;
+
+    if (earnedToken) {
+        const { data: profileData, error: fetchErr } = await supabase
+            .from('profiles')
+            .select('recovery_tokens')
+            .eq('id', currentUser.id)
+            .single();
+
+        if (!fetchErr && profileData) {
+            const currentTokens = profileData.recovery_tokens || 0;
+            await supabase
+                .from('profiles')
+                .update({ recovery_tokens: currentTokens + 1 })
+                .eq('id', currentUser.id);
+        }
+    }
+    // ----------------------------
 
     const nowISO = new Date().toISOString();
 
@@ -322,12 +446,14 @@ async function handleAbsenceClick(e) {
 
     if (error) {
         console.error("Errore registrazione assenza:", error);
-        alert("Errore durante la segnalazione dell'assenza. Riprova più tardi.");
+        showCustomAlert("Errore", "Errore durante la segnalazione dell'assenza. Riprova più tardi.", false);
         btn.innerHTML = originalText;
         btn.disabled = false;
     } else {
-        alert("Assenza segnalata con successo!");
-        // Reload data to show updated lists and exact token count (if triggered)
+        showCustomAlert("Successo", earnedToken
+            ? 'Assenza segnalata! Hai guadagnato 1 Recovery Token.'
+            : 'Assenza segnalata con successo!'
+        );
         await Promise.all([
             loadProfile(),
             loadTrainings()
@@ -341,3 +467,222 @@ if (document.readyState === 'loading') {
 } else {
     initDashboard();
 }
+
+
+/* -------------------------------------------
+ * RECOVERY TOKEN MODAL
+ * ------------------------------------------- */
+
+function openRecoveryModal() {
+    els.recoveryModal.classList.remove('hidden');
+    els.recoveryModal.classList.add('flex');
+}
+
+function closeRecoveryModal() {
+    els.recoveryModal.classList.add('hidden');
+    els.recoveryModal.classList.remove('flex');
+    els.recoveryCourseSelect.innerHTML = '<option value="">Caricamento corsi...</option>';
+    els.recoveryCourseSelect.disabled = true;
+    els.recoveryDateSelect.innerHTML = '<option value="">Seleziona prima un corso</option>';
+    els.recoveryDateSelect.disabled = true;
+    els.recoveryAlert.classList.add('hidden');
+    els.recoveryAlert.textContent = '';
+    els.btnConfirmRecovery.disabled = false;
+    els.btnConfirmRecovery.innerHTML = '<span class="material-icons text-[18px]">check_circle</span> Conferma Recupero';
+}
+
+function showRecoveryAlert(message, isError = true) {
+    els.recoveryAlert.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+    els.recoveryAlert.classList.add(
+        isError ? 'bg-red-100' : 'bg-green-100',
+        isError ? 'text-red-800' : 'text-green-800'
+    );
+    els.recoveryAlert.textContent = message;
+}
+
+// Open modal: check token balance first
+els.btnSpendToken.addEventListener('click', async () => {
+    const currentTokens = parseInt(els.tokenCount.textContent, 10) || 0;
+    if (currentTokens <= 0) {
+        showCustomAlert("Token Esauriti", "Non hai Recovery Token disponibili. Segnala un'assenza con almeno 24h di anticipo per guadagnarne uno!", false);
+        return;
+    }
+    openRecoveryModal();
+    await loadRecoveryCourses();
+});
+
+// Close on Annulla or backdrop click
+els.btnCancelRecovery.addEventListener('click', closeRecoveryModal);
+els.recoveryModalBackdrop.addEventListener('click', closeRecoveryModal);
+
+// Load all courses into the course select
+// Load all courses into the course select (CON FILTRI)
+// Costante di gerarchia (puoi metterla fuori dalla funzione o qui dentro)
+const LEVEL_HIERARCHY = ['Base 1', 'Base 2', 'Base 3', 'Intermedio 1', 'Intermedio 2', 'Avanzato'];
+
+// Load all courses into the course select (CON FILTRI GENERE + LIVELLO)
+async function loadRecoveryCourses() {
+    els.recoveryCourseSelect.innerHTML = '<option value="" disabled selected>Caricamento corsi...</option>';
+    els.recoveryCourseSelect.disabled = true;
+
+    // 1. Recuperiamo il genere e livello dell'atleta
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('gender, level')
+        .eq('id', currentUser.id)
+        .single();
+
+    // 2. Costruiamo la query di base
+    let query = supabase
+        .from('courses')
+        .select('id, name, start_time, target_gender, level')
+        .order('name', { ascending: true });
+
+    // 3. Applichiamo la Business Logic (Filtri incrociati)
+    if (profile) {
+
+        // A. Filtro Genere
+        if (profile.gender) {
+            query = query.in('target_gender', [profile.gender, 'Mix']);
+        }
+
+        // B. Filtro Livello
+        if (profile.level) {
+            const userLevelIndex = LEVEL_HIERARCHY.indexOf(profile.level);
+
+            // Se troviamo il livello nell'array, estraiamo i livelli consentiti
+            if (userLevelIndex !== -1) {
+                // Prende da indice 0 fino all'indice dell'utente (compreso)
+                const allowedLevels = LEVEL_HIERARCHY.slice(0, userLevelIndex + 1);
+                query = query.in('level', allowedLevels);
+            }
+        }
+    }
+
+    const { data: courses, error } = await query;
+
+    if (error || !courses || courses.length === 0) {
+        els.recoveryCourseSelect.innerHTML = '<option value="">Nessun corso compatibile disponibile</option>';
+        return;
+    }
+
+    els.recoveryCourseSelect.innerHTML = '<option value="" disabled selected>-- Scegli un corso --</option>';
+
+    courses.forEach(course => {
+        const opt = document.createElement('option');
+        opt.value = course.id;
+        opt.textContent = `${course.name} (${course.level || 'Tutti i livelli'})`;
+        opt.dataset.start = course.start_time || '';
+        els.recoveryCourseSelect.appendChild(opt);
+    });
+
+    els.recoveryCourseSelect.disabled = false;
+}
+
+// Compute the next 4 dates matching the course's weekday
+function getNext4Dates(startTimeISO) {
+    const base = new Date(startTimeISO);
+    const targetDay = base.getDay();
+    const hours = base.getHours();
+    const minutes = base.getMinutes();
+
+    const dates = [];
+    const cursor = new Date();
+    cursor.setHours(0, 0, 0, 0);
+
+    while (dates.length < 4) {
+        cursor.setDate(cursor.getDate() + 1); // always start from tomorrow
+        if (cursor.getDay() === targetDay) {
+            const session = new Date(cursor);
+            session.setHours(hours, minutes, 0, 0);
+            dates.push(new Date(session));
+        }
+    }
+    return dates;
+}
+
+// Populate date select when a course is chosen
+els.recoveryCourseSelect.addEventListener('change', () => {
+    const selectedOpt = els.recoveryCourseSelect.options[els.recoveryCourseSelect.selectedIndex];
+    const startISO = selectedOpt.dataset.start;
+
+    els.recoveryAlert.classList.add('hidden');
+    els.recoveryDateSelect.disabled = true;
+
+    if (!startISO) {
+        els.recoveryDateSelect.innerHTML = '<option value="">Orario non disponibile per questo corso</option>';
+        return;
+    }
+
+    const dates = getNext4Dates(startISO);
+    els.recoveryDateSelect.innerHTML = '<option value="" disabled selected>-- Scegli una data --</option>';
+    dates.forEach(date => {
+        const opt = document.createElement('option');
+        opt.value = date.toISOString();
+        const label = date.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+        const time = date.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+        opt.textContent = label.charAt(0).toUpperCase() + label.slice(1) + ' - ' + time;
+        els.recoveryDateSelect.appendChild(opt);
+    });
+    els.recoveryDateSelect.disabled = false;
+});
+
+// Confirm: decrement token, create ghost enrollment, insert attendance
+els.btnConfirmRecovery.addEventListener('click', async () => {
+    const courseId = els.recoveryCourseSelect.value;
+    const sessionDateISO = els.recoveryDateSelect.value;
+
+    if (!courseId) { showRecoveryAlert('Seleziona un corso.'); return; }
+    if (!sessionDateISO) { showRecoveryAlert('Seleziona una data di recupero.'); return; }
+
+    const originalBtnHtml = els.btnConfirmRecovery.innerHTML;
+    els.btnConfirmRecovery.disabled = true;
+    els.btnConfirmRecovery.innerHTML = '<span class="material-icons animate-spin text-[18px]">autorenew</span>';
+
+    const resetBtn = () => {
+        els.btnConfirmRecovery.disabled = false;
+        els.btnConfirmRecovery.innerHTML = originalBtnHtml;
+    };
+
+    // Step 1: decrement token
+    const currentTokens = parseInt(els.tokenCount.textContent, 10) || 1;
+    const { error: tokenError } = await supabase
+        .from('profiles')
+        .update({ recovery_tokens: currentTokens - 1 })
+        .eq('id', currentUser.id);
+
+    if (tokenError) {
+        showRecoveryAlert('Errore durante il decremento del token: ' + tokenError.message);
+        resetBtn();
+        return;
+    }
+
+    // Step 2: ghost enrollment with status 'recovery'
+    const { data: newEnrollment, error: enrollError } = await supabase
+        .from('enrollments')
+        .insert([{ course_id: courseId, athlete_id: currentUser.id, status: 'recovery' }])
+        .select('id')
+        .single();
+
+    if (enrollError || !newEnrollment) {
+        showRecoveryAlert("Errore durante la creazione dell'iscrizione: " + (enrollError?.message || 'sconosciuto'));
+        resetBtn();
+        return;
+    }
+
+    // Step 3: single attendance record for the chosen date
+    const { error: attError } = await supabase
+        .from('attendance')
+        .insert([{ enrollment_id: newEnrollment.id, session_date: sessionDateISO, status: 'da_definire' }]);
+
+    if (attError) {
+        showRecoveryAlert('Errore durante la creazione della presenza: ' + attError.message);
+        resetBtn();
+        return;
+    }
+
+    // All good!
+    closeRecoveryModal();
+    showCustomAlert('Recupero Prenotato', 'Recupero prenotato con successo! La sessione apparirà nel tuo calendario.');
+    await Promise.all([loadProfile(), loadTrainings()]);
+});
