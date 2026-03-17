@@ -74,11 +74,75 @@ async function renderNavbar() {
             </div>
             
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-transparent">
-                    <li><a href="index.html" class="block py-2 px-3 text-primary">Home</a></li>
-                    <li><a href="corsi.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Corsi</a></li>
-                    <li><a href="eventi.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Eventi</a></li>
-                    <li><a href="contatti.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Contatti</a></li>
+                <!-- Desktop menu -->
+                <ul class="hidden md:flex items-center space-x-6 font-medium">
+                    <li>
+                        <a href="index.html" class="py-2 px-3 text-primary">Home</a>
+                    </li>
+                    <li class="relative group">
+                        <button type="button" class="flex items-center py-2 px-3 text-gray-900 hover:text-primary gap-1">
+                            <span>Corsi</span>
+                            <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                        </button>
+                        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full pt-2 z-40 transition-all duration-300 ease-out">
+                            <div class="bg-white dark:bg-background-dark rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 transform origin-top animate-fade-in-down min-w-max">
+                                <div class="flex">
+                                    <a href="corsi.html" class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 rounded-l-xl whitespace-nowrap transition-all">
+                                        <span class="material-symbols-outlined text-[18px]">school</span>
+                                        Tutti i corsi
+                                    </a>
+                                    <a href="coaches.html" class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 rounded-r-xl whitespace-nowrap transition-all">
+                                        <span class="material-symbols-outlined text-[18px]">sports</span>
+                                        Allenatori
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="eventi.html" class="py-2 px-3 text-gray-900 hover:text-primary">Eventi</a>
+                    </li>
+                    <li class="relative group">
+                        <button type="button" class="flex items-center py-2 px-3 text-gray-900 hover:text-primary gap-1">
+                            <span>Contatti</span>
+                            <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                        </button>
+                        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full pt-2 z-40 transition-all duration-300 ease-out">
+                            <div class="bg-white dark:bg-background-dark rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 transform origin-top animate-fade-in-down min-w-max">
+                                <div class="flex">
+                                    <a href="contatti.html" class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 rounded-l-xl whitespace-nowrap transition-all">
+                                        <span class="material-symbols-outlined text-[18px]">mail</span>
+                                        Contatti
+                                    </a>
+                                    <a href="workwith.html" class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 rounded-r-xl whitespace-nowrap transition-all">
+                                        <span class="material-symbols-outlined text-[18px]">work</span>
+                                        Lavora con noi
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Mobile menu -->
+                <ul class="flex flex-col md:hidden p-4 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50">
+                    <li>
+                        <a href="index.html" class="block py-2 px-3 text-primary">Home</a>
+                    </li>
+                    <li>
+                        <a href="corsi.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Corsi</a>
+                    </li>
+                    <li class="pl-4">
+                        <a href="coaches.html" class="block py-1.5 px-3 text-sm text-gray-700 hover:text-primary">Allenatori</a>
+                    </li>
+                    <li>
+                        <a href="eventi.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Eventi</a>
+                    </li>
+                    <li>
+                        <a href="contatti.html" class="block py-2 px-3 text-gray-900 hover:text-primary">Contatti</a>
+                    </li>
+                    <li class="pl-4">
+                        <a href="workwith.html" class="block py-1.5 px-3 text-sm text-gray-700 hover:text-primary">Lavora con noi</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -90,7 +154,7 @@ async function renderNavbar() {
         if (logoutBtn) {
             logoutBtn.addEventListener('click', async () => {
                 await supabase.auth.signOut();
-                window.location.reload(); 
+                window.location.reload();
             });
         }
     }

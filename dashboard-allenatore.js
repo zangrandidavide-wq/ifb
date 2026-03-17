@@ -17,7 +17,9 @@ const els = {
     selectedCourseDesc: document.getElementById('selected-course-desc'),
     attendanceEmptyState: document.getElementById('attendance-empty-state'),
     attendanceLoading: document.getElementById('attendance-loading'),
-    sessionsContainer: document.getElementById('sessions-container')
+    sessionsContainer: document.getElementById('sessions-container'),
+    globalAddAthleteBtn: document.getElementById('global-add-athlete-btn'),
+    sessionDateSelect: document.getElementById('session-date-select')
 };
 
 let currentUser = null;
@@ -25,6 +27,7 @@ let currentProfile = null;
 let coachCourses = [];
 let modalCourseId = null;
 let modalSessionDate = null;
+let currentCourseId = null;
 
 // Initialize
 async function initCoachDashboard() {
@@ -59,8 +62,66 @@ async function initCoachDashboard() {
         // Fetch Data
         await loadCourses();
 
-        // Attach modal event
+        // Attach modal events
         document.getElementById('confirm-add-athlete-btn')?.addEventListener('click', handleAddPhantomAthlete);
+
+        if (els.globalAddAthleteBtn) {
+            els.globalAddAthleteBtn.addEventListener('click', async () => {
+                if (!currentCourseId) return;
+
+                const course = coachCourses.find(c => c.id === currentCourseId);
+                if (!course || !course.start_time) {
+                    alert("Non è possibile calcolare le prossime date per questo corso.");
+                    return;
+                }
+
+                modalCourseId = currentCourseId;
+                modalSessionDate = null;
+
+                const athleteSelect = document.getElementById('athlete-select');
+                const sessionDateSelect = els.sessionDateSelect;
+
+                if (athleteSelect) {
+                    athleteSelect.innerHTML = '<option value="">Caricamento atleti...</option>';
+                }
+
+                if (sessionDateSelect) {
+                    sessionDateSelect.innerHTML = '<option value="">Caricamento date...</option>';
+                }
+
+                document.getElementById('add-athlete-modal').classList.remove('hidden');
+
+                await loadAvailableAthletes(currentCourseId);
+
+                if (sessionDateSelect) {
+                    const nextDates = getNext4Dates(course.start_time);
+
+                    if (!nextDates.length) {
+                        sessionDateSelect.innerHTML = '<option value="">Nessuna data disponibile.</option>';
+                    } else {
+                        sessionDateSelect.innerHTML = '<option value="" disabled selected>Seleziona una data...</option>';
+
+                        nextDates.forEach(d => {
+                            const iso = d.toISOString();
+                            const dateStr = d.toLocaleDateString('it-IT', {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long'
+                            }).replace(/^\w/, c => c.toUpperCase());
+                            const timeStr = d.toLocaleTimeString('it-IT', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
+                            const opt = document.createElement('option');
+                            opt.value = iso;
+                            opt.textContent = `${dateStr} - ${timeStr}`;
+                            sessionDateSelect.appendChild(opt);
+                        });
+                    }
+                }
+            });
+        }
 
     } catch (err) {
         console.error("Errore inizializzazione coach dashboard:", err);
@@ -165,6 +226,7 @@ function highlightSelectedCourse(courseId) {
  * ATTENDANCE ROLL-CALL SECTION
  * ------------------------------------------- */
 async function selectCourse(courseId) {
+    currentCourseId = courseId;
     highlightSelectedCourse(courseId);
 
     const course = coachCourses.find(c => c.id === courseId);
@@ -176,6 +238,10 @@ async function selectCourse(courseId) {
     els.attendanceEmptyState.classList.add('hidden');
     els.sessionsContainer.classList.add('hidden');
     els.attendanceLoading.classList.remove('hidden');
+
+    if (els.globalAddAthleteBtn) {
+        els.globalAddAthleteBtn.classList.remove('hidden');
+    }
 
     await loadRollCall(courseId);
 }
@@ -301,10 +367,6 @@ function renderSessionsGrouped(rawAttendanceData, courseId) {
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">${formatted.dateStr} <span class="font-normal text-gray-500 ml-1">ore ${formatted.timeStr}</span></h3>
                     ${badgeHtml}
                 </div>
-                <button class="add-athlete-btn text-sm bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1" data-date="${group.dateISO}">
-                    <span class="material-icons text-[16px]">person_add</span>
-                    Aggiungi Atleta
-                </button>
             </div>
         `;
 
@@ -397,13 +459,36 @@ function renderSessionsGrouped(rawAttendanceData, courseId) {
     document.querySelectorAll('.status-btn').forEach(btn => {
         btn.addEventListener('click', handleStatusToggle);
     });
+}
 
-    document.querySelectorAll('.add-athlete-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const dateISO = e.currentTarget.getAttribute('data-date');
-            openAddAthleteModal(courseId, dateISO);
-        });
-    });
+function getNext4Dates(startTimeISO) {
+    const base = new Date(startTimeISO);
+    if (Number.isNaN(base.getTime())) return [];
+
+    const targetWeekday = base.getDay(); // 0-6
+    const targetHours = base.getHours();
+    const targetMinutes = base.getMinutes();
+
+    const today = new Date();
+    today.setSeconds(0, 0);
+
+    // Start from today at course time
+    let current = new Date(today);
+    current.setHours(targetHours, targetMinutes, 0, 0);
+
+    const currentWeekday = current.getDay();
+    let diff = targetWeekday - currentWeekday;
+    if (diff < 0) diff += 7;
+
+    current.setDate(current.getDate() + diff);
+
+    const dates = [];
+    for (let i = 0; i < 4; i++) {
+        dates.push(new Date(current));
+        current.setDate(current.getDate() + 7);
+    }
+
+    return dates;
 }
 
 async function handleStatusToggle(e) {
@@ -527,13 +612,18 @@ async function loadAvailableAthletes(courseId) {
 async function handleAddPhantomAthlete() {
     const selectEl = document.getElementById('athlete-select');
     const athleteId = selectEl.value;
+    const sessionDateValue = document.getElementById('session-date-select')?.value;
     
     if (!athleteId) {
         alert("Seleziona un atleta.");
         return;
     }
-    
-    if (!modalCourseId || !modalSessionDate) return;
+    if (!sessionDateValue) {
+        alert("Seleziona una data per la lezione.");
+        return;
+    }
+
+    if (!currentCourseId) return;
     
     const btn = document.getElementById('confirm-add-athlete-btn');
     const originalText = btn.innerHTML;
@@ -543,7 +633,7 @@ async function handleAddPhantomAthlete() {
     try {
         const { data: enrollmentObj, error: enrError } = await supabase
             .from('enrollments')
-            .insert({ course_id: modalCourseId, athlete_id: athleteId, status: 'recovery' })
+            .insert({ course_id: currentCourseId, athlete_id: athleteId, status: 'recovery' })
             .select()
             .single();
             
@@ -553,12 +643,12 @@ async function handleAddPhantomAthlete() {
         
         const { error: attError } = await supabase
             .from('attendance')
-            .insert({ enrollment_id: newEnrollmentId, session_date: modalSessionDate, status: 'presente' });
+            .insert({ enrollment_id: newEnrollmentId, session_date: sessionDateValue, status: 'presente' });
             
         if (attError) throw attError;
         
         document.getElementById('add-athlete-modal').classList.add('hidden');
-        await loadRollCall(modalCourseId); // Aggiorna viste in tempo reale
+        await loadRollCall(currentCourseId); // Aggiorna viste in tempo reale
         
     } catch (err) {
         console.error("Errore aggiunta atleta recupero:", err);
