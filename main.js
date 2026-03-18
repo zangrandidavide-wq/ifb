@@ -27,7 +27,7 @@ form.addEventListener('submit', async (e) => {
     try {
         // Query a Supabase: inserimento nella tabella (es. 'newsletter')
         const { data, error } = await supabase
-            .from('newsletter_ifb') // Sostituisci con il nome reale della tua tabella
+            .from('newsletter') // Sostituisci con il nome reale della tua tabella
             .insert([ { email: emailValue } ]); // La chiave 'email' deve combaciare con la colonna in DB
 
         if (error) throw error;

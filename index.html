@@ -242,8 +242,7 @@
 </span>
 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Non fare paste!</h2>
 <p class="text-gray-600 dark:text-gray-400 mb-8">Gli ultimi annunci di tornei, i consigli per l'allenamento e le notizie della comunità consegnati direttamente nella tua casella di posta.</p>
-<form id="newsletter-form" action="https://formspree.io/f/mqeygqve" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-    <input type="hidden" name="_next" value="index.html">
+<form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
     <input 
         id="email-input" 
         class="flex-1 px-6 py-4 rounded-full border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all" 
@@ -254,14 +253,13 @@
     />
     <button 
         id="submit-btn"
-        class="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all transform hover:-translate-y-0.5" 
+        class="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed" 
         type="submit">
         Iscriviti
     </button>
 </form>
 
 <p id="form-message" class="text-center mt-4 text-sm hidden font-medium"></p>
-<p class="mt-4 text-xs text-gray-400">Rispettiamo la tua privacy. Annulla l'iscrizione in qualsiasi momento.</p>
 </div>
 </section>
 <ifbv-footer></ifbv-footer>
