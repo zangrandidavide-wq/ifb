@@ -110,7 +110,7 @@ async function renderNavbar() {
         </button>
     </div>
 
-    <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 z-[60] bg-white/98 dark:bg-background-dark/98 backdrop-blur-lg origin-top transition-all duration-300">
+   <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 z-[60] bg-white dark:bg-background-dark origin-top transition-all duration-300">
         
         <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
             <a class="flex items-center space-x-2" href="index.html">
