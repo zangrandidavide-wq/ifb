@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 
 <html lang="en"><head>
+    <meta name="theme-color" content="#7f13ec" />
+
+<link rel="icon" type="image/jpeg" href="logo.jpg" />
+
+<link rel="apple-touch-icon" href="logo.jpg" />
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>IFB</title>
@@ -136,66 +141,57 @@
 </div>
 </section>
 <!-- Upcoming Events Section -->
-<section class="py-20 bg-background-light dark:bg-background-dark" id="camps">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-<div>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Vieni in campo!</h2>
-<p class="text-gray-600 dark:text-gray-400">Prossimi eventi</p>
-</div>
-<a class="text-primary font-semibold hover:underline flex items-center" href="eventi.html">
-                    Vedi il calendario completo <span class="material-icons text-sm ml-1">arrow_forward</span>
-</a>
-</div>
-<!-- Breaking News Event Card -->
-    <div class="group relative rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.005] flex flex-col md:flex-row min-h-[360px]">
-        <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0Y-1REl9Xtuq4BD2e0evjTYOEjD5DhpPB5RTYvOHMb-ZE7ampXXnrwE_x-hm4m8LgCBS6IoUm5z-PdiELYmXakBUwJFUYfNLnTzHCgiewugUc9XV3vL9nQz58WCkWN2HpE98sT0thEdQc9wtV19PhAuzN7ahZ-SSLyWGBVhn4iqZSZN8GouFxXZjxYkaByQo1Z2KNtKT8Dfof6vaGBefe2NmQyzY4whmZLTKSAkXiGivxJD9DQ0nr6j3j4c5Y5mC8I4OF_UrZbD6" alt="Evento in Evidenza" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-r from-background-dark/95 via-background-dark/80 to-background-dark/40"></div>
+<section id="prossimi-eventi" class="py-12 md:py-20 relative bg-background-light dark:bg-background-dark">
+    <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col items-center mb-12 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">L'Evento dell'Anno</h2>
         </div>
-        <!-- Content -->
-        <div class="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-16 md:w-3/5">
-            <!-- Badge -->
-            <div class="mb-6">
-                <span class="inline-flex items-center gap-2 bg-red-500 text-white font-bold px-4 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg shadow-red-500/30 animate-pulse">
-                    <span class="material-icons text-sm">campaign</span>
-                    Evento in Evidenza
-                </span>
-            </div>
-            <!-- Dynamic Title -->
-            <h3 id="dynamic-event-title" class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight">
-                Caricamento evento...
-            </h3>
-            <!-- Dynamic Meta -->
-            <p id="dynamic-event-meta" class="inline-flex items-center gap-2 text-secondary font-semibold text-sm mb-4">
-                <span class="material-icons text-base">calendar_today</span>
-                Data e luogo in arrivo...
-            </p>
-            <!-- Dynamic Description -->
-            <p id="dynamic-event-desc" class="text-gray-300 text-base md:text-lg font-light max-w-xl mb-8 leading-relaxed">
-                Stiamo caricando i dettagli dell'evento. Resta sintonizzato!
-            </p>
-            <!-- CTA Button -->
-            <div>
-                <a href="clinic.html" class="inline-flex items-center gap-3 bg-white text-gray-900 hover:bg-primary hover:text-white font-bold px-8 py-3.5 rounded-full transition-all text-sm shadow-xl hover:shadow-primary/30 group/btn">
-                    Scopri di più e Iscriviti
-                    <span class="material-icons text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-        <!-- Right decorative side (visible on md+) -->
-        <div class="relative z-10 hidden md:flex md:w-2/5 items-center justify-center p-8">
-            <div class="text-center text-white/80">
-                <div class="w-24 h-24 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
-                    <span class="material-icons text-5xl text-secondary">sports_volleyball</span>
+
+        <div class="w-full">
+            <div class="group relative rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row md:min-h-[85vh] bg-white dark:bg-gray-800 border-l-[12px] border-secondary transform transition-all duration-500 hover:shadow-3xl hover:-translate-y-2">
+                
+                <div class="md:w-1/2 relative min-h-[50vh] md:min-h-full overflow-hidden">
+                    <img src="locandina-beach-break.jpg" alt="Beach Break alla Partaccia" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" />
+                    
+                    <div class="absolute top-6 left-6 bg-red-600 text-white text-sm md:text-base font-bold px-5 py-2.5 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2 animate-pulse z-10">
+                        <span class="material-icons">campaign</span> Evento in Evidenza
+                    </div>
                 </div>
-                <p class="text-sm font-medium text-white/60 uppercase tracking-widest">Non perdere</p>
-                <p class="text-lg font-bold text-white">questa occasione!</p>
+
+                <div class="md:w-1/2 p-12 md:p-20 lg:p-24 flex flex-col justify-center relative bg-white dark:bg-gray-800 z-10">
+                    
+                    <div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] -z-10"></div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+                            Beach Break alla <br><span class="text-primary">Partaccia</span>
+                        </h3>
+
+                        <div class="flex flex-wrap items-center gap-4 mb-10 text-base md:text-xl font-bold text-gray-700 dark:text-gray-300">
+                            <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-6 py-3 rounded-full border border-secondary/20">
+                                <span class="material-icons text-xl">sunny</span> 
+                                Marina di Massa | 24 - 26 Aprile
+                            </span>
+                        </div>
+
+                        <p class="text-gray-600 dark:text-gray-400 mb-14 font-light leading-relaxed text-xl md:text-2xl max-w-3xl">
+                            Tre giorni dedicati completamente al beach volley con allenamenti intensivi, tornei federali, feste sulla spiaggia e momenti di socialità. Il Beach Break è pensato per atleti e appassionati che vogliono vivere lo sport sulla sabbia in un contesto unico fatto di sole, mare e community.
+                        </p>
+
+                        <div>
+                            <a href="clinic.html" class="inline-flex items-center gap-3 bg-primary text-white hover:bg-primary-dark font-extrabold px-12 py-5 rounded-full transition-all text-lg md:text-xl shadow-2xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-2 group/btn">
+                                Dettagli e Iscrizioni
+                                <span class="material-icons text-xl group-hover/btn:translate-x-2 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
-</div>
 </section>
 <!-- Map / Location Section -->
 <section class="py-16 bg-sand dark:bg-sand-dark">
@@ -272,7 +268,6 @@
 
     <script src="footer.js" defer></script>
     <script type="module" src="main.js"></script>
-    <script src="fetchEvent.js" defer></script>
 </body>
 </html>
 </body></html>

@@ -58,9 +58,7 @@ async function renderNavbar() {
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
             
             <a class="flex items-center space-x-2" href="index.html">
-                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined">sports_volleyball</span>
-                </div>
+                <img src="logo.jpg" alt="I Follow Beach Volley" class="w-10 h-10 aspect-square rounded-full object-cover shrink-0"/>
                 <span class="self-center text-xl font-bold text-primary dark:text-white">I Follow Beach Volley</span>
             </a>
             
