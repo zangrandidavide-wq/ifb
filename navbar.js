@@ -37,28 +37,29 @@ async function renderNavbar() {
         </button>
     </div>
 
-    <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 z-[60] bg-white dark:bg-background-dark origin-top transition-all duration-300">
+   <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 z-[60] bg-white dark:bg-background-dark origin-top transition-all duration-300">
         
         <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
             <a class="flex items-center space-x-2" href="index.html">
                 <img src="logo.jpg" alt="Logo" class="w-10 h-10 rounded-full object-cover shrink-0"/>
                 <span class="self-center text-xl font-bold text-primary dark:text-white">I Follow B.V.</span>
             </a>
-            <button id="close-menu-btn" type="button" class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+            <button id="close-menu-btn" type="button" class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
 
-        <div class="px-8 py-10 h-[calc(100vh-80px)] flex flex-col justify-center items-center">
-            <ul class="flex flex-col space-y-10 text-5xl font-black tracking-tight text-gray-900 dark:text-white text-center">
-                <li><a href="index.html" class="block hover:text-primary transition-transform hover:scale-110">Home</a></li>
-                <li><a href="clinic.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Eventi</a></li>
-                <li><a href="coaches.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Staff Tecnico</a></li>
-                <li><a href="contatti.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Contatti</a></li>
+        <div class="px-6 h-[calc(100vh-88px)] flex flex-col justify-center items-center pb-16">
+            
+            <ul class="flex flex-col space-y-8 text-4xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white text-center">
+                <li><a href="index.html" class="block hover:text-primary transition-transform duration-300 hover:scale-110">Home</a></li>
+                <li><a href="clinic.html" class="block hover:text-primary transition-transform duration-300 hover:scale-110">Eventi</a></li>
+                <li><a href="coaches.html" class="block hover:text-primary transition-transform duration-300 hover:scale-110">Staff Tecnico</a></li>
+                <li><a href="contatti.html" class="block hover:text-primary transition-transform duration-300 hover:scale-110">Contatti</a></li>
             </ul>
+            
         </div>
     </div>`;
-
     // Logica JavaScript per il Mobile Menu
     const floatingBtn = document.getElementById('floating-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
