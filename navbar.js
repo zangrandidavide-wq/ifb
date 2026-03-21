@@ -53,6 +53,8 @@ async function renderNavbar() {
             <ul class="flex flex-col space-y-10 text-5xl font-black tracking-tight text-gray-900 dark:text-white text-center">
                 <li><a href="index.html" class="block hover:text-primary transition-transform hover:scale-110">Home</a></li>
                 <li><a href="clinic.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Eventi</a></li>
+                <li><a href="coaches.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Staff Tecnico</a></li>
+                <li><a href="contatti.html" class="block text-primary hover:text-primary-dark transition-transform hover:scale-110">Contatti</a></li>
             </ul>
         </div>
     </div>`;
