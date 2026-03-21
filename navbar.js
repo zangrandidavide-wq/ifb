@@ -17,12 +17,14 @@ async function renderNavbar() {
             
             <a class="flex items-center space-x-2" href="index.html">
                 <img src="logo.jpg" alt="Logo" class="w-10 h-10 rounded-full object-cover shrink-0"/>
-                <span class="self-center text-xl font-bold text-primary dark:text-white">I Follow</span>
+              
             </a>
             
             <div class="flex items-center space-x-12 font-bold text-lg">
                 <a href="index.html" class="text-gray-900 dark:text-gray-100 hover:text-primary transition-colors">Home</a>
                 <a href="clinic.html" class="text-gray-900 dark:text-gray-100 hover:text-primary transition-colors">Eventi</a>
+                <a href="coaches.html" class="text-gray-900 dark:text-gray-100 hover:text-primary transition-colors">Staff Tecnico</a>
+                <a href="contatti.html" class="text-gray-900 dark:text-gray-100 hover:text-primary transition-colors">Contatti</a>
             </div>
 
             <div class="w-24"></div>
