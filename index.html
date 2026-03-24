@@ -64,44 +64,39 @@
 <script type="module" src="navbar.js"></script>
 </header>
 <!-- Hero Section -->
-<section class="relative h-[85vh] min-h-[600px] md:h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+<section class="relative h-[85vh] min-h-[600px] md:h-screen w-full overflow-hidden bg-slate-950">
     
     <img 
-        alt="Giocatore IFB" 
-        class="absolute inset-0 w-full h-full object-cover object-top scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]" 
-        src="hero_2.jpg"
+        alt="Azione dinamica Beach Volley IFB" 
+        class="absolute inset-0 w-full h-full object-cover object-top z-0" 
+        src="eddi-hero-3.jpg"
     />
     
-    <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent"></div>
-    <div class="absolute inset-0 bg-black/30 backdrop-contrast-125"></div>
+    <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+    <div class="absolute inset-0 z-10 bg-black/20 backdrop-contrast-110"></div>
     
-    <div class="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-5xl mx-auto mt-12 md:mt-24">
+    <div class="relative z-20 h-full w-full max-w-[1700px] mx-auto flex items-end justify-center pb-8 md:pb-12">
         
-        <span class="inline-block text-xs md:text-sm font-bold text-white uppercase tracking-[0.2em] bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 border border-white/20 shadow-lg">
-            #1 Beach Volley Community a Milano
-        </span>
-        
-        <h1 class="text-7xl md:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
-            GIOCA.<br>IMPARA.<br>DOMINA.
-        </h1>
-        
-        <p class="text-lg md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto mb-12 drop-shadow-md">
-            La sabbia è il nostro tempio. Scatena il tuo potenziale con corsi d'élite, tornei elettrizzanti e una community che non dorme mai.
-        </p>
-        
-        <div class="relative inline-flex group">
-            <div class="absolute -inset-1 bg-primary rounded-full blur-lg opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-500"></div>
+        <div class="flex flex-col items-center text-center w-full max-w-6xl px-6 space-y-4 md:space-y-6">
             
-            <a href="/clinic.html" class="relative inline-flex items-center justify-center gap-3 px-12 py-5 bg-primary text-white font-black text-xl rounded-full hover:bg-primary-dark transition-all transform hover:-translate-y-1 shadow-2xl border border-white/10">
-                Scopri gli Eventi
-                <span class="material-symbols-outlined text-[28px]">local_fire_department</span>
-            </a>
+            <span class="inline-block text-xs font-bold text-gray-300 uppercase tracking-[0.3em] bg-white/5 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10 shadow-sm">
+                #1 Beach Volley Community a Milano
+            </span>
+            
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase">
+                SABBIA. PASSIONE. COMMUNITY.
+            </h1>
+            
+            <p class="text-base md:text-lg text-gray-300 font-medium max-w-xl mx-auto leading-relaxed">
+                Dove la passione per il beach volley prende vita, ogni giorno.
+            </p>
+            
         </div>
         
     </div>
 </section>
 <!-- Features / Values Strip -->
-<section class="py-10 bg-primary">
+<section class="pt-3 pb-8 md:pt-4 md:pb-10 bg-primary">
 <div class="container mx-auto px-4">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
 <div class="px-4 py-2">
@@ -124,48 +119,48 @@
 </section>
 <!-- Upcoming Events Section -->
 <section id="prossimi-eventi" class="py-12 md:py-20 relative bg-background-light dark:bg-background-dark">
-    <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col items-center mb-12 text-center">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">L'Evento dell'Anno</h2>
+        <div class="flex flex-col items-center mb-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">L'Evento dell'Anno</h2>
         </div>
 
         <div class="w-full">
-            <div class="group relative rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row md:min-h-[85vh] bg-white dark:bg-gray-800 border-l-[12px] border-secondary transform transition-all duration-500 hover:shadow-3xl hover:-translate-y-2">
+            <div class="group relative rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row bg-white dark:bg-gray-800 border-l-[8px] border-secondary transform transition-all duration-500 hover:shadow-3xl hover:-translate-y-2">
                 
-                <div class="md:w-1/2 relative min-h-[50vh] md:min-h-full overflow-hidden">
+                <div class="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                     <img src="locandina-beach-break.jpg" alt="Beach Break alla Partaccia" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" />
                     
-                    <div class="absolute top-6 left-6 bg-red-600 text-white text-sm md:text-base font-bold px-5 py-2.5 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2 animate-pulse z-10">
-                        <span class="material-icons">campaign</span> Evento in Evidenza
+                    <div class="absolute top-4 left-4 bg-red-600 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-full uppercase tracking-widest shadow-xl flex items-center gap-1.5 animate-pulse z-10">
+                        <span class="material-icons text-base">campaign</span> In Evidenza
                     </div>
                 </div>
 
-                <div class="md:w-1/2 p-12 md:p-20 lg:p-24 flex flex-col justify-center relative bg-white dark:bg-gray-800 z-10">
+                <div class="md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-white dark:bg-gray-800 z-10">
                     
                     <div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
                     <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] -z-10"></div>
 
                     <div class="relative z-10">
-                        <h3 class="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+                        <h3 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 leading-[1.1] tracking-tight">
                             Beach Break alla <br><span class="text-primary">Partaccia</span>
                         </h3>
 
-                        <div class="flex flex-wrap items-center gap-4 mb-10 text-base md:text-xl font-bold text-gray-700 dark:text-gray-300">
-                            <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-6 py-3 rounded-full border border-secondary/20">
-                                <span class="material-icons text-xl">sunny</span> 
+                        <div class="flex flex-wrap items-center gap-4 mb-6 text-sm md:text-base font-bold text-gray-700 dark:text-gray-300">
+                            <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-5 py-2.5 rounded-full border border-secondary/20">
+                                <span class="material-icons text-lg">sunny</span> 
                                 Marina di Massa | 24 - 26 Aprile
                             </span>
                         </div>
 
-                        <p class="text-gray-600 dark:text-gray-400 mb-14 font-light leading-relaxed text-xl md:text-2xl max-w-3xl">
+                        <p class="text-gray-600 dark:text-gray-400 mb-8 font-light leading-relaxed text-base md:text-lg max-w-2xl">
                             Tre giorni dedicati completamente al beach volley con allenamenti intensivi, tornei federali, feste sulla spiaggia e momenti di socialità. Il Beach Break è pensato per atleti e appassionati che vogliono vivere lo sport sulla sabbia in un contesto unico fatto di sole, mare e community.
                         </p>
 
                         <div>
-                            <a href="clinic.html" class="inline-flex items-center gap-3 bg-primary text-white hover:bg-primary-dark font-extrabold px-12 py-5 rounded-full transition-all text-lg md:text-xl shadow-2xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-2 group/btn">
+                            <a href="clinic.html" class="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary-dark font-extrabold px-8 py-4 rounded-full transition-all text-base md:text-lg shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1 group/btn w-fit">
                                 Dettagli e Iscrizioni
-                                <span class="material-icons text-xl group-hover/btn:translate-x-2 transition-transform">arrow_forward</span>
+                                <span class="material-icons text-xl group-hover/btn:translate-x-1.5 transition-transform">arrow_forward</span>
                             </a>
                         </div>
                     </div>
