@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html lang="en"><head>
-    <link rel="preload" as="image" href="eddi-hero-3.webp" type="image/webp">
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -72,10 +71,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     
-    <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700", /* Golden Yellow Accent */
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7", /* Light sand beige for alternate sections */
+                        "sand-dark": "#231b2e", /* Darker variant for dark mode sections */
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    keyframes: {
+                        'fade-in-down': {
+                            '0%': { opacity: '0', transform: 'translateY(-8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                    animation: {
+                        'fade-in-down': 'fade-in-down 0.3s ease-out both',
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+      
+            font-family: 'Lexend', sans-serif;
+        }
+    
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #7f13ec, #FFD700);
+        }
+    </style>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -110,9 +153,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img 
             alt="Azione dinamica Beach Volley IFB" 
             class="w-full h-full object-cover object-top" 
-            src="eddi-hero-3.webp" 
-            fetchpriority="high"
-            loading="eager"
+            src="eddi-hero-3.webp"
         />
         
     </picture>
