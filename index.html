@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 
 <html lang="en"><head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        
+        // Imposta tutto su 'denied' prima che GTM e GA4 si attivino
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+        
+        // Push di sicurezza per inizializzare il dataLayer
+        dataLayer.push({ 'event': 'default_consent' });
+    </script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPB635BSN3"></script>
 <script>
@@ -312,6 +328,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <ifbv-footer></ifbv-footer>
 
     <script src="footer.js" defer></script>
-    <script type="module" src="main.js"></script>
+   
+    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-4 sm:pb-6 z-50 hidden transition-transform duration-500 translate-y-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                
+                <div class="flex items-center w-full sm:w-auto">
+                    <span class="flex p-3 rounded-xl bg-primary/10 shrink-0">
+                        <span class="material-icons text-primary">cookie</span>
+                    </span>
+                    <p class="ml-4 font-medium text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Utilizziamo i cookie per analizzare il traffico e migliorare i nostri Camp. Scegli tu cosa condividere.
+                    </p>
+                </div>
+                
+                <div class="flex shrink-0 w-full sm:w-auto gap-3">
+                    <button id="btn-reject-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-bold text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        Solo Necessari
+                    </button>
+                    <button id="btn-accept-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark transition-colors">
+                        Accetta Tutti
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+     <script type="module" src="main.js"></script>
 </body>
 </html>
