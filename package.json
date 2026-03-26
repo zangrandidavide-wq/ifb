@@ -13,19 +13,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.2.2",
-    "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/forms": "^0.5.11",
-    "tailwindcss": "^4.2.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zangrandidavide-wq/ifb.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zangrandidavide-wq/ifb/issues"
-  },
-  "homepage": "https://github.com/zangrandidavide-wq/ifb#readme"
+  "type": "commonjs"
 }
