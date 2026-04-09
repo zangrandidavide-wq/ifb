@@ -89,6 +89,20 @@
     <ifbv-footer></ifbv-footer>
     <script src="footer.js" defer></script>
 
+    <div id="exercise-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div id="exercise-modal-panel" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-primary/10 shadow-2xl p-6 md:p-8">
+            <button
+                id="exercise-modal-close"
+                type="button"
+                aria-label="Chiudi dettagli esercizio"
+                class="absolute top-4 right-4 inline-flex items-center justify-center h-10 w-10 rounded-full border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+                <span class="material-icons text-xl">close</span>
+            </button>
+            <div id="exercise-modal-content" class="pr-10"></div>
+        </div>
+    </div>
+
     <script>
         const API_KEY = "AIzaSyAtVOJkOSzFovjEAlnG_FdBdtfTXhNicec";
         const SPREADSHEET_ID = "1E1IiD8ae3vUDmg7TdOgPzYkjCSK1D9HZSWK1fMh4syI";
@@ -99,9 +113,17 @@
         const filtersContainerEl = document.getElementById("filters-container");
         const searchInputEl = document.getElementById("search-input");
         const resultsCountEl = document.getElementById("results-count");
+        const modalEl = document.getElementById("exercise-modal");
+        const modalPanelEl = document.getElementById("exercise-modal-panel");
+        const modalContentEl = document.getElementById("exercise-modal-content");
+        const modalCloseEl = document.getElementById("exercise-modal-close");
         let allRows = [];
         let activeTipologia = "Tutti";
         let searchTerm = "";
+
+        function extractRow(item) {
+            return Array.isArray(item) ? item : item?.row || [];
+        }
 
         function escapeHtml(value) {
             return String(value ?? "")
@@ -155,44 +177,30 @@
             `;
         }
 
-        function createCard(row) {
+        function createCard(row, index) {
             const nome = row[0] || "Esercizio senza titolo";
             const tipologia = row[1] || "Generale";
             const focus = row[2] || "";
-            const svolgimento = row[3] || "";
-            const varianti = row[4] || "";
             const tempo = row[5] || "";
-            const correzioni = row[6] || "";
 
             return `
-                <article class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/10 p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
-                    <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">${escapeHtml(nome)}</h2>
-
-                    <div class="mb-4">
+                <article data-index="${index}" class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/10 p-5 shadow-sm cursor-pointer hover:ring-2 hover:ring-primary/40 hover:shadow-md transition-all duration-300 flex flex-col gap-3">
+                    <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">${escapeHtml(nome)}</h2>
+                    <div>
                         <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeClassByCategory(tipologia)}">
                             ${escapeHtml(tipologia)}
                         </span>
                     </div>
-
-                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-4">${escapeHtml(focus)}</p>` : ""}
-
-                    ${svolgimento ? `<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(svolgimento)}</p>` : ""}
-
-                    ${varianti ? `
-                        <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
-                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Varianti</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(varianti)}</p>
-                        </div>
-                    ` : ""}
-
+                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200">${escapeHtml(focus)}</p>` : ""}
                     ${tempo ? `
-                        <div class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
                             <span class="material-icons text-primary text-base">schedule</span>
                             <span>${escapeHtml(tempo)}</span>
                         </div>
                     ` : ""}
-
-                    ${renderCorrezioni(correzioni)}
+                    <p class="mt-1 text-xs font-semibold uppercase tracking-wide text-primary/80 dark:text-primary/90">
+                        Clicca per vedere i dettagli
+                    </p>
                 </article>
             `;
         }
@@ -207,19 +215,22 @@
                 return;
             }
 
-            gridEl.innerHTML = rows.map(createCard).join("");
+            gridEl.innerHTML = rows
+                .map((item) => createCard(extractRow(item), item.originalIndex))
+                .join("");
         }
 
         function filterRowsByTipologia(tipologia) {
             if (tipologia === "Tutti") return allRows;
-            return allRows.filter((row) => (row[1] || "").trim() === tipologia);
+            return allRows.filter((item) => (extractRow(item)[1] || "").trim() === tipologia);
         }
 
         function filterRowsBySearch(rows, term) {
             const normalized = term.trim().toLowerCase();
             if (!normalized) return rows;
 
-            return rows.filter((row) => {
+            return rows.filter((item) => {
+                const row = extractRow(item);
                 const nome = (row[0] || "").toLowerCase();
                 const focus = (row[2] || "").toLowerCase();
                 return nome.includes(normalized) || focus.includes(normalized);
@@ -240,7 +251,7 @@
             const uniqueTipologie = Array.from(
                 new Set(
                     allRows
-                        .map((row) => (row[1] || "").trim())
+                        .map((item) => (extractRow(item)[1] || "").trim())
                         .filter(Boolean)
                 )
             ).sort((a, b) => a.localeCompare(b, "it", { sensitivity: "base" }));
@@ -284,6 +295,79 @@
             updateResultsCount(filteredRows.length);
         });
 
+        function openModal(index) {
+            const exercise = allRows[index];
+            if (!exercise) return;
+            const row = extractRow(exercise);
+            const nome = row[0] || "Esercizio senza titolo";
+            const tipologia = row[1] || "Generale";
+            const focus = row[2] || "";
+            const svolgimento = row[3] || "";
+            const varianti = row[4] || "";
+            const tempo = row[5] || "";
+            const correzioni = row[6] || "";
+
+            modalContentEl.innerHTML = `
+                <div class="space-y-4">
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">${escapeHtml(nome)}</h2>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeClassByCategory(tipologia)}">
+                            ${escapeHtml(tipologia)}
+                        </span>
+                        ${tempo ? `
+                            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
+                                <span class="material-icons text-primary text-base">schedule</span>
+                                <span>${escapeHtml(tempo)}</span>
+                            </span>
+                        ` : ""}
+                    </div>
+                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200">${escapeHtml(focus)}</p>` : ""}
+                    ${svolgimento ? `
+                        <div class="pt-2">
+                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Svolgimento</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(svolgimento)}</p>
+                        </div>
+                    ` : ""}
+                    ${varianti ? `
+                        <div class="pt-2">
+                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Varianti</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(varianti)}</p>
+                        </div>
+                    ` : ""}
+                    ${renderCorrezioni(correzioni)}
+                </div>
+            `;
+
+            modalEl.classList.remove("hidden");
+            modalEl.classList.add("flex");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modalEl.classList.add("hidden");
+            modalEl.classList.remove("flex");
+            modalContentEl.innerHTML = "";
+            document.body.style.overflow = "";
+        }
+
+        gridEl.addEventListener("click", (event) => {
+            const card = event.target.closest("article[data-index]");
+            if (!card) return;
+            const index = Number(card.dataset.index);
+            if (!Number.isInteger(index)) return;
+            openModal(index);
+        });
+
+        modalCloseEl.addEventListener("click", closeModal);
+        modalEl.addEventListener("click", (event) => {
+            if (!modalPanelEl.contains(event.target)) closeModal();
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !modalEl.classList.contains("hidden")) {
+                closeModal();
+            }
+        });
+
         async function fetchSheetData() {
             for (const range of SHEET_RANGES) {
                 const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(range)}?key=${API_KEY}`;
@@ -311,7 +395,7 @@
                     return;
                 }
 
-                allRows = rows;
+                allRows = rows.map((row, originalIndex) => ({ row, originalIndex }));
                 renderFilterButtons();
                 const filteredRows = getFilteredRows();
                 renderGrid(filteredRows);
