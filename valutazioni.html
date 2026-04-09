@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+        dataLayer.push({ 'event': 'default_consent' });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPB635BSN3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VPB635BSN3');
+    </script>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P7VLDV3W');</script>
+    <script>
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "w1rk4uvro4");
+    </script>
+    <meta name="theme-color" content="#7f13ec" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Valutazioni allenamento | I Follow Beach Volley</title>
+    <meta name="description" content="Valuta i corsisti dopo l'allenamento: seleziona la classe e invia le valutazioni a I Follow Beach Volley." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://ifollowbv.it/valutazioni.html" />
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7VLDV3W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <div id="page-loading" class="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm">
+        <div class="h-14 w-14 rounded-full border-4 border-primary/30 border-t-primary animate-spin" aria-hidden="true"></div>
+        <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">Caricamento dati…</p>
+    </div>
+
+    <main class="max-w-[960px] mx-auto px-6 pb-16 pt-8 md:pt-24 flex flex-col gap-8 relative">
+        <div id="load-error" class="hidden rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/40 p-6 text-center">
+            <p class="font-bold text-red-800 dark:text-red-200">Impossibile caricare i dati</p>
+            <p id="load-error-detail" class="mt-2 text-sm text-red-700/90 dark:text-red-300/90"></p>
+            <button type="button" id="retry-load-btn" class="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 hover:bg-primary-dark transition-colors">
+                Riprova
+            </button>
+        </div>
+
+        <div id="success-panel" class="hidden rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/50 p-10 text-center shadow-sm">
+            <p class="text-xl font-bold text-emerald-800 dark:text-emerald-200">✅ Valutazioni salvate con successo!</p>
+            <p class="mt-2 text-sm text-emerald-700/90 dark:text-emerald-300/80">Grazie per aver compilato il modulo.</p>
+        </div>
+
+        <div id="valutazioni-app" class="hidden flex flex-col gap-8">
+            <section class="relative rounded-xl overflow-hidden flex flex-col items-center justify-center text-center p-8 md:p-10 bg-primary/5 border border-primary/10">
+                <div class="absolute inset-0 z-0 bg-gradient-to-br from-primary/15 via-transparent to-primary/10"></div>
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">Valutazione allenamento</h1>
+                    <p class="text-slate-600 dark:text-slate-400 font-medium text-sm md:text-base">
+                        Seleziona data, orario e coach, poi valuta i corsisti della classe.
+                    </p>
+                </div>
+            </section>
+
+            <section class="w-full bg-white dark:bg-slate-900 rounded-xl border border-primary/10 p-6 md:p-8 shadow-sm">
+                <h2 class="text-lg font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">filter_alt</span>
+                    Selezione classe
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label for="dataAllenamento" class="block text-sm font-semibold mb-2">Data allenamento</label>
+                        <input id="dataAllenamento" type="date" class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 px-4 py-2.5" />
+                    </div>
+                    <div>
+                        <label for="select-orario" class="block text-sm font-semibold mb-2">Orario</label>
+                        <select id="select-orario" disabled class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <option value="">— Seleziona prima la data —</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="select-coach" class="block text-sm font-semibold mb-2">Coach</label>
+                        <select id="select-coach" disabled class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <option value="">— Seleziona prima l'orario —</option>
+                        </select>
+                    </div>
+                </div>
+                <p id="filter-feedback" class="hidden mt-4 text-sm font-medium text-amber-700 dark:text-amber-300"></p>
+            </section>
+
+            <section id="sezione-valutazione-classe" class="hidden w-full bg-white dark:bg-slate-900 rounded-xl border border-primary/10 p-6 md:p-8 shadow-sm">
+                <h2 class="text-lg font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">star</span>
+                    Valutazione classe
+                </h2>
+                <div id="studenti-container" class="flex flex-col gap-4"></div>
+            </section>
+
+            <section id="sezione-note-submit" class="hidden w-full bg-white dark:bg-slate-900 rounded-xl border border-primary/10 p-6 md:p-8 shadow-sm space-y-6">
+                <button type="button" id="btn-submit-valutazioni" class="w-full sm:w-auto min-w-[240px] bg-primary text-white py-3.5 px-8 rounded-xl font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30 disabled:opacity-60 disabled:cursor-not-allowed">
+                    Salva e Invia Valutazioni
+                </button>
+            </section>
+            <p id="submit-error" class="hidden text-sm font-medium text-red-600 dark:text-red-400 px-1"></p>
+        </div>
+    </main>
+
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+
+    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-4 sm:pb-6 z-50 hidden transition-transform duration-500 translate-y-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center w-full sm:w-auto">
+                    <span class="flex p-3 rounded-xl bg-primary/10 shrink-0">
+                        <span class="material-icons text-primary">cookie</span>
+                    </span>
+                    <p class="ml-4 font-medium text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Utilizziamo i cookie per analizzare il traffico e migliorare i nostri Camp. Scegli tu cosa condividere.
+                    </p>
+                </div>
+                <div class="flex shrink-0 w-full sm:w-auto gap-3">
+                    <button id="btn-reject-cookies" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-bold text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        Solo Necessari
+                    </button>
+                    <button id="btn-accept-cookies" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark transition-colors">
+                        Accetta Tutti
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+
+    <script>
+(function () {
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxjA1aiggGCL3762sUsIh-2X9PS8nJX_Bcgg6XyBI1-OU7QYHLTKcJ86GewPpGjOhd7/exec';
+
+    /** @type {string[][]} Dati roster da GET (ogni riga: giorno, orario, coach, corsista) */
+    window.rosterData = [];
+
+    const el = {
+        loading: document.getElementById('page-loading'),
+        loadError: document.getElementById('load-error'),
+        loadErrorDetail: document.getElementById('load-error-detail'),
+        retryBtn: document.getElementById('retry-load-btn'),
+        app: document.getElementById('valutazioni-app'),
+        success: document.getElementById('success-panel'),
+        dataAllenamento: document.getElementById('dataAllenamento'),
+        orario: document.getElementById('select-orario'),
+        coach: document.getElementById('select-coach'),
+        sezioneValutazione: document.getElementById('sezione-valutazione-classe'),
+        studentiContainer: document.getElementById('studenti-container'),
+        sezioneNote: document.getElementById('sezione-note-submit'),
+        btnSubmit: document.getElementById('btn-submit-valutazioni'),
+        submitError: document.getElementById('submit-error'),
+        filterFeedback: document.getElementById('filter-feedback'),
+    };
+
+    function localDateISO() {
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return y + '-' + m + '-' + day;
+    }
+
+    function uniqueSorted(values) {
+        return [...new Set(values)].filter(Boolean).sort((a, b) => a.localeCompare(b, 'it'));
+    }
+
+    /** Domenica = indice 0 … Sabato = 6 — stringhe allineate al roster API indice [0] */
+    var GIORNI_SETTIMANA_IT = [
+        'Domenica',
+        'Lunedì',
+        'Martedì',
+        'Mercoledì',
+        'Giovedì',
+        'Venerdì',
+        'Sabato',
+    ];
+
+    /**
+     * Calcola il giorno della settimana in italiano da una data YYYY-MM-DD (interpretata in ora locale).
+     */
+    function giornoSettimanaItalianoFromISO(isoDate) {
+        if (!isoDate || typeof isoDate !== 'string') return '';
+        var parts = isoDate.split('-');
+        if (parts.length !== 3) return '';
+        var y = parseInt(parts[0], 10);
+        var m = parseInt(parts[1], 10) - 1;
+        var d = parseInt(parts[2], 10);
+        if (isNaN(y) || isNaN(m) || isNaN(d)) return '';
+        var date = new Date(y, m, d);
+        if (date.getFullYear() !== y || date.getMonth() !== m || date.getDate() !== d) return '';
+        return GIORNI_SETTIMANA_IT[date.getDay()];
+    }
+
+    function getGiornoCalcolato() {
+        return giornoSettimanaItalianoFromISO(el.dataAllenamento.value);
+    }
+
+    function showLoading(show) {
+        el.loading.classList.toggle('hidden', !show);
+    }
+
+    function showLoadError(msg) {
+        showLoading(false);
+        el.loadError.classList.remove('hidden');
+        el.app.classList.add('hidden');
+        el.loadErrorDetail.textContent = msg || 'Errore di rete o risposta non valida.';
+    }
+
+    function showApp() {
+        el.loadError.classList.add('hidden');
+        el.app.classList.remove('hidden');
+    }
+
+    async function fetchRoster() {
+        showLoading(true);
+        el.loadError.classList.add('hidden');
+        el.app.classList.add('hidden');
+        try {
+            const res = await fetch(API_URL, { method: 'GET', mode: 'cors' });
+            const json = await res.json();
+            if (json && json.status === 'success' && Array.isArray(json.data)) {
+                window.rosterData = json.data;
+                el.dataAllenamento.value = localDateISO();
+                onDataAllenamentoChange();
+                showLoading(false);
+                showApp();
+            } else {
+                showLoadError('Risposta API non valida.');
+            }
+        } catch (e) {
+            console.error(e);
+            showLoadError(e.message || 'Impossibile completare la richiesta.');
+        }
+    }
+
+    /**
+     * Data cambiata: ricalcola il giorno in italiano, resetta Orario e Coach, ripopola Orario se c’è match nel roster.
+     */
+    function onDataAllenamentoChange() {
+        hideEvaluationUI();
+        el.coach.innerHTML = '<option value="">— Seleziona prima l\'orario —</option>';
+        el.coach.disabled = true;
+
+        var iso = el.dataAllenamento.value;
+        if (!iso) {
+            el.orario.innerHTML = '<option value="">— Seleziona prima la data —</option>';
+            el.orario.disabled = true;
+            if (el.filterFeedback) {
+                el.filterFeedback.classList.add('hidden');
+                el.filterFeedback.textContent = '';
+            }
+            return;
+        }
+
+        var g = getGiornoCalcolato();
+        if (!g) {
+            el.orario.innerHTML = '<option value="">— Data non valida —</option>';
+            el.orario.disabled = true;
+            return;
+        }
+
+        var times = uniqueSorted(
+            window.rosterData.filter(function (r) {
+                return r[0] === g;
+            }).map(function (r) {
+                return r[1];
+            })
+        );
+
+        if (times.length === 0) {
+            el.orario.innerHTML = '<option value="">— Nessun orario —</option>';
+            el.orario.disabled = true;
+            el.filterFeedback.textContent =
+                'Nessuna classe in elenco per ' + g + '. Scegli un’altra data.';
+            el.filterFeedback.classList.remove('hidden');
+            return;
+        }
+
+        el.filterFeedback.classList.add('hidden');
+        el.orario.innerHTML = '<option value="">— Seleziona —</option>';
+        times.forEach(function (t) {
+            var opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = t;
+            el.orario.appendChild(opt);
+        });
+        el.orario.disabled = false;
+    }
+
+    function onOrarioChange() {
+        var g = getGiornoCalcolato();
+        var t = el.orario.value;
+        if (!g || !t) {
+            el.coach.innerHTML = '<option value="">— Seleziona —</option>';
+            el.coach.disabled = true;
+            hideEvaluationUI();
+            return;
+        }
+        var coaches = uniqueSorted(
+            window.rosterData
+                .filter(function (r) {
+                    return r[0] === g && r[1] === t;
+                })
+                .map(function (r) {
+                    return r[2];
+                })
+        );
+        el.coach.innerHTML = '<option value="">— Seleziona —</option>';
+        coaches.forEach(function (c) {
+            var opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c;
+            el.coach.appendChild(opt);
+        });
+        el.coach.disabled = false;
+        hideEvaluationUI();
+    }
+
+    function hideEvaluationUI() {
+        el.sezioneValutazione.classList.add('hidden');
+        el.sezioneNote.classList.add('hidden');
+        el.studentiContainer.innerHTML = '';
+        if (el.filterFeedback) {
+            el.filterFeedback.classList.add('hidden');
+            el.filterFeedback.textContent = '';
+        }
+    }
+
+    function onCoachChange() {
+        var g = getGiornoCalcolato();
+        var t = el.orario.value;
+        var c = el.coach.value;
+        if (!g || !t || !c) {
+            hideEvaluationUI();
+            return;
+        }
+        var rows = window.rosterData.filter(function (r) {
+            return r[0] === g && r[1] === t && r[2] === c;
+        });
+        const names = uniqueSorted(rows.map((r) => r[3]));
+        if (names.length === 0) {
+            hideEvaluationUI();
+            el.filterFeedback.textContent =
+                'Nessun corsista trovato per questa combinazione.';
+            el.filterFeedback.classList.remove('hidden');
+            return;
+        }
+        el.filterFeedback.classList.add('hidden');
+        renderStudenti(names);
+        el.sezioneValutazione.classList.remove('hidden');
+        el.sezioneNote.classList.remove('hidden');
+    }
+
+    function renderStudenti(names) {
+        el.studentiContainer.innerHTML = '';
+        names.forEach((nome, idx) => {
+            const row = document.createElement('div');
+            row.className =
+                'flex flex-col gap-4 p-4 rounded-xl bg-background-light dark:bg-background-dark/80 border border-primary/10';
+            row.dataset.nome = nome;
+
+            const idBase = 'voto-' + idx + '-' + nome.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-_]/g, '');
+
+            const topRow = document.createElement('div');
+            topRow.className = 'flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4';
+
+            const labelWrap = document.createElement('div');
+            labelWrap.className = 'sm:w-1/3 min-w-0';
+            const nameEl = document.createElement('p');
+            nameEl.className = 'font-bold text-slate-900 dark:text-slate-100 truncate';
+            nameEl.textContent = nome;
+            labelWrap.appendChild(nameEl);
+
+            const controls = document.createElement('div');
+            controls.className = 'flex flex-1 flex-wrap items-center gap-3';
+
+            const range = document.createElement('input');
+            range.type = 'range';
+            range.min = '1';
+            range.max = '10';
+            range.step = '1';
+            range.value = '6';
+            range.id = idBase;
+            range.className =
+                'flex-1 min-w-[140px] h-2 accent-primary rounded-lg cursor-pointer';
+
+            const badge = document.createElement('span');
+            badge.className =
+                'inline-flex min-w-[2.5rem] justify-center items-center rounded-lg bg-primary/15 text-primary dark:bg-primary/25 dark:text-white px-3 py-1.5 text-sm font-black tabular-nums';
+            badge.textContent = range.value;
+
+            range.addEventListener('input', () => {
+                badge.textContent = range.value;
+            });
+
+            controls.appendChild(range);
+            controls.appendChild(badge);
+
+            const notaInput = document.createElement('input');
+            notaInput.type = 'text';
+            notaInput.placeholder = 'Note opzionali...';
+            notaInput.className =
+                'w-full rounded-lg border-primary/20 bg-white dark:bg-background-dark focus:border-primary focus:ring-primary/20 px-4 py-2.5';
+            notaInput.dataset.notaInput = '1';
+
+            topRow.appendChild(labelWrap);
+            topRow.appendChild(controls);
+            row.appendChild(topRow);
+            row.appendChild(notaInput);
+            el.studentiContainer.appendChild(row);
+        });
+    }
+
+    el.dataAllenamento.addEventListener('change', onDataAllenamentoChange);
+    el.dataAllenamento.addEventListener('input', onDataAllenamentoChange);
+    el.orario.addEventListener('change', onOrarioChange);
+    el.coach.addEventListener('change', onCoachChange);
+    el.retryBtn.addEventListener('click', fetchRoster);
+
+    el.btnSubmit.addEventListener('click', async (e) => {
+        e.preventDefault();
+        el.submitError.classList.add('hidden');
+
+        const giorno = getGiornoCalcolato();
+        const orario = el.orario.value;
+        const coach = el.coach.value;
+        if (!el.dataAllenamento.value || !giorno || !orario || !coach) {
+            el.submitError.textContent = 'Seleziona data, orario e coach.';
+            el.submitError.classList.remove('hidden');
+            return;
+        }
+
+        const valutazioni = [];
+        el.studentiContainer.querySelectorAll('[data-nome]').forEach((row) => {
+            const nome = row.dataset.nome;
+            const input = row.querySelector('input[type="range"]');
+            const notaInput = row.querySelector('[data-nota-input="1"]');
+            if (nome && input) {
+                valutazioni.push({
+                    nome: nome,
+                    voto: String(input.value),
+                    nota: notaInput ? notaInput.value.trim() : '',
+                });
+            }
+        });
+
+        const payload = {
+            dataAllenamento: el.dataAllenamento.value,
+            giorno: giorno,
+            orario: orario,
+            coach: coach,
+            valutazioni: valutazioni,
+        };
+
+        const originalText = el.btnSubmit.textContent;
+        el.btnSubmit.disabled = true;
+        el.btnSubmit.textContent = 'Salvataggio in corso...';
+
+        try {
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                mode: 'cors',
+            });
+            const json = await res.json().catch(() => ({}));
+            if (json && json.status === 'success') {
+                el.app.classList.add('hidden');
+                el.success.classList.remove('hidden');
+            } else {
+                el.submitError.textContent =
+                    (json && json.message) || 'Invio non riuscito. Riprova.';
+                el.submitError.classList.remove('hidden');
+            }
+        } catch (err) {
+            console.error(err);
+            el.submitError.textContent =
+                'Errore di rete. Controlla la connessione e riprova.';
+            el.submitError.classList.remove('hidden');
+        } finally {
+            el.btnSubmit.disabled = false;
+            el.btnSubmit.textContent = originalText;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', fetchRoster);
+})();
+    </script>
+</body>
+</html>
