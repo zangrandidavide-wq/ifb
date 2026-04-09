@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glossario Esercizi | I Follow Beach Volley</title>
+    <meta name="description" content="Glossario esercizi IFB: consulta focus tecnici, svolgimento, varianti, tempi e correzioni in una dashboard aggiornata da Google Sheets." />
+    <meta name="robots" content="index, follow" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#600eb3",
+                        "secondary": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <main class="flex-1 max-w-[1200px] mx-auto w-full px-6 pt-28 pb-16">
+        <section class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">Glossario Esercizi</h1>
+            <p class="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+                Una raccolta dinamica di esercizi tecnici e tattici aggiornata automaticamente da Google Sheets.
+            </p>
+        </section>
+
+        <section>
+            <div id="filters-wrapper" class="mb-6 hidden space-y-4">
+                <div class="bg-white dark:bg-slate-900 border border-primary/10 rounded-2xl p-4 shadow-sm">
+                    <label for="search-input" class="block text-sm font-semibold text-slate-800 dark:text-slate-100 mb-2">
+                        Cerca per nome o focus
+                    </label>
+                    <input
+                        id="search-input"
+                        type="search"
+                        placeholder="Es. battuta float, ricezione, muro..."
+                        class="w-full rounded-xl border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 text-sm"
+                    />
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div id="filters-container" class="flex flex-wrap gap-2"></div>
+                    <p id="results-count" class="text-sm font-medium text-slate-600 dark:text-slate-300"></p>
+                </div>
+            </div>
+            <div id="exercise-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div id="loading-state" class="col-span-full flex items-center justify-center py-16">
+                    <div class="inline-flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                        <span class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></span>
+                        <span class="font-medium">Caricamento esercizi...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+
+    <script>
+        const API_KEY = "AIzaSyAtVOJkOSzFovjEAlnG_FdBdtfTXhNicec";
+        const SPREADSHEET_ID = "1E1IiD8ae3vUDmg7TdOgPzYkjCSK1D9HZSWK1fMh4syI";
+        const SHEET_RANGES = ["Foglio1!A:G", "Sheet1!A:G", "Glossario!A:G"];
+
+        const gridEl = document.getElementById("exercise-grid");
+        const filtersWrapperEl = document.getElementById("filters-wrapper");
+        const filtersContainerEl = document.getElementById("filters-container");
+        const searchInputEl = document.getElementById("search-input");
+        const resultsCountEl = document.getElementById("results-count");
+        let allRows = [];
+        let activeTipologia = "Tutti";
+        let searchTerm = "";
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function nlToBr(value) {
+            return escapeHtml(value).replace(/\n/g, "<br>");
+        }
+
+        function badgeClassByCategory(category) {
+            const normalized = (category || "").toLowerCase();
+            if (normalized.includes("tecnica")) return "bg-primary/10 text-primary border-primary/20";
+            if (normalized.includes("tattica")) return "bg-blue-100 text-blue-700 border-blue-200";
+            if (normalized.includes("fisic")) return "bg-emerald-100 text-emerald-700 border-emerald-200";
+            return "bg-amber-100 text-amber-700 border-amber-200";
+        }
+
+        function renderCorrezioni(correzioniRaw) {
+            if (!correzioniRaw) return "";
+
+            const lines = correzioniRaw
+                .split("\n")
+                .map((line) => line.trim())
+                .filter(Boolean);
+
+            const isBulletList = lines.every((line) => /^[-*•]/.test(line));
+            const cleanedLines = lines.map((line) => line.replace(/^[-*•]\s*/, ""));
+
+            if (isBulletList) {
+                const items = cleanedLines
+                    .map((line) => `<li class="leading-relaxed">${escapeHtml(line)}</li>`)
+                    .join("");
+                return `
+                    <div class="mt-5 bg-slate-50 dark:bg-slate-800/70 border-l-4 border-primary rounded-r-lg p-4">
+                        <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-2">Correzioni</p>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 dark:text-slate-300 space-y-1">${items}</ul>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="mt-5 bg-slate-50 dark:bg-slate-800/70 border-l-4 border-primary rounded-r-lg p-4">
+                    <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-2">Correzioni</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(correzioniRaw)}</p>
+                </div>
+            `;
+        }
+
+        function createCard(row) {
+            const nome = row[0] || "Esercizio senza titolo";
+            const tipologia = row[1] || "Generale";
+            const focus = row[2] || "";
+            const svolgimento = row[3] || "";
+            const varianti = row[4] || "";
+            const tempo = row[5] || "";
+            const correzioni = row[6] || "";
+
+            return `
+                <article class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/10 p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
+                    <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">${escapeHtml(nome)}</h2>
+
+                    <div class="mb-4">
+                        <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeClassByCategory(tipologia)}">
+                            ${escapeHtml(tipologia)}
+                        </span>
+                    </div>
+
+                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-4">${escapeHtml(focus)}</p>` : ""}
+
+                    ${svolgimento ? `<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(svolgimento)}</p>` : ""}
+
+                    ${varianti ? `
+                        <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Varianti</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(varianti)}</p>
+                        </div>
+                    ` : ""}
+
+                    ${tempo ? `
+                        <div class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+                            <span class="material-icons text-primary text-base">schedule</span>
+                            <span>${escapeHtml(tempo)}</span>
+                        </div>
+                    ` : ""}
+
+                    ${renderCorrezioni(correzioni)}
+                </article>
+            `;
+        }
+
+        function renderGrid(rows) {
+            if (!rows.length) {
+                gridEl.innerHTML = `
+                    <div class="col-span-full bg-white dark:bg-slate-900 border border-primary/10 rounded-2xl p-8 text-center shadow-sm">
+                        <p class="font-semibold text-slate-800 dark:text-slate-100">Nessun esercizio disponibile per questo filtro.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            gridEl.innerHTML = rows.map(createCard).join("");
+        }
+
+        function filterRowsByTipologia(tipologia) {
+            if (tipologia === "Tutti") return allRows;
+            return allRows.filter((row) => (row[1] || "").trim() === tipologia);
+        }
+
+        function filterRowsBySearch(rows, term) {
+            const normalized = term.trim().toLowerCase();
+            if (!normalized) return rows;
+
+            return rows.filter((row) => {
+                const nome = (row[0] || "").toLowerCase();
+                const focus = (row[2] || "").toLowerCase();
+                return nome.includes(normalized) || focus.includes(normalized);
+            });
+        }
+
+        function getFilteredRows() {
+            const byTipologia = filterRowsByTipologia(activeTipologia);
+            return filterRowsBySearch(byTipologia, searchTerm);
+        }
+
+        function updateResultsCount(count) {
+            const label = count === 1 ? "esercizio" : "esercizi";
+            resultsCountEl.textContent = `${count} ${label}`;
+        }
+
+        function renderFilterButtons() {
+            const uniqueTipologie = Array.from(
+                new Set(
+                    allRows
+                        .map((row) => (row[1] || "").trim())
+                        .filter(Boolean)
+                )
+            ).sort((a, b) => a.localeCompare(b, "it", { sensitivity: "base" }));
+
+            const tipologie = ["Tutti", ...uniqueTipologie];
+
+            filtersContainerEl.innerHTML = tipologie.map((tipologia) => {
+                const isActive = tipologia === activeTipologia;
+                const activeClasses = "bg-primary text-white border-primary shadow-sm";
+                const inactiveClasses = "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-primary/20 hover:border-primary/50";
+
+                return `
+                    <button
+                        type="button"
+                        data-tipologia="${escapeHtml(tipologia)}"
+                        class="px-4 py-2 rounded-full border text-sm font-semibold transition-colors ${isActive ? activeClasses : inactiveClasses}"
+                    >
+                        ${escapeHtml(tipologia)}
+                    </button>
+                `;
+            }).join("");
+
+            filtersWrapperEl.classList.remove("hidden");
+        }
+
+        filtersContainerEl.addEventListener("click", (event) => {
+            const button = event.target.closest("button[data-tipologia]");
+            if (!button) return;
+
+            activeTipologia = button.dataset.tipologia || "Tutti";
+            renderFilterButtons();
+            const filteredRows = getFilteredRows();
+            renderGrid(filteredRows);
+            updateResultsCount(filteredRows.length);
+        });
+
+        searchInputEl.addEventListener("input", (event) => {
+            searchTerm = event.target.value || "";
+            const filteredRows = getFilteredRows();
+            renderGrid(filteredRows);
+            updateResultsCount(filteredRows.length);
+        });
+
+        async function fetchSheetData() {
+            for (const range of SHEET_RANGES) {
+                const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(range)}?key=${API_KEY}`;
+                const response = await fetch(endpoint);
+
+                if (response.ok) {
+                    return response.json();
+                }
+
+                if (response.status !== 400 && response.status !== 404) {
+                    throw new Error(`Errore API: ${response.status}`);
+                }
+            }
+
+            throw new Error("Nessun foglio valido trovato tra i range configurati.");
+        }
+
+        async function loadGlossario() {
+            try {
+                const data = await fetchSheetData();
+                const rows = Array.isArray(data.values) ? data.values.slice(1) : [];
+
+                if (!rows.length) {
+                    renderGrid(rows);
+                    return;
+                }
+
+                allRows = rows;
+                renderFilterButtons();
+                const filteredRows = getFilteredRows();
+                renderGrid(filteredRows);
+                updateResultsCount(filteredRows.length);
+            } catch (error) {
+                console.error("Errore caricamento glossario:", error);
+                gridEl.innerHTML = `
+                    <div class="col-span-full bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-2xl p-6 text-center">
+                        <p class="font-semibold text-red-700 dark:text-red-300">Impossibile caricare gli esercizi. Controlla API key, Spreadsheet ID e range.</p>
+                    </div>
+                `;
+            }
+        }
+
+        loadGlossario();
+    </script>
+</body>
+</html>
