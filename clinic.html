@@ -172,90 +172,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script type="module" src="navbar.js"></script>
     </header>
 
-    <header class="relative pt-24 pb-16 lg:pt-28 lg:pb-20 overflow-hidden shadow-2xl">
+    <header class="relative h-[85vh] min-h-[600px] md:h-screen w-full overflow-hidden bg-slate-950 shadow-2xl">
         <h1 class="sr-only">Beach Break alla Partaccia - Camp di Beach Volley</h1>
-        <div class="absolute inset-0 z-0">
-            <div id="hero-slideshow-desktop" class="hidden min-[769px]:block absolute inset-0 z-0" aria-hidden="true">
-                <img src="slide-desktop1.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-100" />
-                <img src="slide-desktop2.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-desktop3.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-desktop4.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover object-top transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-desktop5.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover object-top transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-            </div>
-            <div id="hero-slideshow-mobile" class="block min-[769px]:hidden absolute inset-0 z-0" aria-hidden="true">
-                <img src="slide-mobile1.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-100" />
-                <img src="slide-mobile2.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-mobile3.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-mobile4.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-                <img src="slide-mobile5.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
-            </div>
-            <div class="absolute inset-0 z-10 bg-gradient-to-r from-background-dark/90 via-background-dark/70 to-primary/40 mix-blend-multiply"></div>
-            <div class="absolute inset-0 z-10 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent"></div>
-            <script>
-                (function () {
-                    var desktopEl = document.getElementById("hero-slideshow-desktop");
-                    var mobileEl = document.getElementById("hero-slideshow-mobile");
-                    if (!desktopEl || !mobileEl) return;
-                    var desktopSlides = desktopEl.querySelectorAll("img");
-                    var mobileSlides = mobileEl.querySelectorAll("img");
-                    var desktopSrcs = [];
-                    var mobileSrcs = [];
-                    var i;
-                    for (i = 0; i < desktopSlides.length; i++) desktopSrcs.push(desktopSlides[i].src);
-                    for (i = 0; i < mobileSlides.length; i++) mobileSrcs.push(mobileSlides[i].src);
-                    function preload(src) {
-                        var img = new Image();
-                        img.src = src;
-                    }
-                    for (i = 1; i < desktopSrcs.length; i++) preload(desktopSrcs[i]);
-                    for (i = 1; i < mobileSrcs.length; i++) preload(mobileSrcs[i]);
-                    var desktopIdx = 0;
-                    var mobileIdx = 0;
-                    function setActive(slides, from, to) {
-                        slides[from].classList.remove("opacity-100");
-                        slides[from].classList.add("opacity-0");
-                        slides[to].classList.remove("opacity-0");
-                        slides[to].classList.add("opacity-100");
-                    }
-                    function advance() {
-                        var isMobile = window.innerWidth <= 768;
-                        var next;
-                        if (isMobile) {
-                            next = (mobileIdx + 1) % mobileSlides.length;
-                            setActive(mobileSlides, mobileIdx, next);
-                            mobileIdx = next;
-                            preload(mobileSrcs[(mobileIdx + 1) % mobileSrcs.length]);
-                        } else {
-                            next = (desktopIdx + 1) % desktopSlides.length;
-                            setActive(desktopSlides, desktopIdx, next);
-                            desktopIdx = next;
-                            preload(desktopSrcs[(desktopIdx + 1) % desktopSrcs.length]);
-                        }
-                    }
-                    setInterval(advance, 4000);
-                })();
-            </script>
+        <div id="hero-slideshow-desktop" class="hidden min-[769px]:block absolute inset-0 z-0" aria-hidden="true">
+            <img src="slide-desktop1.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-100" />
+            <img src="slide-desktop2.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-desktop3.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-desktop4.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-desktop5.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
         </div>
-        <!--
-        <div class="absolute top-7 left-4 z-20 md:hidden">
-            <span class="inline-flex items-center gap-1.5 bg-accent-yellow text-background-dark font-bold px-4 py-2 rounded-full text-xs shadow-lg shadow-accent-yellow/20 uppercase tracking-widest">
-                <span class="material-icons text-sm">sunny</span>
-                Marina di Massa
-            </span>
+        <div id="hero-slideshow-mobile" class="block min-[769px]:hidden absolute inset-0 z-0" aria-hidden="true">
+            <img src="slide-mobile1.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-100" />
+            <img src="slide-mobile2.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-mobile3.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-mobile4.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
+            <img src="slide-mobile5.webp" alt="" class="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out opacity-0" />
         </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
-            <span class="hidden md:inline-flex items-center gap-2 bg-accent-yellow text-background-dark font-bold px-4 py-2 rounded-full text-sm mb-6 shadow-lg shadow-accent-yellow/20 uppercase tracking-widest">
-                <span class="material-icons text-base">sunny</span>
-                Marina di Massa | 24 - 26 Aprile
-            </span>
-        -->
-            <div class="relative z-10 flex justify-center">
-                <img src="no_bg.webp" alt="Beach Break alla Partaccia" class="max-w-2xl w-full h-auto object-contain drop-shadow-2xl" />
-            </div>
-            
+        <div class="absolute inset-0 z-10 bg-gradient-to-r from-background-dark/90 via-background-dark/70 to-primary/40 mix-blend-multiply"></div>
+        <div class="absolute inset-0 z-10 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent"></div>
+        <div class="relative z-20 h-full w-full flex items-center justify-center px-6">
+            <img src="no_bg.webp" alt="Beach Break alla Partaccia" class="max-w-2xl w-full h-auto object-contain drop-shadow-2xl" />
         </div>
+        <script>
+            (function () {
+                var desktopEl = document.getElementById("hero-slideshow-desktop");
+                var mobileEl = document.getElementById("hero-slideshow-mobile");
+                if (!desktopEl || !mobileEl) return;
+                var desktopSlides = desktopEl.querySelectorAll("img");
+                var mobileSlides = mobileEl.querySelectorAll("img");
+                var desktopSrcs = [];
+                var mobileSrcs = [];
+                var i;
+                for (i = 0; i < desktopSlides.length; i++) desktopSrcs.push(desktopSlides[i].src);
+                for (i = 0; i < mobileSlides.length; i++) mobileSrcs.push(mobileSlides[i].src);
+                function preload(src) {
+                    var img = new Image();
+                    img.src = src;
+                }
+                for (i = 1; i < desktopSrcs.length; i++) preload(desktopSrcs[i]);
+                for (i = 1; i < mobileSrcs.length; i++) preload(mobileSrcs[i]);
+                var desktopIdx = 0;
+                var mobileIdx = 0;
+                function setActive(slides, from, to) {
+                    slides[from].classList.remove("opacity-100");
+                    slides[from].classList.add("opacity-0");
+                    slides[to].classList.remove("opacity-0");
+                    slides[to].classList.add("opacity-100");
+                }
+                function advance() {
+                    var isMobile = window.innerWidth <= 768;
+                    var next;
+                    if (isMobile) {
+                        next = (mobileIdx + 1) % mobileSlides.length;
+                        setActive(mobileSlides, mobileIdx, next);
+                        mobileIdx = next;
+                        preload(mobileSrcs[(mobileIdx + 1) % mobileSrcs.length]);
+                    } else {
+                        next = (desktopIdx + 1) % desktopSlides.length;
+                        setActive(desktopSlides, desktopIdx, next);
+                        desktopIdx = next;
+                        preload(desktopSrcs[(desktopIdx + 1) % desktopSrcs.length]);
+                    }
+                }
+                setInterval(advance, 4000);
+            })();
+        </script>
     </header>
 
     <section class="py-16 md:py-24 relative bg-background-light dark:bg-background-dark">
