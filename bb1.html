@@ -62,17 +62,17 @@
     </header>
 
     <main class="pt-10 md:pt-32 pb-16">
-        <section class="bg-gray-950 py-16 md:py-24 rounded-b-[3rem] shadow-2xl mb-10">
+        <section class="bg-background-light dark:bg-background-dark py-10 md:py-16 mb-6">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl">
-                    <span class="inline-flex items-center gap-2 bg-primary/20 text-secondary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-5">
+                    <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-5">
                         <span class="material-icons text-base">sports_volleyball</span>
                         Beach Break
                     </span>
-                    <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                    <h1 class="text-3xl md:text-5xl font-black text-gray-950 dark:text-white tracking-tight leading-tight">
                         Prenota il tuo <span class="text-primary">allenatore</span> durante il torneo
                     </h1>
-                    <p class="mt-5 text-base md:text-lg text-gray-300 leading-relaxed">
+                    <p class="mt-5 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                         Controlla gli slot disponibili in agenda e scegli giorno, orario e coach per la tua coppia.
                     </p>
                 </div>
@@ -96,6 +96,7 @@
                             <div>
                                 <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">Agenda</p>
                                 <h2 class="mt-2 text-2xl md:text-3xl font-black text-gray-950 dark:text-white">Disponibilita coach</h2>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Clicca su una prenotazione per i dettagli.</p>
                             </div>
                             <div id="day-tabs" class="flex flex-wrap gap-2"></div>
                         </div>
@@ -105,12 +106,7 @@
                         Nessun allenatore configurato. Controlla la risposta dell'API.
                     </div>
 
-                    <div class="overflow-x-auto custom-scrollbar">
-                        <table id="agenda-table" class="min-w-full border-collapse text-sm">
-                            <thead id="agenda-head" class="bg-neutral-tint dark:bg-gray-950"></thead>
-                            <tbody id="agenda-body" class="divide-y divide-gray-100 dark:divide-gray-800"></tbody>
-                        </table>
-                    </div>
+                    <div id="agenda-container" class="overflow-x-auto custom-scrollbar"></div>
                 </section>
 
                 <aside class="bg-white dark:bg-gray-900 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-black/30 p-6 md:p-8 xl:sticky xl:top-28">
@@ -123,7 +119,7 @@
                     <form id="booking-form" class="mt-7 space-y-5">
                         <div>
                             <label for="pair-name" class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Nome Coppia</label>
-                            <input id="pair-name" name="pairName" type="text" required placeholder="Es. Rossi / Bianchi" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
+                            <input id="pair-name" name="pairName" type="text" required placeholder="Inserisci il tuo cognome..:" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -133,7 +129,7 @@
                             </div>
                             <div>
                                 <label for="time-select" class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Orario</label>
-                                <select id="time-select" name="time" required class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary"></select>
+                                <input id="time-select" name="time" type="time" required step="900" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
                             </div>
                         </div>
 
@@ -163,11 +159,35 @@
         </section>
     </main>
 
+    <div id="booking-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
+        <div id="booking-modal-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div role="dialog" aria-modal="true" aria-labelledby="booking-modal-team" class="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-2xl p-6 md:p-8">
+            <button id="booking-modal-close" type="button" aria-label="Chiudi" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-primary hover:bg-primary/10 flex items-center justify-center transition-colors">
+                <span class="material-icons">close</span>
+            </button>
+            <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">Dettagli prenotazione</p>
+            <h3 id="booking-modal-team" class="mt-2 text-2xl md:text-3xl font-black text-gray-950 dark:text-white break-words pr-12">--</h3>
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
+                    <span class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Ora</span>
+                    <span id="booking-modal-time" class="mt-1 block text-xl font-black text-gray-900 dark:text-white">--</span>
+                </div>
+                <div class="rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
+                    <span class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Campo</span>
+                    <span id="booking-modal-field" class="mt-1 block text-xl font-black text-gray-900 dark:text-white">--</span>
+                </div>
+            </div>
+            <div class="mt-4 rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
+                <span class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Allenatore</span>
+                <span id="booking-modal-coach" class="mt-1 block text-base font-bold text-gray-900 dark:text-white">--</span>
+            </div>
+        </div>
+    </div>
+
     <ifbv-footer></ifbv-footer>
 
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycbzMrLIoqbudcOfFKmgCnK_F0zIFH6YbNc9lJ4qDm-lwEJuXsdjKWxXoxDJ-uLhcmS5ang/exec';
-        const HOURS = Array.from({ length: 13 }, (_, index) => `${String(index + 8).padStart(2, '0')}:00`);
         const DEFAULT_DAYS = [
             { id: 'giorno-1', label: 'Giorno 1' },
             { id: 'giorno-2', label: 'Giorno 2' },
@@ -185,9 +205,7 @@
             content: document.getElementById('content'),
             statusMessage: document.getElementById('status-message'),
             dayTabs: document.getElementById('day-tabs'),
-            agendaHead: document.getElementById('agenda-head'),
-            agendaBody: document.getElementById('agenda-body'),
-            agendaTable: document.getElementById('agenda-table'),
+            agendaContainer: document.getElementById('agenda-container'),
             agendaEmpty: document.getElementById('agenda-empty'),
             form: document.getElementById('booking-form'),
             pairName: document.getElementById('pair-name'),
@@ -199,12 +217,18 @@
             notes: document.getElementById('notes'),
             submitButton: document.getElementById('submit-button'),
             submitLabel: document.getElementById('submit-label'),
+            modal: document.getElementById('booking-modal'),
+            modalBackdrop: document.getElementById('booking-modal-backdrop'),
+            modalClose: document.getElementById('booking-modal-close'),
+            modalTeam: document.getElementById('booking-modal-team'),
+            modalTime: document.getElementById('booking-modal-time'),
+            modalField: document.getElementById('booking-modal-field'),
+            modalCoach: document.getElementById('booking-modal-coach'),
         };
 
         document.addEventListener('DOMContentLoaded', init);
 
         async function init() {
-            populateTimeSelect();
             bindEvents();
             await loadAgenda();
         }
@@ -218,6 +242,17 @@
             });
             elements.timeSelect.addEventListener('change', renderCoachSelect);
             elements.form.addEventListener('submit', submitBooking);
+
+            elements.agendaContainer.addEventListener('click', (event) => {
+                const card = event.target.closest('[data-booking-card]');
+                if (card) openBookingModal(card.dataset);
+            });
+
+            elements.modalBackdrop.addEventListener('click', closeBookingModal);
+            elements.modalClose.addEventListener('click', closeBookingModal);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeBookingModal();
+            });
         }
 
         async function loadAgenda({ preserveMessage = false } = {}) {
@@ -291,12 +326,6 @@
             elements.daySelect.value = state.activeDay;
         }
 
-        function populateTimeSelect() {
-            elements.timeSelect.innerHTML = HOURS.map((hour) => (
-                `<option value="${hour}">${hour}</option>`
-            )).join('');
-        }
-
         function renderDayTabs() {
             elements.dayTabs.innerHTML = state.days.map((day) => {
                 const isActive = day.id === state.activeDay;
@@ -320,60 +349,77 @@
 
         function renderAgenda() {
             const hasCoaches = state.coaches.length > 0;
-            elements.agendaTable.classList.toggle('hidden', !hasCoaches);
+            elements.agendaContainer.classList.toggle('hidden', !hasCoaches);
             elements.agendaEmpty.classList.toggle('hidden', hasCoaches);
 
             if (!hasCoaches) {
-                elements.agendaHead.innerHTML = '';
-                elements.agendaBody.innerHTML = '';
+                elements.agendaContainer.innerHTML = '';
                 return;
             }
 
-            elements.agendaHead.innerHTML = `
-                <tr>
-                    <th class="sticky left-0 z-20 bg-neutral-tint dark:bg-gray-950 px-4 py-4 text-left text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400">Allenatore</th>
-                    ${HOURS.map((hour) => `<th class="px-3 py-4 text-center text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400 min-w-[120px]">${hour}</th>`).join('')}
-                </tr>
+            elements.agendaContainer.innerHTML = `
+                <div class="min-w-full divide-y divide-gray-100 dark:divide-gray-800">
+                    ${state.coaches.map((coach) => renderCoachRow(coach)).join('')}
+                </div>
             `;
-
-            elements.agendaBody.innerHTML = state.coaches.map((coach) => `
-                <tr>
-                    <th class="sticky left-0 z-10 bg-white dark:bg-gray-900 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)] px-4 py-3 text-left font-black text-gray-900 dark:text-white whitespace-nowrap">${escapeHtml(coach.name)}</th>
-                    ${HOURS.map((hour) => renderAgendaCell(coach, hour)).join('')}
-                </tr>
-            `).join('');
         }
 
-        function renderAgendaCell(coach, hour) {
-            const booking = findBooking(state.activeDay, hour, coach);
-            if (booking) {
-                const teamLabel = booking.team || booking.coupleName || booking.nomeCoppia;
-                return `
-                    <td class="px-2 py-2 align-middle min-w-[120px]">
-                        <div class="rounded-xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-900 px-2 py-2 text-center">
-                            <span class="block text-[11px] font-black uppercase tracking-wider text-red-700 dark:text-red-300">Occupato</span>
-                            ${teamLabel ? `<span class="mt-1 block text-[11px] text-red-600 dark:text-red-300 truncate">${escapeHtml(teamLabel)}</span>` : ''}
-                        </div>
-                    </td>
-                `;
-            }
+        function renderCoachRow(coach) {
+            const bookings = getCoachBookings(coach, state.activeDay);
+            const lane = bookings.length === 0
+                ? `<span class="text-sm italic text-gray-400 dark:text-gray-500">Nessun impegno per oggi</span>`
+                : bookings.map((booking) => renderBookingCard(coach, booking)).join('');
 
             return `
-                <td class="px-2 py-2 align-middle min-w-[120px]">
-                    <div class="rounded-xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-900 px-2 py-2 text-center">
-                        <span class="text-[11px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Libero</span>
+                <div class="flex items-stretch">
+                    <div class="sticky left-0 z-10 bg-white dark:bg-gray-900 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)] flex items-center gap-3 min-w-[180px] px-4 md:px-6 py-4 font-black text-gray-900 dark:text-white whitespace-nowrap">
+                        <span class="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                            <span class="material-icons text-base">person</span>
+                        </span>
+                        <span class="truncate max-w-[160px]">${escapeHtml(coach.name)}</span>
                     </div>
-                </td>
+                    <div class="flex-1 flex items-center gap-3 px-4 md:px-6 py-4 min-h-[88px]">
+                        ${lane}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBookingCard(coach, booking) {
+            const time = getBookingTime(booking);
+            const team = getBookingTeam(booking);
+            const field = getBookingField(booking);
+            const dataAttrs = [
+                `data-booking-card="1"`,
+                `data-time="${escapeHtml(time)}"`,
+                `data-team="${escapeHtml(team || 'Prenotazione')}"`,
+                `data-field="${escapeHtml(field || '--')}"`,
+                `data-coach="${escapeHtml(coach.name)}"`,
+            ].join(' ');
+
+            return `
+                <button type="button" ${dataAttrs} class="shrink-0 text-left rounded-2xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-900 px-4 py-3 hover:-translate-y-0.5 hover:shadow-md hover:shadow-red-200/50 dark:hover:shadow-red-950/40 focus:outline-none focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900/50 transition-all">
+                    <span class="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-red-700 dark:text-red-300">
+                        <span class="material-icons text-sm">schedule</span>
+                        ${escapeHtml(time || '--:--')}
+                    </span>
+                    ${team ? `<span class="mt-1 block text-sm font-bold text-red-700 dark:text-red-200 truncate max-w-[180px]">${escapeHtml(team)}</span>` : ''}
+                    ${field ? `<span class="mt-0.5 block text-[11px] text-red-600/80 dark:text-red-300/80">Campo ${escapeHtml(field)}</span>` : ''}
+                </button>
             `;
         }
 
         function renderCoachSelect() {
             const selectedDay = elements.daySelect.value;
-            const selectedTime = elements.timeSelect.value;
+            const selectedTime = normalizeTime(elements.timeSelect.value);
+            const hasTime = Boolean(elements.timeSelect.value);
+
             const occupiedCoachIds = new Set(
-                state.coaches
-                    .filter((coach) => findBooking(selectedDay, selectedTime, coach))
-                    .map((coach) => coach.id)
+                hasTime
+                    ? state.coaches
+                        .filter((coach) => getCoachBookings(coach, selectedDay).some((b) => getBookingTime(b) === selectedTime))
+                        .map((coach) => coach.id)
+                    : []
             );
             const availableCount = state.coaches.length - occupiedCoachIds.size;
 
@@ -386,21 +432,59 @@
                 })
             ].join('');
 
+            if (!hasTime) {
+                elements.coachHelp.textContent = 'Seleziona giorno e orario per vedere gli allenatori disponibili.';
+                return;
+            }
+
             elements.coachHelp.textContent = availableCount > 0
                 ? `${availableCount} allenatori disponibili per questo slot.`
                 : 'Nessun allenatore disponibile per questo slot.';
         }
 
-        function findBooking(dayId, time, coach) {
-            return state.bookings.find((booking) => {
-                const bookingDay = String(booking.day || booking.giorno || booking.dayId || booking.data || '');
-                const bookingTime = String(booking.time || booking.orario || booking.slot || '');
-                const bookingCoach = String(booking.coachId || booking.coach || booking.allenatoreId || booking.allenatore || booking.trainer || '');
+        function getCoachBookings(coach, dayId) {
+            return state.bookings
+                .filter((booking) => {
+                    const bookingDay = String(booking.day || booking.giorno || booking.dayId || booking.data || '');
+                    const bookingCoach = String(booking.coachId || booking.coach || booking.allenatoreId || booking.allenatore || booking.trainer || '');
+                    return bookingDay === String(dayId)
+                        && (bookingCoach === String(coach.id) || bookingCoach === String(coach.name));
+                })
+                .sort((a, b) => getBookingTime(a).localeCompare(getBookingTime(b)));
+        }
 
-                return bookingDay === String(dayId)
-                    && normalizeTime(bookingTime) === normalizeTime(time)
-                    && (bookingCoach === String(coach.id) || bookingCoach === String(coach.name));
-            });
+        function findBooking(dayId, time, coach) {
+            const target = normalizeTime(time);
+            return getCoachBookings(coach, dayId).find((booking) => getBookingTime(booking) === target) || null;
+        }
+
+        function getBookingTime(booking) {
+            return normalizeTime(booking.time || booking.orario || booking.slot || '');
+        }
+
+        function getBookingTeam(booking) {
+            return String(booking.team || booking.coupleName || booking.nomeCoppia || booking.squadra || '').trim();
+        }
+
+        function getBookingField(booking) {
+            const field = booking.field ?? booking.courtNumber ?? booking.campo ?? booking.numeroCampo;
+            return field === undefined || field === null || field === '' ? '' : String(field);
+        }
+
+        function openBookingModal(data) {
+            elements.modalTeam.textContent = data.team || 'Prenotazione';
+            elements.modalTime.textContent = data.time || '--:--';
+            elements.modalField.textContent = data.field ? `N. ${data.field}` : '--';
+            elements.modalCoach.textContent = data.coach || '--';
+            elements.modal.classList.remove('hidden');
+            elements.modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            elements.modal.classList.add('hidden');
+            elements.modal.classList.remove('flex');
+            document.body.style.overflow = '';
         }
 
         async function submitBooking(event) {
