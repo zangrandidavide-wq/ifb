@@ -124,7 +124,7 @@
                     <form id="booking-form" class="mt-7 space-y-5">
                         <div>
                             <label for="pair-name" class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Nome Coppia</label>
-                            <input id="pair-name" name="pairName" type="text" required placeholder="Inserisci il tuo cognome..:" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
+                            <input id="pair-name" name="pairName" type="text" required placeholder="Inserisci il tuo cognome..." class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -379,25 +379,40 @@
 
             elements.agendaContainer.innerHTML = `
                 <div class="min-w-full divide-y divide-gray-100 dark:divide-gray-800">
-                    ${state.coaches.map((coach) => renderCoachRow(coach)).join('')}
+                    ${state.coaches.map((coach, index) => renderCoachRow(coach, index)).join('')}
                 </div>
             `;
         }
 
-        function renderCoachRow(coach) {
+        const COACH_IMAGES = [
+            'verrigni.webp',
+            'fish.webp',
+            'yari.webp',
+            'zangrandi.webp',
+            'passi.webp',
+            'noccone.webp',
+            'cappa.webp',
+            'eddi.webp',
+            'sgro.webp',
+        ];
+
+        function renderCoachRow(coach, index) {
             const bookings = getCoachBookings(coach, state.activeDay);
             const lane = bookings.length === 0
                 ? `<span class="text-sm italic text-gray-400 dark:text-gray-500">Nessun impegno per oggi</span>`
                 : bookings.map((booking) => renderBookingCard(coach, booking)).join('');
 
-            const imageSrc = getCoachImage(coach.name);
+            const imageSrc = COACH_IMAGES[index] || '';
             const fallbackHandler = "this.onerror=null;this.style.display='none';this.nextElementSibling.classList.remove('hidden');this.nextElementSibling.classList.add('flex');";
+            const imageMarkup = imageSrc
+                ? `<img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(coach.name)}" loading="lazy" onerror="${fallbackHandler}" class="w-10 h-10 rounded-full object-cover object-top border border-gray-200 dark:border-gray-700 shrink-0 bg-gray-100 dark:bg-gray-800" />`
+                : '';
 
             return `
                 <div class="flex items-stretch">
                     <div class="sticky left-0 z-10 bg-white dark:bg-gray-900 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)] flex items-center gap-3 min-w-[200px] px-4 md:px-6 py-4 font-black text-gray-900 dark:text-white whitespace-nowrap">
-                        <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(coach.name)}" loading="lazy" onerror="${fallbackHandler}" class="w-10 h-10 rounded-full object-cover object-top border border-gray-200 dark:border-gray-700 shrink-0 bg-gray-100 dark:bg-gray-800" />
-                        <span class="hidden w-10 h-10 rounded-full bg-primary/10 text-primary items-center justify-center shrink-0">
+                        ${imageMarkup}
+                        <span class="${imageSrc ? 'hidden' : 'flex'} w-10 h-10 rounded-full bg-primary/10 text-primary items-center justify-center shrink-0">
                             <span class="material-icons text-base">person</span>
                         </span>
                         <span class="truncate max-w-[160px]">${escapeHtml(coach.name)}</span>
@@ -407,12 +422,6 @@
                     </div>
                 </div>
             `;
-        }
-
-        function getCoachImage(fullName) {
-            const parts = String(fullName || '').trim().split(/\s+/);
-            const surname = (parts[parts.length - 1] || '').toLowerCase();
-            return `${surname}.webp`;
         }
 
         function renderBookingCard(coach, booking) {
