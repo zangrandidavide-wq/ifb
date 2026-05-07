@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/jpeg" href="logo.jpg" />
+    <link rel="apple-touch-icon" href="logo.jpg" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Calendario Tornei - I Follow Beach Volley</title>
+    <meta name="description" content="Sfoglia il calendario dei tornei di beach volley organizzati da I Follow Beach Volley. Consulta date, luoghi e iscriviti direttamente." />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary":          "#7f13ec",
+                        "primary-dark":     "#600eb3",
+                        "accent-yellow":    "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark":  "#191022",
+                        "neutral-tint":     "#f0eafc",
+                        "sand":             "#fdfbf7",
+                        "sand-dark":        "#231b2e",
+                    },
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg":      "2rem",
+                        "xl":      "3rem",
+                        "full":    "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Minimum cell height for calendar grid */
+        .cal-cell { min-height: 96px; }
+        @media (max-width: 1023px) { .cal-cell { min-height: 76px; } }
+
+        /* Truncate long tournament names in badges */
+        .t-badge {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Highlight today */
+        .day-today { box-shadow: inset 0 0 0 2px #7f13ec; }
+
+        /* Gradient hero text */
+        .text-gradient {
+            background: linear-gradient(135deg, #7f13ec 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Modal transitions */
+        .modal-overlay { transition: opacity 0.2s ease; }
+        .modal-box     { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease; }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+    <!-- ░░ NAVBAR ░░ -->
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <!-- ░░ MAIN ░░ -->
+    <main class="flex-grow pt-28 pb-20">
+
+        <!-- Page header -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary dark:bg-primary/20 font-bold text-sm tracking-widest uppercase mb-5 border border-primary/20">
+                <span class="material-icons text-base">emoji_events</span>
+                Circuito Tornei
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight tracking-tight">
+                Calendario <span class="text-gradient">Tornei</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
+                Consulta il calendario completo degli eventi. Clicca su un torneo per scoprire tutti i dettagli e iscriverti.
+            </p>
+        </div>
+
+        <!-- Calendar card -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 shadow-xl shadow-gray-200/50 dark:shadow-none overflow-hidden">
+
+                <!-- Calendar navigation header -->
+                <div class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-primary to-primary-dark">
+                    <button id="prev-month" aria-label="Mese precedente"
+                        class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all active:scale-95">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+
+                    <h2 id="calendar-title" class="text-xl md:text-2xl font-extrabold text-white tracking-tight capitalize"></h2>
+
+                    <button id="next-month" aria-label="Mese successivo"
+                        class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all active:scale-95">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Loading skeleton -->
+                <div id="cal-loading" class="p-12 text-center">
+                    <div class="inline-block w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+                    <p class="text-gray-500 dark:text-gray-400 font-semibold">Caricamento tornei…</p>
+                </div>
+
+                <!-- Calendar content (shown after load) -->
+                <div id="cal-content" class="hidden">
+
+                    <!-- ── Desktop: monthly grid ── -->
+                    <div id="cal-grid" class="hidden md:block px-4 pb-4 pt-2 lg:px-6 lg:pb-6">
+
+                        <!-- Weekday headers -->
+                        <div id="cal-headers" class="grid grid-cols-7 gap-1 mb-1"></div>
+
+                        <!-- Day cells -->
+                        <div id="cal-days" class="grid grid-cols-7 gap-1"></div>
+
+                    </div>
+
+                    <!-- ── Mobile: agenda list ── -->
+                    <div id="cal-agenda" class="md:hidden p-4"></div>
+
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-semibold text-gray-500 dark:text-gray-400">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-primary inline-block"></span>Torneo in programma
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent-yellow inline-block border border-yellow-400/60"></span>In evidenza
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full ring-2 ring-primary bg-primary/10 inline-block"></span>Oggi
+                </span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ░░ MODAL ░░ -->
+    <div id="tournament-modal"
+        class="modal-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 opacity-0 pointer-events-none"
+        role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+        <div class="modal-box bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-lg p-0 overflow-hidden scale-95 opacity-0 border border-gray-100 dark:border-white/10">
+
+            <!-- Gradient header -->
+            <div class="relative bg-gradient-to-br from-primary to-primary-dark p-6 pb-8">
+                <button id="close-modal" aria-label="Chiudi modale"
+                    class="absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+                <span id="modal-category-badge"
+                    class="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-[11px] font-bold uppercase tracking-widest mb-3"></span>
+                <h3 id="modal-title" class="text-2xl font-extrabold text-white leading-tight pr-10"></h3>
+            </div>
+
+            <!-- Decorative wave -->
+            <div class="-mt-4 overflow-hidden">
+                <svg viewBox="0 0 400 20" preserveAspectRatio="none" class="w-full h-4 fill-white dark:fill-slate-900">
+                    <path d="M0,0 C100,20 300,0 400,20 L400,20 L0,20 Z"/>
+                </svg>
+            </div>
+
+            <!-- Body -->
+            <div class="px-6 pb-6 space-y-4">
+
+                <!-- Date & location -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
+                        <span class="flex items-center justify-center w-9 h-9 rounded-xl bg-primary/10 text-primary shrink-0">
+                            <i data-lucide="calendar-days" class="w-4 h-4"></i>
+                        </span>
+                        <span id="modal-date" class="font-semibold"></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
+                        <span class="flex items-center justify-center w-9 h-9 rounded-xl bg-primary/10 text-primary shrink-0">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        </span>
+                        <span id="modal-location" class="font-semibold"></span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div id="modal-desc-wrapper" class="hidden">
+                    <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-2">Dettagli</p>
+                    <p id="modal-description"
+                        class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 rounded-2xl p-4 border border-gray-100 dark:border-white/5"></p>
+                </div>
+
+                <!-- CTA -->
+                <a id="modal-cta" href="#" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-primary/25 mt-2 active:scale-[0.98]">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    Iscriviti al Torneo
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ░░ FOOTER ░░ -->
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+
+    <!-- ░░ DEPENDENCIES ░░ -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+    <!-- ░░ CALENDAR LOGIC ░░ -->
+    <script>
+    // ─────────────────────────────────────────────────────────
+    //  CONFIG — inserisci qui l'URL CSV del foglio Google
+    // ─────────────────────────────────────────────────────────
+    const SHEET_URL = 'INSERISCI_QUI_URL_CSV_PUBBLICATO';
+
+    // ─────────────────────────────────────────────────────────
+    //  COSTANTI ITALIANE
+    // ─────────────────────────────────────────────────────────
+    const MESI = [
+        'Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+        'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'
+    ];
+    const GIORNI_BREVI  = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
+    const GIORNI_LUNGHI = ['lunedì','martedì','mercoledì','giovedì','venerdì','sabato','domenica'];
+
+    // ─────────────────────────────────────────────────────────
+    //  STATO
+    // ─────────────────────────────────────────────────────────
+    let currentDate  = new Date();
+    let tournaments  = [];
+
+    // ─────────────────────────────────────────────────────────
+    //  FETCH TORNEI DA GOOGLE SHEETS (CSV)
+    //  Colonne attese (case-insensitive, supporta italiano/inglese):
+    //    date | data, title | titolo, location | luogo,
+    //    category | categoria, description | descrizione,
+    //    link | url, featured | evidenziato
+    // ─────────────────────────────────────────────────────────
+    async function fetchTournaments() {
+        if (SHEET_URL === 'INSERISCI_QUI_URL_CSV_PUBBLICATO') {
+            console.info('[tornei] SHEET_URL non configurato — nessun dato caricato.');
+            return;
+        }
+        try {
+            const res  = await fetch(SHEET_URL);
+            const text = await res.text();
+            const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+
+            tournaments = parsed.data.map(r => ({
+                date:        col(r, 'date','data','Date')       .trim(),
+                title:       col(r, 'title','titolo','Title')   .trim(),
+                location:    col(r, 'location','luogo','Location').trim(),
+                category:    col(r, 'category','categoria','Category').trim(),
+                description: col(r, 'description','descrizione','Description').trim(),
+                link:        col(r, 'link','url','Link','URL')  .trim(),
+                featured:    col(r, 'featured','evidenziato','Featured')
+                                 .toLowerCase() === 'true',
+            })).filter(t => t.date && t.title);
+        } catch (err) {
+            console.error('[tornei] Errore nel caricamento dei dati:', err);
+        }
+    }
+
+    /** Picks the first matching key from a row object */
+    function col(row, ...keys) {
+        for (const k of keys) if (row[k] !== undefined) return String(row[k]);
+        return '';
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  DATE HELPERS
+    // ─────────────────────────────────────────────────────────
+
+    /** Normalise any recognised format → YYYY-MM-DD */
+    function normalizeDate(str) {
+        if (!str) return null;
+        const parts = str.split(/[-\/]/);
+        if (parts.length !== 3) return null;
+        if (parts[0].length === 4) return str;           // already YYYY-MM-DD
+        const [d, m, y] = parts;                         // DD/MM/YYYY or DD-MM-YYYY
+        return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+    }
+
+    function parseLocalDate(str) {
+        const norm = normalizeDate(str);
+        if (!norm) return null;
+        const [y, m, d] = norm.split('-').map(Number);
+        return new Date(y, m - 1, d);
+    }
+
+    function formatDateItalian(str) {
+        const d = parseLocalDate(str);
+        if (!d) return str;
+        const dow = GIORNI_LUNGHI[(d.getDay() + 6) % 7];
+        return `${dow[0].toUpperCase()}${dow.slice(1)} ${d.getDate()} ${MESI[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  GENERATE CALENDAR  (called on every month change)
+    // ─────────────────────────────────────────────────────────
+    function generateCalendar() {
+        const year  = currentDate.getFullYear();
+        const month = currentDate.getMonth();       // 0-based
+        const today = new Date();
+
+        document.getElementById('calendar-title').textContent =
+            `${MESI[month]} ${year}`;
+
+        const monthPrefix = `${year}-${String(month + 1).padStart(2,'0')}`;
+        const monthEvents = tournaments.filter(t => {
+            const n = normalizeDate(t.date);
+            return n && n.startsWith(monthPrefix);
+        });
+
+        renderGrid(year, month, today, monthEvents);
+        renderAgenda(monthEvents, month);
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  DESKTOP GRID
+    // ─────────────────────────────────────────────────────────
+    function renderGrid(year, month, today, events) {
+        // Weekday header (Mon … Dom)
+        const headEl = document.getElementById('cal-headers');
+        headEl.innerHTML = '';
+        GIORNI_BREVI.forEach(g => {
+            const el = document.createElement('div');
+            el.className = 'text-center text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider py-2';
+            el.textContent = g;
+            headEl.appendChild(el);
+        });
+
+        // Day cells
+        const grid      = document.getElementById('cal-days');
+        grid.innerHTML  = '';
+
+        const firstDay  = new Date(year, month, 1);
+        const lastDay   = new Date(year, month + 1, 0);
+        const startDow  = (firstDay.getDay() + 6) % 7;   // Mon = 0
+        const totalDays = lastDay.getDate();
+
+        // Leading empty cells
+        for (let i = 0; i < startDow; i++) {
+            grid.appendChild(emptyCellEl());
+        }
+
+        for (let day = 1; day <= totalDays; day++) {
+            const ds      = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+            const dayEvts = events.filter(t => normalizeDate(t.date) === ds);
+            const isToday = today.getFullYear() === year
+                         && today.getMonth()    === month
+                         && today.getDate()     === day;
+
+            const cell = document.createElement('div');
+            cell.className = [
+                'cal-cell rounded-2xl p-1.5 border transition-colors overflow-hidden',
+                isToday
+                    ? 'day-today bg-primary/5 dark:bg-primary/10 border-primary/20'
+                    : 'bg-white dark:bg-white/[0.03] border-gray-100 dark:border-white/5 hover:border-primary/20 hover:bg-neutral-tint/30 dark:hover:bg-primary/5',
+            ].join(' ');
+
+            const numEl = document.createElement('span');
+            numEl.className = `block text-right text-[11px] font-bold mb-1 pr-0.5 ${
+                isToday ? 'text-primary' : 'text-gray-400 dark:text-gray-500'
+            }`;
+            numEl.textContent = day;
+            cell.appendChild(numEl);
+
+            dayEvts.forEach(t => {
+                const badge = document.createElement('button');
+                badge.type  = 'button';
+                badge.className = [
+                    't-badge w-full text-left text-[10px] font-bold px-1.5 py-0.5 rounded-lg mb-0.5',
+                    'transition-all hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-primary/40',
+                    t.featured
+                        ? 'bg-accent-yellow/25 text-yellow-700 dark:text-yellow-300 border border-yellow-300/50 dark:border-yellow-500/30'
+                        : 'bg-primary/10 text-primary dark:text-primary-300 border border-primary/20',
+                ].join(' ');
+                badge.textContent = t.title;
+                badge.addEventListener('click', () => openModal(t));
+                cell.appendChild(badge);
+            });
+
+            grid.appendChild(cell);
+        }
+
+        // Trailing empty cells
+        const filled    = startDow + totalDays;
+        const remainder = filled % 7;
+        if (remainder !== 0) {
+            for (let i = 0; i < 7 - remainder; i++) grid.appendChild(emptyCellEl());
+        }
+    }
+
+    function emptyCellEl() {
+        const el = document.createElement('div');
+        el.className = 'cal-cell rounded-2xl bg-gray-50/70 dark:bg-white/[0.015] border border-transparent';
+        return el;
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  MOBILE AGENDA
+    // ─────────────────────────────────────────────────────────
+    function renderAgenda(events, month) {
+        const container   = document.getElementById('cal-agenda');
+        container.innerHTML = '';
+
+        const sorted = [...events].sort((a, b) =>
+            (normalizeDate(a.date) || '').localeCompare(normalizeDate(b.date) || '')
+        );
+
+        if (sorted.length === 0) {
+            container.innerHTML = `
+                <div class="py-12 text-center">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                        <span class="material-icons text-3xl text-primary/40">event_busy</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-semibold">
+                        Nessun torneo in programma per ${MESI[month]}.
+                    </p>
+                </div>`;
+            return;
+        }
+
+        sorted.forEach(t => {
+            const parsedD  = parseLocalDate(t.date);
+            const dayNum   = parsedD ? parsedD.getDate() : '';
+            const monthAbb = parsedD ? MESI[parsedD.getMonth()].slice(0, 3) : '';
+
+            const card = document.createElement('button');
+            card.type  = 'button';
+            card.className = [
+                'w-full text-left flex items-center gap-4 p-4 rounded-2xl mb-2.5 transition-all',
+                'active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/30',
+                t.featured
+                    ? 'bg-accent-yellow/10 border border-yellow-300/40 dark:border-yellow-500/20'
+                    : 'bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10',
+            ].join(' ');
+
+            card.innerHTML = `
+                <div class="flex flex-col items-center justify-center shrink-0 w-12 h-12 rounded-xl shadow-md font-extrabold ${
+                    t.featured ? 'bg-accent-yellow text-gray-900' : 'bg-primary text-white'
+                }">
+                    <span class="text-lg leading-none">${dayNum}</span>
+                    <span class="text-[10px] uppercase font-bold">${monthAbb}</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-bold text-gray-900 dark:text-white truncate">${escHtml(t.title)}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 flex items-center gap-1 truncate">
+                        <span class="material-icons text-sm">location_on</span>${escHtml(t.location || '—')}
+                    </p>
+                    ${t.category
+                        ? `<span class="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide">
+                               ${escHtml(t.category)}
+                           </span>`
+                        : ''
+                    }
+                </div>
+                <span class="material-icons text-gray-300 dark:text-gray-600 shrink-0">chevron_right</span>
+            `;
+            card.addEventListener('click', () => openModal(t));
+            container.appendChild(card);
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  MODAL
+    // ─────────────────────────────────────────────────────────
+    function openModal(tournament) {
+        document.getElementById('modal-title')   .textContent = tournament.title;
+        document.getElementById('modal-date')    .textContent = formatDateItalian(tournament.date);
+        document.getElementById('modal-location').textContent = tournament.location || '—';
+
+        const catBadge = document.getElementById('modal-category-badge');
+        catBadge.textContent = tournament.category || '';
+        catBadge.style.display = tournament.category ? '' : 'none';
+
+        const descWrap = document.getElementById('modal-desc-wrapper');
+        if (tournament.description) {
+            document.getElementById('modal-description').textContent = tournament.description;
+            descWrap.classList.remove('hidden');
+        } else {
+            descWrap.classList.add('hidden');
+        }
+
+        const cta = document.getElementById('modal-cta');
+        if (tournament.link) {
+            cta.href = tournament.link;
+            cta.removeAttribute('aria-disabled');
+            cta.classList.remove('opacity-50', 'pointer-events-none');
+        } else {
+            cta.href = '#';
+            cta.setAttribute('aria-disabled', 'true');
+            cta.classList.add('opacity-50', 'pointer-events-none');
+        }
+
+        const overlay = document.getElementById('tournament-modal');
+        const box     = overlay.querySelector('.modal-box');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        // Force a frame so the transition fires
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            box.classList.remove('scale-95', 'opacity-0');
+            box.classList.add('scale-100', 'opacity-100');
+        }));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const overlay = document.getElementById('tournament-modal');
+        const box     = overlay.querySelector('.modal-box');
+        box.classList.add('scale-95', 'opacity-0');
+        box.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => {
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+        }, 230);
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  UTILITY
+    // ─────────────────────────────────────────────────────────
+    function escHtml(str) {
+        const d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+    }
+
+    // ─────────────────────────────────────────────────────────
+    //  INIT
+    // ─────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+        await fetchTournaments();
+
+        // Swap loading → content
+        document.getElementById('cal-loading').style.display = 'none';
+        document.getElementById('cal-content').classList.remove('hidden');
+
+        generateCalendar();
+        lucide.createIcons();
+
+        // Month navigation
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar();
+        });
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar();
+        });
+
+        // Modal close
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('tournament-modal').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+    });
+    </script>
+
+</body>
+</html>
