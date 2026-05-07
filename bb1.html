@@ -159,7 +159,7 @@
 
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycbzMrLIoqbudcOfFKmgCnK_F0zIFH6YbNc9lJ4qDm-lwEJuXsdjKWxXoxDJ-uLhcmS5ang/exec';
-        const HOURS = Array.from({ length: 10 }, (_, index) => `${String(index + 9).padStart(2, '0')}:00`);
+        const HOURS = Array.from({ length: 13 }, (_, index) => `${String(index + 8).padStart(2, '0')}:00`);
         const DEFAULT_DAYS = [
             { id: 'giorno-1', label: 'Giorno 1' },
             { id: 'giorno-2', label: 'Giorno 2' },
@@ -404,12 +404,11 @@
             }
 
             const payload = {
-                pairName: elements.pairName.value.trim(),
                 day: elements.daySelect.value,
                 time: elements.timeSelect.value,
-                coachId: selectedOption.value,
-                coachName: selectedOption.dataset.name,
-                courtNumber: Number(elements.courtNumber.value),
+                coach: selectedOption.dataset.name || selectedOption.value,
+                team: elements.pairName.value.trim(),
+                field: Number(elements.courtNumber.value),
                 notes: elements.notes.value.trim(),
             };
 
@@ -417,12 +416,15 @@
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload),
                 });
 
-                if (!response.ok) {
-                    throw new Error('Slot non disponibile');
+                const data = await response.json().catch(() => ({}));
+                const isSuccess = response.ok && data && (data.success === true || data.status === 'success' || data.result === 'success') && !data.error;
+
+                if (!isSuccess) {
+                    throw new Error(data && (data.error || data.message) || 'Slot non disponibile');
                 }
 
                 showMessage('Prenotazione confermata. Agenda aggiornata.', 'success');
