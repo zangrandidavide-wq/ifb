@@ -165,7 +165,7 @@
             <button id="booking-modal-close" type="button" aria-label="Chiudi" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-primary hover:bg-primary/10 flex items-center justify-center transition-colors">
                 <span class="material-icons">close</span>
             </button>
-            <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">Dettagli prenotazione</p>
+            <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">Coppia</p>
             <h3 id="booking-modal-team" class="mt-2 text-2xl md:text-3xl font-black text-gray-950 dark:text-white break-words pr-12">--</h3>
             <div class="mt-6 grid grid-cols-2 gap-4">
                 <div class="rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
@@ -174,7 +174,7 @@
                 </div>
                 <div class="rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
                     <span class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Campo</span>
-                    <span id="booking-modal-field" class="mt-1 block text-xl font-black text-gray-900 dark:text-white">--</span>
+                    <span id="booking-modal-field" class="mt-1 block text-xl font-black text-gray-900 dark:text-white">-</span>
                 </div>
             </div>
             <div class="mt-4 rounded-2xl bg-neutral-tint dark:bg-gray-950 p-4">
@@ -392,8 +392,8 @@
             const dataAttrs = [
                 `data-booking-card="1"`,
                 `data-time="${escapeHtml(time)}"`,
-                `data-team="${escapeHtml(team || 'Prenotazione')}"`,
-                `data-field="${escapeHtml(field || '--')}"`,
+                `data-team="${escapeHtml(team)}"`,
+                `data-field="${escapeHtml(field)}"`,
                 `data-coach="${escapeHtml(coach.name)}"`,
             ].join(' ');
 
@@ -411,16 +411,21 @@
 
         function renderCoachSelect() {
             const selectedDay = elements.daySelect.value;
-            const selectedTime = normalizeTime(elements.timeSelect.value);
             const hasTime = Boolean(elements.timeSelect.value);
+            const selectedMin = timeToMinutes(elements.timeSelect.value);
 
-            const occupiedCoachIds = new Set(
-                hasTime
-                    ? state.coaches
-                        .filter((coach) => getCoachBookings(coach, selectedDay).some((b) => getBookingTime(b) === selectedTime))
-                        .map((coach) => coach.id)
-                    : []
-            );
+            const occupiedCoachIds = new Set();
+            if (hasTime && Number.isFinite(selectedMin)) {
+                state.coaches.forEach((coach) => {
+                    const bookings = getCoachBookings(coach, selectedDay);
+                    const conflict = bookings.some((booking) => {
+                        const bookedMin = timeToMinutes(getBookingTime(booking));
+                        return Number.isFinite(bookedMin) && Math.abs(selectedMin - bookedMin) < 30;
+                    });
+                    if (conflict) occupiedCoachIds.add(coach.id);
+                });
+            }
+
             const availableCount = state.coaches.length - occupiedCoachIds.size;
 
             elements.coachSelect.innerHTML = [
@@ -438,8 +443,15 @@
             }
 
             elements.coachHelp.textContent = availableCount > 0
-                ? `${availableCount} allenatori disponibili per questo slot.`
-                : 'Nessun allenatore disponibile per questo slot.';
+                ? `${availableCount} allenatori disponibili per questo slot (tolleranza 30 min).`
+                : 'Nessun allenatore disponibile in questa fascia.';
+        }
+
+        function timeToMinutes(time) {
+            const normalized = normalizeTime(time);
+            const [hours, minutes] = normalized.split(':').map(Number);
+            if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return NaN;
+            return hours * 60 + minutes;
         }
 
         function getCoachBookings(coach, dayId) {
@@ -472,9 +484,9 @@
         }
 
         function openBookingModal(data) {
-            elements.modalTeam.textContent = data.team || 'Prenotazione';
+            elements.modalTeam.textContent = data.team || '-';
             elements.modalTime.textContent = data.time || '--:--';
-            elements.modalField.textContent = data.field ? `N. ${data.field}` : '--';
+            elements.modalField.textContent = data.field || '-';
             elements.modalCoach.textContent = data.coach || '--';
             elements.modal.classList.remove('hidden');
             elements.modal.classList.add('flex');
