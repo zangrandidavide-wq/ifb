@@ -11,6 +11,15 @@
     <link rel="manifest" href="site.webmanifest">
 
     <title>Prenota un Allenatore | I Follow Beach Volley</title>
+    <style>
+      .custom-scrollbar::-webkit-scrollbar { height: 12px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: #f7f6f8; border-radius: 8px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 8px; border: 3px solid #f7f6f8; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+      .dark .custom-scrollbar::-webkit-scrollbar-track { background: #111827; }
+      .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-color: #111827; }
+      .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+    </style>
     <meta name="description" content="Prenota uno slot con un allenatore durante il torneo Beach Break." />
 
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -53,18 +62,17 @@
     </header>
 
     <main class="pt-10 md:pt-32 pb-16">
-        <section class="relative overflow-hidden">
-            <div class="absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-br from-primary/20 via-secondary/20 to-transparent blur-3xl"></div>
+        <section class="bg-gray-950 py-16 md:py-24 rounded-b-[3rem] shadow-2xl mb-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl">
-                    <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-5">
+                    <span class="inline-flex items-center gap-2 bg-primary/20 text-secondary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-5">
                         <span class="material-icons text-base">sports_volleyball</span>
                         Beach Break
                     </span>
-                    <h1 class="text-3xl md:text-5xl font-black text-gray-950 dark:text-white tracking-tight leading-tight">
+                    <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
                         Prenota il tuo <span class="text-primary">allenatore</span> durante il torneo
                     </h1>
-                    <p class="mt-5 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p class="mt-5 text-base md:text-lg text-gray-300 leading-relaxed">
                         Controlla gli slot disponibili in agenda e scegli giorno, orario e coach per la tua coppia.
                     </p>
                 </div>
@@ -97,7 +105,7 @@
                         Nessun allenatore configurato. Controlla la risposta dell'API.
                     </div>
 
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto custom-scrollbar">
                         <table id="agenda-table" class="min-w-full border-collapse text-sm">
                             <thead id="agenda-head" class="bg-neutral-tint dark:bg-gray-950"></thead>
                             <tbody id="agenda-body" class="divide-y divide-gray-100 dark:divide-gray-800"></tbody>
@@ -323,15 +331,15 @@
 
             elements.agendaHead.innerHTML = `
                 <tr>
-                    <th class="sticky left-0 z-10 bg-neutral-tint dark:bg-gray-950 px-4 py-4 text-left text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400">Orario</th>
-                    ${state.coaches.map((coach) => `<th class="px-4 py-4 text-left text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400 min-w-40">${escapeHtml(coach.name)}</th>`).join('')}
+                    <th class="sticky left-0 z-20 bg-neutral-tint dark:bg-gray-950 px-4 py-4 text-left text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400">Allenatore</th>
+                    ${HOURS.map((hour) => `<th class="px-3 py-4 text-center text-xs font-black uppercase tracking-wider text-gray-500 dark:text-gray-400 min-w-[120px]">${hour}</th>`).join('')}
                 </tr>
             `;
 
-            elements.agendaBody.innerHTML = HOURS.map((hour) => `
+            elements.agendaBody.innerHTML = state.coaches.map((coach) => `
                 <tr>
-                    <th class="sticky left-0 z-10 bg-white dark:bg-gray-900 px-4 py-4 text-left font-black text-gray-900 dark:text-white border-r border-gray-100 dark:border-gray-800">${hour}</th>
-                    ${state.coaches.map((coach) => renderAgendaCell(coach, hour)).join('')}
+                    <th class="sticky left-0 z-10 bg-white dark:bg-gray-900 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)] px-4 py-3 text-left font-black text-gray-900 dark:text-white whitespace-nowrap">${escapeHtml(coach.name)}</th>
+                    ${HOURS.map((hour) => renderAgendaCell(coach, hour)).join('')}
                 </tr>
             `).join('');
         }
@@ -339,20 +347,21 @@
         function renderAgendaCell(coach, hour) {
             const booking = findBooking(state.activeDay, hour, coach);
             if (booking) {
+                const teamLabel = booking.team || booking.coupleName || booking.nomeCoppia;
                 return `
-                    <td class="px-3 py-3">
-                        <div class="rounded-2xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-900 px-3 py-3 text-center">
-                            <span class="block text-xs font-black uppercase tracking-wider text-red-700 dark:text-red-300">Occupato</span>
-                            ${booking.coupleName || booking.nomeCoppia ? `<span class="mt-1 block text-xs text-red-600 dark:text-red-300">${escapeHtml(booking.coupleName || booking.nomeCoppia)}</span>` : ''}
+                    <td class="px-2 py-2 align-middle min-w-[120px]">
+                        <div class="rounded-xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-900 px-2 py-2 text-center">
+                            <span class="block text-[11px] font-black uppercase tracking-wider text-red-700 dark:text-red-300">Occupato</span>
+                            ${teamLabel ? `<span class="mt-1 block text-[11px] text-red-600 dark:text-red-300 truncate">${escapeHtml(teamLabel)}</span>` : ''}
                         </div>
                     </td>
                 `;
             }
 
             return `
-                <td class="px-3 py-3">
-                    <div class="rounded-2xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-900 px-3 py-3 text-center">
-                        <span class="text-xs font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Libero</span>
+                <td class="px-2 py-2 align-middle min-w-[120px]">
+                    <div class="rounded-xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-900 px-2 py-2 text-center">
+                        <span class="text-[11px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Libero</span>
                     </div>
                 </td>
             `;
