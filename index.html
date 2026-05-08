@@ -101,9 +101,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             '0%': { opacity: '0', transform: 'translateY(-8px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
+                        'gradient-shift': {
+                            '0%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                            '100%': { 'background-position': '0% 50%' },
+                        },
                     },
                     animation: {
                         'fade-in-down': 'fade-in-down 0.3s ease-out both',
+                        'gradient-shift': 'gradient-shift 12s ease infinite',
                     },
                 },
             },
@@ -205,6 +211,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 </div>
+</section>
+<section class="my-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl bg-gradient-to-r from-primary-dark via-primary to-fuchsia-600 bg-[length:200%_200%] animate-gradient-shift shadow-2xl overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 px-6 py-8 md:px-10 text-center md:text-left">
+                <div class="flex flex-col sm:flex-row items-center md:items-start gap-3">
+                    <span class="material-symbols-outlined text-4xl text-white">sports_volleyball</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">
+                            Vuoi un feedback personalizzato in campo?
+                        </h2>
+                        <p class="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+                            Prenota uno slot con i nostri coach durante i tornei. Analisi tecnica e tattica dedicata alla tua coppia.
+                        </p>
+                    </div>
+                </div>
+                <a href="bb1.html" class="inline-flex w-full md:w-auto items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 font-extrabold text-gray-900 shadow-lg transition-all duration-300 hover:scale-105 hover:ring-4 hover:ring-secondary/60 hover:ring-offset-2 hover:ring-offset-primary-dark">
+                    <span class="material-symbols-outlined text-xl">schedule</span>
+                    Prenota il tuo Coach
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- Upcoming Events Section -->
 <section id="prossimi-eventi" class="py-12 md:py-20 relative bg-background-light dark:bg-background-dark">
