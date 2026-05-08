@@ -124,7 +124,7 @@
                     <form id="booking-form" class="mt-7 space-y-5">
                         <div>
                             <label for="pair-name" class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Nome Coppia</label>
-                            <input id="pair-name" name="pairName" type="text" required placeholder="Inserisci il tuo cognome..." class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
+                            <input id="pair-name" name="pairName" type="text" required placeholder="Inserisci il tuo cognome..:" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -134,7 +134,7 @@
                             </div>
                             <div>
                                 <label for="time-select" class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Orario</label>
-                                <input id="time-select" name="time" type="time" required step="900" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
+                                <input id="time-select" name="time" type="time" required step="60" class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-primary focus:ring-primary" />
                             </div>
                         </div>
 
@@ -426,6 +426,7 @@
 
         function renderBookingCard(coach, booking) {
             const time = getBookingTime(booking);
+            const endTime = calculateEndTime(time, 40);
             const team = getBookingTeam(booking);
             const field = getBookingField(booking);
             const dataAttrs = [
@@ -440,7 +441,7 @@
                 <button type="button" ${dataAttrs} class="shrink-0 text-left rounded-2xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-900 px-4 py-3 hover:-translate-y-0.5 hover:shadow-md hover:shadow-red-200/50 dark:hover:shadow-red-950/40 focus:outline-none focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900/50 transition-all">
                     <span class="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-red-700 dark:text-red-300">
                         <span class="material-icons text-sm">schedule</span>
-                        ${escapeHtml(time || '--:--')}
+                        ${escapeHtml(time || '--:--')} - ${escapeHtml(endTime)}
                     </span>
                     ${team ? `<span class="mt-1 block text-sm font-bold text-red-700 dark:text-red-200 truncate max-w-[180px]">${escapeHtml(team)}</span>` : ''}
                     ${field ? `<span class="mt-0.5 block text-[11px] text-red-600/80 dark:text-red-300/80">Campo ${escapeHtml(field)}</span>` : ''}
@@ -459,7 +460,9 @@
                     const bookings = getCoachBookings(coach, selectedDay);
                     const conflict = bookings.some((booking) => {
                         const bookedMin = timeToMinutes(getBookingTime(booking));
-                        return Number.isFinite(bookedMin) && Math.abs(selectedMin - bookedMin) < 30;
+                        return Number.isFinite(bookedMin)
+                            && selectedMin >= (bookedMin - 39)
+                            && selectedMin <= (bookedMin + 39);
                     });
                     if (conflict) occupiedCoachIds.add(coach.id);
                 });
@@ -482,7 +485,7 @@
             }
 
             elements.coachHelp.textContent = availableCount > 0
-                ? `${availableCount} allenatori disponibili per questo slot (tolleranza 30 min).`
+                ? `${availableCount} allenatori disponibili per questo slot (slot da 40 min).`
                 : 'Nessun allenatore disponibile in questa fascia.';
         }
 
@@ -491,6 +494,17 @@
             const [hours, minutes] = normalized.split(':').map(Number);
             if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return NaN;
             return hours * 60 + minutes;
+        }
+
+        function calculateEndTime(startTimeStr, durationMinutes) {
+            const startMin = timeToMinutes(startTimeStr);
+            if (!Number.isFinite(startMin)) return '--:--';
+            const totalMinutesInDay = 24 * 60;
+            const endMin = (startMin + durationMinutes) % totalMinutesInDay;
+            const normalizedEndMin = endMin < 0 ? endMin + totalMinutesInDay : endMin;
+            const endHours = Math.floor(normalizedEndMin / 60);
+            const endMinutes = normalizedEndMin % 60;
+            return `${String(endHours).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`;
         }
 
         function getCoachBookings(coach, dayId) {
@@ -523,8 +537,10 @@
         }
 
         function openBookingModal(data) {
+            const startTime = data.time || '--:--';
+            const endTime = calculateEndTime(data.time, 40);
             elements.modalTeam.textContent = data.team || '-';
-            elements.modalTime.textContent = data.time || '--:--';
+            elements.modalTime.textContent = `${startTime} - ${endTime}`;
             elements.modalField.textContent = data.field || '-';
             elements.modalCoach.textContent = data.coach || '--';
             elements.modal.classList.remove('hidden');
