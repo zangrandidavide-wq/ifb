@@ -8,82 +8,74 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 
 // ==========================================
-// MODULO MODAL PRENOTAZIONE PROVA
+// MODULO POPUP PROVA GRATUITA (solo index.html)
+// ──────────────────────────────────────────
+// Per disattivare: commenta questo intero blocco
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    const btnPrenota = document.getElementById('btn-prenota-prova');
-    const modal = document.getElementById('modal-prenotazione');
-    const btnClose = document.getElementById('modal-prenotazione-close');
-    const formPrenotazione = document.getElementById('form-prenotazione');
-    const feedbackEl = document.getElementById('prenotazione-feedback');
-    const submitBtn = document.getElementById('prenotazione-submit-btn');
+    const popup = document.getElementById('popup-prova-gratuita');
+    const btnClose = document.getElementById('popup-prova-close');
+    const btnDismiss = document.getElementById('popup-prova-dismiss');
+    const locandina = document.getElementById('popup-prova-locandina');
+    const locandinaPlaceholder = document.getElementById('popup-prova-locandina-placeholder');
+    
+    // Chiave per la sessione corrente
+    const STORAGE_KEY = 'ifb_popup_prova_dismissed';
+    // Ritardo ridotto per un'apertura quasi immediata (0.8 secondi)
+    const DELAY_MS = 800; 
 
-    if (!btnPrenota || !modal || !btnClose) return;
+    if (!popup || !btnClose || !btnDismiss) return;
 
-    function openModal() {
-        modal.classList.remove('hidden');
+    const locandinaSrc = locandina?.getAttribute('src')?.trim();
+    if (locandina && locandinaSrc) {
+        locandina.classList.remove('hidden');
+        locandinaPlaceholder?.classList.add('hidden');
+    }
+
+    function closePopup(persist = true) {
+        popup.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (persist) {
+            // Usiamo sessionStorage invece di localStorage
+            // Così si riaprirà alla prossima visita (quando l'utente riapre il browser/scheda)
+            sessionStorage.setItem(STORAGE_KEY, 'true');
+        }
+    }
+
+    function openPopup() {
+        popup.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
+    // Controlliamo il sessionStorage invece del localStorage
+    if (!sessionStorage.getItem(STORAGE_KEY)) {
+        setTimeout(openPopup, DELAY_MS);
     }
 
-    btnPrenota.addEventListener('click', openModal);
-    btnClose.addEventListener('click', closeModal);
+    btnClose.addEventListener('click', () => closePopup(true));
+    btnDismiss.addEventListener('click', () => closePopup(true));
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) closePopup(true);
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            closeModal();
+        if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+            closePopup(true);
         }
     });
-
-    if (formPrenotazione) {
-        formPrenotazione.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Invio in corso...';
-            if (feedbackEl) {
-                feedbackEl.classList.add('hidden');
-            }
-
-            try {
-                const response = await fetch(formPrenotazione.action, {
-                    method: 'POST',
-                    body: new FormData(formPrenotazione),
-                    headers: { Accept: 'application/json' },
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    if (feedbackEl) {
-                        feedbackEl.textContent = 'Prenotazione inviata! Ti ricontatteremo a breve.';
-                        feedbackEl.className = 'text-sm font-medium text-green-600 dark:text-green-400 block';
-                    }
-                    formPrenotazione.reset();
-                    setTimeout(closeModal, 2000);
-                } else {
-                    throw new Error(data.error || 'Invio non riuscito');
-                }
-            } catch (error) {
-                if (feedbackEl) {
-                    feedbackEl.textContent = 'Si è verificato un errore. Riprova tra poco.';
-                    feedbackEl.className = 'text-sm font-medium text-red-600 dark:text-red-400 block';
-                }
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Invia Prenotazione';
-            }
-        });
-    }
 });
+
+// ==========================================
+// MODULO MODAL PRENOTAZIONE PROVA (disattivato)
+// ==========================================
+/*
+document.addEventListener('DOMContentLoaded', () => {
+    const btnPrenota = document.getElementById('btn-prenota-prova');
+    const modal = document.getElementById('modal-prenotazione');
+    ...
+});
+*/
 
 // ==========================================
 // MODULO COOKIE BANNER (Eseguito solo se il banner esiste)
@@ -91,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
     const banner = document.getElementById('cookie-banner');
     
-    if (banner) { // <-- IL SECONDO CONTROLLO SALVAVITA
+    if (banner) { 
         const btnAccept = document.getElementById('btn-accept-cookies');
         const btnReject = document.getElementById('btn-reject-cookies');
 
