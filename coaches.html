@@ -121,83 +121,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         </div>
 
-<!-- INIZIO CARD NEWS IN EVIDENZA --> <div class="relative w-full max-w-6xl mb-16 bg-gradient-to-br from-primary via-[#5a0ca8] to-slate-900 rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/30 border border-white/10 group"> <!-- Elemento decorativo background -->
-
-
-<!-- INIZIO CARD NEWS IN EVIDENZA (ridisegnata) -->
+<!-- INIZIO CARD NEWS IN EVIDENZA (Versione Coerente) -->
 <div class="relative w-full max-w-6xl mb-16 bg-gradient-to-br from-primary via-[#5a0ca8] to-slate-900 rounded-[2rem] overflow-hidden shadow-xl border border-white/10 group">
- 
-    <!-- Elemento decorativo background, più leggero rispetto all'originale -->
+    
+    <!-- Elemento decorativo background -->
     <div class="absolute -top-32 -right-24 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
- 
+    
+    <!-- CONTENITORE FLEX CORRETTO -->
     <div class="flex flex-col lg:flex-row relative z-10">
- 
-        <!-- Sezione Immagine e Anagrafica -->
-        <div class="w-full lg:w-2/5 p-6 flex flex-col gap-5">
- 
+        
+        <!-- Colonna Sinistra: Immagine e Anagrafica -->
+        <div class="w-full lg:w-2/5 p-6 lg:p-10 flex flex-col gap-6">
+            
             <!-- Immagine -->
-            <div class="relative aspect-square rounded-2xl overflow-hidden border border-white/15 bg-black/20">
-                <span class="absolute top-3 left-3 z-20 bg-white text-primary text-[11px] font-medium px-3 py-1.5 rounded-lg uppercase tracking-wider flex items-center gap-1.5">
+            <div class="relative aspect-[4/5] lg:aspect-square rounded-2xl overflow-hidden border border-white/15 bg-black/20 shadow-inner">
+                <span class="absolute top-4 left-4 z-20 bg-white text-primary text-[11px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-md">
                     <i class="ti ti-speakerphone text-sm"></i>
                     Ultime news
                 </span>
                 <img alt="James Martins" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" src="james.jpeg" loading="lazy" decoding="async"/>
             </div>
- 
+            
             <!-- Scheda Anagrafica -->
-            <div class="bg-black/25 rounded-xl p-4 border border-white/10">
-                <div class="flex justify-between items-center pb-2.5 border-b border-white/10">
-                    <span class="text-purple-200/65 text-[11px] font-medium uppercase tracking-wider">Nome e Cognome</span>
-                    <span class="text-white font-medium text-sm">James Martins</span>
+            <div class="bg-black/20 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-sm">
+                <div class="flex justify-between items-center pb-3 border-b border-white/10">
+                    <span class="text-purple-200/70 text-[11px] font-bold uppercase tracking-wider">Nome e Cognome</span>
+                    <span class="text-white font-medium text-sm text-right">James Martins</span>
                 </div>
-                <div class="flex justify-between items-center py-2.5 border-b border-white/10">
-                    <span class="text-purple-200/65 text-[11px] font-medium uppercase tracking-wider">Ruolo</span>
-                    <span class="text-white font-medium text-sm">Coach</span>
+                <div class="flex justify-between items-center py-3 border-b border-white/10">
+                    <span class="text-purple-200/70 text-[11px] font-bold uppercase tracking-wider">Ruolo</span>
+                    <span class="text-white font-medium text-sm text-right">Coach</span>
                 </div>
-                <div class="flex justify-between items-center pt-2.5">
-                    <span class="text-purple-200/65 text-[11px] font-medium uppercase tracking-wider">Ingresso IFB</span>
-                    <span class="text-white font-medium text-sm">Giugno 2026</span>
+                <div class="flex justify-between items-center pt-3">
+                    <span class="text-purple-200/70 text-[11px] font-bold uppercase tracking-wider">Ingresso IFB</span>
+                    <span class="text-white font-medium text-sm text-right">Giugno 2026</span>
                 </div>
             </div>
         </div>
-    </div> 
-        <!-- Sezione Testo -->
-        <div class="w-full lg:w-3/5 p-6 lg:p-8 lg:pl-2 flex flex-col justify-center">
- 
-            <h2 class="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-4 leading-snug tracking-tight">
+        
+        <!-- Colonna Destra: Sezione Testo (Ora dentro il Flexbox) -->
+        <div class="w-full lg:w-3/5 p-6 lg:p-10 lg:pl-0 flex flex-col justify-center">
+            
+            <h2 class="text-white text-3xl md:text-4xl font-black mb-6 leading-tight tracking-tight">
                 James Martins entra nella I Follow Beach Volley School
             </h2>
- 
-            <p class="text-slate-100/80 text-[15px] leading-relaxed mb-3">
-                La I Follow Beach Volley è orgogliosa di accogliere nel proprio progetto tecnico James Martins, uno dei coach più riconosciuti e influenti del panorama del beach volley italiano.
-            </p>
- 
-            <p class="text-slate-100/80 text-[15px] leading-relaxed mb-3">
-                Nato a Rio de Janeiro, James porta con sé una cultura sportiva internazionale, costruita prima da atleta e poi da allenatore. La sua esperienza nasce dalla sabbia brasiliana e si è consolidata negli anni in Italia, dove ha contribuito in modo significativo alla crescita del movimento beach volley.
-            </p>
- 
-            <p class="text-slate-100/80 text-[15px] leading-relaxed mb-3">
-                Il suo ingresso rappresenta un passaggio importante per la crescita della scuola: non solo per il valore tecnico che porta in campo, ma per la sua capacità di trasmettere metodo, mentalità e consapevolezza.
-            </p>
- 
-            <p class="text-slate-100/80 text-[15px] leading-relaxed mb-3">
-                Il lavoro con James sarà orientato allo sviluppo completo dell'atleta: tecnica, lettura del gioco, gestione della pressione, costruzione della coppia e approccio mentale alla competizione.
-            </p>
- 
-            <p class="text-slate-100/80 text-[15px] leading-relaxed mb-5">
-                Con James Martins, I Follow Beach Volley rafforza la propria identità: una scuola aperta, ambiziosa e appassionata, nata per accompagnare ogni atleta dal primo allenamento fino agli obiettivi più importanti.
-            </p>
- 
-            <div class="flex items-center gap-2.5 pt-4 border-t border-white/10">
-                <i class="ti ti-confetti text-amber-300 text-lg"></i>
-                <span class="text-white text-sm font-medium">Benvenuto James nella famiglia I Follow Beach Volley</span>
+            
+            <div class="space-y-4 text-slate-100/80 text-[15px] leading-relaxed font-light">
+                <p>
+                    La I Follow Beach Volley è orgogliosa di accogliere nel proprio progetto tecnico James Martins, uno dei coach più riconosciuti e influenti del panorama del beach volley italiano.
+                </p>
+                <p>
+                    Nato a Rio de Janeiro, James porta con sé una cultura sportiva internazionale, costruita prima da atleta e poi da allenatore. La sua esperienza nasce dalla sabbia brasiliana e si è consolidata negli anni in Italia, dove ha contribuito in modo significativo alla crescita del movimento beach volley.
+                </p>
+                <p>
+                    Il suo ingresso rappresenta un passaggio importante per la crescita della scuola: non solo per il valore tecnico che porta in campo, ma per la sua capacità di trasmettere metodo, mentalità e consapevolezza.
+                </p>
+                <p>
+                    Il lavoro con James sarà orientato allo sviluppo completo dell'atleta: tecnica, lettura del gioco, gestione della pressione, costruzione della coppia e approccio mentale alla competizione.
+                </p>
+                <p>
+                    Con James Martins, I Follow Beach Volley rafforza la propria identità: una scuola aperta, ambiziosa e appassionata, nata per accompagnare ogni atleta dal primo allenamento fino agli obiettivi più importanti.
+                </p>
             </div>
- 
+            
+            <div class="flex items-center gap-3 pt-6 mt-6 border-t border-white/10">
+                <i class="ti ti-confetti text-amber-400 text-xl"></i>
+                <span class="text-white text-sm font-bold tracking-wide uppercase">Benvenuto James nella famiglia I Follow Beach Volley</span>
+            </div>
+            
         </div>
-    </div>
+    </div> <!-- FINE CONTENITORE FLEX -->
 </div>
 <!-- FINE CARD NEWS IN EVIDENZA -->
- 
 
         <div class="flex flex-col gap-12 w-full max-w-6xl">
     
