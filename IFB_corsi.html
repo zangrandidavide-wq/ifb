@@ -82,10 +82,64 @@
                         "display": ["Lexend", "sans-serif"]
                     },
                     borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    keyframes: {
+                        'fade-in-down': {
+                            '0%': { opacity: '0', transform: 'translateY(-16px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                    animation: {
+                        'fade-in-down': 'fade-in-down 0.7s ease-out both',
+                        'fade-in-up': 'fade-in-up 0.7s ease-out both',
+                        'fade-in': 'fade-in 0.7s ease-out both',
+                    },
                 },
             },
         }
     </script>
+    <style>
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        [data-reveal="fade"] {
+            transform: none;
+        }
+        [data-reveal="left"] {
+            transform: translateX(-28px);
+        }
+        [data-reveal="right"] {
+            transform: translateX(28px);
+        }
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-reveal],
+            [data-reveal].is-visible {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .animate-fade-in-down,
+            .animate-fade-in-up,
+            .animate-fade-in {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col">
@@ -101,30 +155,133 @@
     <!-- 4.1 Introduzione -->
     <section class="pt-10 md:pt-32 pb-12 md:pb-16 bg-background-light dark:bg-background-dark">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6">
+            <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 animate-fade-in-down">
                 <span class="material-icons text-base">sports_volleyball</span>
                 Corsi IFB
             </span>
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1] mb-6">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1] mb-6 animate-fade-in-up [animation-delay:120ms]">
                 Il tuo percorso sulla <span class="text-primary">sabbia</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto animate-fade-in-up [animation-delay:240ms]">
                 I corsi IFB sono pensati per accompagnare ogni atleta nel proprio percorso: da chi non ha mai giocato a chi vuole competere. Ogni gruppo viene organizzato per livello, con uno staff tecnico coordinato e un metodo di lavoro progressivo.
             </p>
         </div>
     </section>
 
-    <!-- 4.2 Livelli corso -->
+    <!-- 4.2 Informazioni pratiche -->
     <section class="py-12 md:py-20 bg-white dark:bg-gray-900/40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-reveal="fade">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Informazioni pratiche</h2>
+                <p class="text-gray-600 dark:text-gray-400">Tutto quello che ti serve per organizzarti e iniziare.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 80ms">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-icons text-primary">schedule</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Durata allenamenti</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">1,5 ore per sessione, in fasce serali distribuite per sede.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 160ms">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-icons text-primary">calendar_month</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Giorni disponibili</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Lunedì – Venerdì in tutte le sedi attive.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 240ms">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-icons text-primary">location_on</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Sedi disponibili</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Basiglio, Pero e Corsico — tutte attive.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-[#25D366]/20 shadow-sm" data-reveal style="transition-delay: 320ms">
+                    <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 fill-[#25D366]" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Contatto WhatsApp</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">Scrivici per informazioni, iscrizioni o per prenotare una prova.</p>
+                        <a href="https://wa.me/393494633610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#25D366] font-bold text-sm hover:underline">
+                            +39 349 463 3610
+                            <span class="material-icons text-base">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-12" data-reveal style="transition-delay: 120ms">
+                <div class="overflow-x-auto rounded-2xl border border-primary/10 shadow-sm bg-background-light dark:bg-gray-800">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-900/50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Sede</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Giorni</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Fasce orarie</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Livelli</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Stato</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Basiglio</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Gio 18:30–23:00 · Ven 18:00–22:30</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">
+                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Pero</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">18:30–23:00</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">
+                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Corsico</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">18:30–23:00</td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">
+                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4.3 Livelli corso -->
+    <section class="py-12 md:py-20 bg-background-light dark:bg-background-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-reveal="fade">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Livelli corso</h2>
                 <p class="text-gray-600 dark:text-gray-400">Quattro percorsi distinti, ognuno con obiettivi chiari e progressivi.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
-                <article class="group flex flex-col bg-background-light dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="left" style="transition-delay: 80ms">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:scale-110 transition-all duration-300">
                             <span class="material-icons text-emerald-600 dark:text-emerald-400 text-3xl group-hover:text-white transition-colors">play_arrow</span>
@@ -146,7 +303,7 @@
                     </ul>
                 </article>
 
-                <article class="group flex flex-col bg-background-light dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="right" style="transition-delay: 160ms">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-14 h-14 rounded-2xl bg-sky-500/10 flex items-center justify-center group-hover:bg-sky-500 group-hover:scale-110 transition-all duration-300">
                             <span class="material-icons text-sky-600 dark:text-sky-400 text-3xl group-hover:text-white transition-colors">trending_up</span>
@@ -168,7 +325,7 @@
                     </ul>
                 </article>
 
-                <article class="group flex flex-col bg-background-light dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="left" style="transition-delay: 240ms">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500 group-hover:scale-110 transition-all duration-300">
                             <span class="material-icons text-amber-600 dark:text-amber-400 text-3xl group-hover:text-white transition-colors">military_tech</span>
@@ -190,7 +347,7 @@
                     </ul>
                 </article>
 
-                <article class="group flex flex-col bg-background-light dark:bg-gray-800 rounded-3xl p-8 border border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ring-1 ring-primary/5">
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ring-1 ring-primary/5" data-reveal="right" style="transition-delay: 320ms">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                             <span class="material-icons text-primary text-3xl group-hover:text-white transition-colors">emoji_events</span>
@@ -215,72 +372,14 @@
         </div>
     </section>
 
-    <!-- 4.3 Informazioni pratiche -->
-    <section class="py-12 md:py-20 bg-background-light dark:bg-background-dark">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Informazioni pratiche</h2>
-                <p class="text-gray-600 dark:text-gray-400">Tutto quello che ti serve per organizzarti e iniziare.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-                <div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">schedule</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Durata allenamenti</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">1,5 ore in fasce a partire dalle 18:30 alle 23:00.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">calendar_month</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Giorni disponibili</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Lunedì – Venerdì.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">location_on</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Sedi disponibili</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Basiglio, Pero e Corsico.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-[#25D366]/20 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6 fill-[#25D366]" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Contatto WhatsApp</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">Scrivici per informazioni, iscrizioni o per prenotare una prova.</p>
-                        <a href="https://wa.me/393494633610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#25D366] font-bold text-sm hover:underline">
-                            +39 349 463 3610
-                            <span class="material-icons text-base">open_in_new</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- 4.4 CTA pagina corsi -->
     <section class="py-16 md:py-20 bg-white dark:bg-gray-900/40 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Pronto a entrare in campo?</h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">Scegli come contattarci: prova gratuita, WhatsApp o richiesta di informazioni sui corsi.</p>
-            <div class="flex flex-wrap items-center justify-center gap-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="fade">Pronto a entrare in campo?</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto" data-reveal="fade" style="transition-delay: 100ms">Scegli come contattarci: prova gratuita, WhatsApp o richiesta di informazioni sui corsi.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4" data-reveal style="transition-delay: 200ms">
                 <a href="contatti.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1">
                     <span class="material-icons">event_available</span>
                     Prenota una prova
@@ -301,6 +400,34 @@
 
 <ifbv-footer></ifbv-footer>
 <script src="footer.js" defer></script>
+<script>
+    (function () {
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            document.querySelectorAll('[data-reveal]').forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+            return;
+        }
+
+        var revealElements = document.querySelectorAll('[data-reveal]');
+        if (!revealElements.length || !('IntersectionObserver' in window)) {
+            revealElements.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+        revealElements.forEach(function (el) { observer.observe(el); });
+    })();
+</script>
 
 </body>
 </html>

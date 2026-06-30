@@ -115,7 +115,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             },
         }
     </script>
-<style>
+    <link rel="stylesheet" href="scroll-reveal.css" />
+    <style>
         body {
       
             font-family: 'Lexend', sans-serif;
@@ -174,15 +175,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <div class="flex flex-col items-center text-center w-full max-w-6xl px-6 space-y-4 md:space-y-6">
             
-            <span class="inline-block text-xs font-bold text-gray-300 uppercase tracking-[0.3em] bg-white/5 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10 shadow-sm">
+            <span class="inline-block text-xs font-bold text-gray-300 uppercase tracking-[0.3em] bg-white/5 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10 shadow-sm sr-load-down">
                 #1 Beach Volley Community a Milano
             </span>
             
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase sr-load-up sr-delay-1">
                 SABBIA. PASSIONE. COMMUNITY.
             </h1>
             
-            <p class="text-base md:text-lg text-gray-300 font-medium max-w-xl mx-auto leading-relaxed">
+            <p class="text-base md:text-lg text-gray-300 font-medium max-w-xl mx-auto leading-relaxed sr-load-fade sr-delay-2">
                 Dove la passione per il beach volley prende vita, ogni giorno.
             </p>
             
@@ -190,11 +191,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
     </div>
 </section>
+<!-- 3.0 Intro Corsi -->
+<section class="py-14 md:py-16 bg-sand dark:bg-sand-dark border-y border-gray-200/60 dark:border-gray-700/60 relative overflow-hidden">
+    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative z-10 bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border border-primary/10 shadow-xl shadow-primary/10 p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/20" data-reveal="up">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
+                <div class="max-w-3xl">
+                    <span class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        <span class="material-icons text-sm">sports_volleyball</span>
+                        CORSI IFB
+                    </span>
+                    <h2 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mt-3">
+                        Corsi di beach volley a Milano, Basiglio, Pero e Corsico
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm md:text-base leading-relaxed">
+                        Gruppi per livello, staff qualificato e possibilità di prova gratuita.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
+                    <a href="https://bit.ly/ProvaGratuitaiFollow" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-7 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 whitespace-nowrap">
+                        <span class="material-icons">calendar_month</span>
+                        Prenota prova gratuita
+                    </a>
+                    <a href="IFB_corsi.html" class="inline-flex items-center justify-center gap-2 border border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-7 py-4 rounded-full transition-all duration-300 whitespace-nowrap">
+                        <span class="material-icons">arrow_forward</span>
+                        Scopri i corsi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- 3.1 Chi siamo -->
 <section id="chi-siamo" class="py-16 md:py-24 bg-background-light dark:bg-background-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="inline-block text-primary font-bold tracking-widest uppercase text-sm mb-4">Chi siamo</span>
-        <p class="text-lg md:text-2xl font-light text-gray-700 dark:text-gray-200 leading-relaxed md:leading-relaxed">
+        <span class="inline-block text-primary font-bold tracking-widest uppercase text-sm mb-4" data-reveal="fade">Chi siamo</span>
+        <p class="text-lg md:text-2xl font-light text-gray-700 dark:text-gray-200 leading-relaxed md:leading-relaxed" data-reveal="up">
             IFB non è solo una scuola di beach volley. È una community nata sulla sabbia, cresciuta tra corsi, tornei, eventi, trasferte e campionati, con un metodo tecnico condiviso e uno staff capace di seguire chi parte da zero e chi vuole competere.
         </p>
     </div>
@@ -203,33 +236,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 3.2 Perché scegliere IFB -->
 <section id="perche-ifb" class="py-16 md:py-20 bg-sand dark:bg-sand-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal="fade">
             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Perché scegliere IFB</h2>
             <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Un percorso completo, dalla prima lezione al campionato italiano.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700" data-reveal="left">
                 <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
                     <span class="material-icons text-primary text-3xl">school</span>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Scuola per tutti i livelli</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Corsi base, intermedi, avanzati e agonistici.</p>
             </article>
-            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 sr-stagger-2" data-reveal="up">
                 <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
                     <span class="material-icons text-primary text-3xl">psychology</span>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Metodo tecnico condiviso</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Staff coordinato e percorso di crescita progressivo.</p>
             </article>
-            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 sr-stagger-3" data-reveal="right">
                 <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
                     <span class="material-icons text-primary text-3xl">groups</span>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Community vera</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Allenamenti, tornei, eventi, trasferte e momenti di gruppo.</p>
             </article>
-            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 sr-stagger-4" data-reveal="scale">
                 <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
                     <span class="material-icons text-primary text-3xl">emoji_events</span>
                 </div>
@@ -245,27 +278,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="sr-only">Numeri IFB</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 text-center max-w-5xl mx-auto">
-            <div class="px-4 py-3">
+            <div class="px-4 py-3" data-reveal="scale">
                 <span class="material-icons text-secondary text-3xl mb-2">calendar_today</span>
                 <p class="text-white text-lg md:text-xl font-bold">Dal 2013</p>
             </div>
-            <div class="px-4 py-3">
+            <div class="px-4 py-3 sr-stagger-1" data-reveal="up">
                 <span class="material-icons text-secondary text-3xl mb-2">people</span>
                 <p class="text-white text-lg md:text-xl font-bold">Oltre 200 tesserati</p>
             </div>
-            <div class="px-4 py-3">
+            <div class="px-4 py-3 sr-stagger-2" data-reveal="scale">
                 <span class="material-icons text-secondary text-3xl mb-2">military_tech</span>
                 <p class="text-white text-lg md:text-xl font-bold">4 anni consecutivi vice-campioni italiani per società</p>
             </div>
-            <div class="px-4 py-3">
+            <div class="px-4 py-3 sr-stagger-3" data-reveal="left">
                 <span class="material-icons text-secondary text-3xl mb-2">sports_volleyball</span>
                 <p class="text-white text-lg md:text-xl font-bold">Corsi, tornei, clinic ed eventi</p>
             </div>
-            <div class="px-4 py-3">
+            <div class="px-4 py-3 sr-stagger-4" data-reveal="right">
                 <span class="material-icons text-secondary text-3xl mb-2">location_on</span>
                 <p class="text-white text-lg md:text-xl font-bold">Sede storica a Basiglio</p>
             </div>
-            <div class="px-4 py-3">
+            <div class="px-4 py-3 sr-stagger-5" data-reveal="up">
                 <span class="material-icons text-secondary text-3xl mb-2">add_location_alt</span>
                 <p class="text-white text-lg md:text-xl font-bold">Nuove strutture a Pero e Corsico</p>
             </div>
@@ -275,12 +308,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 3.5 Le nostre strutture -->
 <section id="strutture" class="py-16 md:py-20 bg-sand dark:bg-sand-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal="fade">
             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Le nostre strutture</h2>
             <p class="text-gray-600 dark:text-gray-400">Tre sedi per portare IFB sempre più vicino a te.</p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 border-primary/20">
+            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 border-primary/20" data-reveal="left">
                 <div class="absolute top-4 left-4 z-10">
                     <span class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                         <span class="material-icons text-sm">star</span> Sede attuale
@@ -300,7 +333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </a>
                 </div>
             </article>
-            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 sr-stagger-2" data-reveal="up">
                 <div class="absolute top-4 right-4 z-10">
                     <span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                         Nuova struttura
@@ -320,7 +353,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </a>
                 </div>
             </article>
-            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+            <article class="relative flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 sr-stagger-3" data-reveal="right">
                 <div class="absolute top-4 right-4 z-10">
                     <span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                         Nuova struttura
@@ -348,9 +381,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Pronto a entrare in campo?</h2>
-        <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">Scegli come contattarci: prova gratuita, WhatsApp o informazioni sulle nuove sedi.</p>
-        <div class="flex flex-wrap items-center justify-center gap-4">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="down">Pronto a entrare in campo?</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto sr-stagger-1" data-reveal="fade">Scegli come contattarci: prova gratuita, WhatsApp o informazioni sulle nuove sedi.</p>
+        <div class="flex flex-wrap items-center justify-center gap-4 sr-stagger-2" data-reveal="up">
             <a href="https://bit.ly/ProvaGratuitaiFollow" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1">
                 <span class="material-icons">event_available</span>
                 Richiedi la tua prova gratuita!
@@ -373,13 +406,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 3.5.1 Blog / Notizie -->
 <section id="notizie" class="py-16 md:py-20 bg-background-light dark:bg-background-dark border-t border-gray-200/70 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 max-w-2xl mx-auto">
+        <div class="text-center mb-12 max-w-2xl mx-auto" data-reveal="fade">
             <span class="inline-block text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Blog &amp; Notizie</span>
             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2 leading-tight">Ultime dalla Sabbia</h2>
             <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed">Novità, eventi e storie dal mondo IFB.</p>
         </div>
 
-        <article class="group flex flex-col lg:flex-row bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-500 hover:-translate-y-1">
+        <article class="group flex flex-col lg:flex-row bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-500 hover:-translate-y-1" data-reveal="scale">
             <a href="coaches.html" class="relative block w-full lg:w-2/5 xl:w-[42%] aspect-[16/10] lg:aspect-auto lg:min-h-[340px] shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-900">
                 <img
                     src="james.jpeg"
@@ -426,12 +459,12 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
 <!-- 3.4 Scegli il tuo percorso -->
 <section id="scegli-percorso" class="py-16 md:py-20 bg-background-light dark:bg-background-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal="down">
             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Scegli il tuo percorso</h2>
             <p class="text-gray-600 dark:text-gray-400">Qualunque sia il tuo obiettivo, c'è un percorso IFB per te.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30">
+            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30" data-reveal="left">
                 <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                     <span class="material-icons text-primary text-4xl group-hover:text-white transition-colors duration-300">play_arrow</span>
                 </div>
@@ -441,7 +474,7 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
                     Scopri i corsi <span class="material-icons text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
                 </span>
             </a>
-            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30">
+            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30 sr-stagger-2" data-reveal="up">
                 <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                     <span class="material-icons text-primary text-4xl group-hover:text-white transition-colors duration-300">trending_up</span>
                 </div>
@@ -451,7 +484,7 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
                     Scopri i corsi <span class="material-icons text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
                 </span>
             </a>
-            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30">
+            <a href="IFB_corsi.html" class="group flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/30 sr-stagger-3" data-reveal="right">
                 <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                     <span class="material-icons text-primary text-4xl group-hover:text-white transition-colors duration-300">emoji_events</span>
                 </div>
@@ -543,5 +576,6 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
         </div>
     </div>
      <script type="module" src="main.js"></script>
+     <script src="scroll-reveal.js" defer></script>
 </body>
 </html>
