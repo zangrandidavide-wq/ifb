@@ -119,6 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background-image: linear-gradient(to right, #7f13ec, #FFD700);
         }
     </style>
+<link href="scroll-reveal.css" rel="stylesheet"/>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white">
 <!-- Google Tag Manager (noscript) -->
@@ -133,9 +134,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section class="relative h-[40vh] min-h-[320px] w-full flex items-center justify-center bg-slate-950 pt-16">
 <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary-dark/60 to-background-dark/90 z-10"></div>
 <div class="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-<span class="inline-block text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Le nostre sedi</span>
-<h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">Dove ci alleniamo</h1>
-<p class="text-base md:text-lg text-gray-300 font-light leading-relaxed max-w-3xl mx-auto">
+<span class="inline-block text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4 sr-load-down">Le nostre sedi</span>
+<h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4 sr-load-up sr-delay-1">Dove ci alleniamo</h1>
+<p class="text-base md:text-lg text-gray-300 font-light leading-relaxed max-w-3xl mx-auto sr-load-fade sr-delay-2">
                 IFB nasce e cresce sulla sabbia, con l'obiettivo di creare luoghi in cui allenarsi, migliorare, competere e sentirsi parte di una community. Oggi il progetto ha il suo cuore a Basiglio e si prepara ad ampliarsi con le nuove strutture di Pero e Corsico.
             </p>
 </div>
@@ -146,42 +147,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 <!-- Text Column (Left) -->
 <div>
-<span class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
+<span class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4" data-reveal="fade">
 <span class="material-icons text-sm">star</span> Sede attuale
                     </span>
-<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="left">
                         Basiglio – BeachTown / Sporting Milano 3
                     </h2>
-<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8" data-reveal="up">
                         Basiglio è la casa storica di IFB. Qui sono cresciuti i nostri corsi, la nostra community, il settore agonistico e molti degli eventi che hanno costruito l'identità della scuola. È il punto di riferimento per chi vuole iniziare, migliorare o vivere il beach volley in modo più completo.
                     </p>
 <ul class="space-y-3 mb-8">
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-1" data-reveal="left">
 <span class="material-icons text-primary text-xl">history_edu</span>
 <span class="font-medium">Sede storica IFB</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-2" data-reveal="left">
 <span class="material-icons text-primary text-xl">school</span>
 <span class="font-medium">Corsi per tutti i livelli</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-3" data-reveal="left">
 <span class="material-icons text-primary text-xl">emoji_events</span>
 <span class="font-medium">Tornei &amp; Eventi</span>
 </li>
 </ul>
-<a class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1" href="contatti.html">
+<a class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1" data-reveal="scale" href="contatti.html">
                         Contattaci per Basiglio
                         <span class="material-icons">arrow_forward</span>
 </a>
 </div>
 <!-- Media Column (Right) -->
 <div class="flex flex-col gap-6">
-<img alt="Sede di Basiglio" class="w-full h-64 object-cover rounded-3xl shadow-xl" src="beachtown.jpg"/>
-<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700">
+<img alt="Sede di Basiglio" class="w-full h-64 object-cover rounded-3xl shadow-xl" data-reveal="right" src="beachtown.jpg"/>
+<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700" data-reveal="fade">
 <iframe allowfullscreen="" class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Piazza+Marco+Polo,+3,+20079+Basiglio+MI&amp;hl=it&amp;z=15&amp;output=embed" title="Mappa BeachTown Basiglio">
 </iframe>
 </div>
-<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300" data-reveal="up">
 <div class="bg-primary/10 p-3 rounded-xl shrink-0">
 <span class="material-icons text-primary text-2xl">location_on</span>
 </div>
@@ -203,12 +204,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 <!-- Media Column (Left) -->
 <div class="order-2 lg:order-1 flex flex-col gap-6">
-<img alt="Nuova sede di Pero" class="w-full h-64 object-cover rounded-3xl shadow-xl" src="pero.jpg"/>
-<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+<img alt="Nuova sede di Pero" class="w-full h-64 object-cover rounded-3xl shadow-xl" data-reveal="left" src="pero.jpg"/>
+<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center" data-reveal="zoom">
     <iframe allowfullscreen="" class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Via+Papa+Giovanni+XXIII+6,+20016+Pero,+Lombardia&amp;hl=it&amp;z=15&amp;output=embed" title="Mappa Pero Sporting Club">
     </iframe>
 </div>
-<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300" data-reveal="up">
 <div class="bg-primary/10 p-3 rounded-xl shrink-0">
 <span class="material-icons text-primary text-2xl">location_on</span>
 </div>
@@ -223,33 +224,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <!-- Text Column (Right) -->
 <div class="order-1 lg:order-2">
-<span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
+<span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4" data-reveal="fade">
 <span class="material-icons text-sm">rocket_launch</span> Nuova struttura
                     </span>
-<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="right">
                         Pero Sporting Club
                     </h2>
-<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8" data-reveal="up">
     La sede di Pero rappresenta un tassello strategico nello sviluppo di I Follow Beach Volley. Una struttura già consolidata che, grazie all’ingresso di IFB, riceve oggi una nuova spinta organizzativa e sportiva, con l’obiettivo di diventare un punto di riferimento per il beach volley nell’area ovest di Milano.
 
     Durante tutta la settimana saranno proposti corsi suddivisi per livello, allenamenti tecnici, attività agonistica, tornei ed eventi pensati per creare una vera community di appassionati.
     
                     </p>
 <ul class="space-y-3 mb-8">
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-1" data-reveal="right">
 <span>🚀</span>
 <span class="font-medium">Nuovo impulso al progetto sportivo IFB</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-2" data-reveal="right">
 <span> 🏐 </span>
 <span class="font-medium">Corsi base, intermedi, avanzati e agonistici</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-3" data-reveal="right">
 <span> 🎉  </span>
 <span class="font-medium">Tornei, eventi e community beach volley</span>
 </li>
 </ul>
-<a class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300" href="contatti.html">
+<a class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300" data-reveal="scale" href="contatti.html">
                         Sono interessato ai corsi a Pero
                         <span class="material-icons">arrow_forward</span>
 </a>
@@ -263,47 +264,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 <!-- Text Column (Left) -->
 <div>
-<span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
+<span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4" data-reveal="down">
 <span class="material-icons text-sm">rocket_launch</span> Nuova struttura
                     </span>
-<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
-                        Vamos Padel & Pickleball Corsico
+<h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="left">
+                        Sport Time Corsico
                     </h2>
-<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+<p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8" data-reveal="fade">
                         Corsico è una delle nuove aree di sviluppo IFB. La struttura nasce per ampliare la presenza della scuola nel sud-ovest milanese e offrire nuovi spazi per corsi, allenamenti, tornei e attività sportive legate al beach volley.
                     </p>
 <ul class="space-y-3 mb-8">
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-1" data-reveal="up">
 <span class="material-icons text-primary text-xl">add_location_alt</span>
 <span class="font-medium">Nuova area di sviluppo IFB</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-2" data-reveal="up">
 <span class="material-icons text-primary text-xl">school</span>
 <span class="font-medium">Corsi per principianti, intermedi e avanzati</span>
 </li>
-<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow sr-stagger-3" data-reveal="up">
 <span class="material-icons text-primary text-xl">medical_services</span>
 <span class="font-medium">Clinic &amp; Tornei</span>
 </li>
 </ul>
-<a class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300" href="contatti.html">
+<a class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300" data-reveal="scale" href="contatti.html">
                         Sono interessato ai corsi a Corsico
                         <span class="material-icons">arrow_forward</span>
 </a>
 </div>
 <!-- Media Column (Right) -->
 <div class="flex flex-col gap-6">
-<img alt="Nuova sede di Corsico" class="w-full h-64 object-cover rounded-3xl shadow-xl" src="corsico.webp"/>
-<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-<iframe allowfullscreen="" class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Via+Visconti+di+Modrone+2,+20094+Corsico,+Lombardia&amp;hl=it&amp;z=15&amp;output=embed" title="Mappa Vamos Padel & Pickleball Corsico">
+<img alt="Nuova sede di Corsico" class="w-full h-64 object-cover rounded-3xl shadow-xl" data-reveal="right" src="corsico.webp"/>
+<div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center" data-reveal="fade">
+<iframe allowfullscreen="" class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Via+Visconti+di+Modrone+2,+20094+Corsico,+Lombardia&amp;hl=it&amp;z=15&amp;output=embed" title="Mappa Sport Time Corsico">
 </iframe>
 </div>
-<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300" data-reveal="up">
 <div class="bg-primary/10 p-3 rounded-xl shrink-0">
 <span class="material-icons text-primary text-2xl">location_on</span>
 </div>
 <div>
-<p class="font-bold text-gray-900 dark:text-white text-lg">Vamos Padel & Pickleball Corsico</p>
+<p class="font-bold text-gray-900 dark:text-white text-lg">Sport Time Corsico</p>
 <p class="text-gray-600 dark:text-gray-400 mt-1">Via Visconti di Modrone 2 - 20094 Corsico (MI)</p>
 <a class="inline-flex items-center gap-1 text-primary font-bold mt-3 hover:underline" href="https://www.google.com/maps/dir/?api=1&destination=Via+Visconti+di+Modrone+2,+20094+Corsico,+Lombardia">
                                 Ottieni indicazioni <span class="material-icons text-sm">open_in_new</span>
@@ -340,4 +341,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 </div>
 <script src="main.js" type="module"></script>
+<script defer src="scroll-reveal.js"></script>
 </body></html>
