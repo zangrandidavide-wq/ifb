@@ -41,9 +41,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
 
-    <title>Corsi Beach Volley | I Follow Beach Volley</title>
-    <meta name="description" content="Scopri i corsi IFB: percorsi per ogni livello, da chi parte da zero fino all'agonismo. Allenamenti a Basiglio, Pero e Corsico con staff tecnico coordinato." />
-    <meta name="keywords" content="corsi beach volley, lezioni beach volley Milano, scuola beach volley, IFB, I Follow Beach Volley, Basiglio, allenamento sabbia" />
+    <title>Corsi Beach Volley 2026/2027 | I Follow Beach Volley</title>
+    <meta name="description" content="Scopri i corsi IFB 2026/2027: High Performance Program, corsi monosettimanali per ogni livello e listino prezzi. Allenamenti a Basiglio, Pero e Corsico." />
+    <meta name="keywords" content="corsi beach volley, lezioni beach volley Milano, scuola beach volley, IFB, I Follow Beach Volley, Basiglio, allenamento sabbia, High Performance Program" />
     <meta name="author" content="I Follow Beach Volley" />
     <meta name="robots" content="index, follow" />
 
@@ -51,15 +51,15 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.ifollowbv.it/IFB_corsi.html" />
-    <meta property="og:title" content="Corsi IFB — Dal primo passo in sabbia all'agonismo" />
-    <meta property="og:description" content="Corsi organizzati per livello con metodo progressivo e staff tecnico coordinato. Prova gratuita disponibile." />
+    <meta property="og:title" content="Corsi IFB 2026/2027 — Dal primo passo in sabbia all'agonismo" />
+    <meta property="og:description" content="High Performance Program e corsi per ogni livello. Staff tecnico coordinato, metodo progressivo." />
     <meta property="og:image" content="https://www.ifollowbv.it/og-image.jpg" />
     <meta property="og:locale" content="it_IT" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.ifollowbv.it/IFB_corsi.html" />
-    <meta name="twitter:title" content="Corsi Beach Volley | I Follow Beach Volley" />
-    <meta name="twitter:description" content="Corsi organizzati per livello con metodo progressivo e staff tecnico coordinato." />
+    <meta name="twitter:title" content="Corsi Beach Volley 2026/2027 | I Follow Beach Volley" />
+    <meta name="twitter:description" content="High Performance Program e corsi per ogni livello. Staff tecnico coordinato." />
     <meta name="twitter:image" content="https://www.ifollowbv.it/og-image.jpg" />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -95,11 +95,16 @@
                             '0%': { opacity: '0' },
                             '100%': { opacity: '1' },
                         },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        },
                     },
                     animation: {
                         'fade-in-down': 'fade-in-down 0.7s ease-out both',
                         'fade-in-up': 'fade-in-up 0.7s ease-out both',
                         'fade-in': 'fade-in 0.7s ease-out both',
+                        'shimmer': 'shimmer 3s linear infinite',
                     },
                 },
             },
@@ -139,6 +144,48 @@
                 transform: none !important;
             }
         }
+
+        /* Accordion toggle */
+        .accordion-toggle:checked + .accordion-header + .accordion-body {
+            max-height: 600px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-toggle:checked + .accordion-header .accordion-chevron {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+        }
+
+        /* HPP shimmer border effect */
+        .hpp-shimmer {
+            background: linear-gradient(90deg, transparent 25%, rgba(127,19,236,0.15) 50%, transparent 75%);
+            background-size: 200% 100%;
+        }
+
+        /* Price card hover lift */
+        .price-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .price-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -12px rgba(127,19,236,0.18);
+        }
+
+        /* Recommended badge pulse */
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(127,19,236,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(127,19,236,0); }
+            100% { box-shadow: 0 0 0 0 rgba(127,19,236,0); }
+        }
+        .pulse-badge {
+            animation: pulse-ring 2.5s ease-out infinite;
+        }
     </style>
 </head>
 
@@ -152,233 +199,586 @@
 
 <main class="flex-1">
 
-    <!-- 4.1 Introduzione -->
-    <section class="pt-10 md:pt-32 pb-12 md:pb-16 bg-background-light dark:bg-background-dark">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- ═══════════════════════════════════════════════════════════════
+         SEZIONE 1 — HERO
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="hero" class="relative pt-10 md:pt-32 pb-16 md:pb-24 bg-background-light dark:bg-background-dark overflow-hidden">
+        <!-- Decorative blobs -->
+        <div class="absolute top-0 right-0 w-[28rem] h-[28rem] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 animate-fade-in-down">
                 <span class="material-icons text-base">sports_volleyball</span>
-                Corsi IFB
+                Stagione 2026/2027
             </span>
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1] mb-6 animate-fade-in-up [animation-delay:120ms]">
-                Il tuo percorso sulla <span class="text-primary">sabbia</span>
+                I corsi IFB per il tuo percorso <span class="text-primary">sulla sabbia</span>
             </h1>
             <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto animate-fade-in-up [animation-delay:240ms]">
-                I corsi IFB sono pensati per accompagnare ogni atleta nel proprio percorso: da chi non ha mai giocato a chi vuole competere. Ogni gruppo viene organizzato per livello, con uno staff tecnico coordinato e un metodo di lavoro progressivo.
+                Dal primo allenamento fino all'High Performance Program: percorsi organizzati per livello, con staff tecnico coordinato e un metodo progressivo per accompagnarti in ogni fase.
             </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 mt-8 animate-fade-in-up [animation-delay:360ms]">
+                <a href="#hpp" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 text-sm">
+                    <span class="material-icons text-lg">bolt</span>
+                    High Performance
+                </a>
+                <a href="https://drive.google.com/uc?export=download&id=1v1WEK-ZpK64jGzb6V3DV880KMPZ6KL1V" class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold px-6 py-3 rounded-full transition-all duration-300 text-sm">
+                    <span class="material-icons text-lg">download</span>
+                    Scarica Listino Prezzi
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- 4.2 Informazioni pratiche -->
-    <section class="py-12 md:py-20 bg-white dark:bg-gray-900/40">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-reveal="fade">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Informazioni pratiche</h2>
-                <p class="text-gray-600 dark:text-gray-400">Tutto quello che ti serve per organizzarti e iniziare.</p>
+    <!-- ═══════════════════════════════════════════════════════════════
+         SEZIONE 2 — HIGH PERFORMANCE PROGRAM
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="hpp" class="py-16 md:py-24 bg-white dark:bg-gray-900/40 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(127,19,236,0.06)_0%,transparent_60%)] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section header -->
+            <div class="text-center mb-14" data-reveal="fade">
+                <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+                    <span class="material-icons text-sm">bolt</span>
+                    Programma Elite
+                </span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">High Performance Program 2026/2027</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Il percorso competitivo più completo: allenamenti tecnici con <strong class="text-gray-900 dark:text-white">James Martin</strong>, preparazione atletica, tornei FIPAV e IFB Finals incluse.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- HPP Plans grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
 
-                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 80ms">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">schedule</span>
+                <!-- HPP Standard -->
+                <article class="price-card group relative flex flex-col bg-background-light dark:bg-gray-800 rounded-3xl p-8 border border-primary/15 shadow-sm" data-reveal="left" style="transition-delay: 80ms">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-primary text-2xl group-hover:text-white transition-colors">fitness_center</span>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">HPP</span>
+                            <h3 class="text-xl font-black text-gray-900 dark:text-white">Standard</h3>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Durata allenamenti</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">1,5 ore per sessione, in fasce serali distribuite per sede.</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">Gruppo da <strong class="text-gray-900 dark:text-white">8 atleti</strong> per un percorso agonistico strutturato.</p>
+                    <div class="mb-6">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-gray-900 dark:text-white">1.690 €</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">/anno</span>
+                        </div>
+                        <p class="text-sm text-primary font-semibold mt-1">oppure 10 rate da 169 €/mese</p>
                     </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 160ms">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">calendar_month</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Giorni disponibili</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Lunedì – Venerdì in tutte le sedi attive.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 240ms">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-icons text-primary">location_on</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Sedi disponibili</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Basiglio, Pero e Corsico — tutte attive.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 bg-background-light dark:bg-gray-800 rounded-2xl p-6 border border-[#25D366]/20 shadow-sm" data-reveal style="transition-delay: 320ms">
-                    <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6 fill-[#25D366]" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1">Contatto WhatsApp</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">Scrivici per informazioni, iscrizioni o per prenotare una prova.</p>
-                        <a href="https://wa.me/393494633610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#25D366] font-bold text-sm hover:underline">
-                            +39 349 463 3610
-                            <span class="material-icons text-base">open_in_new</span>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <a href="contatti.html" class="w-full inline-flex items-center justify-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white font-bold py-3 rounded-xl transition-all duration-300 text-sm">
+                            <span class="material-icons text-lg">arrow_forward</span>
+                            Richiedi informazioni
                         </a>
                     </div>
-                </div>
+                </article>
+
+                <!-- HPP Premium / Ambassador -->
+                <article class="price-card group relative flex flex-col bg-gradient-to-br from-primary/5 via-background-light to-primary/5 dark:from-primary/10 dark:via-gray-800 dark:to-primary/10 rounded-3xl p-8 border-2 border-primary/30 shadow-lg shadow-primary/10" data-reveal="right" style="transition-delay: 160ms">
+                    <!-- Badge -->
+                    <div class="absolute -top-3 right-6">
+                        <span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg shadow-primary/40 pulse-badge">
+                            <span class="material-icons text-sm">star</span>
+                            Premium
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/15 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-primary text-2xl group-hover:text-white transition-colors">emoji_events</span>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">HPP</span>
+                            <h3 class="text-xl font-black text-gray-900 dark:text-white">Premium / Ambassador</h3>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">Gruppo esclusivo da <strong class="text-gray-900 dark:text-white">6 atleti</strong> per il massimo livello di attenzione.</p>
+                    <div class="mb-6">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-gray-900 dark:text-white">2.090 €</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">/anno</span>
+                        </div>
+                        <p class="text-sm text-primary font-semibold mt-1">oppure 10 rate da 209 €/mese</p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-primary/20">
+                        <a href="contatti.html" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark font-bold py-3 rounded-xl transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 text-sm">
+                            <span class="material-icons text-lg">arrow_forward</span>
+                            Candidati ora
+                        </a>
+                    </div>
+                </article>
 
             </div>
 
-            <div class="mt-12" data-reveal style="transition-delay: 120ms">
-                <div class="overflow-x-auto rounded-2xl border border-primary/10 shadow-sm bg-background-light dark:bg-gray-800">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-900/50">
-                            <tr>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Sede</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Giorni</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Fasce orarie</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Livelli</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Stato</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                            <tr>
-                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Basiglio</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Gio 18:30–23:00 · Ven 18:00–22:30</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">
-                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Pero</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">18:30–23:00</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">
-                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">Corsico</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Lun–Ven</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">18:30–23:00</td>
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">Base, intermedio, avanzato</td>
-                                <td class="px-6 py-4 text-sm whitespace-nowrap">
-                                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300 px-3 py-1 text-xs font-bold uppercase tracking-wider">Attivo</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- HPP Included features -->
+            <div class="bg-background-light dark:bg-gray-800 rounded-3xl p-6 md:p-10 border border-primary/10 shadow-sm" data-reveal style="transition-delay: 240ms">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span class="material-icons text-primary">checklist</span>
+                    Il programma comprende
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">sports</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300"><strong>2 allenamenti tecnici/tattici</strong> a settimana (1 con James Martin, 1 con coach IFB basato sul programma di James). In caso di 2 gruppi contemporanei, ci saranno 2 allenatori.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">directions_run</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300"><strong>2 ore di preparazione atletica</strong> pre-stagione.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">fitness_center</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300"><strong>2 sessioni mensili</strong> di preparazione atletica durante la stagione.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">badge</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Tesseramento agonistico</strong> FIPAV incluso.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">emoji_events</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">Iscrizione a <strong>8 tornei CIPS FIPAV</strong>.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-icons text-primary text-lg mt-0.5 shrink-0">hotel</span>
+                        <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Pacchetto IFB Finals:</strong> alloggio e iscrizione alle Finali del Campionato Italiano per Società.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4.3 Livelli corso -->
-    <section class="py-12 md:py-20 bg-background-light dark:bg-background-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-reveal="fade">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Livelli corso</h2>
-                <p class="text-gray-600 dark:text-gray-400">Quattro percorsi distinti, ognuno con obiettivi chiari e progressivi.</p>
+    <!-- ═══════════════════════════════════════════════════════════════
+         SEZIONE 3 — CORSI STANDARD & ORARI
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="corsi" class="py-16 md:py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section header -->
+            <div class="text-center mb-6" data-reveal="fade">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Corsi Beach Volley 2026/2027</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Corsi monosettimanali organizzati per fascia oraria. Scegli l'orario che fa per te.</p>
             </div>
 
+            <!-- Info pills -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-12" data-reveal="fade" style="transition-delay: 80ms">
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-bold">
+                    <span class="material-icons text-sm">calendar_month</span>
+                    14/09/2026 – 16/07/2027
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 px-4 py-2 rounded-full text-xs font-bold">
+                    <span class="material-icons text-sm">child_care</span>
+                    Mini Beach fino al 31/05/2027
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-full text-xs font-bold">
+                    <span class="material-icons text-sm">group</span>
+                    Max 8 persone (Under 18: max 12)
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 px-4 py-2 rounded-full text-xs font-bold">
+                    <span class="material-icons text-sm">verified_user</span>
+                    Quota ASD 25 € (incl. assicurazione)
+                </span>
+            </div>
+
+            <!-- Course cards grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
-                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="left" style="transition-delay: 80ms">
+                <!-- EARLY BEACH -->
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-7 border border-primary/10 hover:border-primary/25 shadow-sm hover:shadow-lg transition-all duration-300" data-reveal="left" style="transition-delay: 80ms">
                     <div class="flex items-center gap-4 mb-5">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:scale-110 transition-all duration-300">
-                            <span class="material-icons text-emerald-600 dark:text-emerald-400 text-3xl group-hover:text-white transition-colors">play_arrow</span>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-400/10 flex items-center justify-center group-hover:bg-amber-400 group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-amber-500 text-3xl group-hover:text-white transition-colors">wb_sunny</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Livello 1</span>
-                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Livello Base</h3>
+                            <span class="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">Pomeriggio</span>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Early Beach</h3>
                         </div>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 mb-5">Per chi parte da zero o ha poca esperienza.</p>
-                    <p class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Obiettivi:</p>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 flex-1">
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>palleggio</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>bagher</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>servizio</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>spostamenti</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>regole base</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>primi concetti di gioco 2x2</li>
-                    </ul>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-5">Le fasce pomeridiane, perfette per chi preferisce allenarsi con la luce del giorno.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>17:00–18:30
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>17:30–19:00
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>18:00–19:30
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>18:30–20:00
+                        </span>
+                    </div>
                 </article>
 
-                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="right" style="transition-delay: 160ms">
+                <!-- CLASSIC BEACH -->
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-7 border border-primary/10 hover:border-primary/25 shadow-sm hover:shadow-lg transition-all duration-300" data-reveal="right" style="transition-delay: 160ms">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-14 h-14 rounded-2xl bg-sky-500/10 flex items-center justify-center group-hover:bg-sky-500 group-hover:scale-110 transition-all duration-300">
-                            <span class="material-icons text-sky-600 dark:text-sky-400 text-3xl group-hover:text-white transition-colors">trending_up</span>
+                            <span class="material-icons text-sky-500 text-3xl group-hover:text-white transition-colors">sports_volleyball</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Livello 2</span>
-                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Livello Intermedio</h3>
+                            <span class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Sera</span>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Classic Beach</h3>
                         </div>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 mb-5">Per chi gioca già e vuole migliorare.</p>
-                    <p class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Obiettivi:</p>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 flex-1">
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>continuità</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>difesa</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>attacco</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>ricezione</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>costruzione del gioco</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>prime scelte tattiche</li>
-                    </ul>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-5">La fascia serale classica, la più richiesta. Disponibile anche in formato 2 ore.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="inline-flex items-center gap-1 bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>19:30–21:00
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>20:00–21:30
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>19:00–21:00
+                            <span class="text-[10px] bg-sky-200 dark:bg-sky-800 text-sky-800 dark:text-sky-200 px-1.5 rounded-full font-bold ml-0.5">2h</span>
+                        </span>
+                    </div>
                 </article>
 
-                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-reveal="left" style="transition-delay: 240ms">
+                <!-- LATE BEACH -->
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-7 border border-primary/10 hover:border-primary/25 shadow-sm hover:shadow-lg transition-all duration-300" data-reveal="left" style="transition-delay: 240ms">
                     <div class="flex items-center gap-4 mb-5">
-                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500 group-hover:scale-110 transition-all duration-300">
-                            <span class="material-icons text-amber-600 dark:text-amber-400 text-3xl group-hover:text-white transition-colors">military_tech</span>
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500 group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-indigo-500 text-3xl group-hover:text-white transition-colors">nightlight</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">Livello 3</span>
-                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Livello Avanzato</h3>
+                            <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Notturno</span>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Late Beach</h3>
                         </div>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 mb-5">Per chi partecipa già a tornei.</p>
-                    <p class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Obiettivi:</p>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 flex-1">
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>side-out</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>contrattacco</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>muro/difesa</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>gestione del vento</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>comunicazione di coppia</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>tattica 2x2</li>
-                    </ul>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-5">Per chi preferisce allenarsi tardi. Il prezzo più accessibile del listino.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="inline-flex items-center gap-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>21:00–22:30
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>21:30–23:00
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>21:00–23:00
+                            <span class="text-[10px] bg-indigo-200 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-200 px-1.5 rounded-full font-bold ml-0.5">2h</span>
+                        </span>
+                    </div>
                 </article>
 
-                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-8 border border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ring-1 ring-primary/5" data-reveal="right" style="transition-delay: 320ms">
+                <!-- MINI BEACH -->
+                <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl p-7 border border-amber-300/30 hover:border-amber-400/50 shadow-sm hover:shadow-lg transition-all duration-300" data-reveal="right" style="transition-delay: 320ms">
                     <div class="flex items-center gap-4 mb-5">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                            <span class="material-icons text-primary text-3xl group-hover:text-white transition-colors">emoji_events</span>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-emerald-500 text-3xl group-hover:text-white transition-colors">child_care</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-primary">Livello 4</span>
-                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Agonisti / Elite</h3>
+                            <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Under 18</span>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Mini Beach</h3>
                         </div>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 mb-5">Per chi vuole un percorso competitivo.</p>
-                    <p class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Obiettivi:</p>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 flex-1">
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>tornei federali</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>campionato italiano per società</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>preparazione coppie</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>lavoro tecnico-tattico</li>
-                        <li class="flex items-center gap-2"><span class="material-icons text-primary text-sm">check_circle</span>mentalità agonistica</li>
-                    </ul>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-5">Per i più giovani: gruppi fino a 12 ragazzi. Periodo fino al 31/05/2027.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>16:30–18:00
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>17:00–18:30
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>17:30–19:00
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <span class="material-icons text-xs">schedule</span>18:00–19:30
+                        </span>
+                    </div>
                 </article>
 
             </div>
         </div>
     </section>
 
-    <!-- 4.4 CTA pagina corsi -->
-    <section class="py-16 md:py-20 bg-white dark:bg-gray-900/40 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- ═══════════════════════════════════════════════════════════════
+         SEZIONE 4 — LISTINO PREZZI
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="prezzi" class="py-16 md:py-24 bg-white dark:bg-gray-900/40 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(127,19,236,0.04)_0%,transparent_60%)] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section header -->
+            <div class="text-center mb-14" data-reveal="fade">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Listino Prezzi 2026/2027</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Ogni pacchetto include 1 allenamento settimanale da 1,5 ore. Scegli la durata che fa per te.</p>
+            </div>
+
+            <!-- RECOMMENDED highlight -->
+            <div class="mb-10 flex justify-center" data-reveal="fade" style="transition-delay: 60ms">
+                <div class="relative inline-flex items-center gap-3 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 border border-primary/20 rounded-2xl px-6 py-4 max-w-2xl">
+                    <span class="material-icons text-primary text-2xl shrink-0">recommend</span>
+                    <p class="text-sm text-gray-700 dark:text-gray-300"><strong class="text-primary">Formula annuale consigliata:</strong> prezzo più conveniente, posto garantito e <strong>8 recuperi</strong> prenotabili in anticipo.</p>
+                </div>
+            </div>
+
+            <!-- Price cards grid — Mobile: stacked cards | md+: 4-column grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6" data-reveal style="transition-delay: 120ms">
+
+                <!-- EARLY BEACH pricing card -->
+                <div class="price-card bg-background-light dark:bg-gray-800 rounded-3xl border border-amber-300/20 overflow-hidden">
+                    <div class="bg-gradient-to-r from-amber-400 to-amber-500 px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-white text-xl">wb_sunny</span>
+                            <h3 class="text-lg font-black text-white">Early Beach</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Annuale</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">21 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-primary">798 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">1° Quadrimestre</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">24 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">380 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Rinnovo Quad.</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">23 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">360 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Estivo</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">22 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">130 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLASSIC BEACH pricing card -->
+                <div class="price-card relative bg-background-light dark:bg-gray-800 rounded-3xl border-2 border-primary/30 overflow-hidden shadow-lg shadow-primary/5">
+                    <!-- Popular badge -->
+                    <div class="absolute top-3 right-3 z-10">
+                        <span class="inline-flex items-center gap-0.5 bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                            <span class="material-icons text-xs">local_fire_department</span>
+                            Popolare
+                        </span>
+                    </div>
+                    <div class="bg-gradient-to-r from-primary to-primary-dark px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-white text-xl">sports_volleyball</span>
+                            <h3 class="text-lg font-black text-white">Classic Beach</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Annuale</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">22 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-primary">835 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">1° Quadrimestre</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">25 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">400 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Rinnovo Quad.</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">24 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">380 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Estivo</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">23 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">140 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LATE BEACH pricing card -->
+                <div class="price-card bg-background-light dark:bg-gray-800 rounded-3xl border border-indigo-300/20 overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-white text-xl">nightlight</span>
+                            <h3 class="text-lg font-black text-white">Late Beach</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Annuale</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">20 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-primary">760 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">1° Quadrimestre</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">22 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">350 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Rinnovo Quad.</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">21 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">330 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Estivo</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">20 € a lezione</p>
+                            </div>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">120 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINI BEACH pricing card -->
+                <div class="price-card bg-background-light dark:bg-gray-800 rounded-3xl border border-emerald-300/20 overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-white text-xl">child_care</span>
+                            <h3 class="text-lg font-black text-white">Mini Beach</h3>
+                        </div>
+                        <p class="text-emerald-100 text-xs font-medium mt-0.5">Under 18</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white">Annuale</p>
+                            <span class="text-xl font-black text-primary">450 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white">1° Quadrimestre</p>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">250 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white">Rinnovo Quad.</p>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">220 €</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white">Estivo</p>
+                            <span class="text-xl font-black text-gray-900 dark:text-white">100 €</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NOTE E REGOLE — Accordion -->
+            <div class="mt-14 max-w-3xl mx-auto space-y-3" data-reveal style="transition-delay: 200ms">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="material-icons text-primary">gavel</span>
+                    Note e condizioni
+                </h3>
+
+                <!-- Accordion 1 — Pagamento -->
+                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-gray-800 overflow-hidden">
+                    <input type="checkbox" id="acc-1" class="accordion-toggle hidden" />
+                    <label for="acc-1" class="accordion-header flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
+                        <span class="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white">
+                            <span class="material-icons text-primary text-lg">credit_card</span>
+                            Pagamento e rateizzazione
+                        </span>
+                        <span class="material-icons text-gray-400 text-xl accordion-chevron transition-transform duration-300">expand_more</span>
+                    </label>
+                    <div class="accordion-body px-6">
+                        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-primary text-sm mt-0.5">check</span>
+                                Pagamento anticipato per tutti i pacchetti.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-primary text-sm mt-0.5">check</span>
+                                Fino a <strong class="text-gray-900 dark:text-white">3 rate</strong> per il pacchetto annuale (zero interessi).
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-primary text-sm mt-0.5">check</span>
+                                Fino a <strong class="text-gray-900 dark:text-white">2 rate</strong> per i pacchetti quadrimestrali (zero interessi).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Accordion 2 — Sconti & Maggiorazioni -->
+                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-gray-800 overflow-hidden">
+                    <input type="checkbox" id="acc-2" class="accordion-toggle hidden" />
+                    <label for="acc-2" class="accordion-header flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
+                        <span class="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white">
+                            <span class="material-icons text-primary text-lg">tune</span>
+                            Sconti e maggiorazioni
+                        </span>
+                        <span class="material-icons text-gray-400 text-xl accordion-chevron transition-transform duration-300">expand_more</span>
+                    </label>
+                    <div class="accordion-body px-6">
+                        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-green-500 text-sm mt-0.5">arrow_downward</span>
+                                <strong class="text-green-600 dark:text-green-400">Sconto 5%</strong> sul totale per corso bisettimanale.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-amber-500 text-sm mt-0.5">arrow_upward</span>
+                                <strong class="text-amber-600 dark:text-amber-400">Maggiorazione 30%</strong> per gruppi da 6 persone.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-amber-500 text-sm mt-0.5">arrow_upward</span>
+                                <strong class="text-amber-600 dark:text-amber-400">Maggiorazione 30%</strong> per corsi da 2 ore.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Accordion 3 — Quota associativa -->
+                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-gray-800 overflow-hidden">
+                    <input type="checkbox" id="acc-3" class="accordion-toggle hidden" />
+                    <label for="acc-3" class="accordion-header flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
+                        <span class="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white">
+                            <span class="material-icons text-primary text-lg">verified_user</span>
+                            Quota associativa ASD
+                        </span>
+                        <span class="material-icons text-gray-400 text-xl accordion-chevron transition-transform duration-300">expand_more</span>
+                    </label>
+                    <div class="accordion-body px-6">
+                        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-primary text-sm mt-0.5">check</span>
+                                Quota associativa annuale ASD obbligatoria: <strong class="text-gray-900 dark:text-white">25 €</strong>.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-icons text-primary text-sm mt-0.5">check</span>
+                                Include assicurazione sportiva per tutta la stagione.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SEZIONE 5 — CTA
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="cta" class="py-16 md:py-24 bg-background-light dark:bg-background-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4" data-reveal="fade">Pronto a entrare in campo?</h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto" data-reveal="fade" style="transition-delay: 100ms">Scegli come contattarci: prova gratuita, WhatsApp o richiesta di informazioni sui corsi.</p>
+            <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto" data-reveal="fade" style="transition-delay: 100ms">Prenota una prova gratuita, scrivici su WhatsApp o richiedi informazioni sui corsi 2026/2027.</p>
             <div class="flex flex-wrap items-center justify-center gap-4" data-reveal style="transition-delay: 200ms">
                 <a href="contatti.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-primary/40 hover:shadow-primary/60 hover:-translate-y-1">
                     <span class="material-icons">event_available</span>
@@ -390,7 +790,7 @@
                 </a>
                 <a href="contatti.html" class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300">
                     <span class="material-icons">info</span>
-                    Voglio informazioni sui corsi
+                    Info sui corsi
                 </a>
             </div>
         </div>
