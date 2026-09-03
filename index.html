@@ -101,6 +101,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             '0%': { opacity: '0', transform: 'translateY(-8px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
                         'gradient-shift': {
                             '0%': { 'background-position': '0% 50%' },
                             '50%': { 'background-position': '100% 50%' },
@@ -110,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     animation: {
                         'fade-in-down': 'fade-in-down 0.3s ease-out both',
                         'gradient-shift': 'gradient-shift 12s ease infinite',
+                        'fade-in-up': 'fade-in-up 0.5s ease-out both',
                     },
                 },
             },
@@ -575,6 +580,49 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
     
         </div>
     </div>
+<!-- Floating Announcement Capsule -->
+<aside id="season-announcement" 
+       class="fixed z-[90] transition-all duration-500
+              bottom-4 inset-x-4 max-w-none
+              sm:bottom-6 sm:right-6 sm:left-auto sm:max-w-sm
+              bg-white dark:bg-gray-800 border-l-4 border-primary dark:border-primary
+              shadow-2xl shadow-primary/20 dark:shadow-black/60 rounded-2xl p-5
+              hidden font-display">
+  
+  <div class="flex items-start justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <span class="material-icons text-primary text-2xl">sports_volleyball</span>
+      <h3 class="text-sm font-black tracking-wide text-gray-900 dark:text-white uppercase">
+        Avviso Inizio Corsi
+      </h3>
+    </div>
+    
+    <button id="close-announcement" 
+            class="text-gray-400 hover:text-primary dark:hover:text-secondary p-1 -mr-2 -mt-2 rounded-full transition-colors focus:outline-none"
+            aria-label="Chiudi avviso">
+      <span class="material-icons text-lg">close</span>
+    </button>
+  </div>
+
+  <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 font-medium leading-relaxed">
+    Stiamo completando i gruppi in tutti i centri. Le attività ripartono a breve!
+  </p>
+
+  <ul class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 text-[13px] space-y-2 text-gray-700 dark:text-gray-200">
+    <li class="flex justify-between items-center">
+      <span class="font-light">Corsi standard:</span>
+      <strong class="font-bold">sett. 21/09</strong>
+    </li>
+    <li class="flex justify-between items-center">
+      <span class="font-light">Preparazione HPP:</span>
+      <strong class="font-bold">sett. 14/09</strong>
+    </li>
+    <li class="flex justify-between items-center text-primary dark:text-secondary font-bold mt-1">
+      <span>Prep. sabbia aggiuntiva:</span>
+      <span>10 €/ora</span>
+    </li>
+  </ul>
+</aside>
      <script type="module" src="main.js"></script>
      <script src="scroll-reveal.js" defer></script>
 </body>
