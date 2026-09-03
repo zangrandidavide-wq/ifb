@@ -625,5 +625,36 @@ Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua es
 </aside>
      <script type="module" src="main.js"></script>
      <script src="scroll-reveal.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const announcement = document.getElementById('season-announcement');
+    const closeBtn = document.getElementById('close-announcement');
+    
+    // 1. Verifica se l'utente ha già chiuso il banner in precedenza
+    if (!localStorage.getItem('hideSeasonAnnouncement_2026') && announcement) {
+        // 2. Rimuove 'hidden' e avvia l'animazione dopo un breve ritardo
+        setTimeout(() => {
+            announcement.classList.remove('hidden');
+            announcement.classList.add('animate-fade-in-up');
+        }, 800);
+    }
+
+    // 3. Gestione del click sulla "X" per chiudere
+    if (closeBtn && announcement) {
+        closeBtn.addEventListener('click', () => {
+            // Effetto fade-out verso il basso
+            announcement.style.opacity = '0';
+            announcement.style.transform = 'translateY(20px)';
+            
+            // Attende la fine della transizione prima di rimuovere il nodo dal DOM
+            setTimeout(() => {
+                announcement.remove();
+                // Salva nel browser che l'utente ha letto e chiuso l'avviso
+                // localStorage.setItem('hideSeasonAnnouncement_2026', 'true');
+            }, 500); 
+        });
+    }
+});
+</script>
 </body>
 </html>
