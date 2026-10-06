@@ -109,314 +109,398 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script type="module" src="navbar.js"></script>
 </header>
 
-    <main class="flex-1 flex flex-col items-center px-6 md:px-20 lg:px-40 py-12">
-        <div class="w-full max-w-6xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div class="max-w-2xl">
-                <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block sr-load-down">Il Team d'Élite</span>
-                <h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight sr-load-up sr-delay-1">Il Nostro Staff <span class="text-primary">Tecnico</span></h1>
-                <p class="text-slate-600 dark:text-slate-400 text-lg mt-4 leading-relaxed sr-load-fade sr-delay-2">
-                    Il nostro staff è composto da professionisti formati secondo un’unica scuola di pensiero: un framework tecnico-tattico rigoroso che unisce valori sportivi e principi di gioco avanzati. Portiamo sulla sabbia un sistema di allenamento collaudato per elevare il tuo gioco in modo costante e consapevole.
-                </p>
-            </div>
+<main class="flex-1 flex flex-col items-center px-6 md:px-20 lg:px-40 py-12">
+    <!-- Header Sezione -->
+    <div class="w-full max-w-6xl mb-12 text-center md:text-left">
+        <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Il Team d'Élite</span>
+        <h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+            Il Nostro Staff <span class="text-primary">Tecnico</span>
+        </h1>
+        <p class="text-slate-600 dark:text-slate-400 text-lg mt-4 leading-relaxed max-w-3xl">
+            Seleziona un allenatore per scoprire la sua storia, le qualifiche FIPAV e il metodo di lavoro sulla sabbia.
+        </p>
+    </div>
+
+    <!-- Index Grid (14 Coach) -->
+    <div class="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
         
+        <!-- 1: Angelica -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Angelica 'Mulan' Ferrau"
+            data-role="Presidente"
+            data-image="mulan.webp"
+            data-desc="Conosciuta da tutti come “Mulan“: ama questo sport e tutto ciò che rappresenta, giocatrice dal 2012, nasce insieme a Simone Franchi come organizzatrice di tornei ed eventi amatoriali al Beach Town già dal 2015. Nel 2013 dà luce all’Asd I Follow Beach Volley, della quale è Presidente e che dal 2020 ha ottenuto ottimi risultati nel campionato italiano per società: oltre 200 tesserati e per 4 anni consecutivi il titolo di vice-campioni italiani. Maestro allenatore di beach volley qualificato FIPAV dal 2022. Responsabile ed icona della scuola di beach volley del Beach Town dal 2021, nella quale ricopre il ruolo di responsabile e coordinatrice.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="mulan.webp" alt="Angelica Ferrau" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Angelica Ferrau</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Presidente</span>
+        </button>
+
+        <!-- 2: Simone -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Simone Franchi"
+            data-role="Vice-Presidente | Allenatore"
+            data-image="franchi.webp"
+            data-desc="Ex-giocatore di pallavolo, massima serie raggiunta: Serie B2 nazionale, con esperienza di allenatore nel settore giovanile per 5 anni. Qualificato Maestro Allenatore di beach volley FIPAV dal 2021 e con i piedi nella sabbia come giocatore da più di 10 anni. Supervisore Unico di tornei federali Fipav, Vicepresidente della A.s.d. I Follow Beach Volley, che si fonde nella gestione della scuola di beach volley con Beach Town. Ama il beach volley e il mondo che gli appartiene, e al suo passato da analista video per la nazionale, porta un approccio matematico e chirurgico al posizionamento a muro e in difesa.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="franchi.webp" alt="Simone Franchi" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Simone Franchi</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Vice-Presidente</span>
+        </button>
+
+        <!-- 3: James (NUOVO) -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="James Martins"
+            data-role="Allenatore"
+            data-image="james.jpeg"
+            data-desc="Esperienza internazionale di altissimo livello nel beach volley, maturata tra Brasile, Francia, Italia e Olanda, con ruoli tecnici in ambito federale, scolastico e professionistico. In Italia ha conquistato diversi titoli nazionali, tra cui gli scudetti 2003, 2012, 2016 U20, 2020 e 2023, oltre alla Coppa Italia 2024 e 2025 con la coppia They-Breidenbach. Dal 2026 è Project Manager IFB a Milano, con l’obiettivo di mettere la sua esperienza internazionale al servizio della crescita tecnica della scuola, dello sviluppo degli allenatori e della costruzione di un progetto sportivo sempre più strutturato e competitivo.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="james.jpeg" alt="James Martins" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">James Martins</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 4: Sofia (NUOVO) -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Sofia Arcaini"
+            data-role="Allenatrice"
+            data-image="arcaini.jpeg"
+            data-desc="🏐 Benvenuta Sofia!
+
+Una nuova importante aggiunta allo staff di I Follow Beach Volley: diamo il benvenuto a Sofia Arcaini, nuova allenatrice IFB! 💙💜
+
+Giocatrice di beach volley da 10 anni e allenatrice da 3, Sofia porta sulla nostra sabbia un bagaglio di esperienza maturato ai massimi livelli nazionali e internazionali.
+
+Nel suo percorso da atleta vanta podii nel Campionato Italiano Assoluto, la vittoria del Queen of the Beach 2022 e la partecipazione con la Nazionale Italiana alla CEV Nations Cup 2023.
+
+Nel suo palmarès anche successi nello Snow Volley internazionale, con la vittoria di una tappa del CEV European Tour, oltre al titolo italiano 2026 e al premio di MVP.
+
+Da questa stagione metterà tutta la sua esperienza da atleta e da coach a disposizione dei nostri giocatori.
+
+Benvenuta in IFB, Sofia! 🔥
+Ci vediamo sulla sabbia. 🏐">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="arcaini.jpeg" alt="Sofia Arcaini" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Sofia Arcaini</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatrice</span>
+        </button>
+
+        <!-- 5: Giovanni (NUOVO) -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Giovanni Latini"
+            data-role="Allenatore"
+            data-image="giovanni.svg"
+            data-desc="Entra nello staff IFB Giovanni Latini. Sulla sabbia da quando aveva appena 14 anni, Giovanni ha alle spalle un lungo percorso da giocatore, arrivando a competere anche nel campionato italiano assoluto Gold. Esperienza, tecnica e tanti anni di beach volley vissuto sul campo, che da questa stagione metterà a disposizione dei nostri atleti.
+Benvenuto nel team IFB!">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="giovanni.svg" alt="Giovanni Latini" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Giovanni Latini</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 6: Edgardo -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Edgardo Ceccoli"
+            data-role="Allenatore"
+            data-image="eddi.webp"
+            data-desc="Eddy ha un passato da direttore tecnico ed istruttore di beach volley presso diverse società. La palla non ha segreti per lui. Ha giocato a pallavolo in serie A2 e nel beach volley è tra i migliori giocatori italiani con ottimi piazzamenti nelle tappe del campionato italiano assoluto. Allenatore competente e coinvolgente, insegna con entusiasmo e professionalità al Beach Town dal 2024.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="eddi.webp" alt="Edgardo Ceccoli" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Edgardo Ceccoli</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 7: Davide Lucca -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Davide Lucca"
+            data-role="Allenatore"
+            data-image="noccone.webp"
+            data-desc="Conosciuto meglio come “Noccone”, giocatore agonista e Maestro Fipav. Ha competenze per allenare dal livello base fino all’agonista. Con la sua empatia ha legato e creato amicizie con tantissimi allievi, che restano anche al di fuori del campo da gioco. La sua forza è la positività, sempre solare, trasmette ai suoi atleti la passione per questo sport sotto ogni aspetto; eccellente analizzatore post allenamento dei progressi e del miglior percorso possibile per i suoi atleti e corsisti.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="noccone.webp" alt="Davide Lucca" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Davide Lucca</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 8: Davide Zangrandi -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Davide Zangrandi"
+            data-role="Allenatore"
+            data-image="zangrandi.webp"
+            data-desc="Un appassionato giocatore dal 2016 ed allenatore di beach volley qualificato Maestro allenatore FIPAV dal 2023, con una profonda dedizione per l’insegnamento e il coaching. Oggi si dedica totalmente al ruolo di allenatore nella scuola di Beach Town. Porta con sé una conoscenza approfondita del gioco da entrambe le prospettive, arricchisce le sue skills facendo call con allenatori americani del circuito AVP. La sua forza è la disponibilità e la serietà che mette in tutto quello che fa, un allenatore con allenamenti ad alto ritmo di cardio e lavoro sotto stress, ma resi piacevoli grazie al suo modo empatico di relazionarsi.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="zangrandi.webp" alt="Davide Zangrandi" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Davide Zangrandi</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 9: Nicolò Passi -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Nicolò Passi"
+            data-role="Allenatore"
+            data-image="passi.webp"
+            data-desc="Allenatore di beach volley con una decina di anni circa di esperienza da giocatore, ha fatto parte dello staff Nazionale di pallavolo per il Club Italia, oltre ad aver collaborato con squadre di serie A femminili e maschili in qualità di fisioterapista: il movimento è il suo lavoro. Ama tutti gli sport, la sabbia l’ha conquistato dal primo momento. Meticoloso e paziente nell’insegnamento dei fondamentali e forte propensione al coinvolgimento alle attività extra disciplinari, quali tornei o camp organizzati.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="passi.webp" alt="Nicolò Passi" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Nicolò Passi</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 10: Stefania Verrigni -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Stefania Verrigni"
+            data-role="Allenatrice"
+            data-image="verrigni.webp"
+            data-desc="Ex giocatrice di pallavolo, si approccia al beach volley nel 2019. Inizia ad allenarsi e a competere prima in tornei amatoriali, poi in tappe federali fino a diventare la campionessa Master 35 in carica. Visto le doti tattiche innate, ha conseguito il cartellino da Maestro Fipav nel 2023 e da qui comincia un percorso anche da allenatrice. Positività e ironia a livello esponenziale, fanno sì che le sue lezioni siano apprezzate e divertenti anche sulle parti più tecniche. Ha una forte propensione al coinvolgimento in tornei e partite, mettendosi spesso in gioco con i suoi corsisti ed atleti.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="verrigni.webp" alt="Stefania Verrigni" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Stefania Verrigni</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatrice</span>
+        </button>
+
+               <!-- 12: Antonino Cappadonna -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Antonino Cappadonna"
+            data-role="Allenatore"
+            data-image="cappa.webp"
+            data-desc="Antonino Cappadonna, per tutti Kappa, entra ufficialmente nello staff tecnico di I Follow Beach Volley portando con sé un bagaglio di competenze d'eccellenza e un'energia travolgente. Laureato in Scienze Motorie e istruttore di beach volley con quattro anni di esperienza sul campo, Antonino riveste il ruolo di preparatore atletico specializzato nella performance sulla sabbia. La sua metodologia di allenamento punta al costante superamento dei limiti individuali, coniugando rigore tecnico e una passione contagiosa per trasformare ogni sessione in una sfida orientata alla crescita. Siamo pronti ad affrontare la nuova stagione insieme a un professionista che non molla mai, certi che il suo contributo sarà fondamentale per elevare il livello di gioco e di carica atletica di tutta la nostra squadra.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="cappa.webp" alt="Antonino Cappadonna" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Antonino Cappadonna</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 13: Yari Mannino -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Yari Mannino"
+            data-role="Allenatore"
+            data-image="yari.webp"
+            data-desc="Dal primo giorno in sabbia ha capito che la sua vita sarebbe cambiata: ha iniziato la sua sfida come giocatore nel 2023 e, spinto da una passione viscerale, ha cominciato a organizzare tornei per i corsisti; ma la sua fame di beach volley non finisce: si qualifica Maestro FIPAV per conoscere di più su questo sport che tanto lo appassiona, e da lì a poco inizia anche a insegnare e a trasmettere il suo amato beach volley. Oggi vive il campo a 360 gradi. Mette a disposizione di chi ama questo sport tutto se stesso, con l'occhio di chi conosce le fatiche del principiante, mettendosi sullo stesso piano. Vi aspetta in campo!">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="yari.webp" alt="Yari Mannino" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Yari Mannino</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+
+        <!-- 14: Alessandro Pesce -->
+        <button 
+            class="group flex flex-col items-center text-center cursor-pointer transition-transform hover:-translate-y-2 focus:outline-none"
+            onclick="openCoachModal(this)"
+            data-name="Alessandro Pesce"
+            data-role="Allenatore"
+            data-image="fish.webp"
+            data-desc="Giocatore e allenatore di beach volley da diversi anni, ha costruito il suo percorso tra tornei federali e campi sulla sabbia, affinando lettura di gioco e comunicazione in campo. Arbitro federale FIPAV, porta in allenamento la stessa precisione regolamentare che applica in gara, con sessioni strutturate su tecnica, tattica e gestione del match. Calmo sotto pressione e attento ai dettagli, accompagna i corsisti con obiettivi chiari e un approccio pratico: dal fondamentale alla fase di transizione, sempre con uno sguardo alla crescita costante di chi si allena con lui.">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-slate-800 group-hover:border-primary/50 transition-colors">
+                <img src="fish.webp" alt="Alessandro Pesce" class="w-full h-full object-cover object-top">
+            </div>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Alessandro Pesce</h3>
+            <span class="text-xs font-bold text-primary uppercase tracking-wide mt-1">Allenatore</span>
+        </button>
+        
+    </div>
+
+    <!-- Backdrop Sfondo Scuro -->
+    <div id="modal-backdrop" 
+         class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300"
+         onclick="closeCoachModal()">
+    </div>
+
+   <!-- Bottom Sheet / Modale -->
+    <!-- Bottom Sheet / Modale -->
+    <div id="coach-sheet" 
+         class="fixed z-50 flex flex-col bg-white dark:bg-slate-900 
+                bottom-0 left-0 w-full rounded-t-3xl max-h-[85dvh] 
+                md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:rounded-3xl md:max-h-[90dvh]
+                transform translate-y-full md:scale-95 opacity-0 pointer-events-none transition-all duration-300 shadow-2xl overflow-hidden">
+        
+        <!-- Maniglia interattiva per mobile (Swipe Down area) -->
+        <div id="drag-handle" class="w-full flex justify-center pt-4 pb-4 md:hidden shrink-0 touch-none active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors cursor-grab">
+            <div class="w-12 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
         </div>
 
-        <div class="flex flex-col gap-12 w-full max-w-6xl">
-    
-            <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="left">
-                
-                <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                        <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Presidente</span>
-                    </div>
-                    <img alt="mulan" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="mulan.webp"/>
-                </div>
-                
-                <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                        Angelica "Mulan" Ferrau
-                                        </h3>
-                    
-                    <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                        La nostra pres <3
-                    </p>
-                    
-                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                        Conosciuta da tutti come “Mulan“: ama questo sport e tutto ciò che rappresenta, giocatrice dal 2012, nasce insieme a Simone Franchi come organizzatrice di tornei ed eventi amatoriali al Beach Town già dal 2015. Nel 2013 dà luce all’Asd I Follow Beach Volley, della quale è Presidente e che dal 2020 ha ottenuto ottimi risultati nel campionato italiano per società: oltre 200 tesserati e per 4 anni consecutivi il titolo di vice-campioni italiani. Maestro allenatore di beach volley qualificato FIPAV dal 2022. Responsabile ed icona della scuola di beach volley del Beach Town dal 2021, nella quale ricopre il ruolo di responsabile e coordinatrice.
-                    </p>
-                </div>
+        <!-- Pulsante Chiudi Universale -->
+        <button onclick="closeCoachModal()" class="absolute top-3 right-4 md:top-5 md:right-5 flex items-center justify-center w-8 h-8 bg-slate-100 md:bg-transparent dark:bg-slate-800 md:dark:bg-transparent rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors shrink-0 z-10">
+            <span class="material-icons text-xl md:text-2xl">close</span>
+        </button>
+
+        <!-- Contenuto Modale Dinamico -->
+        <!-- (Mantenere il blocco div con id="sheet-image", "sheet-name", ecc. esattamente come prima) -->
+
+        <!-- Contenuto Modale Dinamico -->
+        <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start text-center md:text-left">
+            <!-- Immagine -->
+            <div class="shrink-0 relative w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden shadow-inner mx-auto md:mx-0">
+                <img id="sheet-image" src="" alt="Coach" class="w-full h-full object-cover object-top">
             </div>
+            
+            <!-- Testi -->
+            <div class="flex flex-col flex-1 w-full">
+                <h2 id="sheet-name" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-1"></h2>
+                <span id="sheet-role" class="text-primary font-bold text-sm md:text-base uppercase tracking-wider mb-4 block"></span>
+                <p id="sheet-desc" class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base"></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // --- 1. Riferimenti agli elementi DOM ---
+    const backdrop = document.getElementById('modal-backdrop');
+    const sheet = document.getElementById('coach-sheet');
+    const sheetImage = document.getElementById('sheet-image');
+    const sheetName = document.getElementById('sheet-name');
+    const sheetRole = document.getElementById('sheet-role');
+    const sheetDesc = document.getElementById('sheet-desc');
+    const dragHandle = document.getElementById('drag-handle');
+
+    // --- 2. Funzioni di Apertura e Chiusura ---
+    function openCoachModal(btnElement) {
+        // Estrazione dati
+        const name = btnElement.getAttribute('data-name');
+        const role = btnElement.getAttribute('data-role');
+        const image = btnElement.getAttribute('data-image');
+        const desc = btnElement.getAttribute('data-desc');
+
+        // Popolamento testi e immagine
+        sheetImage.src = image;
+        sheetName.textContent = name;
+        sheetRole.textContent = role;
+        sheetDesc.textContent = desc;
+
+        // Pulisce eventuali residui del drag-to-dismiss precedente
+        sheet.style.transform = '';
+
+        // Mostra backdrop
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100', 'pointer-events-auto');
+
+        // Mostra sheet
+        sheet.classList.remove('opacity-0', 'pointer-events-none');
+        sheet.classList.add('opacity-100', 'pointer-events-auto');
         
-            <div class="group flex flex-col md:flex-row-reverse bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="right">
-                
-                <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                        <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Vice-Presidente</span>
-                    </div>
-                    <img alt="franchi" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="franchi.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                </div>
-                
-                <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                    <div class="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                        Simone Franchi
-                    </h3>
-                    
-                    <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                        Coordinatore e responsabile settore campionato italiano per società | Allenatore
-                    </p>
-                    
-                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                        Ex-giocatore di pallavolo, massima serie raggiunta: Serie B2 nazionale, con esperienza di allenatore nel settore giovanile per 5 anni.
-Qualificato Maestro Allenatore di beach volley FIPAV dal 2021 e con i piedi nella sabbia come giocatore da più di 10 anni.
-Supervisore Unico di tornei federali Fipav, Vicepresidente della A.s.d. I Follow Beach Volley, che si fonde nella gestione della scuola di beach volley con Beach Town. Ama il beach volley e il mondo che gli appartiene.
+        // Animazione in base al dispositivo
+        if (window.innerWidth < 768) {
+            sheet.classList.remove('translate-y-full');
+            sheet.classList.add('translate-y-0');
+        } else {
+            sheet.classList.remove('md:scale-95');
+            sheet.classList.add('md:scale-100');
+        }
 
-e al suo passato da analista video per la nazionale, porta un approccio matematico e chirurgico al posizionamento a muro e in difesa.
-                    </p>
-                </div>
-            </div>
-            <div class="flex flex-col gap-12 w-full max-w-6xl">
-    
-                <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="scale">
-                    
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Ceccoli" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="eddi.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Edgardo Ceccoli
-                                            </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Eddy ha un passato da direttore tecnico ed istruttore di beach volley presso diverse società. La palla non ha segreti per lui. Ha giocato a pallavolo in serie A2 e nel beach volley è tra i migliori giocatori italiani con ottimi piazzamenti nelle tappe del campionato italiano assoluto. Allenatore competente e coinvolgente, insegna con entusiasmo e professionalità al Beach Town dal 2024.
-                        </p>
-                    </div>
-                </div>
-                <div class="group flex flex-col md:flex-row-reverse bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="up">
-                
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Lucca" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="noccone.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Davide Lucca
-                        </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Conosciuto meglio come “Noccone”, giocatore agonista e Maestro Fipav. Ha competenze per allenare dal livello base fino all’agonista.
-Con la sua empatia ha legato e creato amicizie con tantissimi allievi, che restano anche al di fuori del campo da gioco.
-La sua forza è la positività, sempre solare, trasmette ai suoi atleti la passione per questo sport sotto ogni aspetto; eccellente analizzatore post allenamento dei progressi e del miglior percorso possibile per i suoi atleti e corsisti.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-12 w-full max-w-6xl">
-    
-                <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="zoom">
-                    
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="zangrandi" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="zangrandi.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Davide Zangrandi
-                                            </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            
-Un appassionato giocatore dal 2016 ed allenatore di beach volley qualificato Maestro allenatore FIPAV dal 2023, con una profonda dedizione per l’insegnamento e il coaching. Oggi si dedica totalmente al ruolo di allenatore nella scuola di Beach Town.
-Porta con sé una conoscenza approfondita del gioco da entrambe le prospettive, arricchisce le sue skills facendo call con allenatori americani del circuito AVP.
-La sua forza è la disponibilità e la serietà che mette in tutto quello che fa, un allenatore con allenamenti ad alto ritmo di cardio e lavoro sotto stress, ma resi piacevoli grazie al suo modo empatico di relazionarsi. </p></div>
-                </div>
-                <div class="group flex flex-col md:flex-row-reverse bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="left">
-                
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Passi" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="passi.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Nicolò Passi
-                        </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Allenatore di beach volley con una decina di anni circa di esperienza da giocatore, ha fatto parte dello staff Nazionale di pallavolo per il Club Italia, oltre ad aver collaborato con squadre di serie A femminili e maschili in qualità di fisioterapista: il movimento è il suo lavoro.
-Ama tutti gli sport, la sabbia l’ha conquistato dal primo momento.
-Meticoloso e paziente nell’insegnamento dei fondamentali e forte propensione al coinvolgimento alle attività extra disciplinari, quali tornei o camp organizzati.
+        document.body.style.overflow = 'hidden';
+    }
 
-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-12 w-full max-w-6xl">
-    
-                <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="right">
-                    
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatrice</span>
-                        </div>
-                        <img alt="Verrigni" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="verrigni.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Stefania Verrigni
-                                            </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatrice
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Ex giocatrice di pallavolo, si approccia al beach volley nel 2019.
-                            Inizia ad allenarsi e a competere prima in tornei amatoriali, poi in tappe federali fino a diventare la campionessa Master 35 in carica.
-                            Visto le doti tattiche innate, ha conseguito il cartellino da Maestro Fipav nel 2023 e da qui comincia un percorso anche da allenatrice.
-                            Positività e ironia a livello esponenziale, fanno sì che le sue lezioni siano apprezzate e divertenti anche sulle parti più tecniche. Ha una forte propensione al coinvolgimento in tornei e partite, mettendosi spesso in gioco con i suoi corsisti ed atleti.</p></div>
-                </div>
-            </div>
+    function closeCoachModal() {
+        // Pulisce eventuali residui del drag-to-dismiss
+        sheet.style.transform = '';
 
-                <div class="group flex flex-col md:flex-row-reverse bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="scale">
-                
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Sgro" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="sgro.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Riccardo Sgro
-                        </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Giovane giocatore, allenatore abilitato dal 2023. Dopo anni di pallavolo decide di buttarsi nella sabbia del beach volley, che diventerà la sua più grande passione. Ricerca sempre la precisione tecnica mischiata ad una buona dose di preparazione fisica, e trasmette tutto con entusiasmo ai suoi allievi di Beach Town.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-12 w-full max-w-6xl">
-    
-                <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="down">
-                    
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Cappa" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="cappa.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Antonino Cappadonna
-                                            </h3>
-                        
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Antonino Cappadonna, per tutti Kappa, entra ufficialmente nello staff tecnico di I Follow Beach Volley portando con sé un bagaglio di competenze d'eccellenza e un'energia travolgente. Laureato in Scienze Motorie e istruttore di beach volley con quattro anni di esperienza sul campo, Antonino riveste il ruolo di preparatore atletico specializzato nella performance sulla sabbia. La sua metodologia di allenamento punta al costante superamento dei limiti individuali, coniugando rigore tecnico e una passione contagiosa per trasformare ogni sessione in una sfida orientata alla crescita. Siamo pronti ad affrontare la nuova stagione insieme a un professionista che non molla mai, certi che il suo contributo sarà fondamentale per elevare il livello di gioco e di carica atletica di tutta la nostra squadra.</p>
-                    </div>
-                </div>
+        // Nascondi backdrop
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
 
-                <div class="group flex flex-col md:flex-row-reverse bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="up">
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Mannino" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="yari.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Yari Mannino
-                        </h3>
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Dal primo giorno in sabbia ha capito che la sua vita sarebbe cambiata: ha iniziato la sua sfida come giocatore nel 2023 e, spinto da una passione viscerale, ha cominciato a organizzare tornei per i corsisti; ma la sua fame di beach volley non finisce: si qualifica Maestro FIPAV per conoscere di più su questo sport che tanto lo appassiona, e da lì a poco inizia anche a insegnare e a trasmettere il suo amato beach volley. Oggi vive il campo a 360 gradi. Mette a disposizione di chi ama questo sport tutto se stesso, con l'occhio di chi conosce le fatiche del principiante, mettendosi sullo stesso piano. Vi aspetta in campo!
-                        </p>
-                    </div>
-                </div>
+        // Nascondi sheet
+        sheet.classList.remove('opacity-100', 'pointer-events-auto');
+        sheet.classList.add('opacity-0', 'pointer-events-none');
+        
+        // Animazione di uscita
+        if (window.innerWidth < 768) {
+            sheet.classList.remove('translate-y-0');
+            sheet.classList.add('translate-y-full');
+        } else {
+            sheet.classList.remove('md:scale-100');
+            sheet.classList.add('md:scale-95');
+        }
 
-                <div class="group flex flex-col md:flex-row bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-primary/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10" data-reveal="fade">
-                    <div class="relative w-full md:w-1/4 lg:w-[30%] aspect-square md:aspect-auto overflow-hidden shrink-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-4">
-                            <span class="text-white text-[10px] font-bold bg-primary px-2 py-1 rounded-full uppercase tracking-wider">Allenatore</span>
-                        </div>
-                        <img alt="Pesce" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="fish.webp" width="500" height="500" loading="lazy" decoding="async"/>
-                    </div>
-                    <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/4 lg:w-[78%] relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-                        <h3 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black mb-1 tracking-tight group-hover:text-primary transition-colors">
-                            Alessandro Pesce
-                        </h3>
-                        <p class="text-primary text-xl md:text-2xl font-bold mb-6">
-                            Allenatore
-                        </p>
-                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-3xl">
-                            Giocatore e allenatore di beach volley da diversi anni, ha costruito il suo percorso tra tornei federali e campi sulla sabbia, affinando lettura di gioco e comunicazione in campo. Arbitro federale FIPAV, porta in allenamento la stessa precisione regolamentare che applica in gara, con sessioni strutturate su tecnica, tattica e gestione del match. Calmo sotto pressione e attento ai dettagli, accompagna i corsisti con obiettivi chiari e un approccio pratico: dal fondamentale alla fase di transizione, sempre con uno sguardo alla crescita costante di chi si allena con lui.
-                        </p>
-                    </div>
-                </div>
-            </div>
-    </main>
+        document.body.style.overflow = '';
+    }
 
-    <ifbv-footer></ifbv-footer>
+    // --- 3. Logica Drag-to-Dismiss (Swipe su Mobile) ---
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+
+    if (dragHandle) {
+        // L'utente tocca la maniglia
+        dragHandle.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            sheet.style.transition = 'none'; // Rimuove il ritardo CSS durante il trascinamento
+        }, { passive: true });
+
+        // L'utente trascina il dito
+        dragHandle.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentY = e.touches[0].clientY;
+            const deltaY = currentY - startY;
+
+            // Muove il modale solo verso il basso
+            if (deltaY > 0) {
+                sheet.style.transform = `translateY(${deltaY}px)`;
+            }
+        }, { passive: true });
+
+        // L'utente solleva il dito
+        dragHandle.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            sheet.style.transition = ''; // Ripristina le animazioni Tailwind
+            
+            const deltaY = currentY - startY;
+            
+            // Se ha trascinato giù per più di 80 pixel, chiude il modale. Altrimenti rimbalza su.
+            if (deltaY > 80) {
+                closeCoachModal();
+            } else {
+                sheet.style.transform = '';
+            }
+        });
+    }
+
+    // --- 4. Chiusura con tasto ESC su PC ---
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && backdrop.classList.contains('opacity-100')) {
+            closeCoachModal();
+        }
+    });
+</script>
+<ifbv-footer></ifbv-footer>
 
     <script src="footer.js" defer></script>
     <div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-4 sm:pb-6 z-50 hidden transition-transform duration-500 translate-y-full">
@@ -448,7 +532,3 @@ Meticoloso e paziente nell’insegnamento dei fondamentali e forte propensione a
  <script src="scroll-reveal.js" defer></script>
 </body>
 </html>
-
-
-
-
