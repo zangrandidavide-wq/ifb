@@ -116,18 +116,25 @@
                 </a>
             </div>
 
-            <!-- Interfaccia del Mini-gioco -->
-            <div class="absolute z-20 left-4 sm:left-8 bottom-24 flex gap-3 text-sm" aria-live="polite">
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-4 py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
-                    Palleggi <b id="streak" class="text-primary dark:text-accent-yellow text-base inline-block ml-1">0</b>
+<!-- Interfaccia del Mini-gioco -->
+            <div class="absolute z-20 left-4 sm:left-8 top-28 sm:top-auto sm:bottom-20 flex flex-col items-start gap-2 pointer-events-none" aria-live="polite">
+                
+                <div class="flex gap-2 sm:gap-3 text-sm pointer-events-auto">
+                    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
+                        Palleggi <b id="streak" class="text-primary dark:text-accent-yellow text-base inline-block ml-1">0</b>
+                    </div>
+                    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
+                        Record <b id="best" class="text-primary dark:text-accent-yellow text-base ml-1">0</b>
+                    </div>
                 </div>
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-4 py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
-                    Record <b id="best" class="text-primary dark:text-accent-yellow text-base ml-1">0</b>
-                </div>
+
+                <p id="hint" class="text-xs font-bold text-gray-500 dark:text-gray-400 drop-shadow-md ml-1 sm:ml-2">
+                    Tocca la palla: quanti palleggi riesci a fare?
+                </p>
+
             </div>
-            <p id="hint" class="absolute z-20 left-4 sm:left-8 bottom-[4.5rem] text-xs font-bold text-gray-600 dark:text-gray-400 drop-shadow-md">
-                Tocca la palla: quanti palleggi riesci a fare?
-            </p>
+            
+            <!-- (A seguire c'è il <button id="ball"... che rimane invariato) -->
 
             <button id="ball" type="button" aria-label="Palla da beach volley: toccala per palleggiare">
                 <svg viewBox="0 0 100 100" class="w-full h-full">
