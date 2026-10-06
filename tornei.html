@@ -15,23 +15,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-    <script id="tailwind-config"><!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" type="image/jpeg" href="logo.jpg" />
-    <link rel="apple-touch-icon" href="logo.jpg" />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Calendario Tornei - I Follow Beach Volley</title>
-    <meta name="description" content="Sfoglia il calendario dei tornei di beach volley organizzati da I Follow Beach Volley. Consulta date, luoghi e iscriviti direttamente." />
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -99,89 +82,6 @@
 https://dink.social/widgets/EventsListWidget?organizationId=e9e48b14-32bd-11ee-8000-000000000000&primaryColor=%237f13ec
 &viewPastEvents=false&viewLiveEvents=true&viewFutureEvents=true&layout=grid&contentHeight=800px&borderRadius=24px&autoplay=true&slides=5"
 sort=DESC frameborder="0" width="100%" height="800px"></iframe>
-
-    </main>
-
-    <!-- ░░ FOOTER ░░ -->
-    <ifbv-footer></ifbv-footer>
-    <script src="footer.js" defer></script>
-
-</body>
-</html>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary":          "#7f13ec",
-                        "primary-dark":     "#600eb3",
-                        "accent-yellow":    "#FFD700",
-                        "background-light": "#f7f6f8",
-                        "background-dark":  "#191022",
-                        "neutral-tint":     "#f0eafc",
-                        "sand":             "#fdfbf7",
-                        "sand-dark":        "#231b2e",
-                    },
-                    fontFamily: { "display": ["Lexend", "sans-serif"] },
-                    borderRadius: {
-                        "DEFAULT": "1rem",
-                        "lg":      "2rem",
-                        "xl":      "3rem",
-                        "full":    "9999px"
-                    },
-                },
-            },
-        }
-    </script>
-
-    <style>
-        /* Gradient hero text */
-        .text-gradient {
-            background: linear-gradient(135deg, #7f13ec 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-    </style>
-</head>
-
-<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
-
-    <!-- ░░ NAVBAR ░░ -->
-    <header>
-        <div id="navbar-placeholder"></div>
-        <script type="module" src="navbar.js"></script>
-    </header>
-
-    <!-- ░░ MAIN ░░ -->
-    <main class="flex-grow pt-28 pb-20">
-
-        <!-- Page header -->
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary dark:bg-primary/20 font-bold text-sm tracking-widest uppercase mb-5 border border-primary/20">
-                <span class="material-icons text-base">emoji_events</span>
-                IFB events
-            </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight tracking-tight">
-                Calendario <span class="text-gradient">Eventi</span>
-            </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
-                Consulta il calendario completo degli eventi e iscriviti direttamente tramite il widget sottostante.
-            </p>
-        </div>
-
-        <!-- Iframe Widget Container -->
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="w-full bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 shadow-xl p-2 md:p-4 overflow-hidden relative">
-                <iframe 
-                    src="https://dink.social/widgets/StaffMembersWidget?organizationId=e9e48b14-32bd-11ee-8000-000000000000&primaryColor=%237f13ec&layout=grid&contentHeight=500px&borderRadius=24px&autoplay=true&slides=3" 
-                    frameborder="0" 
-                    width="100%" 
-                    height="500px"
-                    class="rounded-[24px]">
-                </iframe>
-            </div>
-        </div>
 
     </main>
 
