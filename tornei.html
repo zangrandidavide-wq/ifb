@@ -100,20 +100,27 @@
             <!-- Decorative Blobs aggiuntivi per mantenere l'estetica -->
             <div class="absolute top-0 right-0 w-[28rem] h-[28rem] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
 
-            <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pointer-events-none">
-                <p class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 shadow-sm">
+<div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pointer-events-none">
+                
+                <!-- Badge nascosto su mobile (hidden), visibile da tablet in su (sm:inline-flex) -->
+                <p class="hidden sm:inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 shadow-sm">
                     <span class="material-icons text-base">emoji_events</span> IFB events
                 </p>
-                <h1 class="font-black leading-[1.1] tracking-tight text-5xl sm:text-7xl lg:text-8xl text-gray-900 dark:text-white drop-shadow-sm">
+                
+                <!-- Aggiunto mt-14 su mobile per fare spazio esatto ai contatori, azzerato su sm (sm:mt-0) -->
+                <h1 class="font-black leading-[1.1] tracking-tight text-5xl sm:text-7xl lg:text-8xl text-gray-900 dark:text-white drop-shadow-sm mt-14 sm:mt-0">
                     Scendi in sabbia.<br />
                     <span class="text-primary">Scegli il torneo.</span>
                 </h1>
+                
                 <p class="mt-6 max-w-md text-lg text-gray-700 dark:text-gray-300 font-medium drop-shadow-sm">
                     Tutti gli eventi in programma, con date e luoghi. Iscriviti dal calendario qui sotto.
                 </p>
+                
                 <a href="#calendario" class="pointer-events-auto mt-8 inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-7 py-3.5 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
                     Vai al calendario <span class="material-icons">south</span>
                 </a>
+                
             </div>
 
 <!-- Interfaccia del Mini-gioco -->
