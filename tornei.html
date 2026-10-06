@@ -11,7 +11,7 @@
     <meta name="description" content="Sfoglia il calendario dei tornei di beach volley organizzati da I Follow Beach Volley. Consulta date, luoghi e iscriviti direttamente." />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
@@ -22,13 +22,11 @@
                 extend: {
                     colors: {
                         "primary":          "#7f13ec",
-                        "primary-dark":     "#600eb3",
+                        "primary-dark":     "#5e0eb3",
+                        "secondary":        "#FFD700",
                         "accent-yellow":    "#FFD700",
                         "background-light": "#f7f6f8",
                         "background-dark":  "#191022",
-                        "neutral-tint":     "#f0eafc",
-                        "sand":             "#fdfbf7",
-                        "sand-dark":        "#231b2e",
                     },
                     fontFamily: { "display": ["Lexend", "sans-serif"] },
                     borderRadius: {
@@ -43,51 +41,237 @@
     </script>
 
     <style>
-        /* Gradient hero text */
-        .text-gradient {
-            background: linear-gradient(135deg, #7f13ec 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* CSS del Sole (attenuato per la modalità chiara) */
+        .sun { background: radial-gradient(circle at 35% 35%, #fff3a0 0%, #FFD700 40%, #ff8a1f 100%); box-shadow: 0 0 120px 40px rgba(255,215,0,.25); }
+
+        /* Ball Physics */
+        #ball { position: absolute; top: 0; left: 0; width: 120px; height: 120px; cursor: pointer; touch-action: manipulation; will-change: transform; z-index: 20; filter: drop-shadow(0 18px 18px rgba(0,0,0,.15)); }
+        @media (max-width: 640px) { #ball { width: 88px; height: 88px; } }
+        #ball:focus-visible { outline: 3px solid #7f13ec; outline-offset: 6px; border-radius: 9999px; }
+        
+        .score-pop { animation: pop .25s ease-out; }
+        @keyframes pop { 50% { transform: scale(1.25); } }
+
+        /* Ticker */
+        .ticker-track { display: flex; width: max-content; animation: ticker 30s linear infinite; }
+        .ticker:hover .ticker-track { animation-play-state: paused; }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        /* Waves */
+        .wave { animation: wave 14s linear infinite; }
+        .wave.slow { animation-duration: 22s; animation-direction: reverse; }
+        @keyframes wave { to { transform: translateX(-50%); } }
+
+        /* Widget frame with rotating border */
+        .frame { position: relative; overflow: hidden; border-radius: 2rem; padding: 6px; transition: transform .4s ease, box-shadow .4s ease; box-shadow: 0 30px 80px -30px rgba(127,19,236,.25); }
+        .frame::before { content: ""; position: absolute; inset: -60%; background: conic-gradient(from 0deg, #7f13ec, #FFD700, #ff4fa3, #7f13ec); animation: spin 8s linear infinite; opacity: 0.8; }
+        .frame-inner { position: relative; border-radius: 1.6rem; overflow: hidden; background: #fff; }
+        .dark .frame-inner { background: #231b2e; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .frame:hover { transform: translateY(-4px); box-shadow: 0 40px 90px -30px rgba(127,19,236,.45); }
+
+        /* Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(40px) scale(.98); transition: opacity .8s ease, transform .8s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-track, .wave, .frame::before { animation: none; }
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
     </style>
 </head>
 
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
 
-    <!-- ░░ NAVBAR ░░ -->
+    <!-- Header (Navbar via module) -->
     <header>
         <div id="navbar-placeholder"></div>
         <script type="module" src="navbar.js"></script>
     </header>
 
-    <!-- ░░ MAIN ░░ -->
-    <main class="flex-grow pt-28 pb-20">
+    <main class="flex-grow relative overflow-hidden">
 
-        <!-- Page header -->
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary dark:bg-primary/20 font-bold text-sm tracking-widest uppercase mb-5 border border-primary/20">
-                <span class="material-icons text-base">emoji_events</span>
-                IFB events
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative overflow-hidden min-h-[640px] h-[88vh] max-h-[860px] bg-background-light dark:bg-background-dark pt-28 md:pt-32 pb-16 md:pb-24">
+            
+            <!-- Elemento Sole Interattivo -->
+            <div id="sun" class="sun absolute rounded-full w-56 h-56 sm:w-80 sm:h-80 lg:w-[26rem] lg:h-[26rem] right-[-3rem] top-24 opacity-80 will-change-transform z-0"></div>
+            
+            <!-- Decorative Blobs aggiuntivi per mantenere l'estetica -->
+            <div class="absolute top-0 right-0 w-[28rem] h-[28rem] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
+
+            <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pointer-events-none">
+                <p class="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 shadow-sm">
+                    <span class="material-icons text-base">emoji_events</span> IFB events
+                </p>
+                <h1 class="font-black leading-[1.1] tracking-tight text-5xl sm:text-7xl lg:text-8xl text-gray-900 dark:text-white drop-shadow-sm">
+                    Scendi in sabbia.<br />
+                    <span class="text-primary">Scegli il torneo.</span>
+                </h1>
+                <p class="mt-6 max-w-md text-lg text-gray-700 dark:text-gray-300 font-medium drop-shadow-sm">
+                    Tutti gli eventi in programma, con date e luoghi. Iscriviti dal calendario qui sotto.
+                </p>
+                <a href="#calendario" class="pointer-events-auto mt-8 inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-7 py-3.5 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                    Vai al calendario <span class="material-icons">south</span>
+                </a>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight tracking-tight">
-                Calendario <span class="text-gradient">Eventi</span>
-            </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
-                Consulta il calendario completo degli eventi e iscriviti direttamente tramite il widget sottostante.
+
+            <!-- Interfaccia del Mini-gioco -->
+            <div class="absolute z-20 left-4 sm:left-8 bottom-24 flex gap-3 text-sm" aria-live="polite">
+                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-4 py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
+                    Palleggi <b id="streak" class="text-primary dark:text-accent-yellow text-base inline-block ml-1">0</b>
+                </div>
+                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-full px-4 py-2 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200">
+                    Record <b id="best" class="text-primary dark:text-accent-yellow text-base ml-1">0</b>
+                </div>
+            </div>
+            <p id="hint" class="absolute z-20 left-4 sm:left-8 bottom-[4.5rem] text-xs font-bold text-gray-600 dark:text-gray-400 drop-shadow-md">
+                Tocca la palla: quanti palleggi riesci a fare?
             </p>
+
+            <button id="ball" type="button" aria-label="Palla da beach volley: toccala per palleggiare">
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                    <defs>
+                        <radialGradient id="bg" cx="35%" cy="30%" r="80%">
+                            <stop offset="0" stop-color="#fff" />
+                            <stop offset=".6" stop-color="#f4eefc" />
+                            <stop offset="1" stop-color="#c9b2ea" />
+                        </radialGradient>
+                        <clipPath id="bc"><circle cx="50" cy="50" r="48" /></clipPath>
+                    </defs>
+                    <circle cx="50" cy="50" r="48" fill="url(#bg)" />
+                    <g clip-path="url(#bc)" fill="none" stroke-width="7" stroke-linecap="round">
+                        <path d="M-5 38 Q50 8 105 38" stroke="#7f13ec" />
+                        <path d="M-5 70 Q50 40 105 70" stroke="#FFD700" />
+                        <path d="M30 -5 Q50 50 28 105" stroke="#7f13ec" />
+                        <path d="M72 -5 Q52 50 74 105" stroke="#FFD700" />
+                    </g>
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="#4a1a85" stroke-opacity=".35" stroke-width="2" />
+                </svg>
+            </button>
+
+            <!-- Onde Dinamiche -->
+            <div class="absolute inset-x-0 bottom-0 h-16 overflow-hidden text-accent-yellow pointer-events-none z-10" aria-hidden="true">
+                <svg class="wave slow absolute bottom-0 left-0 w-[200%] h-full opacity-40" viewBox="0 0 2400 100" preserveAspectRatio="none"><path fill="currentColor" d="M0 50 Q150 0 300 50 T600 50 T900 50 T1200 50 T1500 50 T1800 50 T2100 50 T2400 50 V100 H0Z" /></svg>
+                <svg class="wave absolute bottom-0 left-0 w-[200%] h-full" viewBox="0 0 2400 100" preserveAspectRatio="none"><path fill="currentColor" d="M0 65 Q150 20 300 65 T600 65 T900 65 T1200 65 T1500 65 T1800 65 T2100 65 T2400 65 V100 H0Z" /></svg>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="ticker overflow-hidden bg-accent-yellow text-gray-900 -rotate-1 scale-105 shadow-lg relative z-20" aria-hidden="true">
+            <div class="ticker-track py-3 font-extrabold text-lg sm:text-xl whitespace-nowrap">
+                <script>
+                    document.write(('<span class="px-6">Tornei a Basiglio, Pero e Corsico</span><span class="material-icons align-middle">emoji_events</span><span class="px-6">Partecipa alla Rookie League!</span><span class="material-icons align-middle">sports_volleyball</span><span class="px-6">Campionati aperti in tutti i nostri centri 💯</span><span class="material-icons align-middle">stadium</span>').repeat(6));
+                </script>
+            </div>
         </div>
 
-<iframe src="
-https://dink.social/widgets/EventsListWidget?organizationId=e9e48b14-32bd-11ee-8000-000000000000&primaryColor=%237f13ec
-&viewPastEvents=false&viewLiveEvents=true&viewFutureEvents=true&layout=grid&contentHeight=800px&borderRadius=24px&autoplay=true&slides=5"
-sort=DESC frameborder="0" width="100%" height="800px"></iframe>
+        <!-- CALENDARIO -->
+        <section id="calendario" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 scroll-mt-24">
+            <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">Calendario eventi</h2>
+                <p class="max-w-sm text-gray-600 dark:text-gray-400 font-light">Scorri le card e apri l'evento che ti interessa per iscriverti.</p>
+            </div>
+
+            <div class="frame reveal" id="frame">
+                <!-- QUI AGGIUNGIAMO IL PADDING: p-4 su mobile, md:p-8 su desktop -->
+                <div class="frame-inner p-4 md:p-8">
+                    <iframe src="https://dink.social/widgets/EventsListWidget?organizationId=e9e48b14-32bd-11ee-8000-000000000000&primaryColor=%237f13ec&viewPastEvents=false&viewLiveEvents=true&viewFutureEvents=true&layout=grid&contentHeight=800px&borderRadius=24px&autoplay=true&slides=5" sort=DESC frameborder="0" width="100%" height="800px"></iframe>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- ░░ FOOTER ░░ -->
+    <!-- Footer via module come in index.html -->
     <ifbv-footer></ifbv-footer>
     <script src="footer.js" defer></script>
+
+    <script>
+    (function () {
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* Reveal del widget */
+        var frame = document.getElementById('frame');
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (e, o) {
+                if (e[0].isIntersecting) { frame.classList.add('in'); o.disconnect(); }
+            }, { threshold: .1 }).observe(frame);
+        } else { frame.classList.add('in'); }
+
+        /* Parallasse del sole (Ripristinato) */
+        var hero = document.getElementById('hero'), sun = document.getElementById('sun');
+        if (!reduce) {
+            hero.addEventListener('pointermove', function (ev) {
+                var r = hero.getBoundingClientRect();
+                var dx = (ev.clientX - r.left) / r.width - .5, dy = (ev.clientY - r.top) / r.height - .5;
+                sun.style.transform = 'translate(' + (-dx * 50) + 'px,' + (-dy * 40) + 'px)';
+            });
+        }
+
+        /* Palla: fisica + minigioco */
+        var ball = document.getElementById('ball');
+        var streakEl = document.getElementById('streak'), bestEl = document.getElementById('best'), hint = document.getElementById('hint');
+        var W, H, S, x, y, vx = 0, vy = 0, rot = 0, streak = 0, best = 0, hit = false;
+        
+        try { best = +localStorage.getItem('ifb-best') || 0; } catch (e) {}
+        bestEl.textContent = best;
+
+        function measure() { 
+            W = hero.clientWidth; 
+            H = hero.clientHeight; 
+            S = ball.offsetWidth; 
+        }
+        function floorY() { return H - S - 70; }
+        
+        measure();
+        x = W * (W < 640 ? .55 : .68); y = -S;
+        addEventListener('resize', function () { measure(); x = Math.min(x, W - S); });
+
+        function end() {
+            hit = false;
+            if (streak > best) {
+                best = streak; bestEl.textContent = best;
+                try { localStorage.setItem('ifb-best', best); } catch (e) {}
+            }
+            streak = 0; streakEl.textContent = 0;
+        }
+
+        ball.addEventListener('pointerdown', function (ev) {
+            ev.preventDefault();
+            vy = -(17 + Math.random() * 6); // Applica spinta vettoriale verso l'alto
+            vx = (Math.random() - .5) * 12; // Direzione X casuale
+            hit = true; streak++;
+            streakEl.textContent = streak;
+            streakEl.classList.remove('score-pop'); void streakEl.offsetWidth; streakEl.classList.add('score-pop');
+            hint.style.opacity = 0;
+        });
+
+        function tick() {
+            vy += .6; // Gravità
+            x += vx; 
+            y += vy; 
+            vx *= .995; // Attrito sull'asse X
+            rot += vx * 1.5;
+            
+            // Gestione dei rimbalzi sui bordi laterali
+            if (x < 0) { x = 0; vx = Math.abs(vx); }
+            if (x > W - S) { x = W - S; vx = -Math.abs(vx); }
+            
+            // Gestione del rimbalzo a terra
+            if (y > floorY()) {
+                y = floorY();
+                if (hit) end();
+                vy = Math.abs(vy) > 3 ? -vy * .6 : 0; // Inversione vettore Y e smorzamento
+                vx *= .8; // Attrito con il terreno
+            }
+            
+            ball.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rot + 'deg)';
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    })();
+    </script>
 
 </body>
 </html>
