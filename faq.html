@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/jpeg" href="logo.jpg" />
     <link rel="apple-touch-icon" href="logo.jpg" />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>FAQ - I Follow Beach Volley</title>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -20,117 +20,159 @@
                 extend: {
                     colors: {
                         "primary": "#7f13ec",
-                        "primary-dark": "#600eb3",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
                         "accent-yellow": "#FFD700",
                         "background-light": "#f7f6f8",
                         "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
                     },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
-                    }
-                }
-            }
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
         }
     </script>
+    <link rel="stylesheet" href="scroll-reveal.css" />
     <style>
-        /* Nasconde la freccetta di default del tag summary sui vari browser */
+        body { font-family: 'Lexend', sans-serif; }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
-        
-        /* Anima l'icona + in - quando il details è aperto */
-        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
-        details[open] summary .icon-plus { display: none; }
-        details[open] summary .icon-minus { display: block; }
-        details:not([open]) summary .icon-minus { display: none; }
-        
-        @keyframes sweep {
-            0%    {opacity: 0; transform: translateY(-10px)}
-            100%  {opacity: 1; transform: translateY(0)}
-        }
+        details[open] summary ~ * { animation: sweep .3s ease-out; }
+        @keyframes sweep { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { details[open] summary ~ * { animation: none; } }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen overflow-x-hidden">
 
-    <header>
-        <div id="navbar-placeholder"></div>
-        <script type="module" src="navbar.js"></script>
-    </header>
+<header>
+    <div id="navbar-placeholder"></div>
+    <script type="module" src="navbar.js"></script>
+</header>
 
-    <main class="flex-1 max-w-4xl mx-auto w-full px-6 pt-32 pb-20">
-        
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight mb-4">Domande Frequenti</h1>
-            <p class="text-lg text-slate-600 dark:text-slate-400">Tutto quello che devi sapere sui nostri corsi, i tornei e la vita sulla sabbia.</p>
+<main class="flex-1">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-sand dark:bg-sand-dark pt-10 md:pt-14 lg:pt-40 pb-14 md:pb-20 border-b border-gray-200/60 dark:border-gray-700/60">
+        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80" aria-hidden="true"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <span class="absolute -right-4 -bottom-10 text-[16rem] md:text-[22rem] font-black leading-none text-primary/5 select-none pointer-events-none" aria-hidden="true">?</span>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> FAQ
+            </span>
+            <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
+                Domande<br /><span class="text-primary">frequenti.</span>
+            </h1>
+            <div class="mt-6 max-w-md sr-load-fade sr-delay-2">
+                <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                <p class="text-lg text-gray-600 dark:text-gray-300 font-light leading-relaxed">Tutto quello che devi sapere sui nostri corsi, i tornei e la vita sulla sabbia.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="space-y-4">
-            
-            <details class="group bg-white dark:bg-slate-800/50 rounded-2xl border border-primary/10 shadow-sm transition-all duration-300 open:border-primary/30 open:shadow-md">
-                <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg hover:text-primary transition-colors">
-                    <span>Non ho mai giocato a pallavolo o beach volley, posso iscrivermi?</span>
-                    <span class="text-primary transition-all duration-300">
-                        <span class="material-icons icon-plus">add_circle_outline</span>
-                        <span class="material-icons icon-minus text-primary">remove_circle_outline</span>
-                    </span>
-                </summary>
-                <div class="text-slate-600 dark:text-slate-400 px-6 pb-6 leading-relaxed">
-                    Assolutamente sì! Abbiamo corsi pensati appositamente per i principianti assoluti. I nostri allenatori ti guideranno passo dopo passo partendo dai fondamentali, in un ambiente rilassato e focalizzato sul divertimento.
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+
+            <!-- Colonna laterale -->
+            <aside class="md:col-span-5 lg:col-span-4 order-2 md:order-1">
+                <div class="md:sticky md:top-8 lg:top-28 space-y-5">
+                    <div class="relative overflow-hidden bg-primary text-white rounded-3xl p-7 shadow-xl shadow-primary/30" data-reveal="left">
+                        <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-white/10 blur-2xl" aria-hidden="true"></div>
+                        <span class="relative inline-flex items-center gap-1 bg-secondary text-gray-900 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-5">
+                            <span class="material-icons text-sm" aria-hidden="true">support_agent</span> Supporto
+                        </span>
+                        <h2 class="relative text-2xl font-black mb-2">Hai altre domande?</h2>
+                        <p class="relative text-white/80 text-sm leading-relaxed mb-6">Non hai trovato quello che cercavi? Scrivici direttamente.</p>
+                        <a href="contatti.html" class="relative inline-flex items-center gap-2 bg-white text-primary hover:bg-secondary hover:text-gray-900 px-6 py-3 rounded-full font-extrabold transition-all duration-300 hover:-translate-y-0.5">
+                            Vai ai contatti <span class="material-icons text-lg" aria-hidden="true">arrow_forward</span>
+                        </a>
+                    </div>
+                    <a href="glossario.html" class="group flex items-center justify-between gap-4 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out" data-reveal="left">
+                        <span class="flex items-center gap-3">
+                            <span class="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors"><span class="material-icons" aria-hidden="true">menu_book</span></span>
+                            <span>
+                                <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Approfondisci</span>
+                                <span class="font-bold text-gray-900 dark:text-white">Glossario del beach</span>
+                            </span>
+                        </span>
+                        <span class="material-icons text-primary group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
+                    </a>
                 </div>
-            </details>
+            </aside>
 
-            <details class="group bg-white dark:bg-slate-800/50 rounded-2xl border border-primary/10 shadow-sm transition-all duration-300 open:border-primary/30 open:shadow-md">
-                <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg hover:text-primary transition-colors">
-                    <span>Cosa devo portare al mio primo allenamento?</span>
-                    <span class="text-primary transition-all duration-300">
-                        <span class="material-icons icon-plus">add_circle_outline</span>
-                        <span class="material-icons icon-minus text-primary">remove_circle_outline</span>
-                    </span>
-                </summary>
-                <div class="text-slate-600 dark:text-slate-400 px-6 pb-6 leading-relaxed">
-                    Basta abbigliamento sportivo comodo (pantaloncini, canotta o t-shirt), una borraccia d'acqua, un asciugamano e le ciabatte per spostarti negli spogliatoi. Ricorda che si gioca rigorosamente a piedi nudi sulla sabbia! Se fai allenamenti serali all'aperto nei mesi più freddi, ti consigliamo i calzari di neoprene (sand socks).
-                </div>
-            </details>
+            <!-- Domande -->
+            <div class="md:col-span-7 lg:col-span-8 order-1 md:order-2 space-y-4">
 
-            <details class="group bg-white dark:bg-slate-800/50 rounded-2xl border border-primary/10 shadow-sm transition-all duration-300 open:border-primary/30 open:shadow-md">
-                <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg hover:text-primary transition-colors">
-                    <span>Posso recuperare una lezione se sono assente?</span>
-                    <span class="text-primary transition-all duration-300">
-                        <span class="material-icons icon-plus">add_circle_outline</span>
-                        <span class="material-icons icon-minus text-primary">remove_circle_outline</span>
-                    </span>
-                </summary>
-                <div class="text-slate-600 dark:text-slate-400 px-6 pb-6 leading-relaxed">
-                    Sì, garantiamo la possibilità di recuperare le assenze inserendoti in altri gruppi di livello equivalente, previa comunicazione alla segreteria con almeno 24 ore di anticipo e in base alla disponibilità dei campi.
-                </div>
-            </details>
+                <details class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md hover:border-primary/30 hover:-translate-y-0.5 open:translate-y-0 open:shadow-xl open:border-l-4 open:border-l-primary transition-all duration-200 ease-out" data-reveal="up">
+                    <summary class="flex items-start gap-4 cursor-pointer p-6 md:p-7">
+                        <span class="text-3xl md:text-4xl font-black text-primary/20 group-open:text-primary leading-none tabular-nums transition-colors">01</span>
+                        <span class="flex-1">
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Corsi</span>
+                            <span class="block font-extrabold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">Non ho mai giocato a pallavolo o beach volley, posso iscrivermi?</span>
+                        </span>
+                        <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-45 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">add</span></span>
+                    </summary>
+                    <div class="px-6 md:px-7 pb-7 md:pl-[5.25rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Assolutamente sì! Abbiamo corsi pensati appositamente per i principianti assoluti. I nostri allenatori ti guideranno passo dopo passo partendo dai fondamentali, in un ambiente rilassato e focalizzato sul divertimento.
+                    </div>
+                </details>
 
-            <details class="group bg-white dark:bg-slate-800/50 rounded-2xl border border-primary/10 shadow-sm transition-all duration-300 open:border-primary/30 open:shadow-md">
-                <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg hover:text-primary transition-colors">
-                    <span>Posso affittare un campo per giocare con i miei amici?</span>
-                    <span class="text-primary transition-all duration-300">
-                        <span class="material-icons icon-plus">add_circle_outline</span>
-                        <span class="material-icons icon-minus text-primary">remove_circle_outline</span>
-                    </span>
-                </summary>
-                <div class="text-slate-600 dark:text-slate-400 px-6 pb-6 leading-relaxed">
-                    Certamente. Quando i campi non sono utilizzati per i corsi o per i tornei ufficiali, è possibile prenotarli liberamente tramite l'app Playtomic cercando "Beach Town Basiglio".
-                </div>
-            </details>
+                <details class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md hover:border-primary/30 hover:-translate-y-0.5 open:translate-y-0 open:shadow-xl open:border-l-4 open:border-l-primary transition-all duration-200 ease-out" data-reveal="up">
+                    <summary class="flex items-start gap-4 cursor-pointer p-6 md:p-7">
+                        <span class="text-3xl md:text-4xl font-black text-primary/20 group-open:text-primary leading-none tabular-nums transition-colors">02</span>
+                        <span class="flex-1">
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Attrezzatura</span>
+                            <span class="block font-extrabold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">Cosa devo portare al mio primo allenamento?</span>
+                        </span>
+                        <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-45 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">add</span></span>
+                    </summary>
+                    <div class="px-6 md:px-7 pb-7 md:pl-[5.25rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                        <p>Basta abbigliamento sportivo comodo (pantaloncini, canotta o t-shirt), una borraccia d'acqua, un asciugamano e le ciabatte per spostarti negli spogliatoi. Ricorda che si gioca rigorosamente a piedi nudi sulla sabbia!</p>
+                        <p class="mt-4 flex gap-3 bg-secondary/15 border-l-4 border-secondary rounded-r-2xl p-4 text-sm text-gray-700 dark:text-gray-200">
+                            <span class="material-icons text-gray-900 dark:text-secondary shrink-0" aria-hidden="true">ac_unit</span>
+                            <span>Se fai allenamenti serali all'aperto nei mesi più freddi, ti consigliamo i calzari di neoprene (sand socks).</span>
+                        </p>
+                    </div>
+                </details>
 
+                <details class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md hover:border-primary/30 hover:-translate-y-0.5 open:translate-y-0 open:shadow-xl open:border-l-4 open:border-l-primary transition-all duration-200 ease-out" data-reveal="up">
+                    <summary class="flex items-start gap-4 cursor-pointer p-6 md:p-7">
+                        <span class="text-3xl md:text-4xl font-black text-primary/20 group-open:text-primary leading-none tabular-nums transition-colors">03</span>
+                        <span class="flex-1">
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Lezioni</span>
+                            <span class="block font-extrabold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">Posso recuperare una lezione se sono assente?</span>
+                        </span>
+                        <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-45 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">add</span></span>
+                    </summary>
+                    <div class="px-6 md:px-7 pb-7 md:pl-[5.25rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Sì, garantiamo la possibilità di recuperare le assenze inserendoti in altri gruppi di livello equivalente, previa comunicazione alla segreteria con almeno <strong class="text-gray-900 dark:text-white">24 ore di anticipo</strong> e in base alla disponibilità dei campi.
+                    </div>
+                </details>
+
+                <details class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md hover:border-primary/30 hover:-translate-y-0.5 open:translate-y-0 open:shadow-xl open:border-l-4 open:border-l-primary transition-all duration-200 ease-out" data-reveal="up">
+                    <summary class="flex items-start gap-4 cursor-pointer p-6 md:p-7">
+                        <span class="text-3xl md:text-4xl font-black text-primary/20 group-open:text-primary leading-none tabular-nums transition-colors">04</span>
+                        <span class="flex-1">
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Campi</span>
+                            <span class="block font-extrabold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">Posso affittare un campo per giocare con i miei amici?</span>
+                        </span>
+                        <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-45 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">add</span></span>
+                    </summary>
+                    <div class="px-6 md:px-7 pb-7 md:pl-[5.25rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Certamente. Quando i campi non sono utilizzati per i corsi o per i tornei ufficiali, è possibile prenotarli liberamente tramite l'app <strong class="text-gray-900 dark:text-white">Playtomic</strong> cercando "Beach Town Basiglio".
+                    </div>
+                </details>
+            </div>
         </div>
+    </section>
+</main>
 
-        <div class="mt-16 bg-primary/5 rounded-2xl p-8 text-center border border-primary/10">
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Hai altre domande?</h3>
-            <p class="text-slate-600 dark:text-slate-400 mb-6">Non hai trovato quello che cercavi? Scrivici direttamente.</p>
-            <a href="contatti.html" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
-                Vai ai Contatti <span class="material-icons text-sm">arrow_forward</span>
-            </a>
-        </div>
-
-    </main>
-
-    <ifbv-footer></ifbv-footer>
-    <script src="footer.js" defer></script>
-
+<ifbv-footer></ifbv-footer>
+<script src="footer.js" defer></script>
+<script src="scroll-reveal.js" defer></script>
 </body>
 </html>
