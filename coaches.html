@@ -1,63 +1,11 @@
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
 <head>
+    <script src="consent.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Consent Mode: tutto negato finché l'utente non sceglie -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-        dataLayer.push({ 'event': 'default_consent' });
-    </script>
-
-    <!-- Microsoft Clarity: caricato SOLO con il consenso.
-         Legge la stessa scelta salvata da main.js (localStorage "ifb_cookie_consent"). -->
-    <script>
-        (function () {
-            var loaded = false;
-            function hasConsent() {
-                try { return localStorage.getItem('ifb_cookie_consent') === 'granted'; } catch (e) { return false; }
-            }
-            function loadClarity() {
-                if (loaded) return;
-                loaded = true;
-                (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "w1rk4uvro4");
-                window.clarity('consent');
-            }
-            if (hasConsent()) loadClarity();
-            document.addEventListener('click', function (e) {
-                if (e.target.closest && e.target.closest('#btn-accept-cookies')) loadClarity();
-            });
-        })();
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPB635BSN3"></script>
-    <script>
-        gtag('js', new Date());
-        gtag('config', 'G-VPB635BSN3');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P7VLDV3W');</script>
-    <!-- End Google Tag Manager -->
-
-    <meta name="theme-color" content="#7f13ec" />
+<meta name="theme-color" content="#7f13ec" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -68,22 +16,22 @@
     <meta name="description" content="Conosci lo staff di I Follow Beach Volley a Milano: maestri qualificati FIPAV, ex atleti di Serie A e Nazionale e un preparatore atletico per farti fare il salto di qualità sulla sabbia." />
     <meta name="author" content="I Follow Beach Volley" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://www.ifollowbv.it/coaches.html" />
+    <link rel="canonical" href="https://ifollowbv.it/coaches.html" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="I Follow Beach Volley" />
-    <meta property="og:url" content="https://www.ifollowbv.it/coaches.html" />
+    <meta property="og:url" content="https://ifollowbv.it/coaches.html" />
     <meta property="og:title" content="Conosci i coach di I Follow Beach Volley" />
     <meta property="og:description" content="Il nostro staff d'élite: passione, metodo e qualifiche FIPAV per elevare il tuo gioco." />
-    <meta property="og:image" content="https://www.ifollowbv.it/og-image.jpg" />
+    <meta property="og:image" content="https://ifollowbv.it/og-image.jpg" />
     <meta property="og:image:alt" content="Lo staff tecnico di I Follow Beach Volley" />
     <meta property="og:locale" content="it_IT" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.ifollowbv.it/coaches.html" />
+    <meta name="twitter:url" content="https://ifollowbv.it/coaches.html" />
     <meta name="twitter:title" content="Staff Tecnico | I Follow Beach Volley" />
     <meta name="twitter:description" content="Il nostro staff d'élite: passione, metodo e qualifiche FIPAV per elevare il tuo gioco." />
-    <meta name="twitter:image" content="https://www.ifollowbv.it/og-image.jpg" />
+    <meta name="twitter:image" content="https://ifollowbv.it/og-image.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -173,147 +121,147 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.ifollowbv.it/coaches.html#webpage",
-      "url": "https://www.ifollowbv.it/coaches.html",
+      "@id": "https://ifollowbv.it/coaches.html#webpage",
+      "url": "https://ifollowbv.it/coaches.html",
       "name": "Staff tecnico e allenatori | I Follow Beach Volley",
       "inLanguage": "it-IT",
       "isPartOf": {
-        "@id": "https://www.ifollowbv.it/#website"
+        "@id": "https://ifollowbv.it/#website"
       },
       "about": {
-        "@id": "https://www.ifollowbv.it/#org"
+        "@id": "https://ifollowbv.it/#org"
       },
       "breadcrumb": {
-        "@id": "https://www.ifollowbv.it/coaches.html#breadcrumb"
+        "@id": "https://ifollowbv.it/coaches.html#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.ifollowbv.it/coaches.html#breadcrumb",
+      "@id": "https://ifollowbv.it/coaches.html#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.ifollowbv.it/"
+          "item": "https://ifollowbv.it/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Staff tecnico",
-          "item": "https://www.ifollowbv.it/coaches.html"
+          "item": "https://ifollowbv.it/coaches.html"
         }
       ]
     },
     {
       "@type": "SportsOrganization",
-      "@id": "https://www.ifollowbv.it/#org",
+      "@id": "https://ifollowbv.it/#org",
       "name": "I Follow Beach Volley",
       "alternateName": "IFB",
-      "url": "https://www.ifollowbv.it/",
+      "url": "https://ifollowbv.it/",
       "member": [
         {
           "@type": "Person",
           "name": "Angelica Ferrau",
           "jobTitle": "Presidente",
-          "image": "https://www.ifollowbv.it/mulan.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#angelica-ferrau",
+          "image": "https://ifollowbv.it/mulan.webp",
+          "url": "https://ifollowbv.it/coaches.html#angelica-ferrau",
           "description": "Conosciuta da tutti come “Mulan”, ama questo sport e tutto ciò che rappresenta. Giocatrice dal 2012, nel 2013 dà vita all’A.s.d. I Follow Beach Volley, di cui è Presidente, e dal 2015 organizza insieme a Simone Franchi tornei ed eventi amatoriali al Beach Town."
         },
         {
           "@type": "Person",
           "name": "Simone Franchi",
           "jobTitle": "Vice-Presidente, Allenatore",
-          "image": "https://www.ifollowbv.it/franchi.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#simone-franchi",
+          "image": "https://ifollowbv.it/franchi.webp",
+          "url": "https://ifollowbv.it/coaches.html#simone-franchi",
           "description": "Ex giocatore di pallavolo fino alla Serie B2 nazionale, con 5 anni di esperienza da allenatore nel settore giovanile. Qualificato Maestro Allenatore di beach volley FIPAV dal 2021, ha i piedi nella sabbia come giocatore da più di 10 anni."
         },
         {
           "@type": "Person",
           "name": "James Martins",
           "jobTitle": "Project Manager, Allenatore",
-          "image": "https://www.ifollowbv.it/james.jpeg",
-          "url": "https://www.ifollowbv.it/coaches.html#james-martins",
+          "image": "https://ifollowbv.it/james.jpeg",
+          "url": "https://ifollowbv.it/coaches.html#james-martins",
           "description": "Esperienza internazionale di altissimo livello nel beach volley, maturata tra Brasile, Francia, Italia e Olanda, con ruoli tecnici in ambito federale, scolastico e professionistico."
         },
         {
           "@type": "Person",
           "name": "Sofia Arcaini",
           "jobTitle": "Allenatrice",
-          "image": "https://www.ifollowbv.it/arcaini.jpeg",
-          "url": "https://www.ifollowbv.it/coaches.html#sofia-arcaini",
+          "image": "https://ifollowbv.it/arcaini.jpeg",
+          "url": "https://ifollowbv.it/coaches.html#sofia-arcaini",
           "description": "Giocatrice di beach volley da 10 anni e allenatrice da 3, Sofia porta sulla sabbia IFB un bagaglio di esperienza maturato ai massimi livelli nazionali e internazionali."
         },
         {
           "@type": "Person",
           "name": "Giovanni Latini",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/giovanni.svg",
-          "url": "https://www.ifollowbv.it/coaches.html#giovanni-latini",
+          "image": "https://ifollowbv.it/giovanni.svg",
+          "url": "https://ifollowbv.it/coaches.html#giovanni-latini",
           "description": "Sulla sabbia da quando aveva appena 14 anni, Giovanni ha alle spalle un lungo percorso da giocatore che lo ha portato a competere anche nel Campionato Italiano Assoluto Gold."
         },
         {
           "@type": "Person",
           "name": "Edgardo Ceccoli",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/eddi.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#edgardo-ceccoli",
+          "image": "https://ifollowbv.it/eddi.webp",
+          "url": "https://ifollowbv.it/coaches.html#edgardo-ceccoli",
           "description": "Eddy ha un passato da direttore tecnico e istruttore di beach volley presso diverse società: la palla non ha segreti per lui."
         },
         {
           "@type": "Person",
           "name": "Davide Lucca",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/noccone.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#davide-lucca",
+          "image": "https://ifollowbv.it/noccone.webp",
+          "url": "https://ifollowbv.it/coaches.html#davide-lucca",
           "description": "Conosciuto meglio come “Noccone”, è giocatore agonista e Maestro FIPAV, con le competenze per allenare dal livello base fino all’agonistico."
         },
         {
           "@type": "Person",
           "name": "Davide Zangrandi",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/zangrandi.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#davide-zangrandi",
+          "image": "https://ifollowbv.it/zangrandi.webp",
+          "url": "https://ifollowbv.it/coaches.html#davide-zangrandi",
           "description": "Appassionato giocatore dal 2016 e Maestro allenatore FIPAV dal 2023, con una profonda dedizione per l’insegnamento e il coaching. Oggi si dedica totalmente al ruolo di allenatore nella scuola di Beach Town."
         },
         {
           "@type": "Person",
           "name": "Nicolò Passi",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/passi.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#nicolo-passi",
+          "image": "https://ifollowbv.it/passi.webp",
+          "url": "https://ifollowbv.it/coaches.html#nicolo-passi",
           "description": "Allenatore di beach volley con circa dieci anni di esperienza da giocatore. Ha fatto parte dello staff della Nazionale di pallavolo per il Club Italia e ha collaborato come fisioterapista con squadre di Serie A femminili e maschili: il movimento è il suo lavoro."
         },
         {
           "@type": "Person",
           "name": "Stefania Verrigni",
           "jobTitle": "Allenatrice",
-          "image": "https://www.ifollowbv.it/verrigni.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#stefania-verrigni",
+          "image": "https://ifollowbv.it/verrigni.webp",
+          "url": "https://ifollowbv.it/coaches.html#stefania-verrigni",
           "description": "Ex giocatrice di pallavolo, si avvicina al beach volley nel 2019. Inizia ad allenarsi e a competere prima in tornei amatoriali, poi in tappe federali, fino a diventare campionessa Master 35 in carica."
         },
         {
           "@type": "Person",
           "name": "Antonino Cappadonna",
           "jobTitle": "Preparatore atletico",
-          "image": "https://www.ifollowbv.it/cappa.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#antonino-cappadonna",
+          "image": "https://ifollowbv.it/cappa.webp",
+          "url": "https://ifollowbv.it/coaches.html#antonino-cappadonna",
           "description": "Per tutti “Kappa”. Laureato in Scienze Motorie e istruttore di beach volley con quattro anni di esperienza sul campo, è il preparatore atletico IFB specializzato nella performance sulla sabbia."
         },
         {
           "@type": "Person",
           "name": "Yari Mannino",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/yari.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#yari-mannino",
+          "image": "https://ifollowbv.it/yari.webp",
+          "url": "https://ifollowbv.it/coaches.html#yari-mannino",
           "description": "Dal primo giorno in sabbia ha capito che la sua vita sarebbe cambiata. Inizia a giocare nel 2023 e, spinto da una passione viscerale, comincia presto a organizzare tornei per i corsisti."
         },
         {
           "@type": "Person",
           "name": "Alessandro Pesce",
           "jobTitle": "Allenatore",
-          "image": "https://www.ifollowbv.it/fish.webp",
-          "url": "https://www.ifollowbv.it/coaches.html#alessandro-pesce",
+          "image": "https://ifollowbv.it/fish.webp",
+          "url": "https://ifollowbv.it/coaches.html#alessandro-pesce",
           "description": "Giocatore e allenatore di beach volley da diversi anni, ha costruito il suo percorso tra tornei federali e campi sulla sabbia, affinando lettura di gioco e comunicazione in campo."
         }
       ]
@@ -323,11 +271,7 @@
     </script>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7VLDV3W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-xl">Vai al contenuto</a>
+<a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-xl">Vai al contenuto</a>
 
     <header>
         <div id="navbar-placeholder"></div>
@@ -784,29 +728,6 @@ document.addEventListener('click', function (e) {
 <script src="footer.js" defer></script>
 
 <!-- Banner cookie (gestito da main.js: ID invariati) -->
-<div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-4 sm:pb-6 z-50 hidden transition-transform duration-500 translate-y-full" role="region" aria-label="Preferenze cookie">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center w-full sm:w-auto">
-                <span class="flex p-3 rounded-xl bg-primary/10 shrink-0">
-                    <span class="material-icons text-primary" aria-hidden="true">cookie</span>
-                </span>
-                <p class="ml-4 font-medium text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Usiamo cookie di analisi (Google Analytics e Microsoft Clarity) per capire come viene usato il sito e migliorarlo. Si attivano solo se accetti.
-                </p>
-            </div>
-            <div class="flex shrink-0 w-full sm:w-auto gap-3">
-                <button id="btn-reject-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-bold text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    Solo Necessari
-                </button>
-                <button id="btn-accept-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark transition-colors">
-                    Accetta Tutti
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="module" src="main.js"></script>
 <script src="scroll-reveal.js" defer></script>
 </body>
