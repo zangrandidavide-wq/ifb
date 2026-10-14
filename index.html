@@ -1,63 +1,11 @@
 <!DOCTYPE html>
 <html lang="it" class="overflow-x-hidden w-full max-w-[100vw] scroll-smooth">
 <head>
+    <script src="consent.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Consent Mode: tutto negato finché l'utente non sceglie -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-        dataLayer.push({ 'event': 'default_consent' });
-    </script>
-
-    <!-- Microsoft Clarity: caricato SOLO con il consenso.
-         Legge la stessa scelta salvata da main.js (localStorage "ifb_cookie_consent"). -->
-    <script>
-        (function () {
-            var loaded = false;
-            function hasConsent() {
-                try { return localStorage.getItem('ifb_cookie_consent') === 'granted'; } catch (e) { return false; }
-            }
-            function loadClarity() {
-                if (loaded) return;
-                loaded = true;
-                (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "w1rk4uvro4");
-                window.clarity('consent');
-            }
-            if (hasConsent()) loadClarity();
-            document.addEventListener('click', function (e) {
-                if (e.target.closest && e.target.closest('#btn-accept-cookies')) loadClarity();
-            });
-        })();
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPB635BSN3"></script>
-    <script>
-        gtag('js', new Date());
-        gtag('config', 'G-VPB635BSN3');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P7VLDV3W');</script>
-    <!-- End Google Tag Manager -->
-
-    <meta name="theme-color" content="#7f13ec" />
+<meta name="theme-color" content="#7f13ec" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -68,22 +16,22 @@
     <meta name="description" content="I Follow Beach Volley è la community di beach volley #1 a Milano: corsi per ogni livello, clinic, tornei federali ed eventi a Basiglio, Pero e Corsico. Prova gratuita." />
     <meta name="author" content="I Follow Beach Volley" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://www.ifollowbv.it/" />
+    <link rel="canonical" href="https://ifollowbv.it/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="I Follow Beach Volley" />
-    <meta property="og:url" content="https://www.ifollowbv.it/" />
+    <meta property="og:url" content="https://ifollowbv.it/" />
     <meta property="og:title" content="I Follow Beach Volley | La community di beach volley #1 a Milano" />
     <meta property="og:description" content="Allenati, gareggia e divertiti con la community di beach volley #1 a Milano. Corsi a Basiglio, Pero e Corsico." />
-    <meta property="og:image" content="https://www.ifollowbv.it/og-image.jpg" />
+    <meta property="og:image" content="https://ifollowbv.it/og-image.jpg" />
     <meta property="og:image:alt" content="I Follow Beach Volley, beach volley a Milano" />
     <meta property="og:locale" content="it_IT" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.ifollowbv.it/" />
+    <meta name="twitter:url" content="https://ifollowbv.it/" />
     <meta name="twitter:title" content="I Follow Beach Volley | La community di beach volley #1 a Milano" />
     <meta name="twitter:description" content="Allenati, gareggia e divertiti con la community di beach volley #1 a Milano. Corsi a Basiglio, Pero e Corsico." />
-    <meta name="twitter:image" content="https://www.ifollowbv.it/og-image.jpg" />
+    <meta name="twitter:image" content="https://ifollowbv.it/og-image.jpg" />
 
     <!-- Immagine hero caricata subito (migliora il Largest Contentful Paint) -->
     <link rel="preload" as="image" href="eddi-hero-horizontal.webp" media="(min-width: 768px)" fetchpriority="high" />
@@ -165,12 +113,12 @@
       "@graph": [
         {
           "@type": "SportsOrganization",
-          "@id": "https://www.ifollowbv.it/#org",
+          "@id": "https://ifollowbv.it/#org",
           "name": "I Follow Beach Volley",
           "alternateName": "IFB",
-          "url": "https://www.ifollowbv.it/",
-          "logo": "https://www.ifollowbv.it/logo.webp",
-          "image": "https://www.ifollowbv.it/og-image.jpg",
+          "url": "https://ifollowbv.it/",
+          "logo": "https://ifollowbv.it/logo.webp",
+          "image": "https://ifollowbv.it/og-image.jpg",
           "description": "Scuola e community di beach volley a Milano: corsi per ogni livello, clinic, tornei federali ed eventi.",
           "sport": "Beach volley",
           "foundingDate": "2013",
@@ -200,22 +148,18 @@
         },
         {
           "@type": "WebSite",
-          "@id": "https://www.ifollowbv.it/#website",
-          "url": "https://www.ifollowbv.it/",
+          "@id": "https://ifollowbv.it/#website",
+          "url": "https://ifollowbv.it/",
           "name": "I Follow Beach Volley",
           "inLanguage": "it-IT",
-          "publisher": { "@id": "https://www.ifollowbv.it/#org" }
+          "publisher": { "@id": "https://ifollowbv.it/#org" }
         }
       ]
     }
     </script>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white overflow-x-hidden w-full max-w-[100vw] relative m-0 p-0">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7VLDV3W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-xl">Vai al contenuto</a>
+<a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-xl">Vai al contenuto</a>
 
     <header>
         <div id="navbar-placeholder"></div>
@@ -643,29 +587,6 @@
 <script src="footer.js" defer></script>
 
 <!-- Banner cookie (gestito da main.js: ID invariati) -->
-<div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-4 sm:pb-6 z-50 hidden transition-transform duration-500 translate-y-full" role="region" aria-label="Preferenze cookie">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center w-full sm:w-auto">
-                <span class="flex p-3 rounded-xl bg-primary/10 shrink-0">
-                    <span class="material-icons text-primary" aria-hidden="true">cookie</span>
-                </span>
-                <p class="ml-4 font-medium text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Usiamo cookie di analisi (Google Analytics e Microsoft Clarity) per capire come viene usato il sito e migliorarlo. Si attivano solo se accetti.
-                </p>
-            </div>
-            <div class="flex shrink-0 w-full sm:w-auto gap-3">
-                <button id="btn-reject-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-bold text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    Solo Necessari
-                </button>
-                <button id="btn-accept-cookies" class="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark transition-colors">
-                    Accetta Tutti
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Popup prova gratuita (gestito da main.js: ID invariati) -->
 <div id="popup-prova-gratuita" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 bg-gray-900/80 dark:bg-background-dark/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="popup-prova-title">
     <div class="relative bg-white dark:bg-gray-800 rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-black/60 max-w-lg w-full overflow-hidden border border-gray-100 dark:border-gray-700 animate-[fade-in-down_0.4s_ease-out] flex flex-col max-h-[95vh]">

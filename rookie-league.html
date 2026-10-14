@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="it" class="overflow-x-hidden w-full max-w-[100vw] scroll-smooth">
 <head>
+    <script src="consent.js"></script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#7f13ec" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <title>Rookie League: Inizio Campionato | I Follow Beach Volley</title>
+    <link rel="canonical" href="https://ifollowbv.it/rookie-league.html" />
     <meta name="description" content="Tutto pronto per l'inizio della Rookie League, il campionato amatoriale di I Follow Beach Volley dedicato a chi muove i primi passi sulla sabbia." />
 
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -192,7 +194,7 @@
                         <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md" data-reveal="right">
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">Condividi l'articolo</p>
                             <div class="flex items-center gap-3">
-                                <a href="https://api.whatsapp.com/send?text=Tutto%20pronto%20per%20la%20Rookie%20League!%20Scopri%20di%20pi%C3%B9:%20https://www.ifollowbv.it/rookie-league.html" target="_blank" rel="noopener noreferrer" aria-label="Condividi su WhatsApp" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#25D366]/10 text-[#128C7E] dark:text-[#25D366] font-bold text-sm hover:bg-[#25D366] hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <a href="https://api.whatsapp.com/send?text=Tutto%20pronto%20per%20la%20Rookie%20League!%20Scopri%20di%20pi%C3%B9:%20https://ifollowbv.it/rookie-league.html" target="_blank" rel="noopener noreferrer" aria-label="Condividi su WhatsApp" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#25D366]/10 text-[#128C7E] dark:text-[#25D366] font-bold text-sm hover:bg-[#25D366] hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
                                     <span class="material-icons text-lg" aria-hidden="true">chat</span> WhatsApp
                                 </a>
                                 <button type="button" id="copy-link" aria-label="Copia il link dell'articolo" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-primary/10 text-primary font-bold text-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
@@ -214,7 +216,7 @@
             var btn = document.getElementById('copy-link');
             if (!btn || !navigator.clipboard) return;
             btn.addEventListener('click', function () {
-                navigator.clipboard.writeText('https://www.ifollowbv.it/rookie-league.html').then(function () {
+                navigator.clipboard.writeText('https://ifollowbv.it/rookie-league.html').then(function () {
                     var l = btn.querySelector('[data-label]');
                     l.textContent = 'Copiato!';
                     setTimeout(function () { l.textContent = 'Copia link'; }, 1800);

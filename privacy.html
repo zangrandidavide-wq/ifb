@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
 <head>
+    <script src="consent.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#7f13ec" />
     <link rel="icon" type="image/jpeg" href="logo.jpg" />
     <link rel="apple-touch-icon" href="logo.jpg" />
     <title>Privacy Policy - I Follow Beach Volley</title>
+    <meta name="description" content="Informativa privacy e cookie di I Follow Beach Volley A.S.D.: quali dati raccogliamo, per quali finalità, quali strumenti di analisi usiamo e come esercitare i tuoi diritti." />
+    <link rel="canonical" href="https://ifollowbv.it/privacy.html" />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
@@ -57,7 +60,7 @@
         <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
             <div class="md:col-span-8">
                 <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
-                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Sicurezza &amp; Privacy
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Privacy &amp; Cookie
                 </span>
                 <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
                     Informativa<br /><span class="text-primary">sulla privacy.</span>
@@ -66,11 +69,10 @@
             <div class="md:col-span-4 sr-load-fade sr-delay-2">
                 <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Benvenuti su I Follow Beach Volley. La tua privacy è fondamentale per noi. Questa informativa spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR).
+                    Questa informativa spiega quali dati personali raccogliamo attraverso il sito e le attività di I Follow Beach Volley, perché lo facciamo e quali sono i tuoi diritti, ai sensi del Regolamento (UE) 2016/679 (GDPR) e della normativa italiana sui cookie.
                 </p>
                 <div class="mt-5 flex flex-wrap gap-2">
-                    <span class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"><span class="material-icons text-sm text-primary" aria-hidden="true">calendar_today</span> Ottobre 2023</span>
-                    <span class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"><span class="material-icons text-sm text-secondary" aria-hidden="true">verified_user</span> v2.1</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"><span class="material-icons text-sm text-primary" aria-hidden="true">calendar_today</span> 14 Ottobre 2026</span>
                 </div>
             </div>
         </div>
@@ -86,11 +88,11 @@
             </a>
             <a href="#dati" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
                 <span class="text-xs font-black text-primary tracking-widest">02</span>
-                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Dati raccolti</span>
+                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Dati e finalità</span>
             </a>
-            <a href="#finalita" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
+            <a href="#cookie" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
                 <span class="text-xs font-black text-primary tracking-widest">03</span>
-                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Finalità</span>
+                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Cookie e servizi terzi</span>
             </a>
             <a href="#diritti" class="group flex flex-col gap-3 bg-primary text-white rounded-3xl p-5 shadow-lg shadow-primary/30 hover:bg-primary-dark hover:-translate-y-0.5 transition-all duration-200 ease-out">
                 <span class="text-xs font-black text-secondary tracking-widest">04</span>
@@ -98,108 +100,120 @@
             </a>
         </div>
 
-        <!-- Accordion -->
         <div class="space-y-4">
 
+            <!-- 01 Titolare -->
             <details id="titolare" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" open data-reveal="up">
                 <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
                     <div class="flex items-center gap-4">
-                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">business</span></span>
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-icons" aria-hidden="true">business</span></span>
                         <div>
                             <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 01</span>
-                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Titolare del trattamento dei dati</h2>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Titolare del trattamento</h2>
                         </div>
                     </div>
                     <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
                 </summary>
-                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Il titolare del trattamento è <strong class="text-gray-900 dark:text-white">I Follow Beach Volley S.r.l.</strong>, con sede legale in Italia.
-                    Siamo responsabili di decidere come e perché i tuoi dati personali vengono utilizzati e di garantire che siano tenuti al sicuro.
-                    Per qualsiasi domanda o richiesta, puoi contattarci all'indirizzo email <a class="text-primary font-bold underline decoration-secondary decoration-2 underline-offset-4 hover:decoration-primary transition-colors" href="mailto:privacy@ifollowbeachvolley.it">privacy@ifollowbeachvolley.it</a>.
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                    <p>Il titolare del trattamento è <strong class="text-gray-900 dark:text-white">I Follow Beach Volley A.S.D.</strong>, associazione sportiva dilettantistica con sede in Italia.</p>
+                    <p>Per qualsiasi domanda sul trattamento dei tuoi dati o per esercitare i tuoi diritti puoi scrivere a <a class="text-primary font-bold underline decoration-secondary decoration-2 underline-offset-4 hover:decoration-primary transition-colors" href="mailto:mulan@ifollowbv.it">mulan@ifollowbv.it</a>.</p>
                 </div>
             </details>
 
+            <!-- 02 Dati e finalità -->
             <details id="dati" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
                 <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
                     <div class="flex items-center gap-4">
-                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">database</span></span>
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-icons" aria-hidden="true">storage</span></span>
                         <div>
                             <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 02</span>
-                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Tipologie di dati raccolti</h2>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Quali dati raccogliamo e perché</h2>
                         </div>
                     </div>
                     <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
                 </summary>
                 <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
-                    <p>Raccogliamo diversi tipi di informazioni per fornirti i nostri servizi:</p>
-                    <ul class="mt-4 grid sm:grid-cols-2 gap-3">
-                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati identificativi</strong><span class="text-sm">Nome, cognome, data di nascita e sesso per la gestione dei tornei e del ranking.</span></li>
-                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati di contatto</strong><span class="text-sm">Indirizzo email e numero di telefono per comunicazioni tecniche o aggiornamenti.</span></li>
-                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati tecnici</strong><span class="text-sm">Indirizzo IP, tipo di browser, dati di navigazione raccolti tramite cookie.</span></li>
-                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati sportivi</strong><span class="text-sm">Risultati delle partite, affiliazioni a club, e storico delle prestazioni.</span></li>
+                    <ul class="grid sm:grid-cols-2 gap-3">
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors">
+                            <strong class="block text-gray-900 dark:text-white mb-1">Richieste di contatto</strong>
+                            <span class="text-sm">Nome, email e messaggio inviati con il form della pagina Contatti, oppure i dati che ci scrivi su WhatsApp. Li usiamo solo per risponderti. <em>Base giuridica: richiesta dell'interessato.</em></span>
+                        </li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors">
+                            <strong class="block text-gray-900 dark:text-white mb-1">Prova gratuita</strong>
+                            <span class="text-sm">I dati che inserisci nel modulo Google Forms di prenotazione, per organizzare la lezione di prova e ricontattarti. <em>Base giuridica: misure precontrattuali richieste dall'interessato.</em></span>
+                        </li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors">
+                            <strong class="block text-gray-900 dark:text-white mb-1">Iscrizione e attività sportiva</strong>
+                            <span class="text-sm">Dati anagrafici, recapiti, certificato medico sportivo e dati relativi a corsi, pagamenti e tornei, necessari per il tesseramento, l'assicurazione e la gestione dei corsi (anche tramite l'app Dink). <em>Base giuridica: rapporto associativo e obblighi di legge.</em></span>
+                        </li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors">
+                            <strong class="block text-gray-900 dark:text-white mb-1">Dati di navigazione</strong>
+                            <span class="text-sm">Informazioni tecniche (indirizzo IP, browser, pagine visitate) raccolte dai sistemi che ospitano il sito e, solo con il tuo consenso, dagli strumenti di analisi descritti nella sezione 03.</span>
+                        </li>
                     </ul>
+                    <p class="mt-5 border-l-4 border-secondary pl-4">I dati sono conservati per il tempo necessario alle finalità indicate e, per i dati legati al tesseramento e ai pagamenti, per il periodo previsto dalla legge. Non vendiamo i tuoi dati e non li usiamo per pubblicità profilata.</p>
                 </div>
             </details>
 
-            <details id="finalita" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
+            <!-- 03 Cookie -->
+            <details id="cookie" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
                 <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
                     <div class="flex items-center gap-4">
-                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">target</span></span>
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-icons" aria-hidden="true">cookie</span></span>
                         <div>
                             <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 03</span>
-                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Finalità del trattamento</h2>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Cookie e servizi di terze parti</h2>
                         </div>
                     </div>
                     <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
                 </summary>
-                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
-                    <p>I tuoi dati sono trattati per le seguenti finalità:</p>
-                    <ol class="mt-4 space-y-3">
-                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">1</span><span><strong class="text-gray-900 dark:text-white">Erogazione dei servizi:</strong> permetterti di iscriverti ai tornei e visualizzare il tuo ranking nazionale.</span></li>
-                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">2</span><span><strong class="text-gray-900 dark:text-white">Obblighi di legge:</strong> rispetto delle normative fiscali e amministrative vigenti.</span></li>
-                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">3</span><span><strong class="text-gray-900 dark:text-white">Sicurezza:</strong> prevenzione di frodi e protezione della nostra infrastruttura informatica.</span></li>
-                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-secondary text-gray-900 text-xs font-black flex items-center justify-center">4</span><span><strong class="text-gray-900 dark:text-white">Marketing (previo consenso):</strong> invio di newsletter relative a nuovi eventi e offerte promozionali.</span></li>
-                    </ol>
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed space-y-5">
+                    <div>
+                        <p class="flex items-center gap-2 font-extrabold text-gray-900 dark:text-white mb-2"><span class="inline-flex bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Sempre attivi</span> Strumenti tecnici</p>
+                        <p class="text-sm">Salviamo nel tuo browser solo la scelta fatta sul banner dei cookie e alcune preferenze di funzionamento (ad esempio il record del mini-gioco nella pagina Eventi). Non servono al tracciamento e non richiedono consenso.</p>
+                    </div>
+                    <div>
+                        <p class="flex items-center gap-2 font-extrabold text-gray-900 dark:text-white mb-2"><span class="inline-flex bg-secondary text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Solo con consenso</span> Statistiche</p>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex gap-2"><span class="material-icons text-primary text-base mt-0.5" aria-hidden="true">insights</span><span><strong class="text-gray-900 dark:text-white">Google Analytics 4 e Google Tag Manager</strong> (Google Ireland Ltd.): statistiche aggregate sulle visite. Usiamo la modalità di consenso di Google: finché non accetti, non vengono salvati cookie di analisi.</span></li>
+                            <li class="flex gap-2"><span class="material-icons text-primary text-base mt-0.5" aria-hidden="true">touch_app</span><span><strong class="text-gray-900 dark:text-white">Microsoft Clarity</strong> (Microsoft Corporation): mappe di calore e registrazioni anonime della navigazione per migliorare il sito. Viene caricato solo dopo il tuo consenso.</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-extrabold text-gray-900 dark:text-white mb-2">Contenuti e servizi esterni</p>
+                        <p class="text-sm">Alcune pagine caricano risorse da fornitori esterni, che possono ricevere il tuo indirizzo IP: Google Fonts (caratteri), Google Maps (mappe delle sedi), Dink (calendario eventi), Web3Forms (invio del form contatti), Google Forms (prenotazione della prova), oltre alle librerie grafiche servite da CDN. Alcuni di questi fornitori hanno sede negli Stati Uniti; i trasferimenti avvengono sulla base delle garanzie previste dal GDPR (ad esempio il Data Privacy Framework UE-USA o le clausole contrattuali standard).</p>
+                    </div>
+                    <button type="button" onclick="window.IFBConsent && window.IFBConsent.open()" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-extrabold px-5 py-3 rounded-full shadow-lg shadow-primary/30 transition-all duration-200 ease-out hover:-translate-y-0.5">
+                        <span class="material-icons text-lg" aria-hidden="true">tune</span> Modifica le preferenze cookie
+                    </button>
                 </div>
             </details>
 
+            <!-- 04 Diritti -->
             <details id="diritti" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
                 <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
                     <div class="flex items-center gap-4">
-                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">gavel</span></span>
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-icons" aria-hidden="true">gavel</span></span>
                         <div>
                             <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 04 · GDPR</span>
-                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Diritti dell'utente</h2>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">I tuoi diritti</h2>
                         </div>
                     </div>
                     <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
                 </summary>
                 <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
-                    <p>In base al GDPR, hai il diritto di:</p>
+                    <p>In qualsiasi momento puoi chiedere di:</p>
                     <ul class="mt-4 flex flex-wrap gap-2">
-                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">visibility</span>Accedere ai tuoi dati personali e riceverne copia</li>
-                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">edit</span>Richiedere la rettifica di dati inesatti o incompleti</li>
-                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">delete_outline</span>Richiedere la cancellazione dei dati ("diritto all'oblio")</li>
-                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">block</span>Limitare o opporti al trattamento dei tuoi dati</li>
-                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">swap_horiz</span>Richiedere la portabilità dei dati in un formato strutturato</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">visibility</span>Accedere ai tuoi dati e riceverne copia</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">edit</span>Rettificare dati inesatti o incompleti</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">delete_outline</span>Cancellare i dati ("diritto all'oblio")</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">block</span>Limitare il trattamento od opporti</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">swap_horiz</span>Ricevere i dati in formato portabile</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">undo</span>Revocare il consenso già dato</li>
                     </ul>
-                    <p class="mt-5 border-l-4 border-secondary pl-4">Puoi esercitare questi diritti inviando una comunicazione scritta al nostro Titolare del Trattamento.</p>
+                    <p class="mt-5 border-l-4 border-secondary pl-4">Per esercitare i tuoi diritti scrivi all'indirizzo indicato nella sezione 01. Se ritieni che il trattamento non sia conforme, puoi presentare reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer" class="text-primary font-bold underline underline-offset-2">garanteprivacy.it</a>).</p>
                 </div>
             </details>
-        </div>
-
-        <!-- Banner protezione -->
-        <div class="relative overflow-hidden mt-14 p-8 md:p-10 rounded-3xl bg-gray-900 text-white grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-xl" data-reveal="up">
-            <div class="absolute -bottom-24 -right-16 w-72 h-72 rounded-full bg-primary/50 blur-3xl" aria-hidden="true"></div>
-            <div class="relative md:col-span-2">
-                <span class="w-16 h-16 rounded-full bg-secondary text-gray-900 flex items-center justify-center"><span class="material-symbols-outlined text-4xl" aria-hidden="true">shield_person</span></span>
-            </div>
-            <div class="relative md:col-span-10">
-                <h2 class="text-2xl font-black mb-2">Proteggiamo i tuoi dati</h2>
-                <p class="text-gray-300 leading-relaxed">
-                    Utilizziamo sistemi di crittografia avanzati (SSL) e server sicuri situati all'interno dell'Unione Europea per garantire la massima protezione dei tuoi dati sportivi e personali.
-                </p>
-            </div>
         </div>
     </section>
 </main>

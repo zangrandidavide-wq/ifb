@@ -25,13 +25,11 @@
         { title: 'Allenati', links: [
             { label: 'Corsi e prezzi', href: 'IFB_corsi.html' },
             { label: 'High Performance', href: 'IFB_corsi.html#hpp' },
-            { label: 'Staff tecnico', href: 'coaches.html' },
-            { label: 'Glossario esercizi', href: 'glossario.html' }
+            { label: 'Staff tecnico', href: 'coaches.html' }
         ] },
         { title: 'Gioca', links: [
             { label: 'Calendario eventi', href: 'tornei.html' },
-            { label: 'Rookie League', href: 'rookie-league.html', badge: 'Nuovo' },
-            { label: 'Beach Break', href: 'clinic.html' }
+            { label: 'Rookie League', href: 'rookie-league.html', badge: 'Nuovo' }
         ] },
         { title: 'Info', links: [
             { label: 'FAQ', href: 'faq.html' },
@@ -213,6 +211,8 @@
                             <a href="${b}privacy.html" class="hover:text-white transition-colors">Privacy</a>
                             <span class="w-1 h-1 rounded-full bg-gray-700" aria-hidden="true"></span>
                             <a href="${b}servizio.html" class="hover:text-white transition-colors">Termini</a>
+                            <span class="w-1 h-1 rounded-full bg-gray-700" aria-hidden="true"></span>
+                            <button type="button" id="ifbv-cookie-prefs" class="hover:text-white transition-colors">Preferenze cookie</button>
                             <button type="button" id="ifbv-top" class="ml-2 inline-flex items-center gap-1 bg-white/10 hover:bg-secondary hover:text-gray-900 text-white font-bold px-3 py-2 rounded-full transition-colors">
                                 <span class="material-icons text-base" aria-hidden="true">north</span> Torna su
                             </button>
@@ -223,6 +223,13 @@
                 <!-- Scritta gigante decorativa -->
                 <p class="relative text-center font-black uppercase tracking-tighter leading-[0.8] whitespace-nowrap text-white/[0.04] text-[12.5vw] select-none pointer-events-none -mb-[1.5vw]" aria-hidden="true">I Follow BV</p>
             </footer>`;
+
+            var prefsBtn = this.querySelector('#ifbv-cookie-prefs');
+            prefsBtn.addEventListener('click', function () {
+                if (window.IFBConsent) window.IFBConsent.open();
+            });
+            // Sulle pagine senza tracciamento (non incluse consent.js) non ci sono preferenze da gestire
+            if (!window.IFBConsent) prefsBtn.previousElementSibling.remove(), prefsBtn.remove();
 
             var topBtn = this.querySelector('#ifbv-top');
             topBtn.addEventListener('click', function () {
