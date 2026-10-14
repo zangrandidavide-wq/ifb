@@ -1,165 +1,211 @@
 <!DOCTYPE html>
-
-<html class="light" lang="it"><head>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#7f13ec" />
+    <link rel="icon" type="image/jpeg" href="logo.jpg" />
+    <link rel="apple-touch-icon" href="logo.jpg" />
+    <title>Privacy Policy - I Follow Beach Volley</title>
 
-<link rel="icon" type="image/jpeg" href="logo.jpg" />
-
-<link rel="apple-touch-icon" href="logo.jpg" />
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Privacy Policy - I Follow Beach Volley</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
                         "background-light": "#f7f6f8",
                         "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
                     },
-                    fontFamily: {
-                        "display": ["Lexend"]
-                    },
-                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
                 },
             },
         }
     </script>
-<style>
-        body {
-            font-family: 'Lexend', sans-serif;
-        }
+    <link rel="stylesheet" href="scroll-reveal.css" />
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
+        summary::-webkit-details-marker { display: none; }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
-<!-- Top Navigation Bar -->
-<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
-            <div id="navbar-placeholder"></div>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen overflow-x-hidden">
 
-<script type="module" src="navbar.js"></script>
+<header>
+    <div id="navbar-placeholder"></div>
+    <script type="module" src="navbar.js"></script>
 </header>
-<main class="max-w-4xl mx-auto px-6 py-12 md:py-20">
-<!-- Hero Section -->
-<div class="mb-16">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
-<span class="material-symbols-outlined text-sm">security</span>
-                Sicurezza &amp; Privacy
+
+<main class="flex-1">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-sand dark:bg-sand-dark pt-10 md:pt-14 lg:pt-40 pb-14 md:pb-20 border-b border-gray-200/60 dark:border-gray-700/60">
+        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80" aria-hidden="true"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <span class="material-icons absolute -right-6 bottom-0 text-[14rem] md:text-[20rem] leading-none text-primary/5 select-none pointer-events-none" aria-hidden="true">shield</span>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+            <div class="md:col-span-8">
+                <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Sicurezza &amp; Privacy
+                </span>
+                <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
+                    Informativa<br /><span class="text-primary">sulla privacy.</span>
+                </h1>
             </div>
-<h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Informativa sulla Privacy</h1>
-<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-                Benvenuti su I Follow Beach Volley. La tua privacy è fondamentale per noi. Questa informativa spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR).
-            </p>
-<div class="mt-8 flex items-center gap-4 text-sm text-slate-500">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span> Ultimo aggiornamento: Ottobre 2023</span>
-<span class="h-1 w-1 bg-slate-300 rounded-full"></span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">verified_user</span> Versione 2.1</span>
-</div>
-</div>
-<!-- Accordion Sections -->
-<div class="space-y-4">
-<!-- Section 1 -->
-<details class="group bg-white dark:bg-slate-900/50 rounded-xl border border-primary/10 transition-all hover:border-primary/30" open="">
-<summary class="flex cursor-pointer items-center justify-between p-6 list-none">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">business</span>
-</div>
-<h3 class="text-lg font-bold">Titolare del Trattamento dei Dati</h3>
-</div>
-<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed ml-14">
-                    Il titolare del trattamento è <strong>I Follow Beach Volley S.r.l.</strong>, con sede legale in Italia. 
-                    Siamo responsabili di decidere come e perché i tuoi dati personali vengono utilizzati e di garantire che siano tenuti al sicuro. 
-                    Per qualsiasi domanda o richiesta, puoi contattarci all'indirizzo email <a class="text-primary font-medium underline" href="mailto:privacy@ifollowbeachvolley.it">privacy@ifollowbeachvolley.it</a>.
+            <div class="md:col-span-4 sr-load-fade sr-delay-2">
+                <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Benvenuti su I Follow Beach Volley. La tua privacy è fondamentale per noi. Questa informativa spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR).
+                </p>
+                <div class="mt-5 flex flex-wrap gap-2">
+                    <span class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"><span class="material-icons text-sm text-primary" aria-hidden="true">calendar_today</span> Ottobre 2023</span>
+                    <span class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"><span class="material-icons text-sm text-secondary" aria-hidden="true">verified_user</span> v2.1</span>
                 </div>
-</details>
-<!-- Section 2 -->
-<details class="group bg-white dark:bg-slate-900/50 rounded-xl border border-primary/10 transition-all hover:border-primary/30">
-<summary class="flex cursor-pointer items-center justify-between p-6 list-none">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">database</span>
-</div>
-<h3 class="text-lg font-bold">Tipologie di Dati Raccolti</h3>
-</div>
-<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed ml-14">
-                    Raccogliamo diversi tipi di informazioni per fornirti i nostri servizi:
-                    <ul class="list-disc mt-3 space-y-2 ml-4">
-<li><strong>Dati Identificativi:</strong> Nome, cognome, data di nascita e sesso per la gestione dei tornei e del ranking.</li>
-<li><strong>Dati di Contatto:</strong> Indirizzo email e numero di telefono per comunicazioni tecniche o aggiornamenti.</li>
-<li><strong>Dati Tecnici:</strong> Indirizzo IP, tipo di browser, dati di navigazione raccolti tramite cookie.</li>
-<li><strong>Dati Sportivi:</strong> Risultati delle partite, affiliazioni a club, e storico delle prestazioni.</li>
-</ul>
-</div>
-</details>
-<!-- Section 3 -->
-<details class="group bg-white dark:bg-slate-900/50 rounded-xl border border-primary/10 transition-all hover:border-primary/30">
-<summary class="flex cursor-pointer items-center justify-between p-6 list-none">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">target</span>
-</div>
-<h3 class="text-lg font-bold">Finalità del Trattamento</h3>
-</div>
-<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed ml-14">
-                    I tuoi dati sono trattati per le seguenti finalità:
-                    <ol class="list-decimal mt-3 space-y-2 ml-4">
-<li><strong>Erogazione dei Servizi:</strong> Permetterti di iscriverti ai tornei e visualizzare il tuo ranking nazionale.</li>
-<li><strong>Obblighi di Legge:</strong> Rispetto delle normative fiscali e amministrative vigenti.</li>
-<li><strong>Sicurezza:</strong> Prevenzione di frodi e protezione della nostra infrastruttura informatica.</li>
-<li><strong>Marketing (Previo Consenso):</strong> Invio di newsletter relative a nuovi eventi e offerte promozionali.</li>
-</ol>
-</div>
-</details>
-<!-- Section 4 -->
-<details class="group bg-white dark:bg-slate-900/50 rounded-xl border border-primary/10 transition-all hover:border-primary/30">
-<summary class="flex cursor-pointer items-center justify-between p-6 list-none">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">gavel</span>
-</div>
-<h3 class="text-lg font-bold">Diritti dell'Utente (GDPR)</h3>
-</div>
-<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed ml-14">
-                    In base al GDPR, hai il diritto di:
-                    <ul class="list-disc mt-3 space-y-2 ml-4">
-<li>Accedere ai tuoi dati personali e riceverne copia.</li>
-<li>Richiedere la rettifica di dati inesatti o incompleti.</li>
-<li>Richiedere la cancellazione dei dati ("diritto all'oblio").</li>
-<li>Limitare o opporti al trattamento dei tuoi dati.</li>
-<li>Richiedere la portabilità dei dati in un formato strutturato.</li>
-</ul>
-<p class="mt-4">Puoi esercitare questi diritti inviando una comunicazione scritta al nostro Titolare del Trattamento.</p>
-</div>
-</details>
-</div>
-<!-- Protection Banner -->
-<div class="mt-16 p-8 rounded-2xl bg-primary text-white flex flex-col md:flex-row items-center gap-8 shadow-xl shadow-primary/20">
-<div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-4xl">shield_person</span>
-</div>
-<div>
-<h4 class="text-xl font-bold mb-2">Proteggiamo i tuoi dati</h4>
-<p class="text-primary-100/80 leading-relaxed">
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+
+        <!-- Quick nav -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10" data-reveal="up">
+            <a href="#titolare" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                <span class="text-xs font-black text-primary tracking-widest">01</span>
+                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Titolare</span>
+            </a>
+            <a href="#dati" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                <span class="text-xs font-black text-primary tracking-widest">02</span>
+                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Dati raccolti</span>
+            </a>
+            <a href="#finalita" class="group flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-5 shadow-md hover:shadow-xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                <span class="text-xs font-black text-primary tracking-widest">03</span>
+                <span class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-primary transition-colors">Finalità</span>
+            </a>
+            <a href="#diritti" class="group flex flex-col gap-3 bg-primary text-white rounded-3xl p-5 shadow-lg shadow-primary/30 hover:bg-primary-dark hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                <span class="text-xs font-black text-secondary tracking-widest">04</span>
+                <span class="font-bold text-sm">I tuoi diritti</span>
+            </a>
+        </div>
+
+        <!-- Accordion -->
+        <div class="space-y-4">
+
+            <details id="titolare" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" open data-reveal="up">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">business</span></span>
+                        <div>
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 01</span>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Titolare del trattamento dei dati</h2>
+                        </div>
+                    </div>
+                    <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
+                </summary>
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Il titolare del trattamento è <strong class="text-gray-900 dark:text-white">I Follow Beach Volley S.r.l.</strong>, con sede legale in Italia.
+                    Siamo responsabili di decidere come e perché i tuoi dati personali vengono utilizzati e di garantire che siano tenuti al sicuro.
+                    Per qualsiasi domanda o richiesta, puoi contattarci all'indirizzo email <a class="text-primary font-bold underline decoration-secondary decoration-2 underline-offset-4 hover:decoration-primary transition-colors" href="mailto:privacy@ifollowbeachvolley.it">privacy@ifollowbeachvolley.it</a>.
+                </div>
+            </details>
+
+            <details id="dati" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">database</span></span>
+                        <div>
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 02</span>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Tipologie di dati raccolti</h2>
+                        </div>
+                    </div>
+                    <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
+                </summary>
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p>Raccogliamo diversi tipi di informazioni per fornirti i nostri servizi:</p>
+                    <ul class="mt-4 grid sm:grid-cols-2 gap-3">
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati identificativi</strong><span class="text-sm">Nome, cognome, data di nascita e sesso per la gestione dei tornei e del ranking.</span></li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati di contatto</strong><span class="text-sm">Indirizzo email e numero di telefono per comunicazioni tecniche o aggiornamenti.</span></li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati tecnici</strong><span class="text-sm">Indirizzo IP, tipo di browser, dati di navigazione raccolti tramite cookie.</span></li>
+                        <li class="rounded-2xl bg-background-light dark:bg-gray-900/40 p-4 border border-transparent hover:border-primary/30 transition-colors"><strong class="block text-gray-900 dark:text-white mb-1">Dati sportivi</strong><span class="text-sm">Risultati delle partite, affiliazioni a club, e storico delle prestazioni.</span></li>
+                    </ul>
+                </div>
+            </details>
+
+            <details id="finalita" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">target</span></span>
+                        <div>
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 03</span>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Finalità del trattamento</h2>
+                        </div>
+                    </div>
+                    <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
+                </summary>
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p>I tuoi dati sono trattati per le seguenti finalità:</p>
+                    <ol class="mt-4 space-y-3">
+                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">1</span><span><strong class="text-gray-900 dark:text-white">Erogazione dei servizi:</strong> permetterti di iscriverti ai tornei e visualizzare il tuo ranking nazionale.</span></li>
+                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">2</span><span><strong class="text-gray-900 dark:text-white">Obblighi di legge:</strong> rispetto delle normative fiscali e amministrative vigenti.</span></li>
+                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">3</span><span><strong class="text-gray-900 dark:text-white">Sicurezza:</strong> prevenzione di frodi e protezione della nostra infrastruttura informatica.</span></li>
+                        <li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-secondary text-gray-900 text-xs font-black flex items-center justify-center">4</span><span><strong class="text-gray-900 dark:text-white">Marketing (previo consenso):</strong> invio di newsletter relative a nuovi eventi e offerte promozionali.</span></li>
+                    </ol>
+                </div>
+            </details>
+
+            <details id="diritti" class="scroll-mt-28 group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-md open:shadow-xl open:border-l-4 open:border-l-primary hover:border-primary/30 transition-all duration-200 ease-out" data-reveal="up">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 p-6 md:p-7 list-none">
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center group-open:bg-primary group-open:text-white transition-colors"><span class="material-symbols-outlined" aria-hidden="true">gavel</span></span>
+                        <div>
+                            <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Sezione 04 · GDPR</span>
+                            <h2 class="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white">Diritti dell'utente</h2>
+                        </div>
+                    </div>
+                    <span class="w-9 h-9 shrink-0 rounded-full border border-primary/30 text-primary flex items-center justify-center group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300"><span class="material-icons" aria-hidden="true">expand_more</span></span>
+                </summary>
+                <div class="px-6 md:px-7 pb-7 md:pl-[5.5rem] text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p>In base al GDPR, hai il diritto di:</p>
+                    <ul class="mt-4 flex flex-wrap gap-2">
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">visibility</span>Accedere ai tuoi dati personali e riceverne copia</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">edit</span>Richiedere la rettifica di dati inesatti o incompleti</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">delete_outline</span>Richiedere la cancellazione dei dati ("diritto all'oblio")</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">block</span>Limitare o opporti al trattamento dei tuoi dati</li>
+                        <li class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 text-sm px-3 py-2 rounded-full"><span class="material-icons text-primary text-base" aria-hidden="true">swap_horiz</span>Richiedere la portabilità dei dati in un formato strutturato</li>
+                    </ul>
+                    <p class="mt-5 border-l-4 border-secondary pl-4">Puoi esercitare questi diritti inviando una comunicazione scritta al nostro Titolare del Trattamento.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Banner protezione -->
+        <div class="relative overflow-hidden mt-14 p-8 md:p-10 rounded-3xl bg-gray-900 text-white grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-xl" data-reveal="up">
+            <div class="absolute -bottom-24 -right-16 w-72 h-72 rounded-full bg-primary/50 blur-3xl" aria-hidden="true"></div>
+            <div class="relative md:col-span-2">
+                <span class="w-16 h-16 rounded-full bg-secondary text-gray-900 flex items-center justify-center"><span class="material-symbols-outlined text-4xl" aria-hidden="true">shield_person</span></span>
+            </div>
+            <div class="relative md:col-span-10">
+                <h2 class="text-2xl font-black mb-2">Proteggiamo i tuoi dati</h2>
+                <p class="text-gray-300 leading-relaxed">
                     Utilizziamo sistemi di crittografia avanzati (SSL) e server sicuri situati all'interno dell'Unione Europea per garantire la massima protezione dei tuoi dati sportivi e personali.
                 </p>
-</div>
-</div>
+            </div>
+        </div>
+    </section>
 </main>
-<!-- Footer -->
+
 <ifbv-footer></ifbv-footer>
 <script src="footer.js" defer></script>
-</body></html>
+<script src="scroll-reveal.js" defer></script>
+</body>
+</html>

@@ -1,136 +1,184 @@
 <!DOCTYPE html>
-
-<html lang="it"><head>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#7f13ec" />
+    <link rel="icon" type="image/jpeg" href="logo.jpg" />
+    <link rel="apple-touch-icon" href="logo.jpg" />
+    <title>Termini di Servizio - I Follow Beach Volley</title>
 
-<link rel="icon" type="image/jpeg" href="logo.jpg" />
-
-<link rel="apple-touch-icon" href="logo.jpg" />
-<meta charset="utf-8"/> 
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
                         "background-light": "#f7f6f8",
                         "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
                     },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
                 },
             },
         }
     </script>
-<style>
+    <link rel="stylesheet" href="scroll-reveal.css" />
+    <style>
         body { font-family: 'Lexend', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        a:focus-visible, button:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
-<div class="relative flex min-h-screen flex-col">
-<!-- Header -->
-<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-6 lg:px-40 py-4">
-            <div id="navbar-placeholder"></div>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen overflow-x-hidden">
 
-<script type="module" src="navbar.js"></script>
+<header>
+    <div id="navbar-placeholder"></div>
+    <script type="module" src="navbar.js"></script>
 </header>
-<!-- Main Content -->
-<main class="flex-1 flex flex-col items-center px-6 lg:px-40 py-12">
-<div class="w-full max-w-4xl">
-<!-- Hero Section / Title -->
-<div class="mb-12">
-<div class="flex items-center gap-2 text-primary mb-4">
-<span class="material-symbols-outlined">description</span>
-<span class="text-sm font-bold uppercase tracking-widest">Documentazione Legale</span>
-</div>
-<h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Termini di Servizio</h1>
-<div class="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-500 dark:text-slate-400">
-<p class="text-base">Ultimo aggiornamento: <span class="font-semibold">24 Maggio 2024</span></p>
-<span class="hidden sm:block">•</span>
-<p class="text-base italic italic">Versione 2.1.0</p>
-</div>
-</div>
-<!-- Terms Content -->
-<div class="space-y-12">
-<!-- 1. Condizioni Generali -->
-<section class="bg-white dark:bg-background-dark/50 border border-primary/5 p-8 rounded-xl shadow-sm">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-primary">info</span>
-<h3 class="text-2xl font-bold">1. Condizioni Generali</h3>
-</div>
-<div class="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
-<p>Benvenuti su <strong>I Follow Beach Volley</strong>. Accedendo o utilizzando i nostri servizi, l'utente accetta di essere vincolato dai presenti Termini di Servizio. Se non si accettano tali termini, si prega di non utilizzare la piattaforma.</p>
-<p>Il nostro servizio è dedicato alla community del beach volley, facilitando l'organizzazione di allenamenti, la partecipazione a tornei e l'iscrizione a camp tecnici nazionali ed internazionali.</p>
-</div>
-</section>
-<!-- 2. Registrazione e Account -->
-<section class="p-8">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">person_add</span>
-<h3 class="text-2xl font-bold">2. Registrazione e Account</h3>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="bg-primary/5 p-6 rounded-lg border-l-4 border-primary">
-<h4 class="font-bold mb-2">Requisiti Utente</h4>
-<p class="text-sm text-slate-600 dark:text-slate-400">La registrazione è consentita a persone di età superiore ai 14 anni. I minori devono avere il consenso dei genitori per partecipare ad eventi fisici.</p>
-</div>
-<div class="bg-primary/5 p-6 rounded-lg border-l-4 border-primary">
-<h4 class="font-bold mb-2">Sicurezza</h4>
-<p class="text-sm text-slate-600 dark:text-slate-400">L'utente è responsabile della riservatezza delle proprie credenziali e di tutte le attività svolte tramite il proprio account.</p>
-</div>
-</div>
-</section>
-<!-- 3. Partecipazione a Eventi e Camps -->
-<section class="bg-white dark:bg-background-dark/50 border border-primary/5 p-8 rounded-xl shadow-sm">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-primary">event_available</span>
-<h3 class="text-2xl font-bold">3. Partecipazione a Eventi e Camps</h3>
-</div>
-<div class="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
-<p>L'iscrizione ai tornei e ai beach volley camps segue le seguenti regole:</p>
-<ul class="list-disc pl-6 space-y-2">
-<li><strong>Certificato Medico:</strong> Obbligo di caricare un certificato medico non agonistico in corso di validità per partecipare a qualsiasi attività fisica.</li>
-<li><strong>Politica di Rimborso:</strong> I rimborsi sono possibili fino a 7 giorni prima dell'evento, salvo diversa indicazione specifica nella pagina dell'evento.</li>
-<li><strong>Comportamento:</strong> Ci riserviamo il diritto di escludere partecipanti che non mantengano un comportamento sportivo e rispettoso verso compagni e istruttori.</li>
-</ul>
-</div>
-</section>
-<!-- 4. Responsabilità -->
-<section class="p-8">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">gavel</span>
-<h3 class="text-2xl font-bold">4. Limitazione di Responsabilità</h3>
-</div>
-<div class="bg-slate-900 text-slate-100 p-8 rounded-xl">
-<p class="leading-relaxed opacity-90 italic">
-                                "I Follow Beach Volley declina ogni responsabilità per infortuni derivanti dalla pratica sportiva durante gli eventi organizzati da terzi o caricati autonomamente dagli utenti. Sebbene la piattaforma verifichi l'idoneità dei coach partner, la responsabilità finale della sicurezza sul campo ricade sull'ente organizzatore locale."
-                            </p>
-</div>
-</section>
-<!-- Contact/Support -->
-<div class="bg-primary text-white p-10 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6">
-<div>
-<h3 class="text-2xl font-bold mb-2">Hai domande sui termini?</h3>
-<p class="opacity-80">Il nostro team legale è a tua disposizione per chiarimenti.</p>
-</div>
-<a class="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-slate-100 transition-colors whitespace-nowrap" href="mailto:support@ifollowbeachvolley.it">
-                            Contattaci
-                        </a>
-</div>
-</div>
-</div>
+
+<main class="flex-1">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-sand dark:bg-sand-dark pt-10 md:pt-14 lg:pt-40 pb-14 md:pb-20 border-b border-gray-200/60 dark:border-gray-700/60">
+        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80" aria-hidden="true"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <span class="material-icons absolute -right-6 bottom-0 text-[14rem] md:text-[20rem] leading-none text-primary/5 select-none pointer-events-none" aria-hidden="true">gavel</span>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Documentazione legale
+            </span>
+            <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
+                Termini<br /><span class="text-primary">di servizio.</span>
+            </h1>
+            <div class="mt-8 flex flex-wrap items-center gap-3 sr-load-fade sr-delay-2">
+                <span class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                    <span class="material-icons text-sm text-primary" aria-hidden="true">update</span> Aggiornato il 24 Maggio 2024
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                    v2.1.0
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENUTO -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+            <!-- Indice sticky -->
+            <aside class="lg:col-span-4">
+                <nav class="lg:sticky lg:top-28 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg p-6" aria-label="Indice dei termini" data-reveal="left">
+                    <p class="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-4">Indice</p>
+                    <ol class="space-y-1 text-sm font-semibold">
+                        <li><a href="#condizioni" class="group flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-out"><span class="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-black flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">01</span>Condizioni generali</a></li>
+                        <li><a href="#account" class="group flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-out"><span class="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-black flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">02</span>Registrazione e account</a></li>
+                        <li><a href="#eventi" class="group flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-out"><span class="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-black flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">03</span>Eventi e camps</a></li>
+                        <li><a href="#responsabilita" class="group flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-out"><span class="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-black flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">04</span>Responsabilità</a></li>
+                    </ol>
+                </nav>
+            </aside>
+
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- 1 -->
+                <article id="condizioni" class="scroll-mt-28 group relative bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-200 ease-out p-7 md:p-10 overflow-hidden" data-reveal="up">
+                    <span class="absolute top-4 right-6 text-7xl font-black text-primary/10 leading-none select-none" aria-hidden="true">01</span>
+                    <div class="relative flex items-center gap-3 mb-5">
+                        <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">info</span></span>
+                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Condizioni generali</h2>
+                    </div>
+                    <div class="relative space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                        <p>Benvenuti su <strong class="text-gray-900 dark:text-white">I Follow Beach Volley</strong>. Accedendo o utilizzando i nostri servizi, l'utente accetta di essere vincolato dai presenti Termini di Servizio. Se non si accettano tali termini, si prega di non utilizzare la piattaforma.</p>
+                        <p>Il nostro servizio è dedicato alla community del beach volley, facilitando l'organizzazione di allenamenti, la partecipazione a tornei e l'iscrizione a camp tecnici nazionali ed internazionali.</p>
+                    </div>
+                </article>
+
+                <!-- 2 -->
+                <article id="account" class="scroll-mt-28" data-reveal="up">
+                    <div class="flex items-center gap-3 mb-5 px-1">
+                        <span class="text-primary font-black text-sm tracking-widest">02</span>
+                        <span class="h-px flex-1 border-t-2 border-dashed border-primary/20" aria-hidden="true"></span>
+                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Registrazione e account</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="group bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border-l-4 border-primary p-6 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                            <span class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-4"><span class="material-icons text-sm" aria-hidden="true">person_add</span> 14+ anni</span>
+                            <h3 class="font-extrabold text-lg text-gray-900 dark:text-white mb-2">Requisiti utente</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">La registrazione è consentita a persone di età superiore ai 14 anni. I minori devono avere il consenso dei genitori per partecipare ad eventi fisici.</p>
+                        </div>
+                        <div class="group bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border-l-4 border-primary p-6 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out md:mt-8">
+                            <span class="inline-flex items-center gap-1 bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-4"><span class="material-icons text-sm" aria-hidden="true">lock</span> Credenziali</span>
+                            <h3 class="font-extrabold text-lg text-gray-900 dark:text-white mb-2">Sicurezza</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">L'utente è responsabile della riservatezza delle proprie credenziali e di tutte le attività svolte tramite il proprio account.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3 -->
+                <article id="eventi" class="scroll-mt-28 group relative bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-200 ease-out p-7 md:p-10 overflow-hidden" data-reveal="up">
+                    <span class="absolute top-4 right-6 text-7xl font-black text-primary/10 leading-none select-none" aria-hidden="true">03</span>
+                    <div class="relative flex items-center gap-3 mb-3">
+                        <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">event_available</span></span>
+                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Eventi e camps</h2>
+                    </div>
+                    <p class="relative text-gray-600 dark:text-gray-300 mb-6">L'iscrizione ai tornei e ai beach volley camps segue le seguenti regole:</p>
+                    <ul class="relative grid gap-3">
+                        <li class="flex gap-4 p-4 rounded-2xl bg-background-light dark:bg-gray-900/40 border border-transparent hover:border-primary/30 transition-all duration-200 ease-out">
+                            <span class="material-icons text-primary shrink-0" aria-hidden="true">medical_services</span>
+                            <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white text-base mb-0.5">Certificato medico</strong>Obbligo di caricare un certificato medico non agonistico in corso di validità per partecipare a qualsiasi attività fisica.</p>
+                        </li>
+                        <li class="flex gap-4 p-4 rounded-2xl bg-background-light dark:bg-gray-900/40 border border-transparent hover:border-primary/30 transition-all duration-200 ease-out">
+                            <span class="material-icons text-primary shrink-0" aria-hidden="true">currency_exchange</span>
+                            <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white text-base mb-0.5">Politica di rimborso <span class="ml-1 align-middle inline-flex bg-secondary text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">-7 giorni</span></strong>I rimborsi sono possibili fino a 7 giorni prima dell'evento, salvo diversa indicazione specifica nella pagina dell'evento.</p>
+                        </li>
+                        <li class="flex gap-4 p-4 rounded-2xl bg-background-light dark:bg-gray-900/40 border border-transparent hover:border-primary/30 transition-all duration-200 ease-out">
+                            <span class="material-icons text-primary shrink-0" aria-hidden="true">handshake</span>
+                            <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white text-base mb-0.5">Comportamento</strong>Ci riserviamo il diritto di escludere partecipanti che non mantengano un comportamento sportivo e rispettoso verso compagni e istruttori.</p>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- 4 -->
+                <article id="responsabilita" class="scroll-mt-28 relative overflow-hidden rounded-3xl bg-gray-900 text-white p-8 md:p-10 shadow-xl" data-reveal="up">
+                    <div class="absolute -bottom-24 -right-16 w-72 h-72 rounded-full bg-primary/40 blur-3xl" aria-hidden="true"></div>
+                    <div class="relative flex items-center gap-3 mb-5">
+                        <span class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center"><span class="material-icons text-secondary" aria-hidden="true">gavel</span></span>
+                        <h2 class="text-2xl font-extrabold">Limitazione di responsabilità</h2>
+                    </div>
+                    <blockquote class="relative border-l-4 border-secondary pl-5 leading-relaxed text-gray-200 italic">
+                        "I Follow Beach Volley declina ogni responsabilità per infortuni derivanti dalla pratica sportiva durante gli eventi organizzati da terzi o caricati autonomamente dagli utenti. Sebbene la piattaforma verifichi l'idoneità dei coach partner, la responsabilità finale della sicurezza sul campo ricade sull'ente organizzatore locale."
+                    </blockquote>
+                </article>
+
+                <!-- CTA -->
+                <div class="relative overflow-hidden bg-primary text-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl shadow-primary/30" data-reveal="up">
+                    <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
+                    <div class="relative">
+                        <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                        <h2 class="text-2xl md:text-3xl font-black mb-1">Hai domande sui termini?</h2>
+                        <p class="text-white/80">Il nostro team legale è a tua disposizione per chiarimenti.</p>
+                    </div>
+                    <a href="mailto:support@ifollowbeachvolley.it" class="relative inline-flex items-center justify-center gap-2 bg-white text-primary hover:bg-secondary hover:text-gray-900 px-7 py-4 rounded-full font-extrabold transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap">
+                        <span class="material-icons" aria-hidden="true">mail</span> Contattaci
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
-<!-- Footer -->
+
 <ifbv-footer></ifbv-footer>
 <script src="footer.js" defer></script>
-</div>
-</body></html>
+<script src="scroll-reveal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it" class="overflow-x-hidden w-full max-w-[100vw] scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#7f13ec" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <title>Rookie League: Inizio Campionato | I Follow Beach Volley</title>
+    <meta name="description" content="Tutto pronto per l'inizio della Rookie League, il campionato amatoriale di I Follow Beach Volley dedicato a chi muove i primi passi sulla sabbia." />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
+                    },
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="scroll-reveal.css" />
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+        a:focus-visible, button:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white overflow-x-hidden w-full max-w-[100vw] relative m-0 p-0 flex flex-col min-h-screen">
+
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <main class="w-full overflow-x-clip flex-1 relative">
+
+        <!-- HERO ARTICOLO -->
+        <section class="relative w-full min-h-[520px] h-[70svh] max-h-[720px] flex items-end bg-slate-950 overflow-hidden">
+            <img src="beachtown.jpg" alt="Campi in sabbia del BeachTown – Sporting Milano 3 a Basiglio" class="absolute inset-0 w-full h-full object-cover object-center z-0" fetchpriority="high" decoding="async">
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
+            <div class="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-primary/50 via-transparent to-transparent"></div>
+
+            <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
+                <a href="index.html#notizie" class="inline-flex items-center gap-2 text-sm font-bold text-white/90 hover:text-secondary bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full transition-all duration-200 ease-out mb-6 sr-load-down">
+                    <span class="material-icons text-sm" aria-hidden="true">arrow_back</span> Torna alla Home
+                </a>
+                <div class="flex flex-wrap items-center gap-2 mb-5 sr-load-down sr-delay-1">
+                    <span class="inline-flex items-center gap-1.5 bg-secondary text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                        <span class="material-icons text-sm" aria-hidden="true">emoji_events</span> Tornei
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/15 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Iscrizioni aperte
+                    </span>
+                </div>
+                <h1 class="max-w-4xl font-black text-white uppercase tracking-tight leading-[0.95] text-[clamp(2.2rem,6.5vw,4.75rem)] sr-load-up sr-delay-2">
+                    Tutto pronto per l'inizio della <span class="text-secondary">Rookie League!</span>
+                </h1>
+                <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-gray-200 sr-load-fade sr-delay-3">
+                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">calendar_month</span> <time datetime="2026-10-04">04 Ottobre 2026</time></span>
+                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">edit</span> Redazione IFB</span>
+                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">schedule</span> 3 min di lettura</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY DATES STRIP -->
+        <div class="relative z-20 bg-primary text-white -rotate-1 scale-[1.02] shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-0 sm:divide-x divide-white/20 rotate-1">
+                <div class="flex items-center gap-3 sm:px-6 first:sm:pl-0">
+                    <span class="material-icons text-secondary" aria-hidden="true">event</span>
+                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Inizio</span><span class="font-extrabold">Dom 18 Ottobre 2026</span></div>
+                </div>
+                <div class="flex items-center gap-3 sm:px-6">
+                    <span class="material-icons text-secondary" aria-hidden="true">place</span>
+                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Location</span><span class="font-extrabold">BeachTown, Basiglio</span></div>
+                </div>
+                <div class="flex items-center gap-3 sm:px-6">
+                    <span class="material-icons text-secondary" aria-hidden="true">hourglass_bottom</span>
+                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Chiusura iscrizioni</span><span class="font-extrabold">Mer 14 Ottobre 2026</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENUTO -->
+        <section class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+                <article class="lg:col-span-8 prose prose-lg prose-gray dark:prose-invert prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary-dark prose-strong:text-gray-900 dark:prose-strong:text-white max-w-none">
+
+                    <p class="lead !text-xl md:!text-2xl !font-light !leading-relaxed text-gray-700 dark:text-gray-200 border-l-4 border-secondary pl-6" data-reveal="up">
+                        Il campionato dedicato a chi muove i primi passi nel beach volley è finalmente ai blocchi di partenza. Le squadre sono pronte, la sabbia è calda e il calendario delle sfide è ufficiale. Ecco tutto quello che c'è da sapere sulla nuova edizione.
+                    </p>
+
+                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
+                        <span class="text-primary font-black text-sm tracking-widest">01</span>
+                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Cos'è la Rookie League?</h2>
+                    </div>
+                    <p data-reveal="up">
+                        La <strong>Rookie League</strong> è il format esclusivo targato <em>I Follow Beach Volley</em> pensato per chi ha da poco iniziato il proprio percorso formativo e vuole assaporare l'adrenalina della competizione in un ambiente stimolante, sano e privo di stress. Non si tratta solo di vincere, ma di mettere in pratica le dinamiche di gioco apprese durante i corsi, imparare a gestire la palla in situazioni di gara e, soprattutto, fare gruppo.
+                    </p>
+
+                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
+                        <span class="text-primary font-black text-sm tracking-widest">02</span>
+                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Regolamento e formula di gioco</h2>
+                    </div>
+                    <p data-reveal="up">
+                        Per garantire il massimo divertimento e l'equilibrio tra le coppie in campo, abbiamo studiato una formula specifica per i livelli base (entry-level):
+                    </p>
+
+                    <ul class="not-prose grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out" data-reveal="up">
+                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">people</span></span>
+                            <span class="inline-flex bg-secondary text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">2x2</span>
+                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Coppie fisse</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Il torneo si gioca in modalità 2x2. Puoi iscriverti con il tuo compagno di corso o richiedere un partner direttamente allo staff.</p>
+                        </li>
+                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-6 sr-stagger-1" data-reveal="up">
+                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">grid_view</span></span>
+                            <span class="inline-flex bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Min. 3 match</span>
+                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Gironi all'italiana</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Nessuno va a casa dopo una sola partita. La prima fase prevede gironi che garantiscono un minimo di 3 match per squadra.</p>
+                        </li>
+                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-12 sr-stagger-2" data-reveal="up">
+                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">height</span></span>
+                            <span class="inline-flex bg-gray-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Entry level</span>
+                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Altezza rete adattata</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Per favorire gli scambi prolungati e la tecnica di costruzione.</p>
+                        </li>
+                    </ul>
+
+                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
+                        <span class="text-primary font-black text-sm tracking-widest">03</span>
+                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Il ruolo degli allenatori</h2>
+                    </div>
+                    <p data-reveal="up">
+                        Durante la Rookie League, lo staff tecnico di IFB non farà solo da arbitro. I nostri coach saranno presenti a bordo campo per fornire feedback a fine partita, aiutare nella comprensione delle posizioni difensive (linea/diagonale) e consigliare sulle scelte di alzata. È a tutti gli effetti un allenamento agonistico supervisionato.
+                    </p>
+
+                    <p class="not-prose mt-10 text-2xl md:text-3xl font-black uppercase tracking-tight text-gray-900 dark:text-white leading-tight" data-reveal="up">
+                        Preparate gli occhiali da sole e la voglia di tuffarvi. <span class="text-primary">Ci vediamo sulla sabbia!</span>
+                    </p>
+                </article>
+
+                <!-- SIDEBAR INFO -->
+                <aside class="lg:col-span-4">
+                    <div class="lg:sticky lg:top-28 space-y-5">
+                        <div class="relative overflow-hidden bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border border-primary/15 shadow-xl shadow-primary/10 p-7" data-reveal="right">
+                            <div class="flex items-center gap-3 mb-6">
+                                <span class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-icons" aria-hidden="true">sports_volleyball</span></span>
+                                <h2 class="text-xl font-black text-gray-900 dark:text-white">Info pratiche</h2>
+                            </div>
+                            <ol class="relative border-l-2 border-dashed border-primary/30 ml-2 space-y-6">
+                                <li class="pl-6 relative">
+                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-white dark:ring-gray-800"></span>
+                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Chiusura iscrizioni</span>
+                                    <span class="font-extrabold text-gray-900 dark:text-white">Mercoledì 14 Ottobre 2026</span>
+                                </li>
+                                <li class="pl-6 relative">
+                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white dark:ring-gray-800"></span>
+                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Data di inizio</span>
+                                    <span class="font-extrabold text-gray-900 dark:text-white">Domenica 18 Ottobre 2026</span>
+                                </li>
+                                <li class="pl-6 relative">
+                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gray-900 dark:bg-white ring-4 ring-white dark:ring-gray-800"></span>
+                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Location</span>
+                                    <span class="font-extrabold text-gray-900 dark:text-white">BeachTown – Sporting Milano 3, Basiglio</span>
+                                </li>
+                            </ol>
+                            <a href="contatti.html" class="mt-8 w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-6 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5">
+                                Iscriviti ora <span class="material-icons text-lg" aria-hidden="true">arrow_forward</span>
+                            </a>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md" data-reveal="right">
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">Condividi l'articolo</p>
+                            <div class="flex items-center gap-3">
+                                <a href="https://api.whatsapp.com/send?text=Tutto%20pronto%20per%20la%20Rookie%20League!%20Scopri%20di%20pi%C3%B9:%20https://www.ifollowbv.it/rookie-league.html" target="_blank" rel="noopener noreferrer" aria-label="Condividi su WhatsApp" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#25D366]/10 text-[#128C7E] dark:text-[#25D366] font-bold text-sm hover:bg-[#25D366] hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                    <span class="material-icons text-lg" aria-hidden="true">chat</span> WhatsApp
+                                </a>
+                                <button type="button" id="copy-link" aria-label="Copia il link dell'articolo" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-primary/10 text-primary font-bold text-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                    <span class="material-icons text-lg" aria-hidden="true">link</span> <span data-label>Copia link</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+    <script src="scroll-reveal.js" defer></script>
+    <script>
+        (function () {
+            var btn = document.getElementById('copy-link');
+            if (!btn || !navigator.clipboard) return;
+            btn.addEventListener('click', function () {
+                navigator.clipboard.writeText('https://www.ifollowbv.it/rookie-league.html').then(function () {
+                    var l = btn.querySelector('[data-label]');
+                    l.textContent = 'Copiato!';
+                    setTimeout(function () { l.textContent = 'Copia link'; }, 1800);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

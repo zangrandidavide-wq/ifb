@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -9,15 +10,14 @@
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Glossario Esercizi | I Follow Beach Volley</title>
     <meta name="description" content="Glossario esercizi IFB: consulta focus tecnici, svolgimento, varianti, tempi e correzioni in una dashboard aggiornata da Google Sheets." />
     <meta name="robots" content="index, follow" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -25,62 +25,91 @@
                 extend: {
                     colors: {
                         "primary": "#7f13ec",
-                        "primary-dark": "#600eb3",
+                        "primary-dark": "#5e0eb3",
                         "secondary": "#FFD700",
                         "background-light": "#f7f6f8",
-                        "background-dark": "#191022"
+                        "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
                     },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    keyframes: {
+                        'card-in': { '0%': { opacity: '0', transform: 'translateY(14px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        'modal-in': { '0%': { opacity: '0', transform: 'translateY(16px) scale(.98)' }, '100%': { opacity: '1', transform: 'none' } },
                     },
-                    borderRadius: {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    }
-                }
-            }
+                    animation: {
+                        'card-in': 'card-in .45s cubic-bezier(.22,1,.36,1) backwards',
+                        'modal-in': 'modal-in .3s cubic-bezier(.22,1,.36,1) both',
+                    },
+                },
+            },
         };
     </script>
+    <link rel="stylesheet" href="scroll-reveal.css" />
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+        a:focus-visible, button:focus-visible, article:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
+        @media (prefers-reduced-motion: reduce) { .motion-safe-only { animation: none !important; } }
+    </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col overflow-x-hidden">
     <header>
         <div id="navbar-placeholder"></div>
         <script type="module" src="navbar.js"></script>
     </header>
 
-    <main class="flex-1 max-w-[1200px] mx-auto w-full px-6 pt-28 pb-16">
-        <section class="mb-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">Glossario Esercizi</h1>
-            <p class="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-                Una raccolta dinamica di esercizi tecnici e tattici aggiornata automaticamente da Google Sheets.
-            </p>
+    <main class="flex-1">
+
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-sand dark:bg-sand-dark pt-10 md:pt-14 lg:pt-40 pb-24 md:pb-28 border-b border-gray-200/60 dark:border-gray-700/60">
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80" aria-hidden="true"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+            <span class="material-icons absolute -right-6 bottom-0 text-[14rem] md:text-[20rem] leading-none text-primary/5 select-none pointer-events-none" aria-hidden="true">menu_book</span>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+                <div class="md:col-span-8">
+                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Live da Google Sheets
+                    </span>
+                    <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
+                        Glossario<br /><span class="text-primary">esercizi.</span>
+                    </h1>
+                </div>
+                <div class="md:col-span-4 sr-load-fade sr-delay-2">
+                    <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Una raccolta dinamica di esercizi tecnici e tattici aggiornata automaticamente da Google Sheets.
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <div id="filters-wrapper" class="mb-6 hidden space-y-4">
-                <div class="bg-white dark:bg-slate-900 border border-primary/10 rounded-2xl p-4 shadow-sm">
-                    <label for="search-input" class="block text-sm font-semibold text-slate-800 dark:text-slate-100 mb-2">
-                        Cerca per nome o focus
-                    </label>
+        <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-20">
+
+            <!-- Barra filtri (flottante sopra l'hero) -->
+            <div id="filters-wrapper" class="hidden -mt-12 relative z-10 mb-10 bg-white dark:bg-gray-800 rounded-3xl border border-primary/10 shadow-xl shadow-primary/10 p-5 md:p-6 space-y-5">
+                <div class="relative">
+                    <label for="search-input" class="sr-only">Cerca per nome o focus</label>
+                    <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none" aria-hidden="true">search</span>
                     <input
                         id="search-input"
                         type="search"
-                        placeholder="Es. battuta float, ricezione, muro..."
-                        class="w-full rounded-xl border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 text-sm"
+                        placeholder="Cerca per nome o focus: battuta float, ricezione, muro..."
+                        class="w-full pl-12 pr-4 py-4 rounded-full border-2 border-primary/15 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-4 focus:ring-primary/15 text-sm md:text-base font-medium transition-all duration-200 ease-out"
                     />
                 </div>
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                    <div id="filters-container" class="flex flex-wrap gap-2"></div>
-                    <p id="results-count" class="text-sm font-medium text-slate-600 dark:text-slate-300"></p>
+                    <div id="filters-container" class="flex flex-wrap gap-2" role="group" aria-label="Filtra per tipologia"></div>
+                    <p id="results-count" class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full" aria-live="polite"></p>
                 </div>
             </div>
-            <div id="exercise-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            <div id="exercise-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 pt-12">
                 <div id="loading-state" class="col-span-full flex items-center justify-center py-16">
-                    <div class="inline-flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                    <div class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border border-primary/10 rounded-full px-6 py-3 shadow-lg text-gray-600 dark:text-gray-300">
                         <span class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></span>
-                        <span class="font-medium">Caricamento esercizi...</span>
+                        <span class="font-semibold">Caricamento esercizi...</span>
                     </div>
                 </div>
             </div>
@@ -90,17 +119,17 @@
     <ifbv-footer></ifbv-footer>
     <script src="footer.js" defer></script>
 
-    <div id="exercise-modal" class="fixed inset-0 z-[1000] bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div id="exercise-modal-panel" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-primary/10 shadow-2xl p-6 md:p-8">
+    <div id="exercise-modal" class="fixed inset-0 z-[1000] bg-gray-900/70 backdrop-blur-sm hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div id="exercise-modal-panel" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-gray-800 shadow-2xl animate-modal-in motion-safe-only">
             <button
                 id="exercise-modal-close"
                 type="button"
                 aria-label="Chiudi dettagli esercizio"
-                class="absolute top-4 right-4 inline-flex items-center justify-center h-10 w-10 rounded-full border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                class="absolute top-4 right-4 z-10 inline-flex items-center justify-center h-10 w-10 rounded-full bg-white/15 text-white hover:bg-secondary hover:text-gray-900 hover:rotate-90 transition-all duration-300"
             >
-                <span class="material-icons text-xl">close</span>
+                <span class="material-icons text-xl" aria-hidden="true">close</span>
             </button>
-            <div id="exercise-modal-content" class="pr-10"></div>
+            <div id="exercise-modal-content"></div>
         </div>
     </div>
 
@@ -147,6 +176,15 @@
             return "bg-amber-100 text-amber-700 border-amber-200";
         }
 
+        // Colore d'accento (bordo sinistro) coerente con il badge di categoria
+        function accentClassByCategory(category) {
+            const normalized = (category || "").toLowerCase();
+            if (normalized.includes("tecnica")) return "border-l-primary";
+            if (normalized.includes("tattica")) return "border-l-blue-500";
+            if (normalized.includes("fisic")) return "border-l-emerald-500";
+            return "border-l-secondary";
+        }
+
         function renderCorrezioni(correzioniRaw) {
             if (!correzioniRaw) return "";
 
@@ -158,49 +196,58 @@
             const isBulletList = lines.every((line) => /^[-*•]/.test(line));
             const cleanedLines = lines.map((line) => line.replace(/^[-*•]\s*/, ""));
 
+            const heading = `
+                <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-gray-900 dark:text-secondary mb-3">
+                    <span class="material-icons text-base" aria-hidden="true">tips_and_updates</span> Correzioni
+                </p>`;
+
             if (isBulletList) {
                 const items = cleanedLines
-                    .map((line) => `<li class="leading-relaxed">${escapeHtml(line)}</li>`)
+                    .map((line) => `<li class="flex gap-2 leading-relaxed"><span class="material-icons text-primary text-base mt-0.5" aria-hidden="true">check_circle</span><span>${escapeHtml(line)}</span></li>`)
                     .join("");
                 return `
-                    <div class="mt-5 bg-slate-50 dark:bg-slate-800/70 border-l-4 border-primary rounded-r-lg p-4">
-                        <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-2">Correzioni</p>
-                        <ul class="list-disc pl-5 text-sm text-slate-600 dark:text-slate-300 space-y-1">${items}</ul>
+                    <div class="mt-6 bg-secondary/15 border-l-4 border-secondary rounded-r-2xl p-5">
+                        ${heading}
+                        <ul class="text-sm text-gray-700 dark:text-gray-200 space-y-2">${items}</ul>
                     </div>
                 `;
             }
 
             return `
-                <div class="mt-5 bg-slate-50 dark:bg-slate-800/70 border-l-4 border-primary rounded-r-lg p-4">
-                    <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-2">Correzioni</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(correzioniRaw)}</p>
+                <div class="mt-6 bg-secondary/15 border-l-4 border-secondary rounded-r-2xl p-5">
+                    ${heading}
+                    <p class="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">${nlToBr(correzioniRaw)}</p>
                 </div>
             `;
         }
 
-        function createCard(row, index) {
+        function createCard(row, index, position) {
             const nome = row[0] || "Esercizio senza titolo";
             const tipologia = row[1] || "Generale";
             const focus = row[2] || "";
             const tempo = row[5] || "";
+            const number = String(index + 1).padStart(2, "0");
+            const delay = Math.min(position, 12) * 40;
 
             return `
-                <article data-index="${index}" class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/10 p-5 shadow-sm cursor-pointer hover:ring-2 hover:ring-primary/40 hover:shadow-md transition-all duration-300 flex flex-col gap-3">
-                    <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">${escapeHtml(nome)}</h2>
-                    <div>
-                        <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeClassByCategory(tipologia)}">
+                <article data-index="${index}" tabindex="0" role="button" aria-label="Apri dettagli: ${escapeHtml(nome)}"
+                    style="animation-delay:${delay}ms"
+                    class="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 ${accentClassByCategory(tipologia)} p-6 shadow-md cursor-pointer hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 hover:border-primary/40 transition-all duration-200 ease-out flex flex-col gap-3 animate-card-in motion-safe-only">
+                    <span class="absolute top-4 right-5 text-5xl font-black text-primary/10 leading-none tabular-nums select-none" aria-hidden="true">${number}</span>
+                    <div class="flex flex-wrap items-center gap-2 pr-14">
+                        <span class="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${badgeClassByCategory(tipologia)}">
                             ${escapeHtml(tipologia)}
                         </span>
+                        ${tempo ? `
+                            <span class="inline-flex items-center gap-1 text-xs font-bold text-gray-600 dark:text-gray-300 bg-background-light dark:bg-gray-900/50 rounded-full px-2.5 py-1">
+                                <span class="material-icons text-primary text-sm" aria-hidden="true">schedule</span>${escapeHtml(tempo)}
+                            </span>
+                        ` : ""}
                     </div>
-                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200">${escapeHtml(focus)}</p>` : ""}
-                    ${tempo ? `
-                        <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
-                            <span class="material-icons text-primary text-base">schedule</span>
-                            <span>${escapeHtml(tempo)}</span>
-                        </div>
-                    ` : ""}
-                    <p class="mt-1 text-xs font-semibold uppercase tracking-wide text-primary/80 dark:text-primary/90">
-                        Clicca per vedere i dettagli
+                    <h2 class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white group-hover:text-primary transition-colors">${escapeHtml(nome)}</h2>
+                    ${focus ? `<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">${escapeHtml(focus)}</p>` : ""}
+                    <p class="mt-auto pt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary">
+                        Vedi dettagli <span class="material-icons text-base group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
                     </p>
                 </article>
             `;
@@ -209,15 +256,16 @@
         function renderGrid(rows) {
             if (!rows.length) {
                 gridEl.innerHTML = `
-                    <div class="col-span-full bg-white dark:bg-slate-900 border border-primary/10 rounded-2xl p-8 text-center shadow-sm">
-                        <p class="font-semibold text-slate-800 dark:text-slate-100">Nessun esercizio disponibile per questo filtro.</p>
+                    <div class="col-span-full bg-white dark:bg-gray-800 border-2 border-dashed border-primary/20 rounded-3xl p-10 text-center">
+                        <span class="material-icons text-4xl text-primary/40 mb-2" aria-hidden="true">search_off</span>
+                        <p class="font-bold text-gray-800 dark:text-gray-100">Nessun esercizio disponibile per questo filtro.</p>
                     </div>
                 `;
                 return;
             }
 
             gridEl.innerHTML = rows
-                .map((item) => createCard(extractRow(item), item.originalIndex))
+                .map((item, position) => createCard(extractRow(item), item.originalIndex, position))
                 .join("");
         }
 
@@ -261,14 +309,15 @@
 
             filtersContainerEl.innerHTML = tipologie.map((tipologia) => {
                 const isActive = tipologia === activeTipologia;
-                const activeClasses = "bg-primary text-white border-primary shadow-sm";
-                const inactiveClasses = "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-primary/20 hover:border-primary/50";
+                const activeClasses = "bg-primary text-white border-primary shadow-lg shadow-primary/30";
+                const inactiveClasses = "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary hover:-translate-y-0.5";
 
                 return `
                     <button
                         type="button"
                         data-tipologia="${escapeHtml(tipologia)}"
-                        class="px-4 py-2 rounded-full border text-sm font-semibold transition-colors ${isActive ? activeClasses : inactiveClasses}"
+                        aria-pressed="${isActive}"
+                        class="px-4 py-2 rounded-full border-2 text-sm font-bold transition-all duration-200 ease-out ${isActive ? activeClasses : inactiveClasses}"
                     >
                         ${escapeHtml(tipologia)}
                     </button>
@@ -276,6 +325,7 @@
             }).join("");
 
             filtersWrapperEl.classList.remove("hidden");
+            gridEl.classList.remove("pt-12");
         }
 
         filtersContainerEl.addEventListener("click", (event) => {
@@ -309,30 +359,36 @@
             const correzioni = row[6] || "";
 
             modalContentEl.innerHTML = `
-                <div class="space-y-4">
-                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">${escapeHtml(nome)}</h2>
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeClassByCategory(tipologia)}">
+                <div class="relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white px-6 md:px-8 pt-8 pb-7">
+                    <div class="absolute -bottom-16 -right-10 w-48 h-48 rounded-full bg-secondary/25 blur-3xl" aria-hidden="true"></div>
+                    <div class="relative flex flex-wrap items-center gap-2 mb-4 pr-12">
+                        <span class="inline-flex items-center rounded-full bg-secondary text-gray-900 px-3 py-1 text-[11px] font-bold uppercase tracking-wider">
                             ${escapeHtml(tipologia)}
                         </span>
                         ${tempo ? `
-                            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
-                                <span class="material-icons text-primary text-base">schedule</span>
-                                <span>${escapeHtml(tempo)}</span>
+                            <span class="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+                                <span class="material-icons text-sm" aria-hidden="true">schedule</span>${escapeHtml(tempo)}
                             </span>
                         ` : ""}
                     </div>
-                    ${focus ? `<p class="text-sm font-semibold text-slate-700 dark:text-slate-200">${escapeHtml(focus)}</p>` : ""}
+                    <h2 class="relative text-2xl md:text-3xl font-black tracking-tight pr-10">${escapeHtml(nome)}</h2>
+                    ${focus ? `<p class="relative mt-2 text-white/85 font-medium">${escapeHtml(focus)}</p>` : ""}
+                </div>
+                <div class="px-6 md:px-8 py-7 space-y-6">
                     ${svolgimento ? `
-                        <div class="pt-2">
-                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Svolgimento</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(svolgimento)}</p>
+                        <div>
+                            <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-2">
+                                <span class="material-icons text-base" aria-hidden="true">play_circle</span> Svolgimento
+                            </p>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">${nlToBr(svolgimento)}</p>
                         </div>
                     ` : ""}
                     ${varianti ? `
-                        <div class="pt-2">
-                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-1">Varianti</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${nlToBr(varianti)}</p>
+                        <div class="border-t-2 border-dashed border-primary/15 pt-6">
+                            <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-2">
+                                <span class="material-icons text-base" aria-hidden="true">alt_route</span> Varianti
+                            </p>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">${nlToBr(varianti)}</p>
                         </div>
                     ` : ""}
                     ${renderCorrezioni(correzioni)}
@@ -342,6 +398,7 @@
             modalEl.classList.remove("hidden");
             modalEl.classList.add("flex");
             document.body.style.overflow = "hidden";
+            modalCloseEl.focus();
         }
 
         function closeModal() {
@@ -357,6 +414,14 @@
             const index = Number(card.dataset.index);
             if (!Number.isInteger(index)) return;
             openModal(index);
+        });
+
+        gridEl.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            const card = event.target.closest("article[data-index]");
+            if (!card) return;
+            event.preventDefault();
+            openModal(Number(card.dataset.index));
         });
 
         modalCloseEl.addEventListener("click", closeModal);
@@ -404,7 +469,7 @@
             } catch (error) {
                 console.error("Errore caricamento glossario:", error);
                 gridEl.innerHTML = `
-                    <div class="col-span-full bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-2xl p-6 text-center">
+                    <div class="col-span-full bg-red-50 dark:bg-red-950/20 border-l-4 border-red-500 rounded-3xl p-6 text-center">
                         <p class="font-semibold text-red-700 dark:text-red-300">Impossibile caricare gli esercizi. Controlla API key, Spreadsheet ID e range.</p>
                     </div>
                 `;
@@ -413,5 +478,6 @@
 
         loadGlossario();
     </script>
+    <script src="scroll-reveal.js" defer></script>
 </body>
 </html>

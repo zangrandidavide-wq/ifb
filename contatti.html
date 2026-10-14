@@ -69,7 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:description" content="Siamo qui per aiutarti a tuffarti nel mondo del beach volley. Scrivici ora!" />
     <meta name="twitter:image" content="https://www.ifollowbv.it/og-image.jpg" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
@@ -85,8 +85,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 extend: {
                     colors: {
                         "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
+                        "accent-yellow": "#FFD700",
                         "background-light": "#f7f6f8",
                         "background-dark": "#191022",
+                        "sand": "#fdfbf7",
+                        "sand-dark": "#231b2e",
                     },
                     fontFamily: {
                         "display": ["Lexend", "sans-serif"]
@@ -99,7 +104,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="scroll-reveal.css" />
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen overflow-x-hidden">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7VLDV3W"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -109,86 +114,104 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script type="module" src="navbar.js"></script>
     </header>
 
-    <main class="max-w-[1200px] mx-auto px-6 pb-8 pt-8 md:pt-24 flex flex-col gap-12">
-        <section id="contatti-canali" class="w-full">
-            <div class="text-center mb-10 max-w-2xl mx-auto" data-reveal="fade">
-                <span class="inline-block text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Contattaci</span>
-                <h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 mb-3">Come preferisci scriverci?</h2>
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed">
-                    Due modi distinti per raggiungerci: WhatsApp per una risposta immediata con Mulan, oppure il form per richieste più articolate.
-                </p>
-            </div>
+    <main class="overflow-x-clip">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                <!-- WhatsApp — sezione dedicata -->
-                <div class="relative flex flex-col bg-white dark:bg-slate-900 rounded-2xl border-2 border-[#25D366]/30 shadow-lg shadow-[#25D366]/10 overflow-hidden hover:border-[#25D366]/50 transition-all duration-300" data-reveal="left">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-[#25D366]/10 rounded-full blur-3xl -z-0 translate-x-1/3 -translate-y-1/3"></div>
-                    <div class="relative z-10 p-8 md:p-10 flex flex-col flex-1">
-                        <div class="flex items-center gap-3 mb-5">
-                            <span class="flex items-center justify-center w-14 h-14 rounded-2xl bg-[#25D366]/15 text-[#25D366]">
-                                <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-sand dark:bg-sand-dark pt-10 md:pt-14 lg:pt-40 pb-28 md:pb-36 border-b border-gray-200/60 dark:border-gray-700/60">
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80" aria-hidden="true"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+            <span class="material-icons absolute -right-6 bottom-0 text-[14rem] md:text-[20rem] leading-none text-primary/5 select-none pointer-events-none" aria-hidden="true">forum</span>
+
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+                <div class="md:col-span-7">
+                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold text-primary uppercase tracking-[0.25em] bg-primary/10 px-4 py-2 rounded-full sr-load-down">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Contattaci
+                    </span>
+                    <h1 class="mt-6 font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,5.5rem)] text-gray-900 dark:text-white sr-load-up sr-delay-1">
+                        Come preferisci<br /><span class="text-primary">scriverci?</span>
+                    </h1>
+                </div>
+                <div class="md:col-span-5 sr-load-fade sr-delay-2">
+                    <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                    <p class="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed">
+                        Due modi distinti per raggiungerci: WhatsApp per una risposta immediata con Mulan, oppure il form per richieste più articolate.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CANALI -->
+        <section id="contatti-canali" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- WhatsApp -->
+                <div class="group relative lg:col-span-5 flex flex-col overflow-hidden rounded-3xl bg-gray-900 text-white shadow-2xl hover:-translate-y-0.5 transition-all duration-200 ease-out" data-reveal="left">
+                    <div class="absolute -top-16 -right-16 w-64 h-64 bg-[#25D366]/30 rounded-full blur-3xl group-hover:bg-[#25D366]/45 transition-colors duration-500" aria-hidden="true"></div>
+                    <div class="relative p-8 md:p-10 flex flex-col flex-1">
+                        <div class="flex items-center justify-between gap-3 mb-8">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/40">
+                                <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
                             </span>
-                            <div>
-                                <p class="text-xs font-bold uppercase tracking-widest text-[#25D366]">Risposta rapida</p>
-                                <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">WhatsApp</h3>
-                            </div>
+                            <span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/15 text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></span> Risposta rapida
+                            </span>
                         </div>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-2 flex-1">
-                            Scrivi direttamente a <strong class="text-slate-800 dark:text-slate-200">Mulan</strong>, Presidente IFB. Ideale per info su corsi, iscrizioni e disponibilità: ti risponde in chat, senza attese.
+                        <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight mb-3">WhatsApp</h2>
+                        <p class="text-gray-300 leading-relaxed mb-6 flex-1">
+                            Scrivi direttamente a <strong class="text-white">Mulan</strong>, Presidente IFB. Ideale per info su corsi, iscrizioni e disponibilità: ti risponde in chat, senza attese.
                         </p>
-                        <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-6">+39 349 463 3610</p>
-                        <a href="https://wa.me/393494633610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-[#25D366]/30 hover:shadow-[#25D366]/50 hover:-translate-y-1">
-                            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-                            Scrivici su WhatsApp!
+                        <p class="text-2xl font-black tabular-nums tracking-tight text-secondary mb-6">+39 349 463 3610</p>
+                        <a href="https://wa.me/393494633610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-[#25D366]/30 hover:shadow-[#25D366]/50 hover:-translate-y-0.5">
+                            Scrivici su WhatsApp! <span class="material-icons" aria-hidden="true">arrow_forward</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Form email — sezione espandibile -->
-                <div class="relative flex flex-col bg-white dark:bg-slate-900 rounded-2xl border-2 border-primary/20 shadow-lg shadow-primary/5 overflow-hidden hover:border-primary/40 transition-all duration-300" data-reveal="right">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-0 translate-x-1/3 -translate-y-1/3"></div>
-                    <div class="relative z-10 p-8 md:p-10 flex flex-col flex-1">
-                        <div class="flex items-center gap-3 mb-5">
-                            <span class="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-3xl">mail</span>
+                <!-- Form -->
+                <div class="relative lg:col-span-7 flex flex-col bg-white dark:bg-gray-800 rounded-3xl border border-primary/15 border-l-4 border-l-primary shadow-2xl shadow-primary/10 overflow-hidden" data-reveal="right">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" aria-hidden="true"></div>
+                    <div class="relative p-8 md:p-10 flex flex-col flex-1">
+                        <div class="flex items-center gap-4 mb-5">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary">
+                                <span class="material-icons text-3xl" aria-hidden="true">mail</span>
                             </span>
                             <div>
-                                <p class="text-xs font-bold uppercase tracking-widest text-primary">Richiesta dettagliata</p>
-                                <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">Form di contatto</h3>
+                                <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Richiesta dettagliata</p>
+                                <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white">Form di contatto</h2>
                             </div>
                         </div>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 flex-1">
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                             Preferisci scriverci per email? Compila il form con nome, indirizzo e messaggio: il team IFB ti risponderà appena possibile.
                         </p>
-                        <button type="button" id="btn-toggle-contact-form" aria-expanded="false" aria-controls="contact-form-panel" class="inline-flex items-center justify-center gap-2 w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/10 hover:shadow-primary/25 hover:-translate-y-1">
-                            <span class="material-symbols-outlined text-xl" id="contact-form-toggle-icon">expand_more</span>
+                        <button type="button" id="btn-toggle-contact-form" aria-expanded="false" aria-controls="contact-form-panel" class="inline-flex items-center justify-center gap-2 w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                            <span class="material-icons text-xl" id="contact-form-toggle-icon" aria-hidden="true">expand_more</span>
                             <span id="contact-form-toggle-label">Apri il form di contatto</span>
                         </button>
 
                         <div id="contact-form-panel" class="grid transition-[grid-template-rows] duration-300 ease-out grid-rows-[0fr]" aria-hidden="true">
                             <div class="overflow-hidden">
-                                <form id="contact-form" class="space-y-4 pt-6 mt-6 border-t border-primary/10">
+                                <form id="contact-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 mt-6 border-t-2 border-dashed border-primary/15">
                                     <input type="hidden" name="access_key" value="49994c33-caa6-4639-88cb-c4b8b1bf57da">
                                     <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                                     <div>
-                                        <label for="name" class="block text-sm font-semibold mb-2">Nome Completo</label>
-                                        <input id="name" name="name" class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 transition-all px-4 py-2" placeholder="Mario Rossi" type="text" required />
+                                        <label for="name" class="block text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-2">Nome completo</label>
+                                        <input id="name" name="name" class="w-full rounded-2xl border-2 border-primary/15 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all duration-200 ease-out px-4 py-3" placeholder="Mario Rossi" type="text" required />
                                     </div>
                                     <div>
-                                        <label for="email" class="block text-sm font-semibold mb-2">Indirizzo Email</label>
-                                        <input id="email" name="email" class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 transition-all px-4 py-2" placeholder="mario@esempio.com" type="email" required />
+                                        <label for="email" class="block text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-2">Indirizzo email</label>
+                                        <input id="email" name="email" class="w-full rounded-2xl border-2 border-primary/15 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all duration-200 ease-out px-4 py-3" placeholder="mario@esempio.com" type="email" required />
                                     </div>
-                                    <div>
-                                        <label for="message" class="block text-sm font-semibold mb-2">Messaggio</label>
-                                        <textarea id="message" name="message" class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary/20 transition-all px-4 py-2" placeholder="Come possiamo aiutarti?" rows="4" required></textarea>
+                                    <div class="sm:col-span-2">
+                                        <label for="message" class="block text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-2">Messaggio</label>
+                                        <textarea id="message" name="message" class="w-full rounded-2xl border-2 border-primary/15 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all duration-200 ease-out px-4 py-3" placeholder="Come possiamo aiutarti?" rows="4" required></textarea>
                                     </div>
 
-                                    <button id="contact-submit-btn" class="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 transition-all" type="submit">
+                                    <button id="contact-submit-btn" class="sm:col-span-2 w-full bg-primary text-white py-4 rounded-full font-extrabold hover:bg-primary-dark hover:-translate-y-0.5 shadow-lg shadow-primary/30 hover:shadow-primary/50 disabled:opacity-50 disabled:pointer-events-none transition-all duration-300" type="submit">
                                         Invia Messaggio
                                     </button>
 
-                                    <p id="contact-feedback" class="text-center text-sm font-medium hidden"></p>
+                                    <p id="contact-feedback" class="sm:col-span-2 text-center text-sm font-medium hidden"></p>
                                 </form>
                             </div>
                         </div>
@@ -197,69 +220,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </section>
 
-        <section class="space-y-8">
-            <div class="text-center" data-reveal="fade">
-                <h2 class="text-3xl font-black tracking-tight">La Nostra Leadership</h2>
-                <p class="text-slate-600 dark:text-slate-400 mt-2">Persone appassionate che guidano lo sport verso il
-                    futuro</p>
+        <!-- LEADERSHIP -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10" data-reveal="fade">
+                <div>
+                    <p class="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Chi ti risponde</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">La nostra leadership</h2>
+                </div>
+                <p class="max-w-sm text-gray-600 dark:text-gray-400 font-light">Persone appassionate che guidano lo sport verso il futuro</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div
-                    class="group bg-white dark:bg-slate-900 rounded-xl border border-primary/10 overflow-hidden hover:border-primary/40 transition-all shadow-sm flex flex-col sm:flex-row sr-stagger-1" data-reveal="up">
-                    <div class="w-full sm:w-48 aspect-square bg-primary/20 relative">
-                        <div class="absolute inset-0 flex items-center justify-center text-primary/50">
-                            <img alt="simone franchi" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" src="franchi.webp" width="400" height="400" loading="lazy" decoding="async"/>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article class="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col sm:flex-row" data-reveal="up">
+                    <div class="relative w-full sm:w-48 shrink-0 aspect-square sm:aspect-auto overflow-hidden bg-primary/20">
+                        <img alt="Simone Franchi" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" src="franchi.webp" width="400" height="400" loading="lazy" decoding="async" />
                     </div>
-                    <div class="p-8 flex flex-col justify-center gap-4 flex-1">
+                    <div class="p-7 flex flex-col justify-center gap-4 flex-1">
+                        <span class="self-start inline-flex bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Direzione tecnica</span>
                         <div>
-                            <h3 class="text-2xl font-bold">Simone Franchi</h3>
-                            <p class="text-primary font-semibold">Vice Presidente e Direttore Tecnico</p>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Simone Franchi</h3>
+                            <p class="text-primary font-semibold text-sm">Vice Presidente e Direttore Tecnico</p>
                         </div>
-                        <div class="space-y-2">
-                            <a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-                                href="mailto:marco@ifollow.com">
-                                <span class="material-symbols-outlined text-xl">mail</span>
-                                <span class="text-sm font-medium">simonefranchi@ifollowbv.it</span>
-                            </a>
-
-                        </div>
+                        <a class="self-start inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-background-light dark:bg-gray-900/50 hover:bg-primary hover:text-white px-4 py-2 rounded-full transition-all duration-200 ease-out" href="mailto:simonefranchi@ifollowbv.it">
+                            <span class="material-icons text-lg" aria-hidden="true">mail</span> simonefranchi@ifollowbv.it
+                        </a>
                     </div>
-                </div>
-                <div
-                    class="group bg-white dark:bg-slate-900 rounded-xl border border-primary/10 overflow-hidden hover:border-primary/40 transition-all shadow-sm flex flex-col sm:flex-row sr-stagger-2" data-reveal="up">
-                    <div class="w-full sm:w-48 aspect-square bg-primary/20 relative">
-                        <div class="absolute inset-0 flex items-center justify-center text-primary/50">
-                            <img alt="mulan" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" src="mulan.webp" width="400" height="400" loading="lazy" decoding="async"/>
-                        </div>
+                </article>
+                <article class="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col sm:flex-row md:mt-10 sr-stagger-1" data-reveal="up">
+                    <div class="relative w-full sm:w-48 shrink-0 aspect-square sm:aspect-auto overflow-hidden bg-primary/20">
+                        <img alt="Angelica &quot;Mulan&quot; Ferrau" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" src="mulan.webp" width="400" height="400" loading="lazy" decoding="async" />
                     </div>
-                    <div class="p-8 flex flex-col justify-center gap-4 flex-1">
+                    <div class="p-7 flex flex-col justify-center gap-4 flex-1">
+                        <span class="self-start inline-flex bg-secondary text-gray-900 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Presidenza</span>
                         <div>
-                            <h3 class="text-2xl font-bold">Angelica "Mulan" Ferrau</h3>
-                            <p class="text-primary font-semibold">Presidente</p>
+                            <h3 class="text-2xl font-black text-gray-900 dark:text-white">Angelica "Mulan" Ferrau</h3>
+                            <p class="text-primary font-semibold text-sm">Presidente</p>
                         </div>
-                        <div class="space-y-2">
-                            <a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-                                href="mailto:mulan@ifollowbv.it">
-                                <span class="material-symbols-outlined text-xl">mail</span>
-                                <span class="text-sm font-medium">mulan@ifollowbv.it</span>
-                            </a>
-                        </div>
+                        <a class="self-start inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-background-light dark:bg-gray-900/50 hover:bg-primary hover:text-white px-4 py-2 rounded-full transition-all duration-200 ease-out" href="mailto:mulan@ifollowbv.it">
+                            <span class="material-icons text-lg" aria-hidden="true">mail</span> mulan@ifollowbv.it
+                        </a>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
-        <section class="relative overflow-hidden bg-primary rounded-xl p-8 md:p-12 text-center text-white space-y-6 border border-white/20 shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_0_40px_rgba(127,19,236,0.45),0_20px_40px_rgba(25,16,34,0.35)]" data-reveal="scale">
-            <div class="pointer-events-none absolute -top-16 -left-16 w-44 h-44 rounded-full bg-white/25 blur-3xl"></div>
-            <div class="pointer-events-none absolute -bottom-20 -right-12 w-56 h-56 rounded-full bg-secondary/25 blur-3xl"></div>
-            <h2 class="text-3xl font-bold">Domande Frequenti</h2>
-            <p class="max-w-2xl mx-auto text-center text-white/80 leading-relaxed md:leading-8">
-                Hai dei dubbi sui nostri camp o sulle modalità di iscrizione? Consulta le risposte alle domande più comuni della nostra community.
-            </p>
-            <a href="faq.html" class="inline-block bg-white text-primary px-10 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-xl">
-                Leggi le nostre FAQ
-            </a>
+        <!-- FAQ CTA -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
+            <div class="relative overflow-hidden bg-primary rounded-3xl p-8 md:p-12 text-white shadow-2xl shadow-primary/30 grid grid-cols-1 md:grid-cols-12 gap-6 items-center" data-reveal="scale">
+                <div class="pointer-events-none absolute -top-16 -left-16 w-44 h-44 rounded-full bg-white/20 blur-3xl" aria-hidden="true"></div>
+                <div class="pointer-events-none absolute -bottom-20 -right-12 w-56 h-56 rounded-full bg-secondary/25 blur-3xl" aria-hidden="true"></div>
+                <span class="pointer-events-none absolute right-6 -bottom-8 text-[10rem] font-black text-white/10 leading-none select-none" aria-hidden="true">?</span>
+                <div class="relative md:col-span-8">
+                    <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                    <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight mb-3">Domande frequenti</h2>
+                    <p class="text-white/80 leading-relaxed max-w-xl">
+                        Hai dei dubbi sui nostri camp o sulle modalità di iscrizione? Consulta le risposte alle domande più comuni della nostra community.
+                    </p>
+                </div>
+                <div class="relative md:col-span-4 md:text-right">
+                    <a href="faq.html" class="inline-flex items-center gap-2 bg-white text-primary hover:bg-secondary hover:text-gray-900 px-8 py-4 rounded-full font-extrabold transition-all duration-300 hover:-translate-y-0.5 shadow-xl">
+                        Leggi le nostre FAQ <span class="material-icons" aria-hidden="true">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 
