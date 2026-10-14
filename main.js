@@ -78,52 +78,5 @@ document.addEventListener('DOMContentLoaded', () => {
 */
 
 // ==========================================
-// MODULO COOKIE BANNER (Eseguito solo se il banner esiste)
+// COOKIE BANNER: gestito da consent.js (incluso nel <head> di ogni pagina)
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const banner = document.getElementById('cookie-banner');
-    
-    if (banner) { 
-        const btnAccept = document.getElementById('btn-accept-cookies');
-        const btnReject = document.getElementById('btn-reject-cookies');
-
-        const consentStatus = localStorage.getItem('ifb_cookie_consent');
-
-        if (!consentStatus) {
-            banner.classList.remove('hidden');
-            setTimeout(() => banner.classList.remove('translate-y-full'), 50);
-        } else if (consentStatus === 'granted') {
-            updateGtagConsent('granted');
-        }
-
-        btnAccept.addEventListener('click', () => {
-            localStorage.setItem('ifb_cookie_consent', 'granted');
-            hideBanner();
-            updateGtagConsent('granted');
-        });
-
-        btnReject.addEventListener('click', () => {
-            localStorage.setItem('ifb_cookie_consent', 'denied');
-            hideBanner();
-        });
-
-        function hideBanner() {
-            banner.classList.add('translate-y-full');
-            setTimeout(() => banner.classList.add('hidden'), 500);
-        }
-
-        function updateGtagConsent(status) {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            
-            gtag('consent', 'update', {
-                'ad_storage': status,
-                'ad_user_data': status,
-                'ad_personalization': status,
-                'analytics_storage': status
-            });
-            
-            dataLayer.push({ 'event': 'consent_updated' });
-        }
-    }
-});
