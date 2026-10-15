@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it" class="overflow-x-hidden w-full max-w-[100vw] scroll-smooth">
+
 <head>
     <script src="consent.js"></script>
     <meta charset="utf-8" />
@@ -7,17 +8,30 @@
     <meta name="theme-color" content="#7f13ec" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <title>Rookie League: Inizio Campionato | I Follow Beach Volley</title>
+    <title>Rookie League 2026/2027: il campionato a coppie miste | I Follow Beach Volley</title>
     <link rel="canonical" href="https://ifollowbv.it/rookie-league.html" />
-    <meta name="description" content="Tutto pronto per l'inizio della Rookie League, il campionato amatoriale di I Follow Beach Volley dedicato a chi muove i primi passi sulla sabbia." />
+    <meta name="description"
+        content="Rookie League IFB: il campionato di beach volley a coppie miste (M/F) a Basiglio, Pero, Corsico e Paderno. Calendario completo di tornei e finali 2026/2027, 25 € a persona per torneo. Iscrizioni su Dink." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Follow Beach Volley" />
+    <meta property="og:url" content="https://ifollowbv.it/rookie-league.html" />
+    <meta property="og:title" content="Rookie League 2026/2027 | I Follow Beach Volley" />
+    <meta property="og:description"
+        content="Il campionato di beach volley a coppie miste per chi muove i primi passi sulla sabbia. 4 centri, calendario completo e finali." />
+    <meta property="og:image" content="https://ifollowbv.it/beachtown.jpg" />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -40,12 +54,47 @@
     </script>
     <link rel="stylesheet" href="scroll-reveal.css" />
     <style>
-        body { font-family: 'Lexend', sans-serif; }
-        a:focus-visible, button:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #FFD700;
+            outline-offset: 3px;
+        }
+
+        /* Le utility Tailwind (flex, block...) sovrascrivono l'attributo hidden: lo riafferma */
+        [hidden] {
+            display: none !important;
+        }
+
+        /* Calendario: date concluse attenuate, prossima data evidenziata */
+        .rl-row.is-past {
+            opacity: .5;
+        }
+
+        .rl-row.is-past:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .rl-row.is-next {
+            box-shadow: 0 0 0 3px #7f13ec, 0 20px 40px -20px rgba(127, 19, 236, .5);
+        }
+
+        .rl-scroll {
+            scrollbar-width: none;
+        }
+
+        .rl-scroll::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white overflow-x-hidden w-full max-w-[100vw] relative m-0 p-0 flex flex-col min-h-screen">
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white overflow-x-hidden w-full max-w-[100vw] relative m-0 p-0 flex flex-col min-h-screen">
 
     <header>
         <div id="navbar-placeholder"></div>
@@ -54,175 +103,1275 @@
 
     <main class="w-full overflow-x-clip flex-1 relative">
 
-        <!-- HERO ARTICOLO -->
-        <section class="relative w-full min-h-[520px] h-[70svh] max-h-[720px] flex items-end bg-slate-950 overflow-hidden">
-            <img src="beachtown.jpg" alt="Campi in sabbia del BeachTown – Sporting Milano 3 a Basiglio" class="absolute inset-0 w-full h-full object-cover object-center z-0" fetchpriority="high" decoding="async">
-            <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
-            <div class="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-primary/50 via-transparent to-transparent"></div>
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-slate-950 text-white pt-10 md:pt-14 lg:pt-36 pb-16 md:pb-20">
+            <div class="absolute -top-32 -right-24 w-[34rem] h-[34rem] rounded-full bg-primary/50 blur-3xl pointer-events-none"
+                aria-hidden="true"></div>
+            <div class="absolute -bottom-40 -left-24 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none"
+                aria-hidden="true"></div>
+            <span
+                class="material-icons absolute -right-8 top-6 text-[16rem] md:text-[26rem] leading-none text-white/[0.04] select-none pointer-events-none"
+                aria-hidden="true">emoji_events</span>
 
-            <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
-                <a href="index.html#notizie" class="inline-flex items-center gap-2 text-sm font-bold text-white/90 hover:text-secondary bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full transition-all duration-200 ease-out mb-6 sr-load-down">
-                    <span class="material-icons text-sm" aria-hidden="true">arrow_back</span> Torna alla Home
-                </a>
-                <div class="flex flex-wrap items-center gap-2 mb-5 sr-load-down sr-delay-1">
-                    <span class="inline-flex items-center gap-1.5 bg-secondary text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
-                        <span class="material-icons text-sm" aria-hidden="true">emoji_events</span> Tornei
+            <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-wrap items-center gap-2 sr-load-down">
+                    <span
+                        class="inline-flex items-center gap-2 bg-secondary text-gray-900 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full uppercase tracking-[0.2em]">
+                        <span class="material-icons text-sm" aria-hidden="true">emoji_events</span> Stagione 2026/2027
                     </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/15 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Iscrizioni aperte
+                    <span
+                        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 text-white text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full uppercase tracking-[0.2em]">
+                        Coppie miste M/F
                     </span>
                 </div>
-                <h1 class="max-w-4xl font-black text-white uppercase tracking-tight leading-[0.95] text-[clamp(2.2rem,6.5vw,4.75rem)] sr-load-up sr-delay-2">
-                    Tutto pronto per l'inizio della <span class="text-secondary">Rookie League!</span>
+
+                <h1
+                    class="mt-6 font-black uppercase tracking-tight leading-[0.9] text-[clamp(3rem,11vw,8rem)] sr-load-up sr-delay-1">
+                    Rookie<br /><span class="text-secondary">League.</span>
                 </h1>
-                <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-gray-200 sr-load-fade sr-delay-3">
-                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">calendar_month</span> <time datetime="2026-10-04">04 Ottobre 2026</time></span>
-                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">edit</span> Redazione IFB</span>
-                    <span class="flex items-center gap-1.5"><span class="material-icons text-secondary text-base" aria-hidden="true">schedule</span> 3 min di lettura</span>
+
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                    <div class="lg:col-span-7 sr-load-fade sr-delay-2">
+                        <span class="block w-14 h-1 rounded-full bg-secondary mb-4" aria-hidden="true"></span>
+                        <p class="text-lg md:text-xl text-gray-200 font-light leading-relaxed max-w-xl">
+                            Il campionato di beach volley a coppie miste per chi muove i primi passi sulla sabbia.
+                            Quattro centri, una stagione di tornei e una finale per ciascuno.
+                        </p>
+                        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                            <a href="#calendario"
+                                class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-7 py-4 rounded-full shadow-xl shadow-primary/40 hover:shadow-primary/60 transition-all duration-300 hover:-translate-y-0.5">
+                                <span class="material-icons" aria-hidden="true">calendar_month</span> Vedi il calendario
+                            </a>
+                            <a href="tornei.html#calendario" data-track="cta_iscrizione_dink"
+                                data-track-pos="rookie_hero"
+                                class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white hover:text-gray-900 border border-white/25 backdrop-blur-md text-white font-extrabold px-7 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                                <span class="material-icons" aria-hidden="true">how_to_reg</span> Iscriviti su Dink
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Prossima data: compilata via JS, nascosta se non ci sono date future -->
+                    <a id="next-event" href="#calendario" hidden
+                        class="lg:col-span-5 group rounded-3xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 p-6 transition-all duration-200 ease-out hover:-translate-y-0.5">
+                        <p
+                            class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Prossima data
+                        </p>
+                        <p id="next-when" class="mt-3 text-2xl md:text-3xl font-black capitalize leading-tight"></p>
+                        <p class="mt-1 flex items-center justify-between gap-3 text-gray-300">
+                            <span id="next-where" class="font-semibold"></span>
+                            <span id="next-in"
+                                class="text-xs font-bold uppercase tracking-wider bg-secondary text-gray-900 px-3 py-1.5 rounded-full"></span>
+                        </p>
+                        <p id="next-reg" class="mt-4 pt-4 border-t border-white/10 text-sm font-semibold text-gray-200">
+                        </p>
+                        <p id="next-alt" hidden class="mt-1 text-sm text-gray-400"></p>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- KEY DATES STRIP -->
+        <!-- STRIP NUMERI -->
         <div class="relative z-20 bg-primary text-white -rotate-1 scale-[1.02] shadow-lg">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-0 sm:divide-x divide-white/20 rotate-1">
-                <div class="flex items-center gap-3 sm:px-6 first:sm:pl-0">
-                    <span class="material-icons text-secondary" aria-hidden="true">event</span>
-                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Inizio</span><span class="font-extrabold">Dom 18 Ottobre 2026</span></div>
-                </div>
-                <div class="flex items-center gap-3 sm:px-6">
-                    <span class="material-icons text-secondary" aria-hidden="true">place</span>
-                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Location</span><span class="font-extrabold">BeachTown, Basiglio</span></div>
-                </div>
-                <div class="flex items-center gap-3 sm:px-6">
-                    <span class="material-icons text-secondary" aria-hidden="true">hourglass_bottom</span>
-                    <div><span class="block text-[11px] uppercase tracking-[0.2em] text-white/70 font-bold">Chiusura iscrizioni</span><span class="font-extrabold">Mer 14 Ottobre 2026</span></div>
-                </div>
+            <div
+                class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-5 lg:gap-0 lg:divide-x divide-white/20 rotate-1">
+                <div class="lg:px-6 lg:first:pl-0"><span
+                        class="block text-4xl font-black leading-none tabular-nums">4</span><span
+                        class="text-[11px] uppercase tracking-[0.2em] text-white/75 font-bold">Centri</span></div>
+                <div class="lg:px-6"><span class="block text-4xl font-black leading-none tabular-nums">19</span><span
+                        class="text-[11px] uppercase tracking-[0.2em] text-white/75 font-bold">Tornei</span></div>
+                <div class="lg:px-6"><span class="block text-4xl font-black leading-none tabular-nums">4</span><span
+                        class="text-[11px] uppercase tracking-[0.2em] text-white/75 font-bold">Finali</span></div>
+                <div class="lg:px-6"><span class="block text-4xl font-black leading-none tabular-nums">25 €</span><span
+                        class="text-[11px] uppercase tracking-[0.2em] text-white/75 font-bold">A persona, a
+                        torneo</span></div>
             </div>
         </div>
 
-        <!-- CONTENUTO -->
-        <section class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-
-                <article class="lg:col-span-8 prose prose-lg prose-gray dark:prose-invert prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary-dark prose-strong:text-gray-900 dark:prose-strong:text-white max-w-none">
-
-                    <p class="lead !text-xl md:!text-2xl !font-light !leading-relaxed text-gray-700 dark:text-gray-200 border-l-4 border-secondary pl-6" data-reveal="up">
-                        Il campionato dedicato a chi muove i primi passi nel beach volley è finalmente ai blocchi di partenza. Le squadre sono pronte, la sabbia è calda e il calendario delle sfide è ufficiale. Ecco tutto quello che c'è da sapere sulla nuova edizione.
+        <!-- IL CAMPIONATO -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+                <div class="lg:col-span-5" data-reveal="left">
+                    <p class="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Il campionato</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-5">
+                        Competere senza stress.</h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed border-l-4 border-secondary pl-5">
+                        La <strong class="text-gray-900 dark:text-white">Rookie League</strong> è il format targato
+                        <em>I Follow Beach Volley</em> pensato per chi ha da poco iniziato il proprio percorso e vuole
+                        assaporare l'adrenalina della competizione in un ambiente stimolante, sano e privo di stress.
                     </p>
+                    <p class="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Non si tratta solo di vincere: è l'occasione per mettere in pratica ciò che hai imparato nei
+                        corsi, gestire la palla in situazioni di gara e, soprattutto, fare gruppo.
+                    </p>
+                </div>
 
-                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
-                        <span class="text-primary font-black text-sm tracking-widest">01</span>
-                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Cos'è la Rookie League?</h2>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <article
+                        class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out"
+                        data-reveal="up">
+                        <span
+                            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span
+                                class="material-icons text-primary group-hover:text-white transition-colors"
+                                aria-hidden="true">wc</span></span>
+                        <span
+                            class="inline-flex bg-secondary text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">M
+                            + F</span>
+                        <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Coppie miste</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Si gioca in coppia, un uomo
+                            e una donna. Puoi iscriverti con il tuo compagno o la tua compagna di corso, oppure chiedere
+                            un partner allo staff.</p>
+                    </article>
+                    <article
+                        class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-6 sr-stagger-1"
+                        data-reveal="up">
+                        <span
+                            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span
+                                class="material-icons text-primary group-hover:text-white transition-colors"
+                                aria-hidden="true">grid_view</span></span>
+                        <span
+                            class="inline-flex bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Min.
+                            3 match</span>
+                        <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Gironi all'italiana</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Nessuno va a casa dopo una
+                            sola partita: la prima fase prevede gironi che garantiscono un minimo di 3 match per
+                            squadra.</p>
+                    </article>
+                    <article
+                        class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-12 sr-stagger-2"
+                        data-reveal="up">
+                        <span
+                            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span
+                                class="material-icons text-primary group-hover:text-white transition-colors"
+                                aria-hidden="true">emoji_events</span></span>
+                        <span
+                            class="inline-flex bg-gray-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Maggio
+                            2027</span>
+                        <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Una finale per centro</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Ogni centro chiude la
+                            stagione con la sua finale, tra il 9 e il 30 maggio 2027.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALENDARIO -->
+        <section id="calendario" class="relative bg-sand dark:bg-sand-dark py-16 md:py-24 scroll-mt-4 lg:scroll-mt-20">
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80"
+                aria-hidden="true"></div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8" data-reveal="fade">
+                    <p class="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Tutte le date</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                        Calendario 2026/2027</h2>
+                </div>
+
+                <!-- Filtro per centro -->
+                <div
+                    class="sticky top-0 lg:top-[72px] z-30 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-3 bg-sand/95 dark:bg-sand-dark/95 backdrop-blur-md">
+                    <div class="flex items-center gap-2 overflow-x-auto rl-scroll" role="group"
+                        aria-label="Filtra per centro">
+                        <button type="button" data-filter="basiglio" aria-pressed="false"
+                            class="rl-chip inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary">Basiglio<span
+                                class="text-[11px] font-black opacity-70 tabular-nums">6</span></button>
+                        <button type="button" data-filter="pero" aria-pressed="false"
+                            class="rl-chip inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary">Pero<span
+                                class="text-[11px] font-black opacity-70 tabular-nums">6</span></button>
+                        <button type="button" data-filter="corsico" aria-pressed="false"
+                            class="rl-chip inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary">Corsico<span
+                                class="text-[11px] font-black opacity-70 tabular-nums">6</span></button>
+                        <button type="button" data-filter="paderno" aria-pressed="false"
+                            class="rl-chip inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary">Paderno<span
+                                class="text-[11px] font-black opacity-70 tabular-nums">5</span></button>
+                        <button type="button" data-filter="tutti" aria-pressed="false"
+                            class="rl-chip inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-primary/20 hover:border-primary hover:text-primary">Tutti<span
+                                class="text-[11px] font-black opacity-70 tabular-nums">23</span></button>
                     </div>
-                    <p data-reveal="up">
-                        La <strong>Rookie League</strong> è il format esclusivo targato <em>I Follow Beach Volley</em> pensato per chi ha da poco iniziato il proprio percorso formativo e vuole assaporare l'adrenalina della competizione in un ambiente stimolante, sano e privo di stress. Non si tratta solo di vincere, ma di mettere in pratica le dinamiche di gioco apprese durante i corsi, imparare a gestire la palla in situazioni di gara e, soprattutto, fare gruppo.
-                    </p>
+                    <p class="mt-2 text-xs font-semibold text-gray-500 dark:text-gray-400" aria-live="polite"><span
+                            id="cal-count"></span> <span id="cal-count-label"></span></p>
+                </div>
 
-                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
-                        <span class="text-primary font-black text-sm tracking-widest">02</span>
-                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Regolamento e formula di gioco</h2>
+                <!-- Stato vuoto: visibile finché nessun centro è selezionato -->
+                <div id="cal-empty" class="mt-8 flex flex-col items-center justify-center gap-4 py-16 text-center">
+                    <span class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                        <span class="material-icons text-3xl text-primary" aria-hidden="true">filter_list</span>
+                    </span>
+                    <p class="font-extrabold text-xl text-gray-900 dark:text-white">Seleziona un centro</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 max-w-xs">Scegli uno dei quattro centri per vedere le relative date, oppure premi «Tutti» per il calendario completo.</p>
+                </div>
+
+                <div id="cal-list" class="mt-4 space-y-8 hidden">
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Ottobre 2026<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="basiglio" data-start="2026-10-18" data-end="2026-10-18"
+                                data-deadline="2026-10-14"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-primary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-10-18" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">18</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">ott</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 1 di 5 ·
+                                        iscrizioni entro mer 14 ott</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
                     </div>
-                    <p data-reveal="up">
-                        Per garantire il massimo divertimento e l'equilibrio tra le coppie in campo, abbiamo studiato una formula specifica per i livelli base (entry-level):
-                    </p>
-
-                    <ul class="not-prose grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out" data-reveal="up">
-                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">people</span></span>
-                            <span class="inline-flex bg-secondary text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">2x2</span>
-                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Coppie fisse</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Il torneo si gioca in modalità 2x2. Puoi iscriverti con il tuo compagno di corso o richiedere un partner direttamente allo staff.</p>
-                        </li>
-                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-6 sr-stagger-1" data-reveal="up">
-                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">grid_view</span></span>
-                            <span class="inline-flex bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Min. 3 match</span>
-                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Gironi all'italiana</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Nessuno va a casa dopo una sola partita. La prima fase prevede gironi che garantiscono un minimo di 3 match per squadra.</p>
-                        </li>
-                        <li class="group bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 ease-out sm:mt-12 sr-stagger-2" data-reveal="up">
-                            <span class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"><span class="material-icons text-primary group-hover:text-white transition-colors" aria-hidden="true">height</span></span>
-                            <span class="inline-flex bg-gray-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">Entry level</span>
-                            <h3 class="font-extrabold text-gray-900 dark:text-white mb-2">Altezza rete adattata</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Per favorire gli scambi prolungati e la tecnica di costruzione.</p>
-                        </li>
-                    </ul>
-
-                    <div class="not-prose flex items-center gap-4 mt-14 mb-5" data-reveal="fade">
-                        <span class="text-primary font-black text-sm tracking-widest">03</span>
-                        <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white tracking-tight">Il ruolo degli allenatori</h2>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Novembre 2026<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="corsico" data-start="2026-11-07" data-end="2026-11-07"
+                                data-deadline="2026-11-03"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-emerald-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-11-07" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">7</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">nov</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 1 di 5 ·
+                                        iscrizioni entro mar 3 nov</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="basiglio" data-start="2026-11-14" data-end="2026-11-14"
+                                data-deadline="2026-11-10"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-primary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-11-14" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">14</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">nov</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 2 di 5 ·
+                                        iscrizioni entro mar 10 nov</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="pero" data-start="2026-11-22" data-end="2026-11-22"
+                                data-deadline="2026-11-18"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-amber-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-11-22" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">22</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">nov</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 1 di 5 ·
+                                        iscrizioni entro mer 18 nov</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="paderno" data-start="2026-11-28" data-end="2026-11-29"
+                                data-deadline="2026-11-24"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-sky-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-11-28" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab–dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">28–29</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">nov</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500"
+                                            aria-hidden="true"></span>Paderno
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 1 di 4 · weekend
+                                        di 2 giorni · iscrizioni entro mar 24 nov</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
                     </div>
-                    <p data-reveal="up">
-                        Durante la Rookie League, lo staff tecnico di IFB non farà solo da arbitro. I nostri coach saranno presenti a bordo campo per fornire feedback a fine partita, aiutare nella comprensione delle posizioni difensive (linea/diagonale) e consigliare sulle scelte di alzata. È a tutti gli effetti un allenamento agonistico supervisionato.
-                    </p>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Dicembre 2026<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="corsico" data-start="2026-12-12" data-end="2026-12-12"
+                                data-deadline="2026-12-08"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-emerald-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2026-12-12" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">12</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">dic</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 2 di 5 ·
+                                        iscrizioni entro mar 8 dic</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Gennaio 2027<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="corsico" data-start="2027-01-09" data-end="2027-01-09"
+                                data-deadline="2027-01-05"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-emerald-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-01-09" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">9</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">gen</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 3 di 5 ·
+                                        iscrizioni entro mar 5 gen</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="pero" data-start="2027-01-16" data-end="2027-01-16"
+                                data-deadline="2027-01-12"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-amber-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-01-16" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">16</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">gen</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 2 di 5 ·
+                                        iscrizioni entro mar 12 gen</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="basiglio" data-start="2027-01-23" data-end="2027-01-23"
+                                data-deadline="2027-01-19"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-primary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-01-23" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">23</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">gen</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 3 di 5 ·
+                                        iscrizioni entro mar 19 gen</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="paderno" data-start="2027-01-30" data-end="2027-01-31"
+                                data-deadline="2027-01-26"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-sky-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-01-30" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab–dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">30–31</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">gen</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500"
+                                            aria-hidden="true"></span>Paderno
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 2 di 4 · weekend
+                                        di 2 giorni · iscrizioni entro mar 26 gen</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Febbraio 2027<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="basiglio" data-start="2027-02-14" data-end="2027-02-14"
+                                data-deadline="2027-02-10"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-primary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-02-14" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">14</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">feb</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 4 di 5 ·
+                                        iscrizioni entro mer 10 feb</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="pero" data-start="2027-02-20" data-end="2027-02-20"
+                                data-deadline="2027-02-16"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-amber-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-02-20" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">20</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">feb</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 3 di 5 ·
+                                        iscrizioni entro mar 16 feb</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="paderno" data-start="2027-02-27" data-end="2027-02-28"
+                                data-deadline="2027-02-23"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-sky-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-02-27" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab–dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">27–28</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">feb</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500"
+                                            aria-hidden="true"></span>Paderno
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 3 di 4 · weekend
+                                        di 2 giorni · iscrizioni entro mar 23 feb</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Marzo 2027<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="pero" data-start="2027-03-06" data-end="2027-03-06"
+                                data-deadline="2027-03-02"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-amber-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-03-06" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">6</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">mar</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 4 di 5 ·
+                                        iscrizioni entro mar 2 mar</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="corsico" data-start="2027-03-13" data-end="2027-03-13"
+                                data-deadline="2027-03-09"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-emerald-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-03-13" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">13</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">mar</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 4 di 5 ·
+                                        iscrizioni entro mar 9 mar</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="paderno" data-start="2027-03-20" data-end="2027-03-21"
+                                data-deadline="2027-03-16"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-sky-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-03-20" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab–dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">20–21</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">mar</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500"
+                                            aria-hidden="true"></span>Paderno
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 4 di 4 · weekend
+                                        di 2 giorni · iscrizioni entro mar 16 mar</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="basiglio" data-start="2027-03-21" data-end="2027-03-21"
+                                data-deadline="2027-03-17"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-primary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-03-21" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">21</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">mar</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 5 di 5 ·
+                                        iscrizioni entro mer 17 mar</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Aprile 2027<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="pero" data-start="2027-04-11" data-end="2027-04-11"
+                                data-deadline="2027-04-07"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-amber-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-04-11" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">11</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">apr</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 5 di 5 ·
+                                        iscrizioni entro mer 7 apr</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="corsico" data-start="2027-04-17" data-end="2027-04-17"
+                                data-deadline="2027-04-13"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-white dark:bg-gray-800 border-l-emerald-500 p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-04-17" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">17</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">apr</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Torneo 5 di 5 ·
+                                        iscrizioni entro mar 13 apr</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-month>
+                        <h3
+                            class="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">
+                            Maggio 2027<span class="flex-1 border-t-2 border-dashed border-primary/15"
+                                aria-hidden="true"></span></h3>
+                        <ul class="space-y-3">
+                            <li data-event data-center="basiglio" data-start="2027-05-09" data-end="2027-05-09"
+                                data-deadline="2027-05-05"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-gradient-to-r from-secondary/25 via-white to-white dark:from-secondary/20 dark:via-gray-800 dark:to-gray-800 border-l-secondary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-05-09" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">9</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-primary">mag</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary"
+                                            aria-hidden="true"></span>Basiglio <span
+                                            class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"><span
+                                                class="material-icons text-xs" aria-hidden="true">emoji_events</span>
+                                            Finale</span>
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Gran finale del centro ·
+                                        iscrizioni entro mer 5 mag</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="paderno" data-start="2027-05-16" data-end="2027-05-16"
+                                data-deadline="2027-05-12"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-gradient-to-r from-secondary/25 via-white to-white dark:from-secondary/20 dark:via-gray-800 dark:to-gray-800 border-l-secondary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-05-16" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">16</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">mag</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500"
+                                            aria-hidden="true"></span>Paderno <span
+                                            class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"><span
+                                                class="material-icons text-xs" aria-hidden="true">emoji_events</span>
+                                            Finale</span>
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Gran finale del centro ·
+                                        iscrizioni entro mer 12 mag</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="corsico" data-start="2027-05-22" data-end="2027-05-22"
+                                data-deadline="2027-05-18"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-gradient-to-r from-secondary/25 via-white to-white dark:from-secondary/20 dark:via-gray-800 dark:to-gray-800 border-l-secondary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-05-22" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">sab</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">22</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">mag</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"
+                                            aria-hidden="true"></span>Corsico <span
+                                            class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"><span
+                                                class="material-icons text-xs" aria-hidden="true">emoji_events</span>
+                                            Finale</span>
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Gran finale del centro ·
+                                        iscrizioni entro mar 18 mag</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                            <li data-event data-center="pero" data-start="2027-05-30" data-end="2027-05-30"
+                                data-deadline="2027-05-26"
+                                class="rl-row relative flex items-center gap-4 rounded-3xl border border-gray-100 dark:border-gray-700 border-l-4 bg-gradient-to-r from-secondary/25 via-white to-white dark:from-secondary/20 dark:via-gray-800 dark:to-gray-800 border-l-secondary p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 ease-out">
+                                <time datetime="2027-05-30" class="shrink-0 min-w-[4rem] text-center">
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">dom</span>
+                                    <span
+                                        class="block text-3xl font-black leading-none text-gray-900 dark:text-white tabular-nums">30</span>
+                                    <span
+                                        class="block text-[11px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">mag</span>
+                                </time>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="flex flex-wrap items-center gap-x-2 gap-y-1 font-extrabold text-lg text-gray-900 dark:text-white leading-tight">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"
+                                            aria-hidden="true"></span>Pero <span
+                                            class="inline-flex items-center gap-1 bg-secondary text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"><span
+                                                class="material-icons text-xs" aria-hidden="true">emoji_events</span>
+                                            Finale</span>
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Gran finale del centro ·
+                                        iscrizioni entro mer 26 mag</p>
+                                </div>
+                                <span data-status
+                                    class="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-                    <p class="not-prose mt-10 text-2xl md:text-3xl font-black uppercase tracking-tight text-gray-900 dark:text-white leading-tight" data-reveal="up">
-                        Preparate gli occhiali da sole e la voglia di tuffarvi. <span class="text-primary">Ci vediamo sulla sabbia!</span>
-                    </p>
+                <div
+                    class="mt-8 rounded-3xl bg-white dark:bg-gray-800 border border-primary/15 border-l-4 border-l-primary p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+                    <span
+                        class="w-11 h-11 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center"><span
+                            class="material-icons" aria-hidden="true">how_to_reg</span></span>
+                    <p class="flex-1 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"><strong
+                            class="text-gray-900 dark:text-white">Ci si iscrive su Dink: le iscrizioni chiudono 3 giorni
+                            interi prima di ogni torneo.</strong> La data limite è indicata su ogni torneo. Trovi i
+                        tornei con il pulsante di iscrizione nella pagina Eventi. Le date possono subire variazioni: per
+                        conferme scrivici su WhatsApp.</p>
+                    <a href="tornei.html#calendario"
+                        class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-5 py-3 rounded-full transition-all duration-200 ease-out hover:-translate-y-0.5 whitespace-nowrap">Vai
+                        agli eventi <span class="material-icons text-lg" aria-hidden="true">arrow_forward</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- I CENTRI -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10" data-reveal="fade">
+                <div>
+                    <p class="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3">Dove si gioca</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">I
+                        quattro centri</h2>
+                </div>
+                <p class="max-w-sm text-gray-600 dark:text-gray-400 font-light">Scegli il centro più comodo: ognuno ha
+                    il suo calendario e la sua finale.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <article
+                    class="group relative overflow-hidden rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col"
+                    data-reveal="up">
+                    <div class="relative h-40 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                        <img src="beachtown.jpg" alt="Campi in sabbia del BeachTown a Basiglio"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy" decoding="async" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <span
+                            class="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"><span
+                                class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>5 tornei +
+                            finale</span>
+                        <p
+                            class="absolute bottom-3 left-4 text-white font-black uppercase tracking-tight text-3xl leading-none">
+                            Basiglio</p>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="text-sm mb-4 flex flex-col"><a href="sedi.html#basiglio"
+                                class="font-bold text-gray-900 dark:text-white hover:text-primary underline-offset-2 hover:underline">BeachTown
+                                – Sporting Milano 3</a><a
+                                href="https://www.google.com/maps/dir/?api=1&amp;destination=Piazza+Marco+Polo,+3,+20079+Basiglio+MI"
+                                target="_blank" rel="noopener noreferrer"
+                                class="mt-1 inline-flex items-start gap-1 text-gray-500 dark:text-gray-400 hover:text-primary transition-colors"><span
+                                    class="material-icons text-base mt-px"
+                                    aria-hidden="true">location_on</span><span>Piazza Marco Polo, 3 – 20079 Basiglio
+                                    (MI)</span></a></div>
+                        <dl class="grid grid-cols-2 gap-3 text-sm mb-5">
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Si parte</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">18 ott 2026</dd>
+                            </div>
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Finale</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">9 mag 2027</dd>
+                            </div>
+                        </dl>
+                        <button type="button" data-goto="basiglio"
+                            class="mt-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-5 py-3 rounded-full transition-all duration-200 ease-out">
+                            Vedi le date <span class="material-icons text-lg" aria-hidden="true">south</span>
+                        </button>
+                    </div>
                 </article>
-
-                <!-- SIDEBAR INFO -->
-                <aside class="lg:col-span-4">
-                    <div class="lg:sticky lg:top-28 space-y-5">
-                        <div class="relative overflow-hidden bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border border-primary/15 shadow-xl shadow-primary/10 p-7" data-reveal="right">
-                            <div class="flex items-center gap-3 mb-6">
-                                <span class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-icons" aria-hidden="true">sports_volleyball</span></span>
-                                <h2 class="text-xl font-black text-gray-900 dark:text-white">Info pratiche</h2>
+                <article
+                    class="group relative overflow-hidden rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col"
+                    data-reveal="up">
+                    <div class="relative h-40 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                        <img src="pero.jpg" alt="Campi da beach volley del Pero Sporting Club"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy" decoding="async" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <span
+                            class="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"><span
+                                class="w-2 h-2 rounded-full bg-amber-500" aria-hidden="true"></span>5 tornei +
+                            finale</span>
+                        <p
+                            class="absolute bottom-3 left-4 text-white font-black uppercase tracking-tight text-3xl leading-none">
+                            Pero</p>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="text-sm mb-4 flex flex-col"><a href="sedi.html#pero"
+                                class="font-bold text-gray-900 dark:text-white hover:text-primary underline-offset-2 hover:underline">Pero
+                                Sporting Club</a><a
+                                href="https://www.google.com/maps/dir/?api=1&amp;destination=Via+Papa+Giovanni+XXIII+6,+20016+Pero,+Lombardia"
+                                target="_blank" rel="noopener noreferrer"
+                                class="mt-1 inline-flex items-start gap-1 text-gray-500 dark:text-gray-400 hover:text-primary transition-colors"><span
+                                    class="material-icons text-base mt-px"
+                                    aria-hidden="true">location_on</span><span>Via Papa Giovanni XXIII 6 – 20016 Pero
+                                    (MI)</span></a></div>
+                        <dl class="grid grid-cols-2 gap-3 text-sm mb-5">
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Si parte</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">22 nov 2026</dd>
                             </div>
-                            <ol class="relative border-l-2 border-dashed border-primary/30 ml-2 space-y-6">
-                                <li class="pl-6 relative">
-                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-white dark:ring-gray-800"></span>
-                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Chiusura iscrizioni</span>
-                                    <span class="font-extrabold text-gray-900 dark:text-white">Mercoledì 14 Ottobre 2026</span>
-                                </li>
-                                <li class="pl-6 relative">
-                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white dark:ring-gray-800"></span>
-                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Data di inizio</span>
-                                    <span class="font-extrabold text-gray-900 dark:text-white">Domenica 18 Ottobre 2026</span>
-                                </li>
-                                <li class="pl-6 relative">
-                                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gray-900 dark:bg-white ring-4 ring-white dark:ring-gray-800"></span>
-                                    <span class="block text-[11px] font-bold text-primary uppercase tracking-[0.2em]">Location</span>
-                                    <span class="font-extrabold text-gray-900 dark:text-white">BeachTown – Sporting Milano 3, Basiglio</span>
-                                </li>
-                            </ol>
-                            <a href="contatti.html" class="mt-8 w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-6 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5">
-                                Iscriviti ora <span class="material-icons text-lg" aria-hidden="true">arrow_forward</span>
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Finale</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">30 mag 2027</dd>
+                            </div>
+                        </dl>
+                        <button type="button" data-goto="pero"
+                            class="mt-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-5 py-3 rounded-full transition-all duration-200 ease-out">
+                            Vedi le date <span class="material-icons text-lg" aria-hidden="true">south</span>
+                        </button>
+                    </div>
+                </article>
+                <article
+                    class="group relative overflow-hidden rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col"
+                    data-reveal="up">
+                    <div class="relative h-40 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                        <img src="corsico.webp" alt="Area beach volley dello Sport Time Corsico"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy" decoding="async" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <span
+                            class="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"><span
+                                class="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>5 tornei +
+                            finale</span>
+                        <p
+                            class="absolute bottom-3 left-4 text-white font-black uppercase tracking-tight text-3xl leading-none">
+                            Corsico</p>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="text-sm mb-4 flex flex-col"><a href="sedi.html#corsico"
+                                class="font-bold text-gray-900 dark:text-white hover:text-primary underline-offset-2 hover:underline">Sport
+                                Time Corsico</a><a
+                                href="https://www.google.com/maps/dir/?api=1&amp;destination=Via+Visconti+di+Modrone+2,+20094+Corsico,+Lombardia"
+                                target="_blank" rel="noopener noreferrer"
+                                class="mt-1 inline-flex items-start gap-1 text-gray-500 dark:text-gray-400 hover:text-primary transition-colors"><span
+                                    class="material-icons text-base mt-px"
+                                    aria-hidden="true">location_on</span><span>Via Visconti di Modrone 2 – 20094 Corsico
+                                    (MI)</span></a></div>
+                        <dl class="grid grid-cols-2 gap-3 text-sm mb-5">
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Si parte</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">7 nov 2026</dd>
+                            </div>
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Finale</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">22 mag 2027</dd>
+                            </div>
+                        </dl>
+                        <button type="button" data-goto="corsico"
+                            class="mt-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-5 py-3 rounded-full transition-all duration-200 ease-out">
+                            Vedi le date <span class="material-icons text-lg" aria-hidden="true">south</span>
+                        </button>
+                    </div>
+                </article>
+                <article
+                    class="group relative overflow-hidden rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl hover:shadow-primary/15 hover:-translate-y-0.5 transition-all duration-200 ease-out flex flex-col"
+                    data-reveal="up">
+                    <div class="relative h-40 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                        <img src="paderno.jpeg" alt="Centro Sportivo Country Village Paderno Dugnano"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy" decoding="async" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <span
+                            class="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"><span
+                                class="w-2 h-2 rounded-full bg-sky-500" aria-hidden="true"></span>4 tornei +
+                            finale</span>
+                        <p
+                            class="absolute bottom-3 left-4 text-white font-black uppercase tracking-tight text-3xl leading-none">
+                            Paderno</p>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="text-sm mb-4 flex flex-col"><span
+                                class="font-bold text-gray-900 dark:text-white">Country Sport Village</span><a
+                                href="https://www.google.com/maps/dir/?api=1&amp;destination=Via+Guglielmo+Pepe+68,+Paderno+Dugnano"
+                                target="_blank" rel="noopener noreferrer"
+                                class="mt-1 inline-flex items-start gap-1 text-gray-500 dark:text-gray-400 hover:text-primary transition-colors"><span
+                                    class="material-icons text-base mt-px"
+                                    aria-hidden="true">location_on</span><span>Via Guglielmo Pepe, 68 – Paderno Dugnano
+                                    (MI)</span></a><span
+                                class="mt-3 inline-flex items-center gap-1 bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full self-start">Weekend
+                                di 2 giorni</span></div>
+                        <dl class="grid grid-cols-2 gap-3 text-sm mb-5">
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Si parte</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">28 nov 2026</dd>
+                            </div>
+                            <div>
+                                <dt class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Finale</dt>
+                                <dd class="font-extrabold text-gray-900 dark:text-white">16 mag 2027</dd>
+                            </div>
+                        </dl>
+                        <button type="button" data-goto="paderno"
+                            class="mt-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-5 py-3 rounded-full transition-all duration-200 ease-out">
+                            Vedi le date <span class="material-icons text-lg" aria-hidden="true">south</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ISCRIZIONE -->
+        <section id="iscrizione"
+            class="relative bg-slate-950 text-white py-16 md:py-24 overflow-hidden scroll-mt-4 lg:scroll-mt-20">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/50 blur-3xl pointer-events-none"
+                aria-hidden="true"></div>
+            <div class="absolute -bottom-32 -left-20 w-80 h-80 rounded-full bg-secondary/15 blur-3xl pointer-events-none"
+                aria-hidden="true"></div>
+            <div
+                class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6" data-reveal="left">
+                    <span class="block w-14 h-1 rounded-full bg-secondary mb-5" aria-hidden="true"></span>
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.95]">Pronto a <span
+                            class="text-secondary">giocare?</span></h2>
+                    <p class="mt-5 text-gray-300 leading-relaxed max-w-md">Iscriversi è semplice: scegli il torneo,
+                        forma la coppia e registrati su Dink. Se hai domande o ti manca un compagno o una compagna di
+                        coppia, scrivici.</p>
+                    <ol class="mt-8 space-y-4">
+                        <li class="flex items-start gap-4"><span
+                                class="w-9 h-9 shrink-0 rounded-full bg-secondary text-gray-900 text-sm font-black flex items-center justify-center">1</span><span
+                                class="pt-1.5 text-gray-200">Scegli il centro e il torneo dal calendario</span></li>
+                        <li class="flex items-start gap-4"><span
+                                class="w-9 h-9 shrink-0 rounded-full bg-secondary text-gray-900 text-sm font-black flex items-center justify-center">2</span><span
+                                class="pt-1.5 text-gray-200">Forma la tua coppia: un uomo e una donna. Non hai un
+                                partner? Scrivici e ti aiutiamo a trovarlo</span></li>
+                        <li class="flex items-start gap-4"><span
+                                class="w-9 h-9 shrink-0 rounded-full bg-secondary text-gray-900 text-sm font-black flex items-center justify-center">3</span><span
+                                class="pt-1.5 text-gray-200">Iscriviti su Dink: le iscrizioni chiudono 3 giorni interi
+                                prima del torneo</span></li>
+                    </ol>
+                </div>
+
+                <div class="lg:col-span-6" data-reveal="right">
+                    <div class="rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 p-7 md:p-9">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">Quota di
+                            partecipazione</p>
+                        <p class="mt-2 flex items-end gap-3"><span
+                                class="text-6xl md:text-7xl font-black leading-none tabular-nums">25 €</span><span
+                                class="pb-2 text-gray-300 font-semibold">a persona, per ogni torneo<br /><span
+                                    class="text-sm text-gray-400 font-medium">finale compresa</span></span></p>
+
+                        <div class="mt-8 flex flex-col gap-3">
+                            <a href="tornei.html#calendario" data-track="cta_iscrizione_dink"
+                                data-track-pos="rookie_iscrizione"
+                                class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-8 py-4 rounded-full shadow-xl shadow-primary/40 hover:shadow-primary/60 transition-all duration-300 hover:-translate-y-0.5">
+                                <span class="material-icons" aria-hidden="true">how_to_reg</span> Iscriviti su Dink
                             </a>
+                            <p class="text-center text-xs text-gray-400 -mt-1">Dalla pagina Eventi, con i tornei in
+                                programma</p>
                         </div>
 
-                        <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-6 shadow-md" data-reveal="right">
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">Condividi l'articolo</p>
-                            <div class="flex items-center gap-3">
-                                <a href="https://api.whatsapp.com/send?text=Tutto%20pronto%20per%20la%20Rookie%20League!%20Scopri%20di%20pi%C3%B9:%20https://ifollowbv.it/rookie-league.html" target="_blank" rel="noopener noreferrer" aria-label="Condividi su WhatsApp" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#25D366]/10 text-[#128C7E] dark:text-[#25D366] font-bold text-sm hover:bg-[#25D366] hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
-                                    <span class="material-icons text-lg" aria-hidden="true">chat</span> WhatsApp
+                        <div class="mt-7 pt-6 border-t border-white/10">
+                            <p class="text-sm font-bold text-gray-200 mb-3">Informazioni o ricerca partner</p>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <a href="https://wa.me/393289683737?text=Ciao!%20Vorrei%20informazioni%20sulla%20Rookie%20League%20(o%20cerco%20un%20compagno%2Funa%20compagna%20di%20coppia)."
+                                    target="_blank" rel="noopener noreferrer" data-track="cta_whatsapp"
+                                    data-track-pos="rookie_iscrizione"
+                                    class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                                    <span class="material-icons" aria-hidden="true">chat</span> WhatsApp
                                 </a>
-                                <button type="button" id="copy-link" aria-label="Copia il link dell'articolo" class="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-primary/10 text-primary font-bold text-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 transition-all duration-200 ease-out">
-                                    <span class="material-icons text-lg" aria-hidden="true">link</span> <span data-label>Copia link</span>
-                                </button>
+                                <a href="tel:+393289683737" data-track="cta_telefono" data-track-pos="rookie_iscrizione"
+                                    class="flex-1 inline-flex items-center justify-center gap-2 bg-white text-primary hover:bg-secondary hover:text-gray-900 font-extrabold px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                                    <span class="material-icons" aria-hidden="true">call</span> +39 328 968 3737
+                                </a>
                             </div>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
+                            <span class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Condividi</span>
+                            <a href="https://api.whatsapp.com/send?text=Rookie%20League%20IFB%3A%20il%20campionato%20a%20coppie%20miste.%20Calendario%20e%20info%3A%20https%3A%2F%2Fifollowbv.it%2Frookie-league.html"
+                                target="_blank" rel="noopener noreferrer" aria-label="Condividi su WhatsApp"
+                                class="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-white/10 hover:bg-[#25D366] text-sm font-bold transition-all duration-200 ease-out">
+                                <span class="material-icons text-lg" aria-hidden="true">share</span> WhatsApp
+                            </a>
+                            <button type="button" id="copy-link" aria-label="Copia il link della pagina"
+                                class="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-white/10 hover:bg-secondary hover:text-gray-900 text-sm font-bold transition-all duration-200 ease-out">
+                                <span class="material-icons text-lg" aria-hidden="true">link</span> <span
+                                    data-label>Copia link</span>
+                            </button>
                         </div>
                     </div>
-                </aside>
+                </div>
             </div>
         </section>
     </main>
 
-    <ifbv-footer></ifbv-footer>
+    <ifbv-footer cta="off"></ifbv-footer>
     <script src="footer.js" defer></script>
     <script src="scroll-reveal.js" defer></script>
     <script>
-        (function () {
-            var btn = document.getElementById('copy-link');
-            if (!btn || !navigator.clipboard) return;
-            btn.addEventListener('click', function () {
-                navigator.clipboard.writeText('https://ifollowbv.it/rookie-league.html').then(function () {
-                    var l = btn.querySelector('[data-label]');
-                    l.textContent = 'Copiato!';
-                    setTimeout(function () { l.textContent = 'Copia link'; }, 1800);
+            (function () {
+                var rows = [].slice.call(document.querySelectorAll('[data-event]'));
+                var chips = [].slice.call(document.querySelectorAll('[data-filter]'));
+                var groups = [].slice.call(document.querySelectorAll('[data-month]'));
+                var countEl = document.getElementById('cal-count');
+                var countLabel = document.getElementById('cal-count-label');
+                var CENTERS = { basiglio: 'Basiglio', pero: 'Pero', corsico: 'Corsico', paderno: 'Paderno' };
+
+                function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+                function daysFromToday(d) {
+                    var t = new Date(); t.setHours(0, 0, 0, 0);
+                    return Math.round((d - t) / 86400000);
+                }
+                function inLabel(days) {
+                    if (days <= 0) return 'Oggi';
+                    if (days === 1) return 'Domani';
+                    return 'Tra ' + days + ' giorni';
+                }
+                function shortDate(d) { return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long' }); }
+
+                // Stato di ogni data: concluso / in corso / futuro.
+                // Iscrizioni: chiudono 3 giorni interi prima del torneo (data-deadline, calcolata in fase di generazione).
+                rows.forEach(function (r) {
+                    var start = daysFromToday(parse(r.dataset.start));
+                    var end = daysFromToday(parse(r.dataset.end));
+                    var dl = daysFromToday(parse(r.dataset.deadline));
+                    r.dataset.state = end < 0 ? 'past' : (start <= 0 ? 'live' : 'future');
+                    r.dataset.reg = r.dataset.state !== 'future' ? 'na' : (dl < 0 ? 'closed' : (dl === 0 ? 'last' : 'open'));
+                    r.classList.toggle('is-past', end < 0);
                 });
-            });
-        })();
+
+                var KINDS = {
+                    past: ['bg-gray-100', 'dark:bg-gray-700', 'text-gray-500', 'dark:text-gray-300'],
+                    next: ['bg-primary', 'text-white'],
+                    live: ['bg-secondary', 'text-gray-900'],
+                    closed: ['bg-gray-900', 'text-white', 'dark:bg-white', 'dark:text-gray-900']
+                };
+                var ALL = [].concat(KINDS.past, KINDS.next, KINDS.live, KINDS.closed);
+                function paint(row, text, kind) {
+                    var el = row.querySelector('[data-status]');
+                    if (!el) return;
+                    ALL.forEach(function (c) { el.classList.remove(c); });
+                    if (!text) { el.classList.add('hidden'); el.textContent = ''; return; }
+                    el.textContent = text;
+                    el.classList.remove('hidden');
+                    KINDS[kind].forEach(function (c) { el.classList.add(c); });
+                }
+
+                var current = null; // null = nessun centro selezionato (stato iniziale)
+                var calList = document.getElementById('cal-list');
+                var calEmpty = document.getElementById('cal-empty');
+
+                function apply() {
+                    // Nessun centro selezionato: mostra lo stato vuoto
+                    if (current === null) {
+                        calList.classList.add('hidden');
+                        calEmpty.hidden = false;
+                        countEl.textContent = '';
+                        countLabel.textContent = '';
+                        chips.forEach(function (c) {
+                            c.setAttribute('aria-pressed', 'false');
+                            ['bg-primary', 'text-white', 'border-primary', 'shadow-lg', 'shadow-primary/30'].forEach(function (k) { c.classList.remove(k); });
+                            ['bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200', 'border-primary/20'].forEach(function (k) { c.classList.add(k); });
+                        });
+                        return;
+                    }
+
+                    calEmpty.hidden = true;
+                    calList.classList.remove('hidden');
+
+                    var visible = 0, nextRow = null;
+                    rows.forEach(function (r) {
+                        var show = current === 'tutti' || r.dataset.center === current;
+                        r.hidden = !show;
+                        r.classList.remove('is-next');
+                        if (show) {
+                            visible++;
+                            if (!nextRow && r.dataset.state !== 'past') nextRow = r;
+                        }
+                        if (r.dataset.state === 'past') paint(r, 'Concluso', 'past');
+                        else if (r.dataset.state === 'live') paint(r, 'In corso', 'live');
+                        else if (r.dataset.reg === 'closed') paint(r, 'Iscrizioni chiuse', 'closed');
+                        else if (r.dataset.reg === 'last') paint(r, 'Ultimo giorno per iscriversi', 'live');
+                        else paint(r, '', 'past');
+                    });
+                    if (nextRow) {
+                        nextRow.classList.add('is-next');
+                        if (nextRow.dataset.reg === 'open') paint(nextRow, inLabel(daysFromToday(parse(nextRow.dataset.start))), 'next');
+                    }
+                    groups.forEach(function (g) {
+                        g.hidden = !g.querySelector('[data-event]:not([hidden])');
+                    });
+                    countEl.textContent = visible;
+                    countLabel.textContent = (visible === 1 ? 'data' : 'date') + (current === 'tutti' ? ' in calendario' : ' a ' + CENTERS[current]);
+                    chips.forEach(function (c) {
+                        var on = c.dataset.filter === current;
+                        c.setAttribute('aria-pressed', String(on));
+                        ['bg-primary', 'text-white', 'border-primary', 'shadow-lg', 'shadow-primary/30'].forEach(function (k) { c.classList.toggle(k, on); });
+                        ['bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200', 'border-primary/20'].forEach(function (k) { c.classList.toggle(k, !on); });
+                    });
+                }
+
+                function setFilter(key, scroll) {
+                    current = (key === 'tutti' || CENTERS[key]) ? key : 'tutti';
+                    apply();
+                    try {
+                        var url = new URL(window.location.href);
+                        if (current === 'tutti') url.searchParams.delete('centro'); else url.searchParams.set('centro', current);
+                        history.replaceState(null, '', url.pathname + url.search + url.hash);
+                    } catch (e) { }
+                    if (scroll) {
+                        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        document.getElementById('calendario').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+                    }
+                }
+
+                chips.forEach(function (c) { c.addEventListener('click', function () { setFilter(c.dataset.filter, false); }); });
+                [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function (b) {
+                    b.addEventListener('click', function () { setFilter(b.dataset.goto, true); });
+                });
+
+                // Filtro iniziale da ?centro=pero (link condivisibili)
+                var initial = null;
+                try {
+                    var param = new URLSearchParams(window.location.search).get('centro');
+                    initial = param ? (CENTERS[param] ? param : 'tutti') : null;
+                } catch (e) { }
+                current = initial;
+                apply();
+
+                // Scheda "Prossima data" nell'hero, con stato delle iscrizioni
+                var upcoming = rows.filter(function (r) { return r.dataset.state !== 'past'; })[0];
+                if (upcoming) {
+                    var d = parse(upcoming.dataset.start);
+                    var end = parse(upcoming.dataset.end);
+                    var when = d.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+                    if (end > d) when = d.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' }) + '–' + end.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'long' });
+                    var isFinal = /Finale/.test(upcoming.querySelector('p').textContent);
+                    document.getElementById('next-when').textContent = when;
+                    document.getElementById('next-where').textContent = CENTERS[upcoming.dataset.center] + (isFinal ? ' · Finale' : '');
+                    document.getElementById('next-in').textContent = upcoming.dataset.state === 'live' ? 'In corso' : inLabel(daysFromToday(d));
+
+                    var reg = document.getElementById('next-reg');
+                    var dlDate = parse(upcoming.dataset.deadline);
+                    if (upcoming.dataset.state === 'live') reg.textContent = 'Torneo in corso';
+                    else if (upcoming.dataset.reg === 'closed') reg.textContent = 'Iscrizioni chiuse';
+                    else if (upcoming.dataset.reg === 'last') reg.textContent = 'Ultimo giorno per iscriverti: entro stasera';
+                    else reg.textContent = 'Iscrizioni aperte fino al ' + shortDate(dlDate);
+
+                    // Se le iscrizioni di questa data sono chiuse, indica la prima ancora aperta
+                    if (upcoming.dataset.reg === 'closed' || upcoming.dataset.state === 'live') {
+                        var open = rows.filter(function (r) { return r.dataset.reg === 'open' || r.dataset.reg === 'last'; })[0];
+                        if (open) {
+                            var alt = document.getElementById('next-alt');
+                            alt.textContent = 'Prossimo con iscrizioni aperte: ' + CENTERS[open.dataset.center] + ', ' + shortDate(parse(open.dataset.start));
+                            alt.hidden = false;
+                        }
+                    }
+                    document.getElementById('next-event').hidden = false;
+                }
+
+                // Copia link
+                var btn = document.getElementById('copy-link');
+                if (btn && navigator.clipboard) {
+                    btn.addEventListener('click', function () {
+                        navigator.clipboard.writeText('https://ifollowbv.it/rookie-league.html').then(function () {
+                            var l = btn.querySelector('[data-label]');
+                            l.textContent = 'Copiato!';
+                            setTimeout(function () { l.textContent = 'Copia link'; }, 1800);
+                        });
+                    });
+                }
+            })();
     </script>
 </body>
+
 </html>
