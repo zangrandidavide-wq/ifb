@@ -25,6 +25,12 @@ const SEDI = [
     { label: 'Corsico', href: 'sedi.html#corsico' },
 ];
 
+// Eventi: due pagine distinte. Su desktop sono una tendina, su mobile un piccolo menu sopra la tab bar.
+const EVENTI = [
+    { label: 'Tornei & eventi', href: 'tornei.html', icon: 'emoji_events', desc: 'Tornei IFB, Rookie League, eventi' },
+    { label: 'Tornei federali', href: 'federali.html', icon: 'verified', desc: 'Circuito FIPAV nelle sedi IFB' },
+];
+
 // Barra desktop: tutte le voci, in orizzontale.
 // Home è esplicita (non solo il logo): tra 1024 e 1279px mostra solo l'icona per non affollare la barra.
 // Per nascondere temporaneamente una voce basta commentarla.
@@ -33,10 +39,9 @@ const DESKTOP_LINKS = [
     { label: 'Corsi', href: 'IFB_corsi.html' },
     { label: 'Sedi', href: 'sedi.html', children: SEDI },
     { label: 'Staff', href: 'coaches.html' },
-    // { label: 'Metodo', href: 'metodo.html' },
-    { label: 'Eventi', href: 'tornei.html' },
+    { label: 'Metodo', href: 'metodo.html' },
+    { label: 'Tornei ed Eventi', href: 'tornei.html', children: EVENTI, highlight: true },
     { label: 'Rookie League', href: 'rookie-league.html', badge: true },
-    { label: 'FAQ', href: 'faq.html' },
     { label: 'Contatti', href: 'contatti.html' },
 ];
 
@@ -45,7 +50,7 @@ const MOBILE_TABS = [
     { label: 'Home', href: 'index.html', icon: 'home' },
     { label: 'Corsi', href: 'IFB_corsi.html', icon: 'sports_volleyball' },
     { cta: true },
-    { label: 'Eventi', href: 'tornei.html', icon: 'emoji_events' },
+    { label: 'Eventi', icon: 'emoji_events', children: EVENTI },
     { more: true },
 ];
 
@@ -54,6 +59,7 @@ const MOBILE_SHEET = [
     { label: 'Sedi', href: 'sedi.html', icon: 'location_on', children: SEDI, wide: true },
     { label: 'Rookie League', href: 'rookie-league.html', icon: 'military_tech', badge: 'Nuovo' },
     { label: 'Staff', href: 'coaches.html', icon: 'groups' },
+    { label: 'Metodo IFB', href: 'metodo.html', icon: 'psychology' },
     { label: 'FAQ', href: 'faq.html', icon: 'help' },
     { label: 'Contatti', href: 'contatti.html', icon: 'mail' },
 ];
@@ -61,6 +67,11 @@ const MOBILE_SHEET = [
 function currentPage() {
     const file = window.location.pathname.split('/').pop();
     return file === '' ? 'index.html' : file;
+}
+
+// Pagina attiva: la voce stessa o una delle sue sotto-pagine
+function isActive(item, page) {
+    return item.href === page || (item.children || []).some((c) => c.href.split('#')[0] === page);
 }
 
 function socialLinks() {
@@ -73,10 +84,18 @@ function socialLinks() {
 
 function renderDesktopLinks(b, page) {
     return DESKTOP_LINKS.map((link) => {
-        const active = link.href === page;
-        const cls = `relative inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out ${active
-            ? 'text-primary bg-primary/10'
-            : 'text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5'}`;
+        const active = isActive(link, page);
+        // highlight: voce in evidenza (pillola dorata), un gradino sotto la CTA viola
+        const cls = link.highlight
+            ? `relative inline-flex items-center gap-1 pl-1.5 pr-1 xl:pl-3 xl:pr-2 py-2 rounded-full text-sm font-extrabold whitespace-nowrap ring-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary/40 ${active
+                ? 'text-primary bg-secondary/30 ring-secondary'
+                : 'text-gray-900 dark:text-white bg-secondary/20 ring-secondary/60 hover:bg-secondary/40 hover:ring-secondary'}`
+            : `relative inline-flex items-center gap-1 px-2 xl:px-3 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ease-out ${active
+                ? 'text-primary bg-primary/10'
+                : 'text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5'}`;
+        const lead = link.highlight
+            ? `<span class="material-symbols-outlined text-base xl:text-lg text-amber-500" style="font-variation-settings:'FILL' 1" aria-hidden="true">emoji_events</span>`
+            : '';
         const dot = active ? '<span class="absolute left-1/2 -bottom-0.5 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary" aria-hidden="true"></span>' : '';
         const badge = link.badge ? '<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" aria-hidden="true"></span>' : '';
         const current = active ? 'aria-current="page"' : '';
@@ -88,26 +107,29 @@ function renderDesktopLinks(b, page) {
         }
 
         if (!link.children) {
-            return `<a href="${b}${link.href}" class="${cls}" ${current}>${link.label}${badge}${dot}</a>`;
+            return `<a href="${b}${link.href}" class="${cls}" ${current}>${lead}${link.label}${badge}${dot}</a>`;
         }
 
         // Tendina in solo CSS: si apre in hover e con il focus da tastiera
         return `
             <div class="relative group/dd">
                 <a href="${b}${link.href}" class="${cls}" ${current}>
-                    ${link.label}
+                    ${lead}${link.label}
                     <span class="material-symbols-outlined text-lg transition-transform duration-200 group-hover/dd:rotate-180 group-focus-within/dd:rotate-180" aria-hidden="true">expand_more</span>
                     ${dot}
                 </a>
                 <div class="absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 invisible translate-y-1 group-hover/dd:opacity-100 group-hover/dd:visible group-hover/dd:translate-y-0 group-focus-within/dd:opacity-100 group-focus-within/dd:visible group-focus-within/dd:translate-y-0 transition-all duration-200 ease-out">
                     <ul class="min-w-[12rem] bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-2xl shadow-primary/10 p-2">
-                        ${link.children.map((c, i) => `
+                        ${link.children.map((c, i) => {
+            const here = c.href === page;
+            return `
                             <li>
-                                <a href="${b}${c.href}" class="group/it flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-primary/5 hover:text-primary transition-colors">
-                                    <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-[11px] font-black flex items-center justify-center group-hover/it:bg-primary group-hover/it:text-white transition-colors">0${i + 1}</span>
-                                    ${c.label}
+                                <a href="${b}${c.href}" ${here ? 'aria-current="page"' : ''} class="group/it flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-bold ${here ? 'bg-primary/10 text-primary' : 'text-gray-700 dark:text-gray-200'} hover:bg-primary/5 hover:text-primary transition-colors">
+                                    <span class="w-7 h-7 shrink-0 rounded-full ${here ? 'bg-primary text-white' : 'bg-primary/10 text-primary'} text-[11px] font-black flex items-center justify-center group-hover/it:bg-primary group-hover/it:text-white transition-colors">${c.icon ? `<span class="material-symbols-outlined text-base" aria-hidden="true">${c.icon}</span>` : `0${i + 1}`}</span>
+                                    <span class="whitespace-nowrap">${c.label}${c.desc ? `<span class="block text-[11px] font-medium text-gray-400">${c.desc}</span>` : ''}</span>
                                 </a>
-                            </li>`).join('')}
+                            </li>`;
+        }).join('')}
                     </ul>
                 </div>
             </div>`;
@@ -141,7 +163,19 @@ function renderMobileTabs(b, page) {
                     </button>
                 </li>`;
         }
-        const active = tab.href === page;
+        const active = isActive(tab, page);
+        if (tab.children) {
+            // Più pagine sotto la stessa voce: il tocco apre una scelta rapida sopra la tab bar
+            return `
+            <li>
+                <button id="mobile-events-btn" type="button" aria-expanded="false" aria-controls="mobile-chooser"
+                        class="relative w-full flex flex-col items-center gap-0.5 py-1 text-[10px] font-bold uppercase tracking-wide ${active ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">
+                    <span class="material-symbols-outlined text-2xl" style="${active ? "font-variation-settings:'FILL' 1" : ''}" aria-hidden="true">${tab.icon}</span>
+                    ${tab.label}
+                    ${active ? '<span class="absolute -top-1 w-6 h-1 rounded-full bg-secondary" aria-hidden="true"></span>' : ''}
+                </button>
+            </li>`;
+        }
         return `
             <li>
                 <a href="${b}${tab.href}" ${active ? 'aria-current="page"' : ''}
@@ -152,6 +186,32 @@ function renderMobileTabs(b, page) {
                 </a>
             </li>`;
     }).join('');
+}
+
+function renderMobileChooser(b, page) {
+    const tab = MOBILE_TABS.find((t) => t.children);
+    if (!tab) return '';
+    const tiles = tab.children.map((c) => {
+        const active = c.href === page;
+        return `
+            <li>
+                <a href="${b}${c.href}" ${active ? 'aria-current="page"' : ''}
+                   class="chooser-link flex h-full flex-col rounded-3xl border p-4 active:scale-[.97] transition-transform ${active ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}">
+                    <span class="w-10 h-10 rounded-full ${active ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'} flex items-center justify-center mb-3">
+                        <span class="material-symbols-outlined text-xl" aria-hidden="true">${c.icon}</span>
+                    </span>
+                    <span class="block font-black uppercase tracking-tight leading-none ${active ? 'text-white' : 'text-gray-900 dark:text-white'}">${c.label}</span>
+                    <span class="mt-1.5 block text-[11px] leading-snug ${active ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}">${c.desc}</span>
+                </a>
+            </li>`;
+    }).join('');
+    return `
+    <div id="mobile-chooser-backdrop" class="lg:hidden fixed inset-0 z-30 hidden"></div>
+    <div id="mobile-chooser" aria-label="${tab.label}" inert
+         class="is-closed lg:hidden fixed inset-x-3 z-[45] bottom-[calc(4.25rem+env(safe-area-inset-bottom)+.6rem)] rounded-[1.75rem] bg-background-light/95 dark:bg-slate-950/95 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-2xl shadow-primary/20 p-2.5">
+        <ul class="grid grid-cols-2 gap-2.5">${tiles}</ul>
+        <span class="absolute -bottom-1.5 left-[70%] -translate-x-1/2 w-3 h-3 rotate-45 bg-background-light dark:bg-slate-950 border-r border-b border-gray-200 dark:border-gray-800" aria-hidden="true"></span>
+    </div>`;
 }
 
 function renderMobileSheet(b, page) {
@@ -216,6 +276,12 @@ function renderNavbar() {
             body { padding-bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
             #cookie-banner { bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
         }
+        #mobile-chooser { transition: opacity .2s ease, transform .3s cubic-bezier(.32,.72,0,1); transform-origin: 70% 100%; }
+        #mobile-chooser.is-closed { opacity: 0; transform: translateY(12px) scale(.96); pointer-events: none; }
+        #mobile-chooser li { transition: opacity .3s ease, transform .35s cubic-bezier(.32,.72,0,1); }
+        #mobile-chooser li:nth-child(2) { transition-delay: .05s; }
+        #mobile-chooser.is-closed li { opacity: 0; transform: translateY(10px); }
+        @media (prefers-reduced-motion: reduce) { #mobile-chooser, #mobile-chooser li { transition: none; } }
         #mobile-sheet { transition: transform .3s cubic-bezier(.32,.72,0,1); }
         #mobile-sheet-backdrop { transition: opacity .25s ease; }
         @media (prefers-reduced-motion: reduce) { #mobile-sheet, #mobile-sheet-backdrop { transition: none; } }
@@ -254,6 +320,9 @@ function renderNavbar() {
         </ul>
     </nav>
 
+    <!-- MOBILE: SCELTA RAPIDA "EVENTI" -->
+    ${renderMobileChooser(b, page)}
+
     <!-- MOBILE: FOGLIO "ALTRO" (contenuto creato al primo tocco) -->
     <div id="mobile-sheet-backdrop" class="lg:hidden fixed inset-0 z-[60] bg-gray-900/50 opacity-0 pointer-events-none"></div>
     <div id="mobile-sheet" role="dialog" aria-modal="true" aria-label="Altre pagine" inert
@@ -286,6 +355,28 @@ function renderNavbar() {
     desktopMq.addEventListener('change', syncScrollListener);
     syncScrollListener();
 
+    // Scelta rapida "Eventi" (solo mobile)
+    const evBtn = document.getElementById('mobile-events-btn');
+    const chooser = document.getElementById('mobile-chooser');
+    const chooserBackdrop = document.getElementById('mobile-chooser-backdrop');
+    function setChooser(open) {
+        if (!evBtn || !chooser) return;
+        chooser.classList.toggle('is-closed', !open);
+        chooser.toggleAttribute('inert', !open);
+        chooserBackdrop.classList.toggle('hidden', !open);
+        evBtn.setAttribute('aria-expanded', String(open));
+    }
+    if (evBtn && chooser) {
+        evBtn.addEventListener('click', () => setChooser(chooser.classList.contains('is-closed')));
+        chooserBackdrop.addEventListener('click', () => setChooser(false));
+        chooser.querySelectorAll('.chooser-link').forEach((a) => a.addEventListener('click', () => setChooser(false)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !chooser.classList.contains('is-closed')) { setChooser(false); evBtn.focus(); }
+        });
+        window.addEventListener('scroll', () => setChooser(false), { passive: true });
+        desktopMq.addEventListener('change', (e) => { if (e.matches) setChooser(false); });
+    }
+
     // Foglio "Altro" (solo mobile)
     const moreBtn = document.getElementById('mobile-more-btn');
     const sheet = document.getElementById('mobile-sheet');
@@ -293,6 +384,7 @@ function renderNavbar() {
     if (!moreBtn || !sheet || !backdrop) return;
 
     function openSheet() {
+        setChooser(false);
         if (!sheet.childElementCount) {
             sheet.innerHTML = renderMobileSheet(b, page);
             sheet.querySelectorAll('.sheet-link').forEach((a) => a.addEventListener('click', closeSheet));

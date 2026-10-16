@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <script src="consent.js"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#7f13ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#191022" media="(prefers-color-scheme: dark)" />
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" />
+    <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="site.webmanifest" rel="manifest" />
+    <title>Tornei Federali FIPAV | I Follow Beach Volley</title>
+    <meta name="description"
+        content="Calendario dei tornei federali FIPAV di beach volley nelle sedi IFB di Basiglio e Pero: date, categorie Beginner, Bronze, Silver, Gold e Master, campi e indicazioni." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://ifollowbv.it/federali.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ifollowbv.it/federali.html" />
+    <meta property="og:title" content="Tornei Federali FIPAV | I Follow Beach Volley" />
+    <meta property="og:description" content="Il circuito federale di beach volley nelle sedi IFB: tutte le date e le categorie." />
+    <meta property="og:image" content="https://ifollowbv.it/beachtown.jpg" />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb3",
+                        "secondary": "#FFD700",
+                        "accent-yellow": "#FFD700",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: { "display": ["Lexend", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* ---------- HERO: campo in prospettiva + palla ---------- */
+        .court-wrap { perspective: 1100px; }
+        .court {
+            transform: perspective(1100px) rotateX(58deg) rotateZ(-24deg);
+            transform-style: preserve-3d;
+            animation: court-float 9s ease-in-out infinite;
+        }
+        @keyframes court-float {
+            50% { transform: perspective(1100px) rotateX(56deg) rotateZ(-20deg) translateZ(14px); }
+        }
+        .sand {
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .25) 0 1px, transparent 2px) 0 0/14px 14px,
+                radial-gradient(circle at 70% 60%, rgba(120, 72, 0, .18) 0 1px, transparent 2px) 0 0/11px 11px,
+                linear-gradient(135deg, #f7d98b, #e9b95c 60%, #d99a3a);
+        }
+        /* Palla: X lineare avanti/indietro, Y a parabola (due elementi annidati) */
+        .ball-x { animation: ball-x 2.6s linear infinite alternate; }
+        .ball-y { animation: ball-y 1.3s cubic-bezier(.33, 0, .67, 1) infinite alternate; }
+        .ball-y > svg { animation: ball-spin 1.2s linear infinite; }
+        .ball-shadow { animation: ball-shadow 1.3s cubic-bezier(.33, 0, .67, 1) infinite alternate; }
+        @keyframes ball-x { from { transform: translateX(0); } to { transform: translateX(var(--travel, 260px)); } }
+        @keyframes ball-y { from { transform: translateY(0); } to { transform: translateY(-150px); } }
+        @keyframes ball-spin { to { transform: rotate(360deg); } }
+        @keyframes ball-shadow { from { transform: scale(1); opacity: .45; } to { transform: scale(.45); opacity: .15; } }
+
+        /* Countdown */
+        .flip { transition: transform .35s cubic-bezier(.3, 1.4, .6, 1), opacity .35s ease; }
+        .flip.tick { transform: translateY(-6px) scale(1.06); }
+
+        /* ---------- LIVELLI (medaglie) ---------- */
+        .medal {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .medal::after {
+            content: "";
+            position: absolute;
+            inset: -50% auto -50% -60%;
+            width: 40%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+            transform: skewX(-20deg) translateX(0);
+            transition: transform .9s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .medal:hover::after { transform: skewX(-20deg) translateX(520%); }
+        .medal[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--c), 0 18px 40px -18px var(--c); }
+        .medal[aria-pressed="true"] .medal-disc { transform: scale(1.08) rotate(-8deg); }
+        .medal-disc {
+            background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, .85), transparent 45%), var(--c);
+            transition: transform .3s cubic-bezier(.3, 1.4, .6, 1);
+        }
+
+        /* ---------- CARD TORNEO ---------- */
+        .t-card {
+            --c: #7f13ec;
+            transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
+        }
+        .t-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px -30px var(--c);
+            border-color: color-mix(in srgb, var(--c) 45%, transparent);
+        }
+        .t-card .t-img { transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+        .t-card:hover .t-img { transform: scale(1.07); }
+        .t-card .t-stripe { background: linear-gradient(90deg, var(--c), color-mix(in srgb, var(--c) 30%, #fff)); }
+        .t-card.is-flash { animation: flash 1.6s ease; }
+        @keyframes flash {
+            0%, 100% { box-shadow: none; }
+            30% { box-shadow: 0 0 0 4px var(--c), 0 30px 60px -20px var(--c); }
+        }
+
+        .lvl-chip { background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--ink, var(--c)); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+        .lvl-dot { background: var(--c); }
+        .g-pill { background: var(--c); color: var(--on, #fff); }
+
+        /* Mese: puntini sui giorni */
+        .cal-day.has-t { cursor: pointer; }
+        .cal-day.has-t:hover .cal-num { transform: scale(1.12); }
+        .cal-num { transition: transform .2s ease, background-color .2s ease, color .2s ease; }
+
+        /* Reveal */
+        .rv { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--d, 0ms); }
+        .rv.in { opacity: 1; transform: none; }
+
+        /* Ticker */
+        .ticker-track { display: flex; width: max-content; animation: ticker 32s linear infinite; }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { scrollbar-width: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .court, .ball-x, .ball-y, .ball-y > svg, .ball-shadow, .ticker-track { animation: none; }
+            .rv { opacity: 1; transform: none; transition: none; }
+            .t-card, .t-card .t-img, .medal::after { transition: none; }
+        }
+    </style>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+    <header>
+        <div id="navbar-placeholder"></div>
+        <script type="module" src="navbar.js"></script>
+    </header>
+
+    <main class="flex-grow relative overflow-hidden">
+
+        <!-- ============ HERO ============ -->
+        <section id="hero" class="relative overflow-hidden bg-slate-950 text-white pt-12 lg:pt-32 pb-20 lg:pb-28">
+            <div class="absolute -top-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-primary/40 blur-[120px] pointer-events-none" aria-hidden="true"></div>
+            <div class="absolute -bottom-40 right-0 w-[28rem] h-[28rem] rounded-full bg-secondary/20 blur-[120px] pointer-events-none" aria-hidden="true"></div>
+            <!-- griglia sottile tipo tabellone -->
+            <div class="absolute inset-0 opacity-[0.07] pointer-events-none" aria-hidden="true"
+                style="background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 30% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000 20%,transparent 75%)"></div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-10 lg:gap-6 items-center">
+                <div class="lg:col-span-7">
+                    <p class="rv inline-flex items-center gap-2 bg-white/10 border border-white/15 text-secondary px-4 py-1.5 rounded-full text-[11px] md:text-xs font-bold uppercase tracking-[0.25em]">
+                        <span class="material-icons text-base" aria-hidden="true">verified</span> Circuito FIPAV · Stagione 2026/27
+                    </p>
+                    <h1 class="rv mt-6 font-black uppercase tracking-tight leading-[0.9] text-[clamp(2.9rem,9vw,6.5rem)]" style="--d:80ms">
+                        Tornei<br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-[#ffb347] to-[#ff4fa3]">federali.</span>
+                    </h1>
+                    <p class="rv mt-6 max-w-lg text-lg text-gray-300 font-light" style="--d:160ms">
+                        Le tappe ufficiali del circuito federale di beach volley, sulla sabbia di casa IFB.
+                        Scegli il tuo livello, segna la data, scendi in campo.
+                    </p>
+
+                    <!-- Countdown al prossimo torneo -->
+                    <div id="next-box" class="rv mt-8 max-w-xl rounded-[1.75rem] bg-white/[0.06] border border-white/10 backdrop-blur-md p-5 sm:p-6" style="--d:240ms" aria-live="polite"></div>
+                </div>
+
+                <!-- Campo in prospettiva -->
+                <div class="lg:col-span-5 relative h-[260px] sm:h-[340px] lg:h-[440px] court-wrap" aria-hidden="true">
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:ml-[-2rem]">
+                    <div class="court relative w-[260px] h-[130px] sm:w-[360px] sm:h-[180px] lg:w-[380px] lg:h-[190px]">
+                        <div class="sand absolute -inset-8 rounded-[2rem] shadow-[0_60px_80px_-30px_rgba(0,0,0,.7)]"></div>
+                        <div class="absolute inset-0 border-[3px] border-white/90 rounded-sm"></div>
+                        <!-- rete -->
+                        <div class="absolute left-1/2 -top-6 -bottom-6 w-[3px] -translate-x-1/2 bg-white/90"></div>
+                        <div class="absolute left-1/2 top-0 bottom-0 w-[10px] -translate-x-1/2 bg-[repeating-linear-gradient(0deg,rgba(25,16,34,.55)_0_3px,transparent_3px_7px)]"></div>
+                        <div class="absolute left-1/2 -top-6 w-3 h-3 -translate-x-1/2 rounded-full bg-secondary"></div>
+                        <div class="absolute left-1/2 -bottom-6 w-3 h-3 -translate-x-1/2 rounded-full bg-secondary"></div>
+                    </div>
+                    </div>
+                    <!-- palla (fuori dal piano inclinato, così resta "in aria") -->
+                    <div class="absolute left-[12%] sm:left-[18%] lg:left-[8%] top-[58%] [--travel:220px] sm:[--travel:300px] lg:[--travel:340px]">
+                        <div class="ball-x">
+                            <div class="ball-shadow absolute top-10 left-1 w-10 h-3 rounded-full bg-black/50 blur-[3px]"></div>
+                            <div class="ball-y">
+                                <svg viewBox="0 0 100 100" class="w-12 h-12 drop-shadow-[0_10px_10px_rgba(0,0,0,.35)]">
+                                    <defs>
+                                        <radialGradient id="hb" cx="35%" cy="30%" r="80%">
+                                            <stop offset="0" stop-color="#fff" /><stop offset=".6" stop-color="#f4eefc" /><stop offset="1" stop-color="#c9b2ea" />
+                                        </radialGradient>
+                                        <clipPath id="hbc"><circle cx="50" cy="50" r="48" /></clipPath>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="48" fill="url(#hb)" />
+                                    <g clip-path="url(#hbc)" fill="none" stroke-width="7" stroke-linecap="round">
+                                        <path d="M-5 38 Q50 8 105 38" stroke="#7f13ec" />
+                                        <path d="M-5 70 Q50 40 105 70" stroke="#FFD700" />
+                                        <path d="M30 -5 Q50 50 28 105" stroke="#7f13ec" />
+                                        <path d="M72 -5 Q52 50 74 105" stroke="#FFD700" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Numeri -->
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 lg:mt-2">
+                <dl id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-[1.75rem] overflow-hidden bg-white/10 border border-white/10"></dl>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="overflow-hidden bg-secondary text-gray-900 -rotate-1 scale-105 shadow-lg relative z-20" aria-hidden="true">
+            <div id="ticker" class="ticker-track py-3 font-extrabold text-base sm:text-lg uppercase tracking-wide whitespace-nowrap"></div>
+        </div>
+
+        <!-- ============ LIVELLI ============ -->
+        <section id="livelli" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+                <div>
+                    <p class="rv text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3">Trova il tuo livello</p>
+                    <h2 class="rv text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white" style="--d:80ms">Dal primo torneo<br class="hidden sm:block" /> al Platinum.</h2>
+                </div>
+                <p class="rv max-w-sm text-gray-600 dark:text-gray-400 font-light" style="--d:160ms">
+                    Tocca una categoria per vedere solo le sue date. Il numero indica quante giornate sono in programma.
+                </p>
+            </div>
+            <div id="ladder" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3" role="group" aria-label="Filtra per categoria"></div>
+        </section>
+
+        <!-- ============ CALENDARIO ============ -->
+        <section id="calendario" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 scroll-mt-24">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+                <h2 class="rv text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">Calendario</h2>
+                <p id="result-count" class="text-sm font-bold text-gray-500 dark:text-gray-400" aria-live="polite"></p>
+            </div>
+
+            <!-- Barra filtri -->
+            <div class="sticky top-0 lg:top-16 z-30 -mx-4 px-4 sm:mx-0 sm:px-0 py-3 bg-background-light/85 dark:bg-background-dark/85 backdrop-blur-md">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                    <div id="f-sede" class="flex shrink-0 items-center gap-1 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-1" role="group" aria-label="Sede"></div>
+                    <div id="f-gen" class="flex shrink-0 items-center gap-1 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-1" role="group" aria-label="Genere"></div>
+                    <button id="f-reset" type="button" class="hidden shrink-0 items-center gap-1 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide text-primary hover:bg-primary/10 transition-colors">
+                        <span class="material-icons text-base" aria-hidden="true">close</span> Azzera
+                    </button>
+                    <div class="ml-auto flex shrink-0 items-center gap-1 rounded-full bg-gray-900 dark:bg-white/10 p-1" role="group" aria-label="Vista">
+                        <button type="button" data-view="lista" class="view-btn inline-flex items-center gap-1 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors">
+                            <span class="material-icons text-base" aria-hidden="true">view_agenda</span><span class="hidden sm:inline">Lista</span>
+                        </button>
+                        <button type="button" data-view="mese" class="view-btn inline-flex items-center gap-1 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors">
+                            <span class="material-icons text-base" aria-hidden="true">calendar_month</span><span class="hidden sm:inline">Mese</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-lista" class="mt-6"></div>
+            <div id="view-mese" class="mt-6 hidden"></div>
+
+            <!-- Archivio -->
+            <details id="archivio" class="group mt-14 hidden rounded-[1.75rem] border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/[0.03]">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 font-extrabold text-gray-900 dark:text-white">
+                    <span class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center"><span class="material-icons" aria-hidden="true">history</span></span>
+                        <span>Tornei già disputati <span id="archivio-n" class="text-gray-400 font-bold"></span></span>
+                    </span>
+                    <span class="material-icons text-gray-400 transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span>
+                </summary>
+                <div id="archivio-list" class="px-5 sm:px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </details>
+        </section>
+
+        <!-- ============ INFO ============ -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+            <div class="grid lg:grid-cols-3 gap-4">
+                <div class="rv rounded-[1.75rem] bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700 p-6">
+                    <span class="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4"><span class="material-icons" aria-hidden="true">badge</span></span>
+                    <h3 class="font-black text-lg text-gray-900 dark:text-white">Chi può giocare</h3>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">I tornei sono riservati agli atleti con tesseramento FIPAV in regola. Non sei ancora tesserato? Ti spieghiamo noi come fare.</p>
+                </div>
+                <div class="rv rounded-[1.75rem] bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700 p-6" style="--d:80ms">
+                    <span class="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4"><span class="material-icons" aria-hidden="true">how_to_reg</span></span>
+                    <h3 class="font-black text-lg text-gray-900 dark:text-white">Come iscriversi</h3>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Le iscrizioni passano dal portale federale FIPAV. Per dubbi su categorie, tabelloni o orari scrivi al referente del torneo.</p>
+                </div>
+                <div class="rv rounded-[1.75rem] bg-gray-900 text-white p-6 relative overflow-hidden" style="--d:160ms">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-primary/50 blur-2xl" aria-hidden="true"></div>
+                    <p class="relative text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">Organizzazione</p>
+                    <p id="org-name" class="relative mt-3 font-black text-lg"></p>
+                    <dl class="relative mt-3 space-y-1.5 text-sm text-gray-300">
+                        <div class="flex gap-2"><dt class="text-gray-500">Referente</dt><dd id="org-ref" class="font-semibold text-white"></dd></div>
+                        <div class="flex gap-2"><dt class="text-gray-500">Codice società</dt><dd id="org-code" class="font-semibold text-white tabular-nums"></dd></div>
+                    </dl>
+                    <a id="org-wa" target="_blank" rel="noopener noreferrer"
+                        class="relative mt-5 inline-flex items-center gap-2 bg-[#25D366] hover:brightness-110 text-white font-extrabold px-5 py-3 rounded-full transition-all hover:-translate-y-0.5">
+                        <span class="material-icons text-lg" aria-hidden="true">chat</span> Scrivi su WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <a href="tornei.html"
+                class="rv group mt-4 flex items-center justify-between gap-4 rounded-[1.75rem] bg-primary text-white p-6 sm:p-8 overflow-hidden relative">
+                <span class="absolute inset-0 bg-[radial-gradient(circle_at_90%_50%,rgba(255,215,0,.35),transparent_45%)]" aria-hidden="true"></span>
+                <span class="relative">
+                    <span class="block text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">Non solo federali</span>
+                    <span class="block mt-2 font-black text-2xl sm:text-3xl tracking-tight">Tornei amatoriali ed eventi IFB</span>
+                </span>
+                <span class="relative w-14 h-14 shrink-0 rounded-full bg-white text-primary flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45">
+                    <span class="material-icons" aria-hidden="true">arrow_forward</span>
+                </span>
+            </a>
+        </section>
+    </main>
+
+    <ifbv-footer></ifbv-footer>
+    <script src="footer.js" defer></script>
+
+    <script src="federali-data.js"></script>
+    <script>
+        (function () {
+            var TORNEI = window.TORNEI_FEDERALI || [];
+            var SEDI = window.SEDI_FEDERALI || {};
+            var INFO = window.FEDERALI_INFO || {};
+            var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ---------- Categorie ----------
+            // group = voce della "scala" usata come filtro; ink = colore del testo se il colore pieno è troppo chiaro
+            var LIVELLI = [
+                { key: 'beginner', label: 'Beginner', c: '#10b981', desc: 'Il primo passo' },
+                { key: 'bronze', label: 'Bronze', c: '#c46f2c', desc: 'Prime esperienze' },
+                { key: 'silver', label: 'Silver', c: '#8b95a5', desc: 'Livello intermedio' },
+                { key: 'gold', label: 'Gold', c: '#f2b400', ink: '#a87a00', desc: 'Livello avanzato' },
+                { key: 'platinum', label: 'Platinum', c: '#e01fc4', desc: 'Il top regionale' },
+                { key: 'master', label: 'Master', c: '#7f13ec', desc: 'Over 35, 45, 55' },
+                { key: 'under', label: 'Under', c: '#0ea5e9', desc: 'Giovanili' },
+            ];
+            var LV = {};
+            LIVELLI.forEach(function (l, i) { l.rank = i; LV[l.key] = l; });
+
+            function groupOf(cat) {
+                if (cat.indexOf('master') === 0) return 'master';
+                if (cat.indexOf('under') === 0) return 'under';
+                return cat;
+            }
+            function catLabel(cat) {
+                var m = cat.match(/^(master|under)(\d+)$/);
+                return m ? LV[m[1]].label + ' ' + m[2] : (LV[cat] ? LV[cat].label : cat);
+            }
+
+            // ---------- Date ----------
+            var MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+            var GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+            function parse(s) { var p = s.split('-'); return new Date(+p[0], p[1] - 1, +p[2]); }
+            var today = new Date(); today.setHours(0, 0, 0, 0);
+            var DAY = 86400000;
+
+            // Righe con stessa data e stessa sede = un'unica giornata con più tabelloni,
+            // ognuno con il proprio numero di coppie (es. 6 dicembre: 16 coppie per alcune categorie, 12 per altre)
+            var giornate = [], perGiorno = {};
+            TORNEI.forEach(function (t) {
+                var k = t.data + '|' + t.sede, g = perGiorno[k];
+                if (!g) {
+                    g = perGiorno[k] = { data: t.data, sede: t.sede, campi: t.campi, cat: {}, tab: [] };
+                    giornate.push(g);
+                }
+                g.campi = Math.max(+g.campi || 0, +t.campi || 0);
+                g.tab.push({ coppie: t.coppie, cat: t.cat || {} });
+                Object.keys(t.cat || {}).forEach(function (c) {
+                    var gen = (g.cat[c] || '') + t.cat[c];
+                    g.cat[c] = (gen.indexOf('F') >= 0 ? 'F' : '') + (gen.indexOf('M') >= 0 ? 'M' : '');
+                });
+            });
+            giornate.forEach(function (g) { g.coppie = g.tab.map(function (x) { return x.coppie; }).join(' · '); });
+
+            var all = giornate.map(function (t, i) {
+                var d = parse(t.data);
+                var cats = Object.keys(t.cat || {});
+                var groups = [];
+                cats.forEach(function (c) { var g = groupOf(c); if (groups.indexOf(g) < 0 && LV[g]) groups.push(g); });
+                groups.sort(function (a, b) { return LV[a].rank - LV[b].rank; });
+                // colore della card: il livello più alto tra quelli "a scala" (master/under contano meno)
+                var core = groups.filter(function (g) { return LV[g].rank <= 4; });
+                var main = LV[(core.length ? core[core.length - 1] : groups[0]) || 'master'];
+                return {
+                    id: 't' + i, raw: t, date: d, sede: SEDI[t.sede] || { nome: t.sede, impianto: '' }, sedeKey: t.sede,
+                    cats: cats, groups: groups, main: main,
+                    diff: Math.round((d - today) / DAY),
+                };
+            }).sort(function (a, b) { return a.date - b.date; });
+
+            var upcoming = all.filter(function (t) { return t.diff >= 0; });
+            var past = all.filter(function (t) { return t.diff < 0; }).reverse();
+            var next = upcoming[0];
+
+            function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+            function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+            function longDate(d) { return GIORNI[d.getDay()] + ' ' + d.getDate() + ' ' + MESI[d.getMonth()] + ' ' + d.getFullYear(); }
+            function relDay(n) { return n === 0 ? 'Oggi' : n === 1 ? 'Domani' : 'Tra ' + n + ' giorni'; }
+
+            // ---------- Componenti ----------
+            function chip(cat, gen) {
+                var l = LV[groupOf(cat)];
+                var pills = gen.split('').map(function (g) {
+                    return '<span class="g-pill w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center" title="' + (g === 'F' ? 'Femminile' : 'Maschile') + '">' + g + '</span>';
+                }).join('');
+                return '<span class="lvl-chip inline-flex items-center gap-1.5 rounded-full pl-3 pr-1 py-1 text-xs font-extrabold" style="--c:' + l.c + (l.ink ? ';--ink:' + l.ink : '') + (l.key === 'gold' ? ';--on:#3b2a00' : '') + '">' +
+                    catLabel(cat) + '<span class="flex gap-0.5">' + pills + '</span></span>';
+            }
+
+            function waLink(t) {
+                var msg = 'Ciao! Vorrei informazioni sul torneo federale di ' + longDate(t.date) + ' a ' + t.sede.nome + ' (' + t.cats.map(catLabel).join(', ') + ').';
+                return 'https://wa.me/' + (INFO.telefono || '').replace(/\D/g, '') + '?text=' + encodeURIComponent(msg);
+            }
+
+            function card(t, opts) {
+                opts = opts || {};
+                var isPast = t.diff < 0;
+                var isNext = next && t === next;
+                var badge = isPast ? '<span class="bg-gray-900/70 text-white">Disputato</span>'
+                    : t.diff === 0 ? '<span class="bg-[#25D366] text-white animate-pulse">Oggi</span>'
+                    : isNext ? '<span class="bg-secondary text-gray-900">Prossimo</span>'
+                    : t.diff <= 14 ? '<span class="bg-white/90 text-gray-900">' + relDay(t.diff) + '</span>' : '';
+                function chipsOf(cat) {
+                    return Object.keys(cat).sort(function (a, b) { return LV[groupOf(a)].rank - LV[groupOf(b)].rank; })
+                        .map(function (c) { return chip(c, cat[c]); }).join('');
+                }
+                var multi = t.raw.tab.length > 1;
+                // Più tabelloni nello stesso giorno: ogni gruppo di categorie con le sue coppie
+                var chips = multi
+                    ? '<div class="w-full space-y-2">' + t.raw.tab.map(function (x) {
+                        return '<div class="flex flex-wrap items-center gap-1.5 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700 p-2">' +
+                            '<span class="inline-flex items-center gap-1 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1"><span class="material-icons text-sm" aria-hidden="true">groups</span>' + esc(x.coppie) + ' coppie</span>' +
+                            chipsOf(x.cat) + '</div>';
+                    }).join('') + '</div>'
+                    : chipsOf(t.raw.cat);
+
+                return '' +
+                    '<article id="' + t.id + '" class="t-card rv group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white dark:bg-gray-800/70 border border-gray-100 dark:border-gray-700 ' + (isPast ? 'opacity-70 grayscale-[.5]' : '') + '" style="--c:' + t.main.c + ';--d:' + (opts.delay || 0) + 'ms">' +
+                        '<div class="relative h-36 overflow-hidden">' +
+                            (t.sede.img ? '<img src="' + t.sede.img + '" alt="" class="t-img absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />' : '<div class="absolute inset-0 bg-primary"></div>') +
+                            '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>' +
+                            '<div class="absolute top-3 right-3 flex gap-1.5 [&>span]:text-[10px] [&>span]:font-black [&>span]:uppercase [&>span]:tracking-wider [&>span]:px-2.5 [&>span]:py-1 [&>span]:rounded-full">' + badge + '</div>' +
+                            '<div class="absolute left-4 bottom-3 right-4 flex items-end gap-3 text-white">' +
+                                '<div class="shrink-0 w-16 rounded-2xl bg-white text-gray-900 text-center overflow-hidden shadow-xl">' +
+                                    '<div class="t-stripe text-[10px] font-black uppercase tracking-wider py-0.5 text-white">' + MESI[t.date.getMonth()].slice(0, 3) + '</div>' +
+                                    '<div class="text-3xl font-black leading-none pt-1">' + t.date.getDate() + '</div>' +
+                                    '<div class="text-[10px] font-bold uppercase text-gray-500 pb-1.5">' + GIORNI[t.date.getDay()].slice(0, 3) + '</div>' +
+                                '</div>' +
+                                '<div class="min-w-0 pb-1">' +
+                                    '<p class="font-black text-xl leading-tight truncate">' + esc(t.sede.nome) + '</p>' +
+                                    '<p class="text-xs text-gray-300 truncate">' + esc(t.sede.impianto) + '</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="t-stripe h-1"></div>' +
+                        '<div class="flex flex-1 flex-col p-5">' +
+                            '<div class="flex flex-wrap gap-1.5">' + chips + '</div>' +
+                            '<dl class="mt-4 grid grid-cols-2 gap-2 text-sm">' +
+                                '<div class="rounded-2xl bg-background-light dark:bg-gray-900/60 px-3 py-2"><dt class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Campi</dt><dd class="font-black text-gray-900 dark:text-white">' + esc(t.raw.campi) + '</dd></div>' +
+                                '<div class="rounded-2xl bg-background-light dark:bg-gray-900/60 px-3 py-2"><dt class="text-[10px] font-bold uppercase tracking-wider text-gray-400">' + (multi ? 'Tabelloni' : 'Coppie / genere') + '</dt><dd class="font-black text-gray-900 dark:text-white">' + (multi ? t.raw.tab.length + ' nella giornata' : esc(t.raw.coppie)) + '</dd></div>' +
+                            '</dl>' +
+                            (isPast ? '' :
+                            '<div class="mt-auto pt-5 flex items-center gap-2">' +
+                                '<button type="button" data-ics="' + t.id + '" class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-primary dark:hover:bg-secondary text-xs font-extrabold px-4 py-3 transition-colors">' +
+                                    '<span class="material-icons text-base" aria-hidden="true">event</span> Salva data</button>' +
+                                (t.sede.maps ? '<a href="https://www.google.com/maps/dir/?api=1&amp;destination=' + t.sede.maps + '" target="_blank" rel="noopener noreferrer" aria-label="Indicazioni per ' + esc(t.sede.impianto) + '" class="w-11 h-11 shrink-0 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-200 hover:bg-primary hover:border-primary hover:text-white transition-colors"><span class="material-icons text-lg" aria-hidden="true">directions</span></a>' : '') +
+                                '<a href="' + waLink(t) + '" target="_blank" rel="noopener noreferrer" aria-label="Chiedi informazioni su WhatsApp" class="w-11 h-11 shrink-0 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-200 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-colors"><span class="material-icons text-lg" aria-hidden="true">chat</span></a>' +
+                            '</div>') +
+                        '</div>' +
+                    '</article>';
+            }
+
+            // ---------- HERO: countdown ----------
+            var nextBox = document.getElementById('next-box');
+            if (!next) {
+                nextBox.innerHTML = '<p class="text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">Prossima tappa</p>' +
+                    '<p class="mt-2 text-2xl font-black">Nuove date in arrivo</p><p class="mt-1 text-sm text-gray-400">Il calendario si aggiorna appena la federazione pubblica le prossime tappe.</p>';
+            } else {
+                var nchips = next.cats.map(function (c) { return chip(c, next.raw.cat[c]); }).join('');
+                nextBox.innerHTML = '' +
+                    '<div class="flex flex-wrap items-center justify-between gap-3">' +
+                        '<p class="text-[11px] font-bold uppercase tracking-[0.25em] text-secondary">Prossima tappa</p>' +
+                        '<a href="#' + next.id + '" data-goto="' + next.id + '" class="inline-flex items-center gap-1 text-xs font-bold text-white/80 hover:text-secondary">Dettagli <span class="material-icons text-base" aria-hidden="true">south</span></a>' +
+                    '</div>' +
+                    '<p class="mt-2 text-xl sm:text-2xl font-black">' + cap(longDate(next.date)) + '</p>' +
+                    '<p class="text-sm text-gray-400">' + esc(next.sede.impianto) + ' · ' + esc(next.sede.nome) + '</p>' +
+                    '<div id="cd" class="mt-5 grid grid-cols-4 gap-2 text-center"></div>' +
+                    '<div class="mt-5 flex flex-wrap gap-1.5 [&_.lvl-chip]:bg-white/10 [&_.lvl-chip]:!text-white">' + nchips + '</div>';
+
+                var cd = document.getElementById('cd');
+                var units = [['g', 'Giorni', DAY], ['h', 'Ore', 3600000], ['m', 'Min', 60000], ['s', 'Sec', 1000]];
+                cd.innerHTML = units.map(function (u) {
+                    return '<div class="rounded-2xl bg-slate-950/60 border border-white/10 py-3"><div data-u="' + u[0] + '" class="flip text-3xl sm:text-4xl font-black tabular-nums">00</div><div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + u[1] + '</div></div>';
+                }).join('');
+                var cells = {}; cd.querySelectorAll('[data-u]').forEach(function (el) { cells[el.dataset.u] = el; });
+                function tickCd() {
+                    var ms = Math.max(0, next.date - new Date());
+                    if (ms === 0) {
+                        cd.innerHTML = '<p class="col-span-4 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/40 py-4 font-black text-lg">Si gioca oggi! 🏐</p>';
+                        return;
+                    }
+                    units.forEach(function (u, i) {
+                        var v = i === 0 ? Math.floor(ms / u[2]) : Math.floor(ms / u[2]) % (i === 1 ? 24 : 60);
+                        var s = (v < 10 ? '0' : '') + v, el = cells[u[0]];
+                        if (el.textContent !== s) {
+                            el.textContent = s;
+                            if (!reduce) { el.classList.add('tick'); setTimeout(function () { el.classList.remove('tick'); }, 180); }
+                        }
+                    });
+                    setTimeout(tickCd, 1000 - (Date.now() % 1000));
+                }
+                tickCd();
+            }
+
+            // ---------- HERO: numeri ----------
+            var sediAttive = {}, catsSet = {}, campiMax = 0;
+            upcoming.forEach(function (t) {
+                sediAttive[t.sedeKey] = 1; campiMax = Math.max(campiMax, +t.raw.campi || 0);
+                t.cats.forEach(function (c) { t.raw.cat[c].split('').forEach(function (g) { catsSet[c + g] = 1; }); });
+            });
+            var stats = [
+                [upcoming.length, upcoming.length === 1 ? 'Giornata in programma' : 'Giornate in programma'],
+                [Object.keys(catsSet).length, 'Tabelloni F + M'],
+                [Object.keys(sediAttive).length, Object.keys(sediAttive).length === 1 ? 'Sede IFB' : 'Sedi IFB'],
+                [campiMax, 'Campi in gioco'],
+            ];
+            var statsEl = document.getElementById('stats');
+            statsEl.innerHTML = stats.map(function (s, i) {
+                return '<div class="rv bg-slate-950/70 px-5 py-5 sm:py-6" style="--d:' + (i * 70) + 'ms"><dd class="text-4xl sm:text-5xl font-black tabular-nums text-white" data-count="' + s[0] + '">' + s[0] + '</dd><dt class="mt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400">' + s[1] + '</dt></div>';
+            }).join('');
+
+            // ---------- Ticker ----------
+            var tick = upcoming.slice(0, 6).map(function (t) {
+                return '<span class="px-6">' + t.date.getDate() + ' ' + MESI[t.date.getMonth()].slice(0, 3) + ' · ' + esc(t.sede.nome) + ' · ' + t.groups.map(function (g) { return LV[g].label; }).join(' / ') + '</span><span class="material-icons align-middle">emoji_events</span>';
+            }).join('') || '<span class="px-6">Tornei federali FIPAV nelle sedi IFB</span><span class="material-icons align-middle">emoji_events</span>';
+            document.getElementById('ticker').innerHTML = new Array(Math.max(2, Math.ceil(8 / Math.max(1, upcoming.length)) * 2) + 1).join(tick);
+
+            // ---------- Filtri ----------
+            var state = { sede: 'all', gen: 'all', lvl: 'all', view: 'lista' };
+            try { state.view = localStorage.getItem('ifb-fed-view') || 'lista'; } catch (e) { }
+
+            function match(t) {
+                if (state.sede !== 'all' && t.sedeKey !== state.sede) return false;
+                if (state.lvl !== 'all' && t.groups.indexOf(state.lvl) < 0) return false;
+                if (state.gen !== 'all') {
+                    var ok = t.cats.some(function (c) {
+                        return (state.lvl === 'all' || groupOf(c) === state.lvl) && t.raw.cat[c].indexOf(state.gen) >= 0;
+                    });
+                    if (!ok) return false;
+                }
+                return true;
+            }
+
+            // Scala dei livelli: sempre i 5 principali, Master/Under solo se presenti
+            var ladder = document.getElementById('ladder');
+            function renderLadder() {
+                var counts = {};
+                upcoming.forEach(function (t) { t.groups.forEach(function (g) { counts[g] = (counts[g] || 0) + 1; }); });
+                var shown = LIVELLI.filter(function (l) { return l.rank <= 4 || counts[l.key]; });
+                ladder.className = 'grid grid-cols-2 sm:grid-cols-3 gap-3 ' + (shown.length >= 7 ? 'lg:grid-cols-7' : shown.length === 6 ? 'lg:grid-cols-6' : 'lg:grid-cols-5');
+                ladder.innerHTML = shown.map(function (l, i) {
+                    var n = counts[l.key] || 0;
+                    return '<button type="button" data-lvl="' + l.key + '" aria-pressed="' + (state.lvl === l.key) + '" ' + (n ? '' : 'disabled') +
+                        ' class="medal rv text-left rounded-[1.5rem] bg-white dark:bg-gray-800/70 border border-gray-100 dark:border-gray-700 p-4 transition-all duration-300 enabled:hover:-translate-y-1 disabled:opacity-45 disabled:cursor-not-allowed" style="--c:' + l.c + ';--d:' + (i * 60) + 'ms">' +
+                            '<span class="flex items-start justify-between">' +
+                                '<span class="medal-disc w-11 h-11 rounded-full flex items-center justify-center text-white shadow-lg"><span class="material-icons text-xl" aria-hidden="true">' + (l.key === 'master' ? 'workspace_premium' : l.key === 'under' ? 'child_care' : 'emoji_events') + '</span></span>' +
+                                '<span class="text-2xl font-black tabular-nums text-gray-900 dark:text-white">' + (n || '–') + '</span>' +
+                            '</span>' +
+                            '<span class="mt-3 block font-black uppercase tracking-tight text-gray-900 dark:text-white">' + l.label + '</span>' +
+                            '<span class="block text-xs text-gray-500 dark:text-gray-400">' + (n ? l.desc : 'Nessuna data, per ora') + '</span>' +
+                        '</button>';
+                }).join('');
+            }
+
+            function seg(el, key, opts) {
+                el.innerHTML = opts.map(function (o) {
+                    var on = state[key] === o[0];
+                    return '<button type="button" data-' + key + '="' + o[0] + '" aria-pressed="' + on + '" class="rounded-full px-3.5 py-2 text-xs font-bold uppercase tracking-wide whitespace-nowrap transition-colors ' +
+                        (on ? 'bg-primary text-white shadow-md shadow-primary/30' : 'text-gray-600 dark:text-gray-300 hover:bg-primary/10 hover:text-primary') + '">' + o[1] + '</button>';
+                }).join('');
+            }
+
+            function renderFilters() {
+                var sedeKeys = []; all.forEach(function (t) { if (sedeKeys.indexOf(t.sedeKey) < 0) sedeKeys.push(t.sedeKey); });
+                seg(document.getElementById('f-sede'), 'sede', [['all', 'Tutte le sedi']].concat(sedeKeys.map(function (k) { return [k, esc((SEDI[k] || {}).nome || k)]; })));
+                seg(document.getElementById('f-gen'), 'gen', [['all', 'F + M'], ['F', 'Femminile'], ['M', 'Maschile']]);
+                var reset = document.getElementById('f-reset');
+                var active = state.sede !== 'all' || state.gen !== 'all' || state.lvl !== 'all';
+                reset.classList.toggle('hidden', !active); reset.classList.toggle('inline-flex', active);
+                document.querySelectorAll('.view-btn').forEach(function (b) {
+                    var on = b.dataset.view === state.view;
+                    b.setAttribute('aria-pressed', on);
+                    b.className = 'view-btn inline-flex items-center gap-1 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ' + (on ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white');
+                });
+                ladder.querySelectorAll('[data-lvl]').forEach(function (b) { b.setAttribute('aria-pressed', state.lvl === b.dataset.lvl); });
+            }
+
+            // ---------- Vista lista (raggruppata per mese) ----------
+            function renderList(list) {
+                var el = document.getElementById('view-lista');
+                if (!list.length) { el.innerHTML = empty(); return; }
+                var html = '', curKey = '', n = 0;
+                var byMonth = {};
+                list.forEach(function (t) { var k = t.date.getFullYear() + '-' + t.date.getMonth(); (byMonth[k] = byMonth[k] || []).push(t); });
+                Object.keys(byMonth).forEach(function (k) {
+                    var items = byMonth[k], d = items[0].date;
+                    html += '<div class="mb-12 last:mb-0">' +
+                        '<div class="rv flex items-baseline gap-4 mb-5">' +
+                            '<h3 class="font-black uppercase tracking-tight text-4xl sm:text-6xl text-transparent [-webkit-text-stroke:1.5px_#111827] dark:[-webkit-text-stroke:1.5px_#fff]">' + MESI[d.getMonth()] + '</h3>' +
+                            '<span class="text-sm font-bold text-gray-400">' + d.getFullYear() + '</span>' +
+                            '<span class="ml-auto shrink-0 inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary text-xs font-black px-3 py-1">' + items.length + (items.length === 1 ? ' giornata' : ' giornate') + '</span>' +
+                        '</div>' +
+                        '<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">' +
+                            items.map(function (t, i) { return card(t, { delay: (i % 3) * 80 }); }).join('') +
+                        '</div></div>';
+                });
+                el.innerHTML = html;
+            }
+
+            // ---------- Vista mese ----------
+            var monthCursor = null;
+            function monthRange() {
+                if (!all.length) return null;
+                var first = (upcoming[0] || all[all.length - 1]).date, last = all[all.length - 1].date;
+                return { min: new Date(all[0].date.getFullYear(), all[0].date.getMonth(), 1), start: new Date(first.getFullYear(), first.getMonth(), 1), max: new Date(last.getFullYear(), last.getMonth(), 1) };
+            }
+            function renderMonth(list) {
+                var el = document.getElementById('view-mese');
+                var r = monthRange();
+                if (!r) { el.innerHTML = empty(); return; }
+                if (!monthCursor) monthCursor = r.start;
+                var y = monthCursor.getFullYear(), m = monthCursor.getMonth();
+                var firstDow = (new Date(y, m, 1).getDay() + 6) % 7; // lunedì = 0
+                var nDays = new Date(y, m + 1, 0).getDate();
+                var byDay = {};
+                list.forEach(function (t) { if (t.date.getFullYear() === y && t.date.getMonth() === m) (byDay[t.date.getDate()] = byDay[t.date.getDate()] || []).push(t); });
+                var canPrev = monthCursor > r.min, canNext = monthCursor < r.max;
+
+                var cells = '';
+                for (var i = 0; i < firstDow; i++) cells += '<div></div>';
+                for (var d = 1; d <= nDays; d++) {
+                    var ts = byDay[d], date = new Date(y, m, d), isToday = +date === +today;
+                    var dots = ts ? '<span class="flex justify-center gap-0.5 mt-1">' + uniq([].concat.apply([], ts.map(function (t) { return t.groups; }))).slice(0, 4).map(function (g) { return '<span class="lvl-dot w-1.5 h-1.5 rounded-full" style="--c:' + LV[g].c + '"></span>'; }).join('') + '</span>' : '';
+                    cells += '<div class="cal-day ' + (ts ? 'has-t' : '') + ' flex flex-col items-center py-1.5"' + (ts ? ' role="button" tabindex="0" data-day="' + d + '" aria-label="' + cap(longDate(date)) + ': ' + ts.length + ' torneo' + '"' : '') + '>' +
+                        '<span class="cal-num w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-sm sm:text-base font-bold ' +
+                        (ts ? (ts[0].diff < 0 ? 'bg-gray-200 dark:bg-gray-700 text-gray-500' : 'bg-primary text-white shadow-md shadow-primary/40') : isToday ? 'ring-2 ring-primary text-primary' : (date < today ? 'text-gray-300 dark:text-gray-600' : 'text-gray-700 dark:text-gray-300')) + '">' + d + '</span>' + dots + '</div>';
+                }
+
+                var monthList = Object.keys(byDay).map(Number).sort(function (a, b) { return a - b; });
+                el.innerHTML = '' +
+                    '<div class="grid lg:grid-cols-12 gap-6 items-start">' +
+                        '<div class="lg:col-span-5 lg:sticky lg:top-36 rounded-[1.75rem] bg-white dark:bg-gray-800/70 border border-gray-100 dark:border-gray-700 p-5 sm:p-6">' +
+                            '<div class="flex items-center justify-between mb-4">' +
+                                '<button type="button" data-mnav="-1" ' + (canPrev ? '' : 'disabled') + ' aria-label="Mese precedente" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary/10 text-primary disabled:opacity-25 disabled:hover:bg-transparent"><span class="material-icons" aria-hidden="true">chevron_left</span></button>' +
+                                '<p class="font-black uppercase tracking-tight text-xl text-gray-900 dark:text-white">' + MESI[m] + ' <span class="text-gray-400">' + y + '</span></p>' +
+                                '<button type="button" data-mnav="1" ' + (canNext ? '' : 'disabled') + ' aria-label="Mese successivo" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary/10 text-primary disabled:opacity-25 disabled:hover:bg-transparent"><span class="material-icons" aria-hidden="true">chevron_right</span></button>' +
+                            '</div>' +
+                            '<div class="grid grid-cols-7 text-center text-[10px] font-black uppercase tracking-wider text-gray-400 mb-1">' + ['L', 'M', 'M', 'G', 'V', 'S', 'D'].map(function (x) { return '<span>' + x + '</span>'; }).join('') + '</div>' +
+                            '<div class="grid grid-cols-7">' + cells + '</div>' +
+                            '<div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex flex-wrap gap-x-3 gap-y-1.5">' +
+                                LIVELLI.map(function (l) { return '<span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-gray-500"><span class="lvl-dot w-2 h-2 rounded-full" style="--c:' + l.c + '"></span>' + l.label + '</span>'; }).join('') +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="lg:col-span-7 grid sm:grid-cols-2 gap-4 sm:gap-5" id="month-cards">' +
+                            (monthList.length ? monthList.map(function (d) { return byDay[d].map(function (t, i) { return card(t, { delay: i * 80 }); }).join(''); }).join('')
+                                : '<div class="sm:col-span-2">' + empty('Nessun torneo in ' + MESI[m] + (list.length ? ' con questi filtri.' : '.')) + '</div>') +
+                        '</div>' +
+                    '</div>';
+            }
+            function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+
+            function empty(msg) {
+                return '<div class="rounded-[1.75rem] border-2 border-dashed border-gray-200 dark:border-gray-700 p-10 text-center">' +
+                    '<span class="material-icons text-5xl text-gray-300 dark:text-gray-600" aria-hidden="true">sports_volleyball</span>' +
+                    '<p class="mt-3 font-black text-lg text-gray-900 dark:text-white">' + (msg || (upcoming.length ? 'Nessun torneo con questi filtri' : 'Nuove date in arrivo')) + '</p>' +
+                    (upcoming.length ? '<button type="button" data-reset class="mt-4 inline-flex items-center gap-1 rounded-full bg-primary text-white text-sm font-bold px-5 py-2.5 hover:bg-primary-dark">Mostra tutte le date</button>' : '') +
+                    '</div>';
+            }
+
+            function renderArchive() {
+                var box = document.getElementById('archivio');
+                var list = past.filter(match);
+                box.classList.toggle('hidden', !past.length);
+                document.getElementById('archivio-n').textContent = '(' + list.length + ')';
+                document.getElementById('archivio-list').innerHTML = list.map(function (t) { return card(t); }).join('');
+            }
+
+            function render() {
+                var list = upcoming.filter(match);
+                document.getElementById('result-count').textContent = list.length + (list.length === 1 ? ' giornata in programma' : ' giornate in programma');
+                document.getElementById('view-lista').classList.toggle('hidden', state.view !== 'lista');
+                document.getElementById('view-mese').classList.toggle('hidden', state.view !== 'mese');
+                if (state.view === 'lista') renderList(list); else renderMonth(all.filter(match));
+                renderArchive();
+                renderFilters();
+                observe();
+            }
+
+            // ---------- Eventi ----------
+            document.addEventListener('click', function (e) {
+                var b;
+                if ((b = e.target.closest('[data-lvl]'))) {
+                    state.lvl = state.lvl === b.dataset.lvl ? 'all' : b.dataset.lvl;
+                    render();
+                    if (state.lvl !== 'all') scrollToCal();
+                } else if ((b = e.target.closest('[data-sede]'))) { state.sede = b.dataset.sede; render(); }
+                else if ((b = e.target.closest('[data-gen]'))) { state.gen = b.dataset.gen; render(); }
+                else if ((b = e.target.closest('#f-reset, [data-reset]'))) { state.sede = state.gen = state.lvl = 'all'; render(); }
+                else if ((b = e.target.closest('[data-view]'))) {
+                    state.view = b.dataset.view;
+                    try { localStorage.setItem('ifb-fed-view', state.view); } catch (err) { }
+                    render();
+                } else if ((b = e.target.closest('[data-mnav]'))) {
+                    monthCursor = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + +b.dataset.mnav, 1);
+                    render();
+                } else if ((b = e.target.closest('[data-day]'))) { flashDay(+b.dataset.day); }
+                else if ((b = e.target.closest('[data-ics]'))) { downloadIcs(b.dataset.ics); }
+                else if ((b = e.target.closest('[data-goto]'))) {
+                    e.preventDefault();
+                    var t = all.filter(function (x) { return x.id === b.dataset.goto; })[0];
+                    state.sede = state.gen = state.lvl = 'all';
+                    if (state.view === 'mese') monthCursor = new Date(t.date.getFullYear(), t.date.getMonth(), 1);
+                    render();
+                    flash(t.id);
+                }
+            });
+            document.addEventListener('keydown', function (e) {
+                var b = e.target.closest && e.target.closest('[data-day]');
+                if (b && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); flashDay(+b.dataset.day); }
+            });
+
+            function scrollToCal() {
+                document.getElementById('calendario').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+            }
+            function flash(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                el.classList.add('in');
+                el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+                el.classList.remove('is-flash'); void el.offsetWidth; el.classList.add('is-flash');
+            }
+            function flashDay(d) {
+                var t = all.filter(function (x) { return match(x) && x.date.getFullYear() === monthCursor.getFullYear() && x.date.getMonth() === monthCursor.getMonth() && x.date.getDate() === d; });
+                t.forEach(function (x, i) { setTimeout(function () { flash(x.id); }, i * 120); });
+            }
+
+            // ---------- File .ics per "Salva data" ----------
+            function ymd(d) { return d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2); }
+            function downloadIcs(id) {
+                var t = all.filter(function (x) { return x.id === id; })[0];
+                if (!t) return;
+                var end = new Date(t.date.getTime() + DAY);
+                var title = 'Torneo federale FIPAV · ' + t.groups.map(function (g) { return LV[g].label; }).join('/') + ' · ' + t.sede.nome;
+                var ics = [
+                    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//I Follow Beach Volley//Tornei federali//IT', 'CALSCALE:GREGORIAN',
+                    'BEGIN:VEVENT',
+                    'UID:' + t.raw.data + '-' + t.sedeKey + '-' + t.cats.join('') + '@ifollowbv.it',
+                    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+                    'DTSTART;VALUE=DATE:' + ymd(t.date), 'DTEND;VALUE=DATE:' + ymd(end),
+                    'SUMMARY:' + title,
+                    'LOCATION:' + (t.sede.impianto + ', ' + (t.sede.indirizzo || t.sede.nome)).replace(/,/g, '\\,'),
+                    'DESCRIPTION:Categorie: ' + t.cats.map(function (c) { return catLabel(c) + ' ' + t.raw.cat[c]; }).join(' · ').replace(/,/g, '\\,') + '\\nhttps://ifollowbv.it/federali.html',
+                    'END:VEVENT', 'END:VCALENDAR'
+                ].join('\r\n');
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+                a.download = 'torneo-federale-' + t.raw.data + '-' + t.sedeKey + '.ics';
+                document.body.appendChild(a); a.click(); a.remove();
+                setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+            }
+
+            // ---------- Reveal ----------
+            var io = 'IntersectionObserver' in window && !reduce ? new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+            }, { rootMargin: '0px 0px -6% 0px', threshold: .08 }) : null;
+            function observe() {
+                document.querySelectorAll('.rv:not(.in)').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+            }
+
+            // ---------- Organizzazione ----------
+            document.getElementById('org-name').textContent = INFO.organizzatore || '';
+            document.getElementById('org-ref').textContent = INFO.referente || '';
+            document.getElementById('org-code').textContent = INFO.codiceSocieta || '';
+            document.getElementById('org-wa').href = 'https://wa.me/' + (INFO.telefono || '').replace(/\D/g, '') + '?text=' + encodeURIComponent('Ciao! Vorrei informazioni sui tornei federali IFB.');
+
+            // ---------- Dati strutturati per Google ----------
+            var ld = document.createElement('script');
+            ld.type = 'application/ld+json';
+            ld.textContent = JSON.stringify(upcoming.map(function (t) {
+                return {
+                    '@context': 'https://schema.org', '@type': 'SportsEvent',
+                    name: 'Torneo federale FIPAV beach volley – ' + t.cats.map(catLabel).join(', '),
+                    startDate: t.raw.data, endDate: t.raw.data, sport: 'Beach volley',
+                    eventStatus: 'https://schema.org/EventScheduled',
+                    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+                    location: { '@type': 'Place', name: t.sede.impianto, address: t.sede.indirizzo || t.sede.nome },
+                    organizer: { '@type': 'SportsOrganization', name: INFO.organizzatore, url: 'https://ifollowbv.it/' },
+                };
+            }));
+            document.head.appendChild(ld);
+
+            renderLadder();
+            render();
+            // L'hero entra subito, senza aspettare lo scroll
+            requestAnimationFrame(function () {
+                document.querySelectorAll('#hero .rv').forEach(function (el) { el.classList.add('in'); if (io) io.unobserve(el); });
+            });
+        })();
+    </script>
+</body>
+
+</html>
