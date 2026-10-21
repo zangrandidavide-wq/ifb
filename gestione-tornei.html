@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#120b1a" />
+    <title>Gestione tornei | I Follow Beach Volley</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#7f13ec', 'primary-dark': '#5e0eb3', secondary: '#FFD700', 'background-light': '#f7f6f8', stage: '#120b1a' },
+                    fontFamily: { display: ['Lexend', 'sans-serif'] },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="tornei/tornei.css" />
+    <style>
+        /* Campi del modulo (input.inp: più specifico degli stili [type=date] del plugin forms) */
+        input.inp, select.inp, textarea.inp {
+            margin-top: .375rem; width: 100%; border-radius: .9rem; border: 2px solid #f0eef3;
+            background-color: #f7f6f8; padding: .75rem 1rem; font-weight: 600; color: #111827;
+        }
+        input.inp::placeholder, textarea.inp::placeholder { color: #9ca3af; font-weight: 400; }
+        input.inp:focus, select.inp:focus, textarea.inp:focus { background-color: #fff; border-color: #7f13ec; box-shadow: 0 0 0 4px rgba(127, 19, 236, .12); outline: none; }
+        .lbl { display: block; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .15em; color: #6b7280; }
+
+        /* Scelte a pillola (sesso, formula) */
+        .pick input { position: absolute; opacity: 0; pointer-events: none; }
+        .pick span { transition: all .2s ease; }
+        .pick input:checked + span { background: #120b1a; color: #fff; border-color: #120b1a; box-shadow: 0 10px 24px -12px rgba(18, 11, 26, .8); transform: translateY(-2px); }
+        .pick input:focus-visible + span { outline: 3px solid #7f13ec; outline-offset: 2px; }
+        .pick-f input:checked + span { background: #FFD700; color: #111827; border-color: #FFD700; box-shadow: 0 10px 24px -10px rgba(255, 215, 0, .9); }
+
+        /* Interruttore "pubblica" */
+        .switch input { position: absolute; opacity: 0; }
+        .switch .track { transition: background .2s ease; }
+        .switch .knob { transition: transform .25s cubic-bezier(.2, .9, .3, 1.3); }
+        .switch input:checked ~ .track { background: #22c55e; }
+        .switch input:checked ~ .track .knob { transform: translateX(22px); }
+        .switch input:focus-visible ~ .track { outline: 3px solid #7f13ec; outline-offset: 2px; }
+
+        .drop.over { border-color: #7f13ec; background: rgba(127, 19, 236, .06); }
+    </style>
+</head>
+
+<body class="font-display bg-background-light text-gray-900 min-h-screen antialiased">
+
+    <!-- ─── Accesso ───────────────────────────────────────────────────────── -->
+    <section id="vista-login" class="hidden min-h-screen lg:grid lg:grid-cols-[1.15fr_1fr] bg-stage">
+        <div class="relative overflow-hidden h-[38vh] min-h-[260px] lg:h-auto lg:min-h-screen">
+            <img src="hero_2.webp" alt="" class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-stage via-stage/70 to-primary/40"></div>
+            <div class="relative h-full flex flex-col justify-between p-6 lg:p-14 text-white">
+                <a href="tornei.html" class="self-start flex items-center justify-center w-[112px] h-10 bg-[#74297c] rounded-full shadow-lg ring-1 ring-white/20" aria-label="Torna alla pagina tornei">
+                    <img src="logo-trasparente.png" alt="Logo IFB" class="h-8 w-auto object-contain" />
+                </a>
+                <div class="hidden lg:block">
+                    <p class="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">I Follow Beach Volley</p>
+                    <h1 class="mt-4 font-poster uppercase leading-[0.86] text-[clamp(3.5rem,6vw,6.5rem)]">
+                        <span class="text-outline-white">Area</span><br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-[#ff8a1f] to-[#ff4fa3]">organizzatori</span>
+                    </h1>
+                    <p class="mt-6 max-w-sm text-white/75 text-lg">Pubblica i tornei, carica le locandine e scarica gli iscritti. Tutto da qui.</p>
+                </div>
+            </div>
+        </div>
+        <div class="relative z-10 -mt-20 lg:mt-0 flex items-start lg:items-center justify-center px-4 pb-14 lg:p-14">
+            <div class="w-full max-w-sm bg-white rounded-[2rem] shadow-2xl p-7 sm:p-9">
+                <p class="text-[11px] font-black uppercase tracking-[0.25em] text-primary lg:hidden">Area organizzatori</p>
+                <h2 class="font-poster uppercase text-5xl leading-none mt-1 lg:mt-0">Accedi</h2>
+                <form id="login-form" class="mt-7 space-y-5" novalidate>
+                    <label class="lbl">Email<input id="login-email" type="email" autocomplete="email" required class="inp" /></label>
+                    <label class="lbl">Password<input id="login-password" type="password" autocomplete="current-password" required class="inp" /></label>
+                    <p id="login-errore" class="hidden rounded-xl bg-red-50 text-red-700 text-sm font-bold px-4 py-3" role="alert"></p>
+                    <button type="submit" class="t-shine w-full bg-primary hover:bg-primary-dark text-white font-poster uppercase text-xl tracking-wide py-4 rounded-2xl shadow-[0_14px_34px_-12px_rgba(127,19,236,.8)] transition-all hover:-translate-y-0.5 disabled:opacity-60">Entra</button>
+                </form>
+                <p class="mt-6 text-xs text-gray-500">Password dimenticata? Chiedi a Davide di reimpostarla.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Account senza permessi ────────────────────────────────────────── -->
+    <section id="vista-negato" class="hidden min-h-screen bg-stage text-white flex items-center justify-center p-6">
+        <div class="max-w-md text-center">
+            <span class="material-symbols-outlined text-7xl text-secondary" aria-hidden="true">lock</span>
+            <h1 class="mt-4 font-poster uppercase text-5xl">Account non abilitato</h1>
+            <p class="mt-3 text-white/70">Questo account non è tra gli organizzatori dei tornei. Se pensi sia un errore, contatta Davide.</p>
+            <button type="button" data-esci class="mt-8 bg-white/10 hover:bg-white/20 font-bold px-6 py-3 rounded-full">Esci</button>
+        </div>
+    </section>
+
+    <p id="caricamento" class="min-h-screen bg-stage text-white/60 flex items-center justify-center">Caricamento…</p>
+
+    <!-- ─── Plancia ───────────────────────────────────────────────────────── -->
+    <div id="vista-tornei" class="hidden">
+        <header class="relative overflow-hidden bg-stage text-white [--t-stage:#120b1a]">
+            <div class="absolute -top-40 -left-32 w-[32rem] h-[32rem] rounded-full bg-primary/50 blur-[130px] pointer-events-none" aria-hidden="true"></div>
+            <div class="absolute -bottom-40 right-0 w-[28rem] h-[28rem] rounded-full bg-[#ff4fa3]/20 blur-[130px] pointer-events-none" aria-hidden="true"></div>
+            <div class="absolute inset-0 opacity-[0.07] pointer-events-none bg-[radial-gradient(rgba(255,255,255,.9)_1px,transparent_1px)] [background-size:22px_22px]" aria-hidden="true"></div>
+
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+                <nav class="h-20 flex items-center justify-between gap-3">
+                    <a href="tornei.html" target="_blank" class="flex items-center gap-3 min-w-0" title="Apri la pagina pubblica">
+                        <span class="flex items-center justify-center w-[100px] h-9 bg-[#74297c] rounded-full shrink-0 ring-1 ring-white/20">
+                            <img src="logo-trasparente.png" alt="Logo IFB" class="h-7 w-auto object-contain" />
+                        </span>
+                        <span class="hidden sm:inline text-[11px] font-black uppercase tracking-[0.25em] text-white/60">Gestione tornei</span>
+                    </a>
+                    <div class="flex items-center gap-1">
+                        <button id="btn-password" type="button" class="inline-flex items-center gap-1.5 text-sm font-bold text-white/70 hover:text-white px-3 py-2 rounded-full hover:bg-white/10">
+                            <span class="material-symbols-outlined text-lg" aria-hidden="true">key</span><span class="hidden sm:inline">Password</span></button>
+                        <button type="button" data-esci class="inline-flex items-center gap-1.5 text-sm font-bold text-white/70 hover:text-white px-3 py-2 rounded-full hover:bg-white/10">
+                            <span class="material-symbols-outlined text-lg" aria-hidden="true">logout</span><span class="hidden sm:inline">Esci</span></button>
+                    </div>
+                </nav>
+
+                <div class="pt-8 pb-28 sm:pb-32 flex flex-wrap items-end justify-between gap-8">
+                    <div>
+                        <p class="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">Area organizzatori</p>
+                        <h1 class="mt-3 font-poster uppercase leading-[0.9] text-6xl sm:text-7xl">Ciao <span id="utente-nome" class="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-[#ff8a1f] to-[#ff4fa3]"></span></h1>
+                        <p class="mt-3 text-white/65 max-w-md">I tornei pubblicati compaiono su <a href="tornei.html#calendario" target="_blank" class="text-white font-bold underline decoration-secondary decoration-2 underline-offset-4">tornei.html</a> fino al giorno della gara.</p>
+                    </div>
+                    <button id="btn-nuovo" type="button" class="t-shine group inline-flex items-center gap-3 bg-secondary text-gray-900 font-poster uppercase text-2xl tracking-wide pl-7 pr-3 py-3 rounded-2xl shadow-[0_16px_40px_-12px_rgba(255,215,0,.8)] transition-all hover:-translate-y-1">
+                        Nuovo torneo
+                        <span class="w-11 h-11 rounded-xl bg-gray-900 text-secondary flex items-center justify-center transition-transform group-hover:rotate-90">
+                            <span class="material-symbols-outlined text-3xl" aria-hidden="true">add</span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="relative max-w-6xl mx-auto px-4 sm:px-6 -mt-20 pb-20">
+            <dl id="stats" class="grid grid-cols-3 gap-3 sm:gap-4"></dl>
+
+            <div class="mt-12 flex items-end justify-between gap-4">
+                <h2 class="font-poster uppercase text-4xl">In programma</h2>
+            </div>
+            <div id="lista" class="mt-5 grid gap-4"></div>
+
+            <details id="passati-box" class="hidden group mt-12">
+                <summary class="cursor-pointer list-none inline-flex items-center gap-2 font-poster uppercase text-2xl text-gray-400 hover:text-gray-700">
+                    <span class="material-symbols-outlined transition-transform group-open:rotate-90" aria-hidden="true">chevron_right</span>Tornei passati
+                </summary>
+                <div id="lista-passati" class="mt-5 grid gap-4 opacity-80"></div>
+            </details>
+        </main>
+    </div>
+
+    <!-- ─── Editor torneo ─────────────────────────────────────────────────── -->
+    <dialog id="dlg-torneo" class="w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-6xl max-h-[94vh] rounded-[2rem] p-0 shadow-2xl bg-background-light">
+        <form id="form-torneo" class="flex flex-col max-h-[94vh]" novalidate>
+            <div class="shrink-0 bg-stage text-white px-5 sm:px-8 py-5 flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Editor torneo</p>
+                    <h2 id="dlg-torneo-titolo" class="font-poster uppercase text-4xl leading-none mt-1">Nuovo torneo</h2>
+                </div>
+                <button type="button" data-chiudi class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center" aria-label="Chiudi"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+            </div>
+
+            <div class="flex-grow overflow-y-auto">
+                <div class="grid lg:grid-cols-[minmax(0,1fr)_380px]">
+                    <div class="p-5 sm:p-8 space-y-6">
+
+                        <!-- 1 · Locandina -->
+                        <fieldset class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm">
+                            <legend class="sr-only">Locandina</legend>
+                            <p class="flex items-center gap-3 font-poster uppercase text-2xl"><span class="w-8 h-8 rounded-lg bg-stage text-secondary text-lg flex items-center justify-center">1</span>Locandina</p>
+                            <div class="mt-4 flex gap-4 items-stretch">
+                                <label id="drop" class="drop relative shrink-0 w-32 sm:w-40 aspect-[4/5] rounded-2xl border-2 border-dashed border-gray-200 bg-background-light overflow-hidden cursor-pointer hover:border-primary transition-colors">
+                                    <img id="locandina-anteprima" alt="" class="hidden absolute inset-0 w-full h-full object-cover" />
+                                    <span id="locandina-vuota" class="absolute inset-0 flex flex-col items-center justify-center gap-1 text-gray-400 text-center p-3">
+                                        <span class="material-symbols-outlined text-4xl text-primary" aria-hidden="true">add_photo_alternate</span>
+                                        <span class="text-xs font-bold text-gray-600">Trascina o tocca</span>
+                                    </span>
+                                    <input id="locandina-file" type="file" accept="image/jpeg,image/png,image/webp" class="sr-only" />
+                                </label>
+                                <div class="text-sm text-gray-600 flex flex-col justify-center gap-3">
+                                    <p>Formato verticale (es. 1080×1350) per riempire bene la card. JPG, PNG o WebP: la riduciamo noi.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <label for="locandina-file" class="cursor-pointer inline-flex items-center gap-1.5 bg-stage text-white text-sm font-bold px-4 py-2 rounded-full"><span class="material-symbols-outlined text-lg" aria-hidden="true">upload</span>Scegli immagine</label>
+                                        <button id="locandina-rimuovi" type="button" class="hidden inline-flex items-center gap-1.5 text-sm font-bold text-red-600 px-3 py-2 rounded-full hover:bg-red-50"><span class="material-symbols-outlined text-lg" aria-hidden="true">delete</span>Rimuovi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- 2 · Il torneo -->
+                        <fieldset class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm space-y-5">
+                            <legend class="sr-only">Il torneo</legend>
+                            <p class="flex items-center gap-3 font-poster uppercase text-2xl"><span class="w-8 h-8 rounded-lg bg-stage text-secondary text-lg flex items-center justify-center">2</span>Il torneo</p>
+                            <label class="lbl">Nome del torneo<input name="titolo" required minlength="3" maxlength="120" class="inp" placeholder="Es. Beach Break Autumn Cup" /></label>
+                            <div>
+                                <span class="lbl">Categoria</span>
+                                <div class="mt-2 grid grid-cols-3 gap-2">
+                                    <label class="pick relative"><input type="radio" name="sesso" value="maschile" required /><span class="flex items-center justify-center gap-2 rounded-xl border-2 border-gray-100 py-3 text-sm font-black cursor-pointer"><span class="w-2.5 h-2.5 rounded-full bg-[#38bdf8]"></span>Maschile</span></label>
+                                    <label class="pick relative"><input type="radio" name="sesso" value="femminile" /><span class="flex items-center justify-center gap-2 rounded-xl border-2 border-gray-100 py-3 text-sm font-black cursor-pointer"><span class="w-2.5 h-2.5 rounded-full bg-[#ff4fa3]"></span>Femminile</span></label>
+                                    <label class="pick relative"><input type="radio" name="sesso" value="misto" checked /><span class="flex items-center justify-center gap-2 rounded-xl border-2 border-gray-100 py-3 text-sm font-black cursor-pointer"><span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>Misto</span></label>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="lbl">Formula</span>
+                                <div class="mt-2 grid grid-cols-3 sm:grid-cols-6 gap-2">
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="2" checked required /><span class="block text-center rounded-xl border-2 border-gray-100 py-2.5 font-poster text-2xl cursor-pointer">2×2</span></label>
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="3" /><span class="block text-center rounded-xl border-2 border-gray-100 py-2.5 font-poster text-2xl cursor-pointer">3×3</span></label>
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="4" /><span class="block text-center rounded-xl border-2 border-gray-100 py-2.5 font-poster text-2xl cursor-pointer">4×4</span></label>
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="5" /><span class="block text-center rounded-xl border-2 border-gray-100 py-2.5 font-poster text-2xl cursor-pointer">5×5</span></label>
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="6" /><span class="block text-center rounded-xl border-2 border-gray-100 py-2.5 font-poster text-2xl cursor-pointer">6×6</span></label>
+                                    <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="1" /><span class="flex items-center justify-center h-full rounded-xl border-2 border-gray-100 py-2.5 text-xs font-black uppercase cursor-pointer">Singolo</span></label>
+                                </div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <label class="lbl">Data del torneo<input name="data" type="date" required class="inp" /></label>
+                                <label class="lbl">Luogo<input name="luogo" required maxlength="120" list="sedi" class="inp" placeholder="Es. Basiglio" /></label>
+                            </div>
+                            <datalist id="sedi"><option value="Basiglio"></option><option value="Pero"></option><option value="Corsico"></option></datalist>
+                            <label class="lbl">Descrizione <span class="normal-case tracking-normal font-semibold text-gray-400">· facoltativa</span>
+                                <textarea name="descrizione" rows="3" maxlength="2000" class="inp" placeholder="Programma, premi, regolamento…"></textarea>
+                            </label>
+                        </fieldset>
+
+                        <!-- 3 · Iscrizioni -->
+                        <fieldset class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm space-y-5">
+                            <legend class="sr-only">Iscrizioni</legend>
+                            <p class="flex items-center gap-3 font-poster uppercase text-2xl"><span class="w-8 h-8 rounded-lg bg-stage text-secondary text-lg flex items-center justify-center">3</span>Iscrizioni</p>
+                            <label class="lbl">Chiusura iscrizioni<input name="chiusura_iscrizioni" type="datetime-local" required class="inp" /></label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="lbl">Quota <span class="normal-case tracking-normal font-semibold text-gray-400">· facolt.</span><input name="quota" maxlength="80" class="inp" placeholder="40 € a coppia" /></label>
+                                <label class="lbl">Max squadre <span class="normal-case tracking-normal font-semibold text-gray-400">· facolt.</span><input name="max_squadre" type="number" min="1" step="1" class="inp" placeholder="Nessun limite" /></label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <!-- Anteprima live: la stessa card che vedrà il pubblico -->
+                    <aside class="bg-stage [--t-stage:#120b1a] p-5 sm:p-7 lg:sticky lg:top-0 lg:self-start lg:min-h-full">
+                        <p class="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-secondary">
+                            <span class="material-symbols-outlined text-base" aria-hidden="true">visibility</span>Anteprima sul sito</p>
+                        <div id="anteprima" class="mt-4 max-w-[340px] mx-auto pointer-events-none"></div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Barra di salvataggio -->
+            <div class="shrink-0 bg-white border-t border-gray-100 px-5 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-3">
+                <label class="switch relative inline-flex items-center gap-3 cursor-pointer select-none">
+                    <input name="pubblicato" type="checkbox" />
+                    <span class="track relative w-[50px] h-7 rounded-full bg-gray-200 shrink-0"><span class="knob absolute top-1 left-1 w-5 h-5 rounded-full bg-white shadow"></span></span>
+                    <span class="leading-tight"><b id="pubblica-label" class="block text-sm">Bozza</b><span class="text-xs text-gray-500">Visibile solo agli organizzatori</span></span>
+                </label>
+                <p id="torneo-errore" class="hidden order-last sm:order-none w-full sm:w-auto rounded-xl bg-red-50 text-red-700 text-sm font-bold px-4 py-2" role="alert"></p>
+                <div class="flex gap-2 ml-auto">
+                    <button type="button" data-chiudi class="font-bold px-5 py-3 rounded-2xl hover:bg-gray-100">Annulla</button>
+                    <button type="submit" class="t-shine bg-primary hover:bg-primary-dark text-white font-poster uppercase text-xl tracking-wide px-8 py-3 rounded-2xl shadow-[0_12px_30px_-12px_rgba(127,19,236,.8)] disabled:opacity-60">Salva</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ─── Iscritti ──────────────────────────────────────────────────────── -->
+    <dialog id="dlg-iscritti" class="w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-4xl max-h-[94vh] overflow-y-auto rounded-[2rem] p-0 shadow-2xl bg-background-light">
+        <div id="iscritti-testa" class="relative overflow-hidden bg-stage text-white px-5 sm:px-8 pt-6 pb-7"></div>
+        <div class="px-5 sm:px-8 py-6">
+            <div class="flex flex-wrap gap-2">
+                <button id="btn-scarica" type="button" class="t-shine inline-flex items-center gap-2 bg-secondary text-gray-900 font-poster uppercase text-lg tracking-wide px-5 py-3 rounded-2xl shadow-[0_12px_28px_-12px_rgba(255,215,0,.9)] disabled:opacity-40">
+                    <span class="material-symbols-outlined" aria-hidden="true">download</span>Scarica Excel (CSV)</button>
+                <button id="btn-copia-email" type="button" class="inline-flex items-center gap-2 bg-white border-2 border-gray-100 font-bold text-sm px-4 py-3 rounded-2xl hover:border-primary disabled:opacity-40">
+                    <span class="material-symbols-outlined text-lg" aria-hidden="true">content_copy</span><span>Copia tutte le email</span></button>
+            </div>
+            <div id="iscritti-lista" class="mt-6"></div>
+        </div>
+    </dialog>
+
+    <!-- ─── Cambio password ───────────────────────────────────────────────── -->
+    <dialog id="dlg-password" class="w-[calc(100%-2rem)] max-w-sm rounded-[2rem] p-0 shadow-2xl">
+        <form id="form-password" class="p-7 sm:p-8 space-y-5" novalidate>
+            <div class="flex items-center justify-between">
+                <h2 class="font-poster uppercase text-3xl">Cambia password</h2>
+                <button type="button" data-chiudi class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center" aria-label="Chiudi"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+            </div>
+            <label class="lbl">Nuova password<input name="password" type="password" minlength="8" required autocomplete="new-password" class="inp" /></label>
+            <p class="text-xs text-gray-500 -mt-2">Almeno 8 caratteri.</p>
+            <p id="password-msg" class="hidden text-sm font-bold" role="status"></p>
+            <button type="submit" class="w-full bg-primary text-white font-poster uppercase text-xl tracking-wide py-3.5 rounded-2xl disabled:opacity-60">Salva password</button>
+        </form>
+    </dialog>
+
+    <script type="module" src="tornei/gestione.js"></script>
+</body>
+
+</html>

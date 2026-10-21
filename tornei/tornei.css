@@ -1,0 +1,160 @@
+/* Stili condivisi da tornei.html e gestione-tornei.html (card dei tornei, modulo, editor). */
+
+/* Carattere "da locandina" per date, titoli e numeri: condensato e pesante */
+.font-poster {
+    font-family: 'Anton', 'Lexend', sans-serif;
+    font-weight: 400;
+    letter-spacing: .01em;
+}
+
+/* Scritta solo contorno */
+.text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
+}
+.text-outline-white {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, .85);
+}
+
+/* ─── Card torneo ──────────────────────────────────────────────────────── */
+.t-card {
+    --acc: #FFD700;
+    transform-style: preserve-3d;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease;
+}
+.t-card:hover {
+    box-shadow: 0 40px 80px -30px var(--acc), 0 0 0 1px rgba(255, 255, 255, .14);
+}
+
+/* Bordo luminoso che segue il colore del torneo */
+.t-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(140deg, var(--acc), transparent 35%, transparent 65%, #FFD700);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: .55;
+    pointer-events: none;
+    transition: opacity .35s ease;
+}
+.t-card:hover::after {
+    opacity: 1;
+}
+
+/* Linea tratteggiata con le "tacche" del biglietto */
+.t-cut {
+    position: relative;
+    height: 22px;
+    margin: -11px 0;
+    z-index: 2;
+}
+.t-cut::before,
+.t-cut::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    background: var(--t-stage, #120b1a);
+}
+.t-cut::before { left: -11px; }
+.t-cut::after { right: -11px; }
+.t-cut > span {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 50%;
+    border-top: 2px dashed rgba(255, 255, 255, .16);
+}
+
+/* Riflesso che attraversa il pulsante */
+.t-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.t-shine::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: -60%;
+    width: 50%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .65), transparent);
+    transform: skewX(-20deg);
+    animation: t-shine 3.2s ease-in-out infinite;
+    z-index: -1;
+}
+@keyframes t-shine {
+    0%, 55% { left: -60%; }
+    100% { left: 130%; }
+}
+
+/* Timbro "chiuso" */
+.t-stamp {
+    border: 4px solid currentColor;
+    transform: rotate(-12deg);
+    box-shadow: inset 0 0 0 2px currentColor;
+    mix-blend-mode: screen;
+}
+
+/* Barra dei posti */
+.t-bar {
+    background-image: linear-gradient(90deg, #FFD700, #ff8a1f 60%, #ff4fa3);
+    background-size: 200% 100%;
+    animation: t-bar 4s linear infinite;
+}
+@keyframes t-bar {
+    to { background-position: -200% 0; }
+}
+
+/* Locandina assente: sfondo "da poster" */
+.t-art {
+    background:
+        radial-gradient(circle at 78% 22%, #FFD700 0 12%, rgba(255, 138, 31, .7) 13%, transparent 34%),
+        radial-gradient(circle at 10% 100%, rgba(255, 79, 163, .55), transparent 50%),
+        linear-gradient(160deg, #7f13ec 0%, #3d0a73 55%, #191022 100%);
+}
+
+/* Puntino che pulsa */
+.t-ping {
+    animation: t-ping 1.6s cubic-bezier(0, 0, .2, 1) infinite;
+}
+@keyframes t-ping {
+    75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Coriandoli dopo l'iscrizione */
+.t-confetti {
+    position: fixed;
+    top: -12px;
+    width: 10px;
+    height: 14px;
+    z-index: 100;
+    pointer-events: none;
+    animation: t-fall linear forwards;
+}
+@keyframes t-fall {
+    to { transform: translate3d(var(--dx), 110vh, 0) rotate(var(--rot)); }
+}
+
+dialog::backdrop {
+    background: rgba(18, 11, 26, .72);
+    backdrop-filter: blur(6px);
+}
+dialog[open] {
+    animation: t-dialog .35s cubic-bezier(.2, .9, .3, 1.2);
+}
+@keyframes t-dialog {
+    from { opacity: 0; transform: translateY(24px) scale(.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .t-shine::before, .t-bar, .t-ping, dialog[open] { animation: none; }
+    .t-card { transition: none; }
+}
