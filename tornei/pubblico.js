@@ -1,7 +1,7 @@
 // Calendario tornei di tornei.html: card dei tornei pubblicati e modulo di iscrizione.
 // Parla con Supabase via fetch (senza libreria) per tenere la pagina leggera:
 // le uniche due chiamate sono le funzioni tornei_pubblici() e iscrivi_torneo().
-import { SUPABASE_URL, SUPABASE_ANON_KEY, locandinaUrl, SESSO, formula, dataEOra, esc } from './config.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, locandinaUrl, SESSO, LIVELLO, barreLivello, formula, dataEOra, esc } from './config.js';
 import { cardTorneo, statoTorneo, aggiornaCountdown, attivaTilt, COLORE_SESSO } from './card.js';
 
 const grid = document.getElementById('tornei-grid');
@@ -129,6 +129,7 @@ function apriIscrizione(t) {
                 <div class="flex flex-wrap gap-2">
                     <span class="font-poster text-xl leading-none bg-secondary text-gray-900 px-2.5 py-1 rounded-lg -rotate-2">${esc(formula(n).replace('x', '×'))}</span>
                     <span class="text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full text-gray-900" style="background:var(--acc)">${esc(SESSO[t.sesso] || '')}</span>
+                    ${LIVELLO[t.livello] ? `<span class="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full bg-white/15 text-white">${barreLivello(t.livello)}${esc(LIVELLO[t.livello].label)}</span>` : ''}
                 </div>
                 <button type="button" data-chiudi class="shrink-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center" aria-label="Chiudi">
                     <span class="material-icons" aria-hidden="true">close</span>

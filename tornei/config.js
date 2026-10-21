@@ -18,6 +18,20 @@ export function locandinaUrl(path) {
 // ─── Formattazione condivisa ──────────────────────────────────────────────
 export const SESSO = { maschile: 'Maschile', femminile: 'Femminile', misto: 'Misto' };
 
+// Livello del torneo: etichetta e numero di "tacche" dell'indicatore (1 = Base … 3 = Open)
+export const LIVELLO = {
+    base: { label: 'Base', tacche: 1 },
+    intermedio: { label: 'Intermedio', tacche: 2 },
+    open: { label: 'Open', tacche: 3 },
+};
+
+// Indicatore a tre barrette, come il segnale del telefono. Eredita il colore dal testo.
+export function barreLivello(livello) {
+    const n = LIVELLO[livello]?.tacche || 0;
+    return `<span class="inline-flex items-end gap-[2px] h-3" aria-hidden="true">${[1, 2, 3].map((i) =>
+        `<span class="w-[3px] rounded-sm bg-current ${i <= n ? '' : 'opacity-25'}" style="height:${i * 33}%"></span>`).join('')}</span>`;
+}
+
 export function formula(n) {
     return n === 1 ? 'Individuale' : `${n}x${n}`;
 }

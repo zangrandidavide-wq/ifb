@@ -1,6 +1,6 @@
 // Card "biglietto" di un torneo: la usano tornei.html e l'anteprima in gestione-tornei.html,
 // così gli organizzatori vedono esattamente quello che vedrà il pubblico.
-import { locandinaUrl, SESSO, formula, dataOra, orario, esc } from './config.js';
+import { locandinaUrl, SESSO, LIVELLO, barreLivello, formula, dataOra, orario, esc } from './config.js';
 
 // Colore di ogni categoria (accento della card)
 export const COLORE_SESSO = { maschile: '#38bdf8', femminile: '#ff4fa3', misto: '#FFD700' };
@@ -71,6 +71,7 @@ export function cardTorneo(t, opts = {}) {
         <div class="flex flex-col items-end gap-2">
             <span class="font-poster text-3xl leading-none bg-secondary text-gray-900 px-3 py-1.5 rounded-xl shadow-lg -rotate-3">${esc(formulaTxt)}</span>
             <span class="text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1 rounded-full text-gray-900 shadow" style="background:var(--acc)">${esc(SESSO[t.sesso] || t.sesso)}</span>
+            ${LIVELLO[t.livello] ? `<span class="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm text-white shadow ring-1 ring-white/15">${barreLivello(t.livello)}${esc(LIVELLO[t.livello].label)}</span>` : ''}
         </div>`;
 
     const urgenza = stato.urgenza

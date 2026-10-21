@@ -1,7 +1,7 @@
 // Pagina degli organizzatori (gestione-tornei.html): accesso, tornei, locandine, iscritti ed esportazione.
 // La versione della libreria è fissata: aggiornarla di proposito, non lasciarla flottare.
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, LOCANDINE_BUCKET, locandinaUrl, SESSO, formula, dataLunga, dataEOra, dataOra, esc } from './config.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, LOCANDINE_BUCKET, locandinaUrl, SESSO, LIVELLO, barreLivello, formula, dataLunga, dataEOra, dataOra, esc } from './config.js';
 import { cardTorneo, countdown, aggiornaCountdown, COLORE_SESSO } from './card.js';
 
 // storageKey proprio: la sessione degli organizzatori non si mescola con quella dell'area riservata
@@ -175,6 +175,9 @@ function riga(t) {
                     ${s.html}
                     <span class="font-poster text-lg leading-none bg-secondary px-2 py-0.5 rounded-md">${esc(formula(t.giocatori_per_squadra).replace('x', '×'))}</span>
                     <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full" style="background:color-mix(in srgb, var(--acc) 22%, white)">${esc(SESSO[t.sesso])}</span>
+                    ${LIVELLO[t.livello]
+                        ? `<span class="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-stage text-white">${barreLivello(t.livello)}${esc(LIVELLO[t.livello].label)}</span>`
+                        : '<span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border-2 border-dashed border-amber-300 text-amber-700">Livello da indicare</span>'}
                 </div>
                 <h3 class="mt-2 font-poster uppercase text-2xl sm:text-3xl leading-none truncate">${esc(t.titolo)}</h3>
                 <p class="mt-1.5 text-sm text-gray-600 truncate">${esc(dataEOra(t))} · <b>${esc(t.luogo)}</b></p>
@@ -276,6 +279,7 @@ function aggiornaAnteprima() {
         id: 'anteprima',
         titolo: f.titolo.value.trim() || 'Nome del torneo',
         sesso: f.sesso.value || 'misto',
+        livello: f.livello.value || null,
         giocatori_per_squadra: Number(f.giocatori_per_squadra.value) || 2,
         data: f.data.value || traUnaSettimana.toLocaleDateString('sv-SE'),
         ora_inizio: f.ora_inizio.value || null,
@@ -304,7 +308,7 @@ function apriEditor(t = null) {
     $('locandina-file').value = '';
     $('dlg-torneo-titolo').textContent = t ? 'Modifica torneo' : 'Nuovo torneo';
     if (t) {
-        for (const k of ['titolo', 'sesso', 'giocatori_per_squadra', 'data', 'luogo', 'quota', 'max_squadre', 'descrizione']) {
+        for (const k of ['titolo', 'sesso', 'livello', 'giocatori_per_squadra', 'data', 'luogo', 'quota', 'max_squadre', 'descrizione']) {
             form.elements[k].value = t[k] ?? '';
         }
         form.elements.ora_inizio.value = t.ora_inizio ? t.ora_inizio.slice(0, 5) : '';
@@ -376,9 +380,14 @@ form.addEventListener('submit', async (ev) => {
     const err = $('torneo-errore');
     errore(err, '');
     if (!form.checkValidity()) {
-        const primo = form.querySelector(':invalid');
-        errore(err, 'Completa i campi obbligatori.');
-        primo?.focus();
+        // Solo i campi: anche i <fieldset> che li contengono risultano ":invalid"
+        const primo = form.querySelector('input:invalid, textarea:invalid, select:invalid');
+        // Nome del campo dall'etichetta (per i gruppi a pillola è lo .lbl sopra le scelte)
+        const nome = (primo?.closest('label.lbl') || primo?.closest('div')?.parentElement?.querySelector('.lbl'))
+            ?.firstChild?.textContent.trim();
+        errore(err, nome ? `Manca un campo obbligatorio: ${nome}.` : 'Completa i campi obbligatori.');
+        primo?.closest('label')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        primo?.focus({ preventScroll: true });
         return;
     }
     const f = form.elements;
@@ -408,6 +417,7 @@ form.addEventListener('submit', async (ev) => {
         const record = {
             titolo: f.titolo.value.trim(),
             sesso: f.sesso.value,
+            livello: f.livello.value,
             giocatori_per_squadra: Number(f.giocatori_per_squadra.value),
             data: f.data.value,
             ora_inizio: f.ora_inizio.value || null,
