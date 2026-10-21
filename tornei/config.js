@@ -31,6 +31,18 @@ export function dataLunga(isoDate) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+// Orario di inizio del torneo: "09:30:00" (dal database) → "9:30". Stringa vuota se non indicato.
+export function orario(hms) {
+    if (!hms) return '';
+    const [h, m] = hms.split(':');
+    return `${Number(h)}:${m}`;
+}
+
+// "Domenica 8 novembre 2026 · ore 9:30"
+export function dataEOra(t) {
+    return dataLunga(t.data) + (t.ora_inizio ? ` · ore ${orario(t.ora_inizio)}` : '');
+}
+
 export function dataCorta(isoDate) {
     const [y, m, d] = isoDate.split('-').map(Number);
     return new Date(Date.UTC(y, m - 1, d, 12)).toLocaleDateString('it-IT', { day: 'numeric', month: 'short', timeZone: TZ });

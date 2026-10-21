@@ -222,10 +222,11 @@
                                     <label class="pick pick-f relative"><input type="radio" name="giocatori_per_squadra" value="1" /><span class="flex items-center justify-center h-full rounded-xl border-2 border-gray-100 py-2.5 text-xs font-black uppercase cursor-pointer">Singolo</span></label>
                                 </div>
                             </div>
-                            <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-4">
                                 <label class="lbl">Data del torneo<input name="data" type="date" required class="inp" /></label>
-                                <label class="lbl">Luogo<input name="luogo" required maxlength="120" list="sedi" class="inp" placeholder="Es. Basiglio" /></label>
+                                <label class="lbl">Ora di inizio <span class="normal-case tracking-normal font-semibold text-gray-400">· facolt.</span><input name="ora_inizio" type="time" step="300" class="inp" /></label>
                             </div>
+                            <label class="lbl">Luogo<input name="luogo" required maxlength="120" list="sedi" class="inp" placeholder="Es. Basiglio" /></label>
                             <datalist id="sedi"><option value="Basiglio"></option><option value="Pero"></option><option value="Corsico"></option></datalist>
                             <label class="lbl">Descrizione <span class="normal-case tracking-normal font-semibold text-gray-400">· facoltativa</span>
                                 <textarea name="descrizione" rows="3" maxlength="2000" class="inp" placeholder="Programma, premi, regolamento…"></textarea>

@@ -1,7 +1,7 @@
 // Pagina degli organizzatori (gestione-tornei.html): accesso, tornei, locandine, iscritti ed esportazione.
 // La versione della libreria è fissata: aggiornarla di proposito, non lasciarla flottare.
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, LOCANDINE_BUCKET, locandinaUrl, SESSO, formula, dataLunga, dataOra, esc } from './config.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, LOCANDINE_BUCKET, locandinaUrl, SESSO, formula, dataLunga, dataEOra, dataOra, esc } from './config.js';
 import { cardTorneo, countdown, aggiornaCountdown, COLORE_SESSO } from './card.js';
 
 // storageKey proprio: la sessione degli organizzatori non si mescola con quella dell'area riservata
@@ -177,7 +177,7 @@ function riga(t) {
                     <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full" style="background:color-mix(in srgb, var(--acc) 22%, white)">${esc(SESSO[t.sesso])}</span>
                 </div>
                 <h3 class="mt-2 font-poster uppercase text-2xl sm:text-3xl leading-none truncate">${esc(t.titolo)}</h3>
-                <p class="mt-1.5 text-sm text-gray-600 truncate">${esc(dataLunga(t.data))} · <b>${esc(t.luogo)}</b></p>
+                <p class="mt-1.5 text-sm text-gray-600 truncate">${esc(dataEOra(t))} · <b>${esc(t.luogo)}</b></p>
                 <p class="mt-1 text-xs text-gray-500 flex items-center gap-1">
                     <span class="material-symbols-outlined text-sm" aria-hidden="true">timer</span>
                     ${s.k === 'aperto' ? `Chiude tra <b class="text-gray-900 tabular-nums" data-countdown="${esc(t.chiusura_iscrizioni)}">${countdown(t.chiusura_iscrizioni)}</b> · ` : ''}${esc(dataOra(t.chiusura_iscrizioni))}
@@ -204,7 +204,7 @@ function riga(t) {
 }
 
 async function caricaTornei() {
-    const { data, error } = await supabase.from('tornei').select('*, tornei_iscrizioni(count)').order('data', { ascending: true });
+    const { data, error } = await supabase.from('tornei').select('*, tornei_iscrizioni(count)').order('data', { ascending: true }).order('ora_inizio', { ascending: true, nullsFirst: false });
     if (error) {
         $('lista').innerHTML = '<p class="rounded-3xl bg-red-50 text-red-700 font-bold p-6">Non è stato possibile caricare i tornei. Ricarica la pagina.</p>';
         return;
@@ -278,6 +278,7 @@ function aggiornaAnteprima() {
         sesso: f.sesso.value || 'misto',
         giocatori_per_squadra: Number(f.giocatori_per_squadra.value) || 2,
         data: f.data.value || traUnaSettimana.toLocaleDateString('sv-SE'),
+        ora_inizio: f.ora_inizio.value || null,
         luogo: f.luogo.value.trim() || 'Luogo',
         chiusura_iscrizioni: f.chiusura_iscrizioni.value ? new Date(f.chiusura_iscrizioni.value).toISOString() : traUnaSettimana.toISOString(),
         max_squadre: f.max_squadre.value ? Number(f.max_squadre.value) : null,
@@ -306,6 +307,7 @@ function apriEditor(t = null) {
         for (const k of ['titolo', 'sesso', 'giocatori_per_squadra', 'data', 'luogo', 'quota', 'max_squadre', 'descrizione']) {
             form.elements[k].value = t[k] ?? '';
         }
+        form.elements.ora_inizio.value = t.ora_inizio ? t.ora_inizio.slice(0, 5) : '';
         form.elements.chiusura_iscrizioni.value = aDatetimeLocal(t.chiusura_iscrizioni);
         form.elements.pubblicato.checked = t.pubblicato;
     }
@@ -408,6 +410,7 @@ form.addEventListener('submit', async (ev) => {
             sesso: f.sesso.value,
             giocatori_per_squadra: Number(f.giocatori_per_squadra.value),
             data: f.data.value,
+            ora_inizio: f.ora_inizio.value || null,
             chiusura_iscrizioni: chiusura.toISOString(),
             luogo: f.luogo.value.trim(),
             quota: f.quota.value.trim() || null,
@@ -455,7 +458,7 @@ function renderTestaIscritti() {
             <div class="min-w-0">
                 <p class="text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Iscritti</p>
                 <h2 class="mt-1 font-poster uppercase text-4xl sm:text-5xl leading-[0.95]">${esc(t.titolo)}</h2>
-                <p class="mt-2 text-sm text-white/70">${esc(dataLunga(t.data))} · ${esc(t.luogo)}</p>
+                <p class="mt-2 text-sm text-white/70">${esc(dataEOra(t))} · ${esc(t.luogo)}</p>
             </div>
             <button type="button" data-chiudi class="shrink-0 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center" aria-label="Chiudi"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
         </div>

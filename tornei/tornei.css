@@ -95,6 +95,13 @@
     100% { left: 130%; }
 }
 
+/* Carosello dei tornei: si scorre col dito, la rotella orizzontale o le frecce; barra nascosta */
+.t-track {
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+.t-track::-webkit-scrollbar { display: none; }
+
 /* Timbro "chiuso" */
 .t-stamp {
     border: 4px solid currentColor;

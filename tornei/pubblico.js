@@ -1,7 +1,7 @@
 // Calendario tornei di tornei.html: card dei tornei pubblicati e modulo di iscrizione.
 // Parla con Supabase via fetch (senza libreria) per tenere la pagina leggera:
 // le uniche due chiamate sono le funzioni tornei_pubblici() e iscrivi_torneo().
-import { SUPABASE_URL, SUPABASE_ANON_KEY, locandinaUrl, SESSO, formula, dataLunga, esc } from './config.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, locandinaUrl, SESSO, formula, dataEOra, esc } from './config.js';
 import { cardTorneo, statoTorneo, aggiornaCountdown, attivaTilt, COLORE_SESSO } from './card.js';
 
 const grid = document.getElementById('tornei-grid');
@@ -50,13 +50,57 @@ async function carica() {
         renderVuoto('sports_volleyball', 'Nuovi tornei in arrivo', 'Stiamo preparando i prossimi eventi: seguici su <a class="text-secondary font-bold underline" href="https://www.instagram.com/ifollowbv" target="_blank" rel="noopener">Instagram</a> per non perderli.');
         return;
     }
-    // Un solo torneo: card in evidenza a tutta larghezza
-    grid.className = tornei.length === 1
-        ? 'grid max-w-5xl mx-auto lg:grid-cols-2 gap-6'
-        : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7';
-    // Il primo torneo ancora aperto va in evidenza
-    const primo = tornei.findIndex((t) => statoTorneo(t).aperto);
-    grid.innerHTML = tornei.map((t, i) => cardTorneo(t, { evidenza: i === primo })).join('');
+    // Il primo torneo ancora aperto va in evidenza, gli altri scorrono nel carosello sotto
+    const primo = tornei.find((t) => statoTorneo(t).aperto);
+    const altri = tornei.filter((t) => t !== primo);
+    grid.className = 'space-y-14';
+    grid.innerHTML =
+        (primo ? `<div class="max-w-5xl mx-auto">${cardTorneo(primo, { evidenza: true })}</div>` : '') +
+        (altri.length ? carosello(altri, !!primo) : '');
+    attivaCarosello();
+}
+
+// ─── Carosello ────────────────────────────────────────────────────────────
+function carosello(lista, dopoEvidenza) {
+    const freccia = (dir, icona, label) => `
+        <button type="button" data-car="${dir}" aria-label="${label}"
+            class="w-12 h-12 rounded-full bg-white/10 hover:bg-secondary hover:text-gray-900 text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:hover:bg-white/10 disabled:hover:text-white">
+            <span class="material-icons" aria-hidden="true">${icona}</span></button>`;
+    return `
+        <div>
+            <div class="flex items-end justify-between gap-4 mb-6">
+                <div>
+                    <p class="text-[11px] font-black uppercase tracking-[0.25em] text-secondary">${dopoEvidenza ? 'In calendario' : 'Calendario'}</p>
+                    <h3 class="mt-1 font-poster uppercase text-4xl sm:text-5xl leading-none">${dopoEvidenza ? 'Altri tornei' : 'Tutti i tornei'} <span class="text-white/30">${lista.length}</span></h3>
+                </div>
+                <div class="hidden sm:flex gap-2">${freccia('prev', 'arrow_back', 'Tornei precedenti')}${freccia('next', 'arrow_forward', 'Tornei successivi')}</div>
+            </div>
+            <div data-car-track tabindex="0" role="region" aria-label="Elenco dei tornei, scorri di lato"
+                class="t-track flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-1 pt-2 pb-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-[2rem]">
+                ${lista.map((t) => `<div class="snap-start shrink-0 w-[84%] sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-3rem)/3)]">${cardTorneo(t)}</div>`).join('')}
+            </div>
+            <div class="mt-2 h-1 rounded-full bg-white/10 overflow-hidden" aria-hidden="true"><div data-car-bar class="h-full rounded-full bg-secondary transition-[width] duration-200" style="width:0"></div></div>
+        </div>`;
+}
+
+function attivaCarosello() {
+    const track = grid.querySelector('[data-car-track]');
+    if (!track) return;
+    const bar = grid.querySelector('[data-car-bar]');
+    const prev = grid.querySelector('[data-car="prev"]'), next = grid.querySelector('[data-car="next"]');
+    const aggiorna = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        // La barra mostra quanta parte dell'elenco è già passata sullo schermo
+        bar.style.width = `${max > 0 ? ((track.scrollLeft + track.clientWidth) / track.scrollWidth) * 100 : 100}%`;
+        prev.disabled = track.scrollLeft <= 4;
+        next.disabled = track.scrollLeft >= max - 4;
+        bar.parentElement.classList.toggle('invisible', max <= 0);
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * 0.9 }));
+    next.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * 0.9 }));
+    track.addEventListener('scroll', aggiorna, { passive: true });
+    addEventListener('resize', aggiorna);
+    aggiorna();
 }
 
 // ─── Modulo di iscrizione ─────────────────────────────────────────────────
@@ -96,7 +140,7 @@ function apriIscrizione(t) {
             </div>
             <p class="relative mt-5 text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Iscrizione squadra</p>
             <h2 class="relative mt-1 font-poster uppercase text-4xl sm:text-5xl leading-[0.95]">${esc(t.titolo)}</h2>
-            <p class="relative mt-2 text-sm font-semibold text-white/75">${esc(dataLunga(t.data))} · ${esc(t.luogo)}</p>
+            <p class="relative mt-2 text-sm font-semibold text-white/75">${esc(dataEOra(t))} · ${esc(t.luogo)}</p>
             ${t.descrizione ? `<details class="relative mt-3 text-sm text-white/75"><summary class="cursor-pointer font-bold text-white">Dettagli del torneo</summary><p class="mt-2 whitespace-pre-line">${esc(t.descrizione)}</p></details>` : ''}
         </div>
         <form class="px-5 sm:px-8 py-7" novalidate>

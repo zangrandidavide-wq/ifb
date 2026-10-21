@@ -1,6 +1,6 @@
 // Card "biglietto" di un torneo: la usano tornei.html e l'anteprima in gestione-tornei.html,
 // così gli organizzatori vedono esattamente quello che vedrà il pubblico.
-import { locandinaUrl, SESSO, formula, dataOra, esc } from './config.js';
+import { locandinaUrl, SESSO, formula, dataOra, orario, esc } from './config.js';
 
 // Colore di ogni categoria (accento della card)
 export const COLORE_SESSO = { maschile: '#38bdf8', femminile: '#ff4fa3', misto: '#FFD700' };
@@ -32,7 +32,7 @@ export function aggiornaCountdown(root = document) {
     root.querySelectorAll('[data-countdown]').forEach((el) => { el.textContent = countdown(el.dataset.countdown); });
 }
 
-function dataBlocco(isoDate, grande) {
+function dataBlocco(isoDate, ora, grande) {
     const [y, m, d] = isoDate.split('-').map(Number);
     const giorno = GIORNI[new Date(y, m - 1, d).getDay()];
     return `
@@ -40,6 +40,7 @@ function dataBlocco(isoDate, grande) {
             <div class="text-[10px] font-black uppercase tracking-[0.2em] py-1 text-gray-900" style="background:var(--acc)">${MESI[m - 1]}</div>
             <div class="font-poster leading-none pt-1.5 ${grande ? 'text-5xl' : 'text-4xl'}">${d}</div>
             <div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 pb-1.5">${giorno}</div>
+            ${ora ? `<div class="bg-gray-900 text-white font-poster tracking-wide py-1 ${grande ? 'text-base' : 'text-sm'}">${esc(orario(ora))}</div>` : ''}
         </div>`;
 }
 
@@ -119,20 +120,20 @@ export function cardTorneo(t, opts = {}) {
 
     // In evidenza (schermi larghi): locandina a sinistra, informazioni a destra
     return `
-        <article class="t-card group relative flex flex-col ${ev ? 'lg:col-span-2 lg:flex-row' : ''} rounded-[2rem] bg-[#21172d] text-white shadow-2xl shadow-black/40"
+        <article class="t-card group relative flex flex-col ${ev ? 'lg:flex-row' : ''} rounded-[2rem] bg-[#21172d] text-white shadow-2xl shadow-black/40"
                  style="--acc:${acc}" ${opts.anteprima ? '' : 'data-tilt'}>
             <div class="relative ${ev ? 'aspect-[4/5] lg:aspect-auto lg:w-[46%] lg:shrink-0 lg:min-h-[580px]' : 'aspect-[4/5]'} overflow-hidden rounded-t-[2rem] ${ev ? 'lg:rounded-tr-none lg:rounded-l-[2rem]' : ''}">
                 ${locandina(t, img, stato)}
                 <div class="absolute inset-0 bg-gradient-to-t from-[#21172d] via-[#21172d]/20 to-black/30"></div>
                 <div class="absolute top-4 left-4 right-4 flex items-start justify-between gap-3">
-                    ${dataBlocco(t.data, ev)}
+                    ${dataBlocco(t.data, t.ora_inizio, ev)}
                     ${badge}
                 </div>
                 ${timbro}
                 <div class="absolute left-5 right-5 bottom-5 ${ev ? 'lg:hidden' : ''}">
                     ${urgenza ? `<div class="mb-3">${urgenza}</div>` : ''}
                     <h3 class="font-poster uppercase text-[2rem] leading-[0.95] drop-shadow-lg">${esc(t.titolo)}</h3>
-                    <p class="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-white/85"><span class="material-icons text-base" style="color:var(--acc)" aria-hidden="true">place</span>${esc(t.luogo)}</p>
+                    <p class="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-white/85"><span class="material-icons text-base" style="color:var(--acc)" aria-hidden="true">place</span>${esc(t.luogo)}${t.ora_inizio ? `<span class="text-white/40">·</span><span class="material-icons text-base" style="color:var(--acc)" aria-hidden="true">schedule</span>ore ${esc(orario(t.ora_inizio))}` : ''}</p>
                 </div>
             </div>
 
@@ -144,7 +145,7 @@ export function cardTorneo(t, opts = {}) {
                     <p class="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em]" style="color:var(--acc)"><span class="w-6 h-px" style="background:var(--acc)"></span>Prossimo torneo</p>
                     ${urgenza ? `<div class="mt-4">${urgenza}</div>` : ''}
                     <h3 class="mt-3 font-poster uppercase text-6xl leading-[0.92]">${esc(t.titolo)}</h3>
-                    <p class="mt-3 inline-flex items-center gap-1.5 font-bold text-white/85"><span class="material-icons text-lg" style="color:var(--acc)" aria-hidden="true">place</span>${esc(t.luogo)}</p>
+                    <p class="mt-3 inline-flex items-center gap-1.5 font-bold text-white/85"><span class="material-icons text-lg" style="color:var(--acc)" aria-hidden="true">place</span>${esc(t.luogo)}${t.ora_inizio ? `<span class="text-white/40">·</span><span class="material-icons text-base" style="color:var(--acc)" aria-hidden="true">schedule</span>ore ${esc(orario(t.ora_inizio))}` : ''}</p>
                 </div>` : ''}
                 ${descr}
                 ${scadenza}
