@@ -25,6 +25,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="tornei/tornei.css" />
     <style>
+        /* Le viste si nascondono con la classe "hidden": deve vincere anche su classi come "lg:grid",
+           altrimenti su schermi larghi il login restava visibile e la plancia finiva sotto. */
+        .hidden { display: none !important; }
+
         /* Campi del modulo (input.inp: più specifico degli stili [type=date] del plugin forms) */
         input.inp, select.inp, textarea.inp {
             margin-top: .375rem; width: 100%; border-radius: .9rem; border: 2px solid #f0eef3;
