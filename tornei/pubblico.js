@@ -50,18 +50,14 @@ async function carica() {
         renderVuoto('sports_volleyball', 'Nuovi tornei in arrivo', 'Stiamo preparando i prossimi eventi: seguici su <a class="text-secondary font-bold underline" href="https://www.instagram.com/ifollowbv" target="_blank" rel="noopener">Instagram</a> per non perderli.');
         return;
     }
-    // Il primo torneo ancora aperto va in evidenza, gli altri scorrono nel carosello sotto
-    const primo = tornei.find((t) => statoTorneo(t).aperto);
-    const altri = tornei.filter((t) => t !== primo);
-    grid.className = 'space-y-14';
-    grid.innerHTML =
-        (primo ? `<div class="max-w-5xl mx-auto">${cardTorneo(primo, { evidenza: true })}</div>` : '') +
-        (altri.length ? carosello(altri, !!primo) : '');
+    // Tutti i tornei con lo stesso peso, affiancati nel carosello (in ordine di data)
+    grid.className = '';
+    grid.innerHTML = carosello(tornei);
     attivaCarosello();
 }
 
 // ─── Carosello ────────────────────────────────────────────────────────────
-function carosello(lista, dopoEvidenza) {
+function carosello(lista) {
     const freccia = (dir, icona, label) => `
         <button type="button" data-car="${dir}" aria-label="${label}"
             class="w-12 h-12 rounded-full bg-white/10 hover:bg-secondary hover:text-gray-900 text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:hover:bg-white/10 disabled:hover:text-white">
@@ -70,8 +66,8 @@ function carosello(lista, dopoEvidenza) {
         <div>
             <div class="flex items-end justify-between gap-4 mb-6">
                 <div>
-                    <p class="text-[11px] font-black uppercase tracking-[0.25em] text-secondary">${dopoEvidenza ? 'In calendario' : 'Calendario'}</p>
-                    <h3 class="mt-1 font-poster uppercase text-4xl sm:text-5xl leading-none">${dopoEvidenza ? 'Altri tornei' : 'Tutti i tornei'} <span class="text-white/30">${lista.length}</span></h3>
+                    <p class="text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Calendario</p>
+                    <h3 class="mt-1 font-poster uppercase text-4xl sm:text-5xl leading-none">Tutti i tornei <span class="text-white/30">${lista.length}</span></h3>
                 </div>
                 <div class="hidden sm:flex gap-2">${freccia('prev', 'arrow_back', 'Tornei precedenti')}${freccia('next', 'arrow_forward', 'Tornei successivi')}</div>
             </div>
