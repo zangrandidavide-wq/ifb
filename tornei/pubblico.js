@@ -210,7 +210,7 @@ function apriIscrizione(t) {
                     </span>
                     <p class="mt-6 text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Iscrizione ricevuta</p>
                     <h2 class="mt-2 font-poster uppercase text-5xl leading-none">Ci vediamo<br>in campo!</h2>
-                    <p class="mt-4 text-white/75 max-w-sm mx-auto">Sei iscritto a <b class="text-white">${esc(t.titolo)}</b>. Gli organizzatori ti contatteranno all'email o al telefono indicati.</p>
+                    <p class="mt-4 text-white/75 max-w-sm mx-auto">Sei iscritto a <b class="text-white">${esc(t.titolo)}</b>. Ti abbiamo mandato un riepilogo a <b class="text-white break-all">${esc(String(f.get('email')).trim())}</b> (se non lo trovi, guarda nello spam). Gli organizzatori ti contatteranno per i dettagli.</p>
                     <button type="button" data-chiudi class="mt-8 inline-flex bg-secondary text-gray-900 font-poster uppercase text-lg tracking-wide px-10 py-3.5 rounded-2xl">Chiudi</button>
                 </div>
             </div>`;
