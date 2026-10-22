@@ -125,26 +125,53 @@
           "telephone": "+39 349 463 3610",
           "areaServed": { "@type": "City", "name": "Milano" },
           "location": [
-            {
-              "@type": "SportsActivityLocation",
-              "name": "BeachTown – Sporting Milano 3",
-              "address": { "@type": "PostalAddress", "addressLocality": "Basiglio", "addressRegion": "MI", "addressCountry": "IT" }
-            },
-            {
-              "@type": "SportsActivityLocation",
-              "name": "Pero Sporting Club",
-              "address": { "@type": "PostalAddress", "addressLocality": "Pero", "addressRegion": "MI", "addressCountry": "IT" }
-            },
-            {
-              "@type": "SportsActivityLocation",
-              "name": "Sport Time Corsico",
-              "address": { "@type": "PostalAddress", "addressLocality": "Corsico", "addressRegion": "MI", "addressCountry": "IT" }
-            }
+            { "@id": "https://ifollowbv.it/sedi.html#basiglio" },
+            { "@id": "https://ifollowbv.it/sedi.html#pero" },
+            { "@id": "https://ifollowbv.it/sedi.html#corsico" }
           ],
           "sameAs": [
             "https://www.instagram.com/ifollowbv/",
             "https://www.facebook.com/IFOLLOWBV/"
           ]
+        },
+        {
+          "@type": "SportsActivityLocation",
+          "@id": "https://ifollowbv.it/sedi.html#basiglio",
+          "name": "BeachTown – Sporting Milano 3",
+          "description": "Sede storica di I Follow Beach Volley: 6 campi in sabbia, corsi, tornei ed eventi tutto l'anno.",
+          "url": "https://ifollowbv.it/sedi.html#basiglio",
+          "image": "https://ifollowbv.it/beachtown.jpg",
+          "telephone": "+39 349 463 3610",
+          "address": { "@type": "PostalAddress", "streetAddress": "Piazza Marco Polo, 3", "postalCode": "20079", "addressLocality": "Basiglio", "addressRegion": "MI", "addressCountry": "IT" },
+          "geo": { "@type": "GeoCoordinates", "latitude": 45.35960, "longitude": 9.15679 },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Piazza+Marco+Polo+3,+20079+Basiglio+MI",
+          "containedInPlace": { "@type": "City", "name": "Basiglio" }
+        },
+        {
+          "@type": "SportsActivityLocation",
+          "@id": "https://ifollowbv.it/sedi.html#pero",
+          "name": "Pero Sporting Club",
+          "description": "Sede IFB a Pero, a pochi minuti da Milano: corsi di beach volley per tutti i livelli, tornei ed eventi.",
+          "url": "https://ifollowbv.it/sedi.html#pero",
+          "image": "https://ifollowbv.it/pero.jpg",
+          "telephone": "+39 349 463 3610",
+          "address": { "@type": "PostalAddress", "streetAddress": "Via Papa Giovanni XXIII, 6", "postalCode": "20016", "addressLocality": "Pero", "addressRegion": "MI", "addressCountry": "IT" },
+          "geo": { "@type": "GeoCoordinates", "latitude": 45.51092, "longitude": 9.07960 },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Via+Papa+Giovanni+XXIII+6,+20016+Pero+MI",
+          "containedInPlace": { "@type": "City", "name": "Pero" }
+        },
+        {
+          "@type": "SportsActivityLocation",
+          "@id": "https://ifollowbv.it/sedi.html#corsico",
+          "name": "Sport Time Corsico",
+          "description": "Nuova area beach volley IFB nel sud-ovest milanese: corsi per tutti i livelli, allenamenti e tornei.",
+          "url": "https://ifollowbv.it/sedi.html#corsico",
+          "image": "https://ifollowbv.it/corsico.webp",
+          "telephone": "+39 349 463 3610",
+          "address": { "@type": "PostalAddress", "streetAddress": "Via Visconti di Modrone, 2", "postalCode": "20094", "addressLocality": "Corsico", "addressRegion": "MI", "addressCountry": "IT" },
+          "geo": { "@type": "GeoCoordinates", "latitude": 45.42743, "longitude": 9.11199 },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Via+Visconti+di+Modrone+2,+20094+Corsico+MI",
+          "containedInPlace": { "@type": "City", "name": "Corsico" }
         },
         {
           "@type": "WebSite",
@@ -177,6 +204,7 @@
             alt="Giocatore IFB in azione su un campo da beach volley"
             class="w-full h-full object-cover object-top motion-safe:animate-hero-settle motion-safe-only"
             fetchpriority="high"
+            loading="eager"
             decoding="async"
         />
     </picture>
@@ -213,39 +241,6 @@
                    class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white hover:text-gray-900 backdrop-blur-md border border-white/30 text-white font-bold px-7 py-4 rounded-full transition-all duration-300">
                     Scopri i corsi
                 </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Intro Corsi -->
-<section id="corsi" class="py-14 md:py-16 bg-sand dark:bg-sand-dark border-b border-gray-200/60 dark:border-gray-700/60 relative overflow-hidden">
-    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-80"></div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative z-10 bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-gray-800 rounded-3xl border border-primary/10 shadow-xl shadow-primary/10 p-6 md:p-8" data-reveal="up">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
-                <div class="max-w-3xl">
-                    <span class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        <span class="material-icons text-sm" aria-hidden="true">sports_volleyball</span>
-                        Corsi IFB
-                    </span>
-                    <h2 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mt-3">
-                        Corsi di beach volley a Milano, Basiglio, Pero e Corsico
-                    </h2>
-                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm md:text-base leading-relaxed">
-                        Gruppi per livello, staff qualificato e possibilità di prova gratuita.
-                    </p>
-                </div>
-                <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdehZERFZJbABXxK9IsS5zgzaIZMo165lyDfuz3PG4UORf8Kw/viewform" target="_blank" rel="noopener noreferrer" data-track="cta_prova_gratuita" data-track-pos="intro_corsi" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-extrabold px-7 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 sm:whitespace-nowrap">
-                        <span class="material-icons" aria-hidden="true">calendar_month</span>
-                        Prenota la prova gratuita
-                    </a>
-                    <a href="IFB_corsi.html" class="inline-flex items-center justify-center gap-2 border border-primary text-primary hover:bg-primary hover:text-white font-extrabold px-7 py-4 rounded-full transition-all duration-300 sm:whitespace-nowrap">
-                        <span class="material-icons" aria-hidden="true">arrow_forward</span>
-                        Scopri i corsi
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -481,34 +476,6 @@
                         </a>
                     </div>
                 </article>
-
-                <!-- Card: Rookie League (da riattivare)
-                <article class="snap-center shrink-0 w-[85vw] sm:w-[350px] lg:w-[400px] flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-shadow duration-300">
-                    <a href="#" class="group relative block w-full h-56 shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-900" tabindex="-1" aria-hidden="true">
-                        <img src="rookie.jpg" alt="" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-                            <span class="material-icons text-sm">emoji_events</span> Campionati
-                        </span>
-                    </a>
-                    <div class="p-6 md:p-8 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 text-xs mb-3">
-                            <span class="text-primary font-bold uppercase tracking-widest">Tornei</span>
-                            <span class="text-gray-300 dark:text-gray-600" aria-hidden="true">·</span>
-                            <time datetime="2026-10-05" class="text-gray-500 dark:text-gray-400 uppercase">05 Ott 2026</time>
-                        </div>
-                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white leading-tight mb-3 hover:text-primary transition-colors">
-                            <a href="#">Tutto pronto per l'inizio della Rookie League!</a>
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3 mb-6">
-                            L'11 ottobre 2026 inizia la Rookie League, il campionato dedicato a chi muove i primi passi nel beach volley.
-                        </p>
-                        <a href="#" class="inline-flex items-center gap-2 mt-auto text-sm font-bold border border-primary text-primary hover:bg-primary hover:text-white px-5 py-2.5 rounded-full self-start transition-all">
-                            Scopri i dettagli <span class="material-icons text-sm" aria-hidden="true">arrow_forward</span>
-                        </a>
-                    </div>
-                </article>
-                -->
             </div>
             <div id="blog-dots" class="hidden mt-2 items-center justify-center gap-2"></div>
         </div>
@@ -587,7 +554,9 @@
 <script src="footer.js" defer></script>
 
 <!-- Banner cookie (gestito da main.js: ID invariati) -->
-<!-- Popup prova gratuita (gestito da main.js: ID invariati) -->
+<!-- Popup prova gratuita (disattivato: la CTA è già nella hero e nella barra mobile).
+     Per riattivarlo basta togliere questo commento: la logica in main.js è ancora attiva
+     e, senza questo markup, semplicemente non fa nulla.
 <div id="popup-prova-gratuita" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 bg-gray-900/80 dark:bg-background-dark/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="popup-prova-title">
     <div class="relative bg-white dark:bg-gray-800 rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-black/60 max-w-lg w-full overflow-hidden border border-gray-100 dark:border-gray-700 animate-[fade-in-down_0.4s_ease-out] flex flex-col max-h-[95vh]">
         <button type="button" id="popup-prova-close" class="absolute top-4 right-4 z-20 flex items-center justify-center w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-md text-gray-800 dark:text-white/80 hover:text-primary dark:hover:text-secondary hover:bg-gray-50 dark:hover:bg-black/70 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-md" aria-label="Chiudi popup">
@@ -615,6 +584,7 @@
         </div>
     </div>
 </div>
+-->
 
 <!-- Floating Announcement Capsule (disattivata)
 <aside id="season-announcement"
