@@ -25,10 +25,17 @@ const SEDI = [
     { label: 'Corsico', href: 'sedi.html#corsico' },
 ];
 
-// Eventi: due pagine distinte. Su desktop sono una tendina, su mobile un piccolo menu sopra la tab bar.
+// Eventi: più pagine distinte. Su desktop sono una tendina, su mobile un piccolo menu sopra la tab bar.
 const EVENTI = [
-    { label: 'Tornei & eventi', href: 'tornei.html', icon: 'emoji_events', desc: 'Tornei IFB, Rookie League, eventi' },
+    { label: 'Tornei & eventi', href: 'tornei.html', icon: 'emoji_events', desc: 'Tornei IFB ed eventi' },
     { label: 'Tornei federali', href: 'federali.html', icon: 'verified', desc: 'Circuito FIPAV nelle sedi IFB' },
+    { label: 'Rookie League', href: 'rookie-league.html', icon: 'military_tech', desc: 'Il campionato a coppie miste' },
+];
+
+// Staff: la pagina dello staff e il metodo con cui allena
+const STAFF = [
+    { label: 'Lo staff', href: 'coaches.html', icon: 'groups', desc: 'Maestri e preparatori IFB' },
+    { label: 'Metodo IFB', href: 'metodo.html', icon: 'psychology', desc: 'Come alleniamo' },
 ];
 
 // Barra desktop: tutte le voci, in orizzontale.
@@ -38,11 +45,8 @@ const DESKTOP_LINKS = [
     { label: 'Home', href: 'index.html', icon: 'home', compactIcon: true },
     { label: 'Corsi', href: 'IFB_corsi.html' },
     { label: 'Sedi', href: 'sedi.html', children: SEDI },
-    { label: 'Staff', href: 'coaches.html' },
-    { label: 'Metodo', href: 'metodo.html' },
+    { label: 'Staff', href: 'coaches.html', children: STAFF },
     { label: 'Tornei ed Eventi', href: 'tornei.html', children: EVENTI, highlight: true },
-    { label: 'Rookie League', href: 'rookie-league.html', badge: true },
-    { label: 'Contatti', href: 'contatti.html' },
 ];
 
 // Tab bar mobile: le 4 destinazioni più frequenti + "Altro". Al centro la CTA.
@@ -57,11 +61,9 @@ const MOBILE_TABS = [
 // Foglio "Altro" su mobile
 const MOBILE_SHEET = [
     { label: 'Sedi', href: 'sedi.html', icon: 'location_on', children: SEDI, wide: true },
-    { label: 'Rookie League', href: 'rookie-league.html', icon: 'military_tech', badge: 'Nuovo' },
-    { label: 'Staff', href: 'coaches.html', icon: 'groups' },
-    { label: 'Metodo IFB', href: 'metodo.html', icon: 'psychology' },
+    { label: 'Staff', href: 'coaches.html', icon: 'groups', children: STAFF.slice(1), wide: true },
     { label: 'FAQ', href: 'faq.html', icon: 'help' },
-    { label: 'Contatti', href: 'contatti.html', icon: 'mail' },
+    { label: 'Area riservata', href: 'area/', icon: 'account_circle' },
 ];
 
 function currentPage() {
@@ -137,7 +139,7 @@ function renderDesktopLinks(b, page) {
 }
 
 function renderMobileTabs(b, page) {
-    const sheetPages = MOBILE_SHEET.map((i) => i.href);
+    const sheetPages = MOBILE_SHEET.flatMap((i) => [i.href, ...(i.children || []).map((c) => c.href.split('#')[0])]);
     return MOBILE_TABS.map((tab) => {
         if (tab.cta) {
             return `
@@ -191,10 +193,12 @@ function renderMobileTabs(b, page) {
 function renderMobileChooser(b, page) {
     const tab = MOBILE_TABS.find((t) => t.children);
     if (!tab) return '';
-    const tiles = tab.children.map((c) => {
+    const tiles = tab.children.map((c, i, tutte) => {
         const active = c.href === page;
+        // Numero dispari di voci: l'ultima occupa tutta la riga
+        const largo = tutte.length % 2 === 1 && i === tutte.length - 1;
         return `
-            <li>
+            <li class="${largo ? 'col-span-2' : ''}">
                 <a href="${b}${c.href}" ${active ? 'aria-current="page"' : ''}
                    class="chooser-link flex h-full flex-col rounded-3xl border p-4 active:scale-[.97] transition-transform ${active ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}">
                     <span class="w-10 h-10 rounded-full ${active ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'} flex items-center justify-center mb-3">
@@ -280,6 +284,7 @@ function renderNavbar() {
         #mobile-chooser.is-closed { opacity: 0; transform: translateY(12px) scale(.96); pointer-events: none; }
         #mobile-chooser li { transition: opacity .3s ease, transform .35s cubic-bezier(.32,.72,0,1); }
         #mobile-chooser li:nth-child(2) { transition-delay: .05s; }
+        #mobile-chooser li:nth-child(3) { transition-delay: .1s; }
         #mobile-chooser.is-closed li { opacity: 0; transform: translateY(10px); }
         @media (prefers-reduced-motion: reduce) { #mobile-chooser, #mobile-chooser li { transition: none; } }
         #mobile-sheet { transition: transform .3s cubic-bezier(.32,.72,0,1); }
@@ -300,11 +305,18 @@ function renderNavbar() {
                 ${renderDesktopLinks(b, page)}
             </div>
 
+            <div class="flex shrink-0 items-center gap-1">
+            <a href="${b}area/" title="Area riservata"
+               class="inline-flex items-center gap-1 px-2 xl:px-3 py-2 rounded-full text-sm font-bold whitespace-nowrap text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 transition-all duration-200 ease-out">
+                <span class="material-symbols-outlined text-xl" aria-hidden="true">account_circle</span>
+                <span class="sr-only xl:not-sr-only">Accedi</span>
+            </a>
             <a href="${PROVA_GRATUITA_URL}" target="_blank" rel="noopener noreferrer" data-track="cta_prova_gratuita" data-track-pos="navbar"
                class="inline-flex shrink-0 items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-sm font-extrabold pl-4 pr-5 py-2.5 rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-200 ease-out hover:-translate-y-0.5">
                 <span class="material-symbols-outlined text-lg" aria-hidden="true">sports_volleyball</span>
                 Prova gratuita
             </a>
+            </div>
         </div>
 
         <!-- Barra di avanzamento della lettura -->
