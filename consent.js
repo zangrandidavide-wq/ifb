@@ -69,6 +69,8 @@
         window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
         loadScript('https://www.clarity.ms/tag/' + CLARITY_ID + '?ref=bwt');
         window.clarity('consent');
+        // Consent API v2 di Clarity (richiesta per i visitatori dello Spazio Economico Europeo)
+        window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
     }
     if (choice === 'granted') loadClarity();
 
