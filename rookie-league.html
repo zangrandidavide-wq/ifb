@@ -6,7 +6,11 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#7f13ec" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <title>Rookie League 2026/2027: il campionato a coppie miste | I Follow Beach Volley</title>
     <link rel="canonical" href="https://ifollowbv.it/rookie-league.html" />
@@ -19,8 +23,11 @@
     <meta property="og:description"
         content="Il campionato di beach volley a coppie miste per chi muove i primi passi sulla sabbia. 4 centri, calendario completo e finali." />
     <meta property="og:image" content="https://ifollowbv.it/beachtown.jpg" />
+    <meta property="og:image:alt" content="Campi in sabbia del BeachTown a Basiglio" />
     <meta property="og:locale" content="it_IT" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://ifollowbv.it/beachtown.jpg" />
 
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -91,6 +98,16 @@
             display: none;
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ifollowbv.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Rookie League", "item": "https://ifollowbv.it/rookie-league.html" }
+      ]
+    }
+    </script>
 </head>
 
 <body
@@ -1233,6 +1250,33 @@
                     r.dataset.reg = r.dataset.state !== 'future' ? 'na' : (regClosed ? 'closed' : (isDeadlineToday ? 'last' : 'open'));
                     r.classList.toggle('is-past', end < 0);
                 });
+
+                // Dati strutturati per Google: le date non ancora concluse
+                var VENUES = {
+                    basiglio: { name: 'BeachTown – Sporting Milano 3', street: 'Piazza Marco Polo, 3', zip: '20079', city: 'Basiglio' },
+                    pero: { name: 'Pero Sporting Club', street: 'Via Papa Giovanni XXIII, 6', zip: '20016', city: 'Pero' },
+                    corsico: { name: 'Sport Time Corsico', street: 'Via Visconti di Modrone, 2', zip: '20094', city: 'Corsico' },
+                    paderno: { name: 'Centro Sportivo Country Village', street: 'Via Guglielmo Pepe, 68', zip: '20037', city: 'Paderno Dugnano' }
+                };
+                var ld = document.createElement('script');
+                ld.type = 'application/ld+json';
+                ld.textContent = JSON.stringify(rows.filter(function (r) { return r.dataset.state !== 'past'; }).map(function (r) {
+                    var v = VENUES[r.dataset.center];
+                    return {
+                        '@context': 'https://schema.org', '@type': 'SportsEvent',
+                        name: 'Rookie League IFB – torneo di beach volley 2x2 misto a ' + CENTERS[r.dataset.center],
+                        description: 'Torneo della Rookie League IFB, il campionato di beach volley a coppie miste per chi muove i primi passi sulla sabbia.',
+                        url: 'https://ifollowbv.it/rookie-league.html',
+                        image: 'https://ifollowbv.it/beachtown.jpg',
+                        startDate: r.dataset.start, endDate: r.dataset.end, sport: 'Beach volley',
+                        eventStatus: 'https://schema.org/EventScheduled',
+                        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+                        location: { '@type': 'Place', name: v.name, address: { '@type': 'PostalAddress', streetAddress: v.street, postalCode: v.zip, addressLocality: v.city, addressRegion: 'MI', addressCountry: 'IT' } },
+                        offers: { '@type': 'Offer', price: '25', priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: 'https://ifollowbv.it/rookie-league.html' },
+                        organizer: { '@type': 'SportsOrganization', name: 'I Follow Beach Volley', url: 'https://ifollowbv.it/' }
+                    };
+                }));
+                document.head.appendChild(ld);
 
                 var KINDS = {
                     past: ['bg-gray-100', 'dark:bg-gray-700', 'text-gray-500', 'dark:text-gray-300'],

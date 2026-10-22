@@ -45,7 +45,7 @@ const STAFF = [
 // Home è esplicita (non solo il logo): tra 1024 e 1279px mostra solo l'icona per non affollare la barra.
 // Per nascondere temporaneamente una voce basta commentarla.
 const DESKTOP_LINKS = [
-    { label: 'Home', href: 'index.html', icon: 'home', compactIcon: true },
+    { label: 'Home', href: './', icon: 'home', compactIcon: true },
     { label: 'Corsi', href: 'IFB_corsi.html' },
     { label: 'Sedi', href: 'sedi.html', children: SEDI },
     { label: 'Staff', href: 'coaches.html', children: STAFF },
@@ -54,7 +54,7 @@ const DESKTOP_LINKS = [
 
 // Tab bar mobile: le 4 destinazioni più frequenti + "Altro". Al centro la CTA.
 const MOBILE_TABS = [
-    { label: 'Home', href: 'index.html', icon: 'home' },
+    { label: 'Home', href: './', icon: 'home' },
     { label: 'Corsi', href: 'IFB_corsi.html', icon: 'sports_volleyball' },
     { cta: true },
     { label: 'Eventi', icon: 'emoji_events', children: EVENTI },
@@ -69,9 +69,10 @@ const MOBILE_SHEET = [
     ...(SHOW_LOGIN ? [{ label: 'Area riservata', href: 'area/', icon: 'account_circle' }] : []),
 ];
 
+// La home si linka come "./" (URL canonico "/"), non come "index.html"
 function currentPage() {
     const file = window.location.pathname.split('/').pop();
-    return file === '' ? 'index.html' : file;
+    return file === '' || file === 'index.html' ? './' : file;
 }
 
 // Pagina attiva: la voce stessa o una delle sue sotto-pagine
@@ -303,7 +304,7 @@ function renderNavbar() {
         <!-- Griglia 1fr | auto | 1fr: le voci restano centrate qualunque sia la larghezza di logo e CTA -->
         <div class="nav-inner max-w-7xl mx-auto px-4 py-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
 
-            <a class="group justify-self-start shrink-0 flex items-center justify-center w-[120px] h-10 bg-[#74297c] rounded-full shadow-md overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30" href="${b}index.html" aria-label="I Follow Beach Volley, home">
+            <a class="group justify-self-start shrink-0 flex items-center justify-center w-[120px] h-10 bg-[#74297c] rounded-full shadow-md overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30" href="${b || './'}" aria-label="I Follow Beach Volley, home">
                 <img src="${b}logo-trasparente.png" alt="Logo IFB" class="h-8 w-auto object-contain" />
             </a>
 

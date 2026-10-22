@@ -1,21 +1,8 @@
+<!DOCTYPE html>
+<html lang="it">
 <head>
+    <meta charset="utf-8" />
     <script src="consent.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        
-        // Imposta tutto su 'denied' prima che GTM e GA4 si attivino
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-        
-        // Push di sicurezza per inizializzare il dataLayer
-        dataLayer.push({ 'event': 'default_consent' });
-    </script>
 <meta name="theme-color" content="#7f13ec" />
 
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -23,9 +10,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-    <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Contattaci | I Follow Beach Volley</title>
+    <title>Contatti: corsi di beach volley a Milano | I Follow Beach Volley</title>
     <meta name="description" content="Hai domande sui nostri camp o corsi di beach volley? Scrivici, il team di I Follow Beach Volley è pronto a risponderti e portarti sulla sabbia!" />
     <meta name="keywords" content="contatti beach volley, informazioni corsi, iscrizioni camp, I Follow Beach Volley, assistenza IFB" />
     <meta name="author" content="I Follow Beach Volley" />
@@ -34,10 +20,13 @@
     <link rel="canonical" href="https://ifollowbv.it/contatti.html" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Follow Beach Volley" />
     <meta property="og:url" content="https://ifollowbv.it/contatti.html" />
     <meta property="og:title" content="Contatta I Follow Beach Volley" />
     <meta property="og:description" content="Siamo qui per aiutarti a tuffarti nel mondo del beach volley. Scrivici ora!" />
     <meta property="og:image" content="https://ifollowbv.it/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="it_IT" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -79,6 +68,44 @@
         }
     </script>
     <link rel="stylesheet" href="scroll-reveal.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "@id": "https://ifollowbv.it/contatti.html#page",
+          "url": "https://ifollowbv.it/contatti.html",
+          "name": "Contatti | I Follow Beach Volley",
+          "inLanguage": "it-IT",
+          "about": { "@id": "https://ifollowbv.it/#org" }
+        },
+        {
+          "@type": "SportsOrganization",
+          "@id": "https://ifollowbv.it/#org",
+          "name": "I Follow Beach Volley",
+          "url": "https://ifollowbv.it/",
+          "telephone": "+39 349 463 3610",
+          "email": "mulan@ifollowbv.it",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+39 349 463 3610",
+            "email": "mulan@ifollowbv.it",
+            "contactType": "customer service",
+            "areaServed": "IT",
+            "availableLanguage": ["Italian"]
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ifollowbv.it/" },
+            { "@type": "ListItem", "position": 2, "name": "Contatti", "item": "https://ifollowbv.it/contatti.html" }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen overflow-x-hidden">

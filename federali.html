@@ -21,9 +21,12 @@
     <meta property="og:url" content="https://ifollowbv.it/federali.html" />
     <meta property="og:title" content="Tornei Federali FIPAV | I Follow Beach Volley" />
     <meta property="og:description" content="Il circuito federale di beach volley nelle sedi IFB: tutte le date e le categorie." />
+    <meta property="og:site_name" content="I Follow Beach Volley" />
     <meta property="og:image" content="https://ifollowbv.it/beachtown.jpg" />
+    <meta property="og:image:alt" content="Campi in sabbia del BeachTown a Basiglio" />
     <meta property="og:locale" content="it_IT" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://ifollowbv.it/beachtown.jpg" />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -823,6 +826,7 @@
                     eventStatus: 'https://schema.org/EventScheduled',
                     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
                     location: { '@type': 'Place', name: t.sede.impianto, address: t.sede.indirizzo || t.sede.nome },
+                    url: 'https://ifollowbv.it/federali.html', image: 'https://ifollowbv.it/beachtown.jpg',
                     organizer: { '@type': 'SportsOrganization', name: INFO.organizzatore, url: 'https://ifollowbv.it/' },
                 };
             }));

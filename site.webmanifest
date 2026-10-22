@@ -1,6 +1,10 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "I Follow Beach Volley",
+  "short_name": "IFB",
+  "description": "Corsi, tornei e community di beach volley a Milano: Basiglio, Pero e Corsico.",
+  "lang": "it",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +19,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#74297c",
+  "theme_color": "#7f13ec",
   "background_color": "#ffffff",
   "display": "standalone"
 }

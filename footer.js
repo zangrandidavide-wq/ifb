@@ -180,7 +180,7 @@
                     <!-- Colonne -->
                     <div class="${showCta ? 'py-12' : 'pt-14 pb-12'} grid grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10">
                         <div class="col-span-2 lg:col-span-3">
-                            <a href="${b}index.html" class="inline-flex items-center justify-center w-[132px] h-11 bg-[#74297c] rounded-full shadow-lg hover:-translate-y-0.5 transition-transform duration-200" aria-label="I Follow Beach Volley, home">
+                            <a href="${b || './'}" class="inline-flex items-center justify-center w-[132px] h-11 bg-[#74297c] rounded-full shadow-lg hover:-translate-y-0.5 transition-transform duration-200" aria-label="I Follow Beach Volley, home">
                                 <img src="${b}logo-trasparente.png" alt="Logo IFB" class="h-8 w-auto object-contain" loading="lazy" />
                             </a>
                             <p class="mt-5 text-sm leading-relaxed text-gray-400 max-w-xs">
