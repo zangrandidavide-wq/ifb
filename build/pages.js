@@ -86,7 +86,6 @@ module.exports = {
         },
     }),
 
-    'clinic': page({ ...BASE_COLORS, ...ACCENT, ...SAND }),
 
     'coaches': page({ ...BASE_COLORS }),
 

@@ -3,7 +3,7 @@ Allow: /
 # File tecnici del backend: niente da indicizzare
 Disallow: /supabase/
 
-# Le pagine riservate (glossario, valutazioni, clinic) NON sono bloccate qui di proposito:
+# Le pagine riservate (glossario, valutazioni) NON sono bloccate qui di proposito:
 # hanno il meta tag "noindex", che i motori di ricerca devono poter leggere per rimuoverle dall'indice.
 
 Sitemap: https://ifollowbv.it/sitemap.xml
