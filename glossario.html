@@ -14,44 +14,16 @@
     <meta name="description" content="Glossario esercizi IFB: consulta focus tecnici, svolgimento, varianti, tempi e correzioni in una dashboard aggiornata da Google Sheets." />
     <meta name="robots" content="noindex, nofollow, noarchive" />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#7f13ec",
-                        "primary-dark": "#5e0eb3",
-                        "secondary": "#FFD700",
-                        "background-light": "#f7f6f8",
-                        "background-dark": "#191022",
-                        "sand": "#fdfbf7",
-                        "sand-dark": "#231b2e",
-                    },
-                    fontFamily: { "display": ["Lexend", "sans-serif"] },
-                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
-                    keyframes: {
-                        'card-in': { '0%': { opacity: '0', transform: 'translateY(14px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-                        'modal-in': { '0%': { opacity: '0', transform: 'translateY(16px) scale(.98)' }, '100%': { opacity: '1', transform: 'none' } },
-                    },
-                    animation: {
-                        'card-in': 'card-in .45s cubic-bezier(.22,1,.36,1) backwards',
-                        'modal-in': 'modal-in .3s cubic-bezier(.22,1,.36,1) both',
-                    },
-                },
-            },
-        };
-    </script>
     <link rel="stylesheet" href="scroll-reveal.css" />
     <style>
         body { font-family: 'Lexend', sans-serif; }
         a:focus-visible, button:focus-visible, article:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
         @media (prefers-reduced-motion: reduce) { .motion-safe-only { animation: none !important; } }
     </style>
+    <link rel="stylesheet" href="tailwind-glossario.css" />
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col overflow-x-hidden">
     <header>
