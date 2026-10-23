@@ -305,7 +305,7 @@ function renderNavbar() {
         <div class="nav-inner max-w-7xl mx-auto px-4 py-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
 
             <a class="group justify-self-start shrink-0 flex items-center justify-center w-[120px] h-10 bg-[#74297c] rounded-full shadow-md overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30" href="${b || './'}" aria-label="I Follow Beach Volley, home">
-                <img src="${b}logo-trasparente.png" alt="Logo IFB" class="h-8 w-auto object-contain" />
+                <img src="${b}logo-trasparente-mini.webp" alt="Logo IFB" class="h-8 w-auto object-contain" />
             </a>
 
             <!-- Desktop: tutte le voci in orizzontale -->

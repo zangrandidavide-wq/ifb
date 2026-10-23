@@ -1,12 +1,12 @@
 // Configurazione Tailwind di ogni pagina.
 // Riproduce esattamente il vecchio `tailwind.config = {...}` che ogni pagina
-// aveva inline quando usava il CDN: ogni pagina ha il suo file CSS compilato
-// in tailwind-<pagina>.css (nella root del sito).
+// aveva inline quando usava il CDN: la build genera il CSS di ogni pagina e lo
+// inserisce nella pagina stessa, nel blocco <style data-inline="tailwind">.
 //
-// Per aggiungere una pagina nuova: aggiungi una voce qui sotto, lancia
-// `npm run build:css` e collega il CSS nella pagina come ultimo elemento
-// dell'<head>:
-//   <link rel="stylesheet" href="tailwind-<pagina>.css" />
+// Per aggiungere una pagina nuova: aggiungi una voce qui sotto, metti come
+// ultimo elemento dell'<head> della pagina il blocco vuoto
+//   <style data-inline="tailwind"></style>
+// e lancia `npm run build:css`.
 
 const BASE_COLORS = {
     'primary': '#7f13ec',

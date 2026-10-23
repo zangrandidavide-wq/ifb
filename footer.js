@@ -181,7 +181,7 @@
                     <div class="${showCta ? 'py-12' : 'pt-14 pb-12'} grid grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10">
                         <div class="col-span-2 lg:col-span-3">
                             <a href="${b || './'}" class="inline-flex items-center justify-center w-[132px] h-11 bg-[#74297c] rounded-full shadow-lg hover:-translate-y-0.5 transition-transform duration-200" aria-label="I Follow Beach Volley, home">
-                                <img src="${b}logo-trasparente.png" alt="Logo IFB" class="h-8 w-auto object-contain" loading="lazy" />
+                                <img src="${b}logo-trasparente-mini.webp" alt="Logo IFB" class="h-8 w-auto object-contain" loading="lazy" />
                             </a>
                             <p class="mt-5 text-sm leading-relaxed text-gray-400 max-w-xs">
                                 Scuola e community di beach volley a Milano dal 2013: corsi per ogni livello, tornei, eventi e un percorso fino al campionato italiano.
@@ -228,8 +228,9 @@
             prefsBtn.addEventListener('click', function () {
                 if (window.IFBConsent) window.IFBConsent.open();
             });
-            // Sulle pagine senza tracciamento (non incluse consent.js) non ci sono preferenze da gestire
-            if (!window.IFBConsent) prefsBtn.previousElementSibling.remove(), prefsBtn.remove();
+            // Sulle pagine senza tracciamento (non incluse consent.js) non ci sono preferenze da gestire.
+            // Si cerca lo script e non window.IFBConsent: consent.js è "defer" e può non essere ancora eseguito.
+            if (!document.querySelector('script[src$="consent.js"]')) prefsBtn.previousElementSibling.remove(), prefsBtn.remove();
 
             var topBtn = this.querySelector('#ifbv-top');
             topBtn.addEventListener('click', function () {
