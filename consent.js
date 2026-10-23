@@ -1,6 +1,6 @@
 // Consenso cookie e analytics di I Follow Beach Volley.
-// Va incluso come PRIMO script nel <head> di ogni pagina pubblica:
-//   <script src="consent.js"></script>
+// Va incluso nel <head> di ogni pagina pubblica, con defer per non bloccare il rendering:
+//   <script src="consent.js" defer></script>
 //
 // - Google Consent Mode v2: tutto negato di default, aggiornato in base alla scelta salvata.
 // - GA4 + Google Tag Manager: caricati sempre, ma rispettano il Consent Mode.

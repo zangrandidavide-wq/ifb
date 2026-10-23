@@ -43,7 +43,7 @@ window.SEDI_FEDERALI = {
     basiglio: {
         nome: 'Basiglio',
         impianto: 'Beach Town',
-        img: 'beachtown.jpg',
+        img: 'beachtown.webp',
         indirizzo: 'Piazza Marco Polo 3, Basiglio (MI)',
         maps: 'Piazza+Marco+Polo,+3,+20079+Basiglio+MI',
         pagina: 'sedi.html#basiglio',
@@ -51,7 +51,7 @@ window.SEDI_FEDERALI = {
     pero: {
         nome: 'Pero',
         impianto: 'Pero Sporting Club',
-        img: 'pero.jpg',
+        img: 'pero-800.webp',
         indirizzo: 'Via Papa Giovanni XXIII 6, Pero (MI)',
         maps: 'Via+Papa+Giovanni+XXIII+6,+20016+Pero,+Lombardia',
         pagina: 'sedi.html#pero',
