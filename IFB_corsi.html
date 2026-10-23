@@ -34,58 +34,10 @@
     <meta name="twitter:description" content="High Performance Program e corsi per ogni livello. Staff tecnico coordinato." />
     <meta name="twitter:image" content="https://ifollowbv.it/og-image.jpg" />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#7f13ec",
-                        "primary-dark": "#5e0eb3",
-                        "secondary": "#FFD700",
-                        "accent-yellow": "#FFD700",
-                        "background-light": "#f7f6f8",
-                        "background-dark": "#191022",
-                        "sand": "#fdfbf7",
-                        "sand-dark": "#231b2e",
-                    },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
-                    keyframes: {
-                        'fade-in-down': {
-                            '0%': { opacity: '0', transform: 'translateY(-16px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        'fade-in-up': {
-                            '0%': { opacity: '0', transform: 'translateY(24px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        'fade-in': {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        'shimmer': {
-                            '0%': { backgroundPosition: '-200% 0' },
-                            '100%': { backgroundPosition: '200% 0' },
-                        },
-                    },
-                    animation: {
-                        'fade-in-down': 'fade-in-down 0.7s ease-out both',
-                        'fade-in-up': 'fade-in-up 0.7s ease-out both',
-                        'fade-in': 'fade-in 0.7s ease-out both',
-                        'shimmer': 'shimmer 3s linear infinite',
-                    },
-                },
-            },
-        }
-    </script>
     <style>
         [data-reveal] {
             opacity: 0;
@@ -201,6 +153,7 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="tailwind-IFB_corsi.css" />
 </head>
 
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col">

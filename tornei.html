@@ -30,7 +30,6 @@
     <meta name="description"
         content="Sfoglia il calendario dei tornei di beach volley organizzati da I Follow Beach Volley. Consulta date, luoghi e iscriviti direttamente." />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
@@ -39,30 +38,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
 
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#7f13ec",
-                        "primary-dark": "#5e0eb3",
-                        "secondary": "#FFD700",
-                        "accent-yellow": "#FFD700",
-                        "background-light": "#f7f6f8",
-                        "background-dark": "#191022",
-                    },
-                    fontFamily: { "display": ["Lexend", "sans-serif"] },
-                    borderRadius: {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
 
     <style>
         /* CSS del Sole (attenuato per la modalità chiara) */
@@ -177,6 +152,7 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="tailwind-tornei.css" />
 </head>
 
 <body

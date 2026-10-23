@@ -46,48 +46,6 @@
     <!-- Usato da navbar.js e footer.js (icone menu, chiudi, freccia "Sedi") -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block" rel="stylesheet" />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#7f13ec",
-                        "primary-dark": "#5e0eb3",
-                        "secondary": "#FFD700",
-                        "background-light": "#f7f6f8",
-                        "background-dark": "#191022",
-                        "sand": "#fdfbf7",
-                        "sand-dark": "#231b2e",
-                    },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
-                    keyframes: {
-                        'fade-in-down': {
-                            '0%': { opacity: '0', transform: 'translateY(-8px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        'fade-in-up': {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        'hero-settle': {
-                            '0%': { transform: 'scale(1.08)' },
-                            '100%': { transform: 'scale(1)' },
-                        },
-                    },
-                    animation: {
-                        'fade-in-down': 'fade-in-down 0.3s ease-out both',
-                        'fade-in-up': 'fade-in-up 0.5s ease-out both',
-                        'hero-settle': 'hero-settle 2.4s cubic-bezier(.22,.61,.36,1) both',
-                    },
-                },
-            },
-        }
-    </script>
     <link rel="stylesheet" href="scroll-reveal.css" />
     <style>
         body { font-family: 'Lexend', sans-serif; }
@@ -186,6 +144,7 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="tailwind-index.css" />
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white overflow-x-hidden w-full max-w-[100vw] relative m-0 p-0">
 <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-xl">Vai al contenuto</a>
