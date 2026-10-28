@@ -147,6 +147,15 @@ module.exports = {
 
     'metodo': page({ ...BASE_COLORS, ...SAND }, GRADIENT_SHIFT),
 
+    'foto': page({ ...BASE_COLORS, ...SAND }, {
+        keyframes: {
+            'card-in': { '0%': { opacity: '0', transform: 'translateY(14px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        },
+        animation: {
+            'card-in': 'card-in .45s cubic-bezier(.22,1,.36,1) backwards',
+        },
+    }),
+
     'privacy': page({ ...BASE_COLORS, ...SAND }),
 
     'rookie-league': page({ ...BASE_COLORS, ...SAND }),

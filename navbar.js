@@ -33,6 +33,7 @@ const EVENTI = [
     { label: 'Tornei & eventi', href: 'tornei.html', icon: 'emoji_events', desc: 'Tornei IFB ed eventi' },
     { label: 'Tornei federali', href: 'federali.html', icon: 'verified', desc: 'Circuito FIPAV nelle sedi IFB' },
     { label: 'Rookie League', href: 'rookie-league.html', icon: 'military_tech', desc: 'Il campionato a coppie miste' },
+    { label: 'Foto', href: 'foto.html', icon: 'photo', desc: 'Gli album dei tornei' },
 ];
 
 // Staff: la pagina dello staff e il metodo con cui allena
