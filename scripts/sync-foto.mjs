@@ -3,7 +3,7 @@
 //
 // Struttura attesa sul Drive (cartella radice condivisa con il service account, come Visualizzatore):
 //   IFB_foto/
-//     2026.10.24 | Torneo Silver + Beginner | BeachTown/   ← data | titolo | luogo (il luogo è facoltativo)
+//     30.10.2026 | Torneo Halloween | BeachTown/   ← data | titolo | luogo (il luogo è facoltativo)
 //       *.jpg                ← tutte le foto della cartella vanno online
 //       copertina.jpg        ← facoltativo
 //
@@ -117,6 +117,21 @@ function chiave(f) {
 
 const IMMAGINE = /^image\/(jpeg|png|webp|tiff)$/;
 
+// Nome della cartella di un torneo: data, titolo e, dopo un'altra |, il luogo.
+//   "30.10.2026 | Torneo Halloween"  oppure  "2026.10.24 | Torneo Silver + Beginner | BeachTown"
+// La data può essere giorno.mese.anno o anno.mese.giorno, con separatore . / - _
+function leggiNome(nome) {
+    const m = nome.trim().match(/^(\d{1,4})[-/._](\d{1,2})[-/._](\d{1,4})(?!\d)[\s_|–-]*(.+)$/);
+    if (!m) return null;
+    const [, a, mese, b, resto] = m;
+    let anno, giorno;
+    if (a.length === 4 && b.length <= 2) [anno, giorno] = [a, b];
+    else if (b.length === 4 && a.length <= 2) [anno, giorno] = [b, a];
+    else return null;
+    if (+mese < 1 || +mese > 12 || +giorno < 1 || +giorno > 31) return null;
+    return { data: `${anno}-${mese.padStart(2, '0')}-${giorno.padStart(2, '0')}`, resto };
+}
+
 async function leggiDrive(rootId) {
     // Se la radice non è raggiungibile (condivisione revocata, cestino) ci si ferma qui, senza toccare nulla su R2
     const root = await drive(`files/${rootId}`, { fields: 'id, name, trashed' }).catch((e) => {
@@ -127,11 +142,9 @@ async function leggiDrive(rootId) {
     const album = [];
     const slugUsati = new Set();
     for (const cartella of await figli(rootId, CARTELLA)) {
-        // "2026.10.24 | Torneo Silver + Beginner | BeachTown": la data accetta come separatore . / - _,
-        // poi titolo e, dopo un'altra |, il luogo
-        const m = cartella.name.trim().match(/^(\d{4})[-/._](\d{1,2})[-/._](\d{1,2})(?!\d)[\s_|–-]*(.+)$/);
+        const m = leggiNome(cartella.name);
         if (!m) {
-            console.warn(`⚠ Ignoro "${cartella.name}": il nome deve essere "AAAA.MM.GG | Nome torneo | Luogo"`);
+            console.warn(`⚠ Ignoro "${cartella.name}": il nome deve essere "GG.MM.AAAA | Nome torneo | Luogo" (o "AAAA.MM.GG | …")`);
             continue;
         }
         // Solo le immagini direttamente nella cartella del torneo; eventuali sottocartelle non vanno online
@@ -147,8 +160,7 @@ async function leggiDrive(rootId) {
         const cop = files.findIndex((f) => /^copertina\./i.test(f.name));
         if (cop > 0) files.unshift(files.splice(cop, 1)[0]);
 
-        const [, anno, mese, giorno, resto] = m;
-        const data = `${anno}-${mese.padStart(2, '0')}-${giorno.padStart(2, '0')}`;
+        const { data, resto } = m;
         const [titolo, ...luogo] = resto.split('|').map((x) => x.trim()).filter(Boolean);
         if (!titolo) {
             console.warn(`⚠ Ignoro "${cartella.name}": manca il nome del torneo dopo la data`);

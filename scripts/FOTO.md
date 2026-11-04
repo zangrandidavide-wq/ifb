@@ -51,7 +51,7 @@ Poi *Actions → Foto tornei → Run workflow* per il primo giro. Nei log si ved
 ## Il fotografo, a ogni torneo
 ```
 IFB_foto/
-└── 2026.10.24 | Torneo Silver + Beginner | BeachTown/   ← "AAAA.MM.GG | Nome torneo | Luogo"
+└── 30.10.2026 | Torneo Halloween | BeachTown/   ← "GG.MM.AAAA | Nome torneo | Luogo" (va bene anche "AAAA.MM.GG")
     ├── copertina.jpg                                    ← facoltativo: copertina dell'album
     └── …jpg                                             ← TUTTE le foto della cartella vanno online
 ```
