@@ -1,7 +1,7 @@
 // Galleria foto dei tornei (foto.html).
 // Le foto le pubblica scripts/sync-foto.mjs su Cloudflare R2: qui si leggono solo i manifest JSON.
 //   foto.html              → elenco degli album (index.json)
-//   foto.html?album=<slug> → griglia di miniature (albums/<slug>.json), lightbox PhotoSwipe al clic
+//   foto.html?album=<slug> → mosaico di miniature con il loro rapporto di forma (albums/<slug>.json), lightbox PhotoSwipe al clic
 //   …#foto-12              → apre direttamente la foto 12 (link condivisibile)
 
 import { esc, dataLunga } from './tornei/config.js';
@@ -96,9 +96,9 @@ function renderAlbum(a) {
                 <span class="material-symbols-outlined text-lg text-secondary" aria-hidden="true">photo</span> ${nFoto(a.foto.length)}
             </p>
         </div>
-        <div id="griglia" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1 sm:gap-2">
+        <div id="griglia" class="mosaico">
             ${a.foto.map((f, i) => `
-                <a href="${grande(f.k)}" data-i="${i}" class="group relative block aspect-square overflow-hidden rounded-md sm:rounded-[10px] bg-white/5">
+                <a href="${grande(f.k)}" data-i="${i}" style="--ar:${(f.w / f.h).toFixed(4)}" class="group relative block overflow-hidden rounded-md sm:rounded-[10px] bg-white/5">
                     <img src="${mini(f.k)}" alt="${esc(a.titolo)}, foto ${i + 1}" width="${f.w}" height="${f.h}" ${i > 14 ? 'loading="lazy"' : ''} decoding="async"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </a>`).join('')}
