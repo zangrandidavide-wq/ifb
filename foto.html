@@ -36,6 +36,14 @@
         a:focus-visible, button:focus-visible { outline: 3px solid #FFD700; outline-offset: 3px; }
         /* Pulsante "scarica" aggiunto alla barra di PhotoSwipe */
         .pswp__button--scarica { display: flex; align-items: center; justify-content: center; color: #fff; }
+        /* Mosaico dell'album: righe di altezza uguale, ogni miniatura col suo rapporto di forma (come Google Drive).
+           flex-grow proporzionale a --ar (larghezza/altezza) allarga tutte le foto di una riga nella stessa misura,
+           così le altezze restano allineate; ::after tiene l'ultima riga all'altezza naturale invece di stirarla. */
+        .mosaico { --riga: 7.5rem; display: flex; flex-wrap: wrap; align-items: flex-start; gap: .25rem; }
+        .mosaico > a { flex: var(--ar) 1 calc(var(--riga) * var(--ar)); aspect-ratio: var(--ar); max-width: 100%; }
+        .mosaico::after { content: ''; flex: 1e6 1 0; }
+        @media (min-width: 640px) { .mosaico { --riga: 11rem; gap: .5rem; } }
+        @media (min-width: 1024px) { .mosaico { --riga: 14rem; } }
     </style>
     <script type="application/ld+json">
     {

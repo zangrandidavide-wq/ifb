@@ -23,7 +23,7 @@ import { createHash } from 'node:crypto';
 const PROVA = process.argv.includes('--prova');
 const FORZA = process.env.FORZA === 'true';
 
-const LATO_MINIATURA = 480;   // lato corto della miniatura (le celle della griglia sono quadrate)
+const LATO_MINIATURA = 480;   // lato corto della miniatura (il mosaico mostra le foto col loro rapporto di forma)
 const LATO_GRANDE = 1600;     // lato lungo della versione per la lightbox
 const MAX_NUOVE_PER_GIRO = 300;  // il resto al giro successivo, per restare nel timeout del workflow
 const PARALLELE = 4;
