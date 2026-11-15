@@ -11,6 +11,9 @@ const params = new URLSearchParams(location.search);
 const BASE = (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && params.get('base')) || 'https://foto.ifollowbv.it';
 const PSWP = 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/';
 
+// iPadOS si presenta come Mac: lo si riconosce dal touch
+const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
 const app = document.getElementById('foto-app');
 const mini = (k) => `${BASE}/t/${k}.webp`;
 const grande = (k) => `${BASE}/l/${k}.webp`;
@@ -100,7 +103,7 @@ function renderAlbum(a) {
             ${a.foto.map((f, i) => `
                 <a href="${grande(f.k)}" data-i="${i}" style="--ar:${(f.w / f.h).toFixed(4)}" class="group relative block overflow-hidden rounded-md sm:rounded-[10px] bg-white/5">
                     <img src="${mini(f.k)}" alt="${esc(a.titolo)}, foto ${i + 1}" width="${f.w}" height="${f.h}" ${i > 14 ? 'loading="lazy"' : ''} decoding="async"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        class="w-full h-full object-cover" />
                 </a>`).join('')}
         </div>
         <p class="mt-10 text-sm text-white/50 max-w-xl">Sei in una foto e preferisci che venga tolta? Scrivici indicando l'album e il numero della foto: trovi come fare nella <a href="privacy.html#foto" class="underline hover:text-secondary">privacy</a>.</p>`;
@@ -136,7 +139,9 @@ async function apriLightbox(a, index, griglia) {
         dataSource: a.foto.map((f, i) => ({ src: grande(f.k), msrc: mini(f.k), width: f.w, height: f.h, alt: `${a.titolo}, foto ${i + 1}` })),
         index,
         bgOpacity: 0.96,
-        showHideAnimationType: 'zoom',
+        // Su iPhone/iPad l'animazione di zoom dalla miniatura e il precaricamento di due foto avanti pesano troppo
+        showHideAnimationType: IOS ? 'fade' : 'zoom',
+        preload: [1, 1],
         imageClickAction: 'zoom-or-close',
         tapAction: 'toggle-controls',
         closeTitle: 'Chiudi', zoomTitle: 'Zoom', arrowPrevTitle: 'Precedente', arrowNextTitle: 'Successiva',
@@ -167,7 +172,10 @@ async function apriLightbox(a, index, griglia) {
 async function scarica(a, i) {
     const nome = `IFB ${a.titolo} ${i + 1}.webp`;
     try {
-        const blob = await (await fetch(grande(a.foto[i].k))).blob();
+        // cache: 'reload': Safari altrimenti riusa la copia presa dalla lightbox senza header CORS e il fetch fallisce
+        const res = await fetch(grande(a.foto[i].k), { cache: 'reload' });
+        if (!res.ok) throw new Error(res.status);
+        const blob = await res.blob();
         const url = URL.createObjectURL(blob);
         Object.assign(document.createElement('a'), { href: url, download: nome }).click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
