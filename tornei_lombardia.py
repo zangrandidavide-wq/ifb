@@ -1,10 +1,11 @@
 """
 Scarica dal sito FIPAV i tornei di beach volley in programma in Lombardia
-(da oggi fino a fine anno) e li salva in federali-lombardia.js,
+(da oggi fino a fine maggio dell'anno prossimo, cioè tutta la stagione invernale)
+e li salva in federali-lombardia.js,
 il file che federali.html legge per la sezione "Tutta la Lombardia".
 
 Uso:
-    python tornei_lombardia.py               # da oggi al 31/12 dell'anno corrente
+    python tornei_lombardia.py               # da oggi al 31 maggio dell'anno prossimo
     python tornei_lombardia.py 2027-03-31    # da oggi a una data a scelta
 
 Non serve installare nulla: usa solo la libreria standard di Python.
@@ -65,7 +66,9 @@ def livello(tipologia):
 
 def main():
     oggi = date.today().isoformat()
-    fine = sys.argv[1] if len(sys.argv) > 1 else f"{date.today().year}-12-31"
+    # La FIPAV pubblica la stagione nuova un mese per volta: arrivando fino a maggio,
+    # ogni aggiornamento settimanale aggiunge da solo i mesi appena usciti.
+    fine = sys.argv[1] if len(sys.argv) > 1 else f"{date.today().year + 1}-05-31"
     stagioni = range(int(oggi[:4]), int(fine[:4]) + 1)
 
     tornei = {}
