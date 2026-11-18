@@ -24,6 +24,7 @@
     var LINK_GROUPS = [
         { title: 'Allenati', links: [
             { label: 'Corsi e prezzi', href: 'IFB_corsi.html' },
+            { label: 'Personal con James', href: 'personal.html' },
             { label: 'High Performance', href: 'IFB_corsi.html#hpp' },
             { label: 'Staff tecnico', href: 'coaches.html' }
         ] },

@@ -9,6 +9,25 @@
 export const SUPABASE_URL = 'https://gwqtkuwfipgvegeipygh.supabase.co';
 export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3cXRrdXdmaXBndmVnZWlweWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0OTM4ODIsImV4cCI6MjEwODA2OTg4Mn0.5-8Yrf1oThUc6rLxhgxymWmJISzcxqP-hLF2wN7G1XU';
 
+// Chiamata a una funzione del database (RPC) con la chiave pubblica, senza la libreria di Supabase.
+// Gli errori sollevati dalle funzioni con "raise exception" (codice P0001) sono già scritti per l'utente.
+export async function rpc(name, body = {}) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
+        method: 'POST',
+        headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+        throw new Error(data?.code === 'P0001' ? data.message : 'Qualcosa è andato storto. Riprova tra poco.');
+    }
+    return data;
+}
+
 export const LOCANDINE_BUCKET = 'locandine';
 
 export function locandinaUrl(path) {
