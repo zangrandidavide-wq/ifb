@@ -1,5 +1,9 @@
 // Navbar di I Follow Beach Volley, iniettata in #navbar-placeholder su ogni pagina.
 //
+// Le pagine la caricano come "navbar.js?v=AAAA-MM-GG" (lo stesso vale per footer.js): il sito dice ai browser
+// di tenere i file in memoria per ore, quindi dopo una modifica al menu cambia la data in tutte le pagine,
+// altrimenti chi ha già visitato il sito continua a vedere il menu vecchio.
+//
 // Due soluzioni distinte:
 //  - Desktop (lg, ≥1024px): barra bianca in alto con tutte le voci in orizzontale + CTA. Nessun hamburger.
 //  - Mobile/tablet (<1024px): nessuna barra in alto, solo la tab bar in basso,
@@ -31,7 +35,7 @@ const SEDI = [
 // Corsi: i corsi della stagione e i personal del weekend con James
 const CORSI = [
     { label: 'Corsi e prezzi', href: 'IFB_corsi.html', icon: 'sports_volleyball', desc: 'Corsi per livello e listino' },
-    { label: 'Personal con James', href: 'personal.html', icon: 'event_available', desc: 'Allenamenti nel weekend' },
+    { label: 'Personal con James', href: 'personal.html', icon: 'event_available', desc: 'Allenamenti nel weekend', accent: true },
 ];
 
 // Eventi: più pagine distinte. Su desktop sono una tendina, su mobile un piccolo menu sopra la tab bar.
@@ -53,7 +57,8 @@ const STAFF = [
 // Per nascondere temporaneamente una voce basta commentarla.
 const DESKTOP_LINKS = [
     { label: 'Home', href: './', icon: 'home', compactIcon: true },
-    { label: 'Corsi', href: 'IFB_corsi.html', children: CORSI },
+    { label: 'Corsi', href: 'IFB_corsi.html' },
+    { label: 'Personal con James', short: 'Personal', href: 'personal.html', icon: 'event_available', accent: true },
     { label: 'Sedi', href: 'sedi.html', children: SEDI },
     { label: 'Staff', href: 'coaches.html', children: STAFF },
     { label: 'Tornei ed Eventi', href: 'tornei.html', children: EVENTI, highlight: true },
@@ -62,7 +67,7 @@ const DESKTOP_LINKS = [
 // Tab bar mobile: le 4 destinazioni più frequenti + "Altro". Al centro la CTA.
 const MOBILE_TABS = [
     { label: 'Home', href: './', icon: 'home' },
-    { label: 'Corsi', icon: 'sports_volleyball', children: CORSI },
+    { label: 'Corsi', icon: 'sports_volleyball', children: CORSI, accent: true },
     { cta: true },
     { label: 'Eventi', icon: 'emoji_events', children: EVENTI },
     { more: true },
@@ -99,7 +104,11 @@ function renderDesktopLinks(b, page) {
     return DESKTOP_LINKS.map((link) => {
         const active = isActive(link, page);
         // highlight: voce in evidenza (pillola dorata), un gradino sotto la CTA viola
-        const cls = link.highlight
+        const cls = link.accent
+            ? `relative inline-flex items-center gap-1 pl-1.5 pr-2 xl:pl-2.5 xl:pr-3 py-2 rounded-full text-sm font-extrabold whitespace-nowrap ring-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#ff4fa3]/40 ${active
+                ? 'text-[#c2185b] bg-[#ff4fa3]/25 ring-[#ff4fa3]'
+                : 'text-gray-900 dark:text-white bg-[#ff4fa3]/15 ring-[#ff4fa3]/60 hover:bg-[#ff4fa3]/25 hover:ring-[#ff4fa3]'}`
+            : link.highlight
             ? `relative inline-flex items-center gap-1 pl-1.5 pr-1 xl:pl-3 xl:pr-2 py-2 rounded-full text-sm font-extrabold whitespace-nowrap ring-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary/40 ${active
                 ? 'text-primary bg-secondary/30 ring-secondary'
                 : 'text-gray-900 dark:text-white bg-secondary/20 ring-secondary/60 hover:bg-secondary/40 hover:ring-secondary'}`
@@ -108,6 +117,8 @@ function renderDesktopLinks(b, page) {
                 : 'text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5'}`;
         const lead = link.highlight
             ? `<span class="material-symbols-outlined text-base xl:text-lg text-amber-500" style="font-variation-settings:'FILL' 1" aria-hidden="true">emoji_events</span>`
+            : link.accent
+            ? `<span class="material-symbols-outlined text-base xl:text-lg text-[#ff4fa3]" style="font-variation-settings:'FILL' 1" aria-hidden="true">${link.icon}</span>`
             : '';
         const dot = active ? '<span class="absolute left-1/2 -bottom-0.5 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary" aria-hidden="true"></span>' : '';
         const badge = link.badge ? '<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" aria-hidden="true"></span>' : '';
@@ -119,6 +130,9 @@ function renderDesktopLinks(b, page) {
                 `<span class="sr-only xl:not-sr-only">${link.label}</span>${dot}</a>`;
         }
 
+        if (link.short) {
+            return `<a href="${b}${link.href}" class="${cls}" ${current} title="${link.label}">${lead}<span class="xl:hidden">${link.short}</span><span class="hidden xl:inline">${link.label}</span>${dot}</a>`;
+        }
         if (!link.children) {
             return `<a href="${b}${link.href}" class="${cls}" ${current}>${lead}${link.label}${badge}${dot}</a>`;
         }
@@ -183,7 +197,10 @@ function renderMobileTabs(b, page) {
             <li>
                 <button type="button" data-chooser="${i}" aria-expanded="false" aria-controls="mobile-chooser-${i}"
                         class="relative w-full flex flex-col items-center gap-0.5 py-1 text-[10px] font-bold uppercase tracking-wide ${active ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">
-                    <span class="material-symbols-outlined text-2xl" style="${active ? "font-variation-settings:'FILL' 1" : ''}" aria-hidden="true">${tab.icon}</span>
+                    ${tab.accent ? `<span class="relative w-8 h-8 -my-1 rounded-full bg-[#ff4fa3]/15 ring-2 ring-[#ff4fa3]/60 text-[#e0388a] flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1" aria-hidden="true">${tab.icon}</span>
+                        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#ff4fa3] ring-2 ring-white dark:ring-background-dark animate-pulse" aria-hidden="true"></span>
+                    </span>` : `<span class="material-symbols-outlined text-2xl" style="${active ? "font-variation-settings:'FILL' 1" : ''}" aria-hidden="true">${tab.icon}</span>`}
                     ${tab.label}
                     ${active ? '<span class="absolute -top-1 w-6 h-1 rounded-full bg-secondary" aria-hidden="true"></span>' : ''}
                 </button>
@@ -211,11 +228,14 @@ function renderMobileChooser(b, page) {
             const active = c.href === page;
             // Numero dispari di voci: l'ultima occupa tutta la riga
             const largo = tutte.length % 2 === 1 && j === tutte.length - 1;
+            const bordo = active ? 'bg-primary text-white border-primary' : c.accent ? 'bg-[#ff4fa3]/10 border-[#ff4fa3]/50' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700';
+            const tondo = active ? 'bg-white/20 text-white' : c.accent ? 'bg-[#ff4fa3] text-white' : 'bg-primary/10 text-primary';
             return `
             <li class="${largo ? 'col-span-2' : ''}">
                 <a href="${b}${c.href}" ${active ? 'aria-current="page"' : ''}
-                   class="chooser-link flex h-full flex-col rounded-3xl border p-4 active:scale-[.97] transition-transform ${active ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}">
-                    <span class="w-10 h-10 rounded-full ${active ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'} flex items-center justify-center mb-3">
+                   class="chooser-link relative flex h-full flex-col rounded-3xl border p-4 active:scale-[.97] transition-transform ${bordo}">
+                    ${c.accent && !active ? '<span class="absolute top-3 right-3 bg-[#ff4fa3] text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full">Novità</span>' : ''}
+                    <span class="w-10 h-10 rounded-full ${tondo} flex items-center justify-center mb-3">
                         <span class="material-symbols-outlined text-xl" aria-hidden="true">${c.icon}</span>
                     </span>
                     <span class="block font-black uppercase tracking-tight leading-none ${active ? 'text-white' : 'text-gray-900 dark:text-white'}">${c.label}</span>
