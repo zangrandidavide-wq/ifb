@@ -1,11 +1,9 @@
 // Generato da tornei_lombardia.py: non modificare a mano.
 // Tornei di beach volley FIPAV in Lombardia (fonte: federvolley.it / myvolley.net).
-window.LOMBARDIA_AGGIORNATO = '2026-11-16';
+window.LOMBARDIA_AGGIORNATO = '2026-11-18';
 window.TORNEI_LOMBARDIA = [
     {"data": "2026-11-21", "fine": "2026-11-21", "liv": "bronze", "gen": "F", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Bronze", "codice": "BVLF12537", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "gold", "gen": "F", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Gold", "codice": "BVLF12536", "stagione": "2026"},
     {"data": "2026-11-21", "fine": "2026-11-21", "liv": "gold", "gen": "M", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Gold", "codice": "BVLM12535", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "under18", "gen": "F", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Under 18", "codice": "BVLF12538", "stagione": "2026"},
     {"data": "2026-11-21", "fine": "2026-11-21", "liv": "bronze", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Bronze", "codice": "BVLM12262", "stagione": "2026"},
     {"data": "2026-11-21", "fine": "2026-11-21", "liv": "silver", "gen": "F", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Silver", "codice": "BVLF12264", "stagione": "2026"},
     {"data": "2026-11-21", "fine": "2026-11-21", "liv": "silver", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Silver", "codice": "BVLM12263", "stagione": "2026"},
