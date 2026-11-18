@@ -19,19 +19,21 @@ const daIso = (s) => { const [y, m, g] = s.split('-').map(Number); return new Da
 const piuGiorni = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
 const lunedi = (d) => piuGiorni(d, -((d.getDay() + 6) % 7));
 const oggi = new Date();
-const primaData = iso(piuGiorni(oggi, D.anticipo));   // primo giorno richiedibile
+const ultimaData = iso(piuGiorni(oggi, D.apertura));   // ultimo giorno già richiedibile
 const corta = (s) => { const d = daIso(s); return `${d.getDate()} ${MESI[d.getMonth()]}`; };
+// Giorno in cui si apre la richiesta per una certa data
+const apre = (g) => corta(iso(piuGiorni(daIso(g), -D.apertura)));
 
 const primoLunedi = lunedi(oggi);
 const ultimoLunedi = lunedi(daIso(D.al));
 
-// Stato di un giorno: null (feriale), 'passato', 'presto' (entro l'anticipo minimo), 'chiuso', 'libero'
+// Stato di un giorno: null (feriale), 'passato', 'chiuso', 'futuro' (richiesta non ancora aperta), 'libero'
 function statoGiorno(d, i) {
     if (i < 5) return null;
     const g = iso(d);
     if (g < iso(oggi)) return 'passato';
     if (g < D.dal || g > D.al || D.chiusure.includes(g)) return 'chiuso';
-    if (g < primaData) return 'presto';
+    if (g > ultimaData) return 'futuro';
     return 'libero';
 }
 
@@ -78,8 +80,8 @@ function renderListino() {
 
 // ─── Calendario ───────────────────────────────────────────────────────────
 const cal = document.getElementById('cal');
-// Si parte dalla prima settimana con un giorno richiedibile (si può comunque tornare a quella corrente)
-let settimana = lunedi(daIso(primaData > D.dal ? primaData : D.dal));
+// Si parte dalla settimana corrente (o da quella d'inizio, se il progetto non è ancora partito)
+let settimana = lunedi(iso(oggi) > D.dal ? oggi : daIso(D.dal));
 let giornoScelto = null;   // telefono: giorno aperto (5 = sab, 6 = dom)
 
 function etichettaSettimana(lun) {
@@ -91,19 +93,17 @@ function etichettaSettimana(lun) {
 const MSG = {
     passato: ['history', 'Giorno passato'],
     chiuso: ['event_busy', 'Niente personal in questo giorno'],
-    presto: ['hourglass_empty', `Si richiede almeno ${D.anticipo} giorni prima`],
 };
 
 // Contenuto di un giorno del weekend: le fasce da scegliere, oppure il motivo per cui non si può
 function contenutoGiorno(d, stato, grande) {
     const g = iso(d);
     if (stato !== 'libero') {
-        const [icona, testo] = MSG[stato];
+        const [icona, testo] = stato === 'futuro' ? ['hourglass_empty', `Richiedibile dal ${apre(g)}`] : MSG[stato];
         return `
             <div class="h-full flex flex-col items-center justify-center gap-1.5 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 p-4 text-center text-gray-400 ${grande ? 'py-8' : ''}">
                 <span class="material-icons" aria-hidden="true">${icona}</span>
                 <span class="text-xs font-bold">${testo}</span>
-                ${stato === 'presto' ? `<a href="${linkWhatsApp(`Ciao! Vorrei sapere se c'è posto per un personal con James ${dataLunga(g).toLowerCase()}.`)}" target="_blank" rel="noopener" class="mt-1 text-xs font-bold text-primary underline">Chiedi su WhatsApp</a>` : ''}
             </div>`;
     }
     return `<div class="${grande ? 'space-y-3' : 'h-full flex flex-col gap-2'}">` + D.fasce.map((f) => grande
@@ -185,7 +185,7 @@ function renderCalendario() {
 
         <p class="mt-6 flex items-start gap-2 text-sm text-gray-500 dark:text-gray-400">
             <span class="material-icons text-lg text-primary" aria-hidden="true">info</span>
-            Scegli giorno e fascia: l'orario preciso te lo proponiamo noi alla conferma. Si richiede almeno ${D.anticipo} giorni prima.
+            Scegli giorno e fascia: l'orario preciso te lo proponiamo noi alla conferma. Ogni sabato e domenica si può richiedere a partire da una settimana prima.
         </p>`;
 }
 
@@ -225,7 +225,7 @@ function apriRichiesta(data, fasciaScelta) {
             </div>
             <h2 class="relative mt-5 text-3xl sm:text-4xl font-black uppercase tracking-tight leading-[0.95]">Allenati con James</h2>
             <p class="relative mt-2 font-bold text-secondary">${esc(giorno)}</p>
-            <p class="relative mt-1 text-sm text-white/70">È una richiesta: ti contattiamo per confermare orario e sede (${esc(D.sedi.join(', '))}). Si paga sul posto.</p>
+            <p class="relative mt-1 text-sm text-white/70">È una richiesta: ti contattiamo per confermare orario e sede (${esc(D.sedi.join(', '))}). Si paga dopo la conferma.</p>
         </div>
         <form class="px-5 sm:px-8 py-7" novalidate>
             <div class="space-y-5">

@@ -1,8 +1,8 @@
 // Navbar di I Follow Beach Volley, iniettata in #navbar-placeholder su ogni pagina.
 //
-// Le pagine la caricano come "navbar.js?v=AAAA-MM-GG" (lo stesso vale per footer.js): il sito dice ai browser
-// di tenere i file in memoria per ore, quindi dopo una modifica al menu cambia la data in tutte le pagine,
-// altrimenti chi ha già visitato il sito continua a vedere il menu vecchio.
+// Le pagine la caricano come "navbar.js?v=<versione>" (lo stesso vale per footer.js): il sito dice ai browser
+// di tenere i file in memoria per ore, quindi dopo una modifica al menu cambia la versione in tutte le pagine,
+// altrimenti chi ha già visitato il sito continua a vedere il menu vecchio. Basta una stringa nuova (es. la data).
 //
 // Due soluzioni distinte:
 //  - Desktop (lg, ≥1024px): barra bianca in alto con tutte le voci in orizzontale + CTA. Nessun hamburger.
@@ -197,7 +197,7 @@ function renderMobileTabs(b, page) {
             <li>
                 <button type="button" data-chooser="${i}" aria-expanded="false" aria-controls="mobile-chooser-${i}"
                         class="relative w-full flex flex-col items-center gap-0.5 py-1 text-[10px] font-bold uppercase tracking-wide ${active ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">
-                    ${tab.accent ? `<span class="relative w-8 h-8 -my-1 rounded-full bg-[#ff4fa3]/15 ring-2 ring-[#ff4fa3]/60 text-[#e0388a] flex items-center justify-center">
+                    ${tab.accent ? `<span class="relative w-7 h-7 -mb-1 rounded-full bg-[#ff4fa3]/15 ring-2 ring-[#ff4fa3]/60 text-[#e0388a] flex items-center justify-center">
                         <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1" aria-hidden="true">${tab.icon}</span>
                         <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#ff4fa3] ring-2 ring-white dark:ring-background-dark animate-pulse" aria-hidden="true"></span>
                     </span>` : `<span class="material-symbols-outlined text-2xl" style="${active ? "font-variation-settings:'FILL' 1" : ''}" aria-hidden="true">${tab.icon}</span>`}
