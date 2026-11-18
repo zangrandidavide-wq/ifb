@@ -22,7 +22,7 @@ Supabase → **Edge Functions** → **Secrets** (oppure `npx supabase secrets se
 | Nome | Valore |
 | --- | --- |
 | `RESEND_API_KEY` | la chiave API di Resend |
-| `PERSONAL_FROM` | mittente su un dominio verificato in Resend, es. `IFB Personal <personal@tuodominio.it>` |
+| `PERSONAL_FROM` | mittente su un dominio verificato in Resend, `IFB Personal <personal@ifollowbv.it>` (il dominio ifollowbv.it è già verificato su Resend) |
 | `PERSONAL_DESTINATARI` | `zangrandi.davide@gmail.com,ifollowbv@gmail.com` (per aggiungere James basta aggiungere il suo indirizzo) |
 | `WEBHOOK_SECRET` | una stringa casuale lunga, la stessa del punto 4 |
 

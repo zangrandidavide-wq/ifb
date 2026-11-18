@@ -3,15 +3,19 @@
 //
 // Secret richiesti (Supabase → Edge Functions → Secrets):
 //   RESEND_API_KEY        chiave API di Resend
-//   PERSONAL_FROM         mittente verificato su Resend, es. "IFB Personal <personal@tuodominio.it>"
+//   PERSONAL_FROM         mittente verificato su Resend, "IFB Personal <personal@ifollowbv.it>"
 //   PERSONAL_DESTINATARI  indirizzi da avvisare, separati da virgola
 //   WEBHOOK_SECRET        stringa casuale, uguale all'header x-webhook-secret del Database Webhook
 
-const SESSIONI: Record<string, string> = {
-    individuale: 'Individuale',
-    coppia: 'In coppia',
-    gruppo: 'Piccolo gruppo',
+const FASCE: Record<string, string> = {
+    mattina: 'Mattina (9–13)',
+    pomeriggio: 'Pomeriggio (13–18)',
+    sera: 'Sera (18–21)',
+    indifferente: 'Indifferente',
 };
+
+// Prezzi a persona, 90 minuti, campo incluso (come in personal-data.js)
+const PREZZI: Record<number, number> = { 1: 130, 2: 75, 3: 55, 4: 45, 6: 30 };
 
 const esc = (s: unknown) =>
     String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -21,13 +25,6 @@ function dataLunga(iso: string) {
         weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Rome',
     });
     return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function fascia(ora: string, durata: number) {
-    const [h, m] = ora.split(':').map(Number);
-    const fine = h * 60 + m + durata;
-    const f = (min: number) => `${Math.floor(min / 60)}:${String(min % 60).padStart(2, '0')}`;
-    return `${f(h * 60 + m)}–${f(fine)}`;
 }
 
 // Numero per il link WhatsApp: solo cifre, con prefisso italiano se manca
@@ -51,13 +48,17 @@ Deno.serve(async (req) => {
     }
 
     const destinatari = (Deno.env.get('PERSONAL_DESTINATARI') || '').split(',').map((s) => s.trim()).filter(Boolean);
-    const quando = `${dataLunga(r.data)} · ${fascia(r.ora_inizio, r.durata)}`;
-    const sessione = SESSIONI[r.sessione] || r.sessione;
+    const giorno = dataLunga(r.data);
+    const fascia = FASCE[r.fascia] || r.fascia;
+    const n = Number(r.atleti);
+    const atleti = `${n} ${n === 1 ? 'atleta' : 'atleti'}` + (PREZZI[n] ? ` · ${PREZZI[n]} € a persona (${PREZZI[n] * n} € in tutto)` : '');
+    const quando = `${giorno}, ${fascia.toLowerCase()}`;
     const wa = `https://wa.me/${numeroWa(r.telefono)}?text=${encodeURIComponent(`Ciao ${r.nome}, siamo IFB: abbiamo ricevuto la tua richiesta per il personal con James (${quando}).`)}`;
 
     const righe: [string, string][] = [
-        ['Quando', quando],
-        ['Sessione', sessione],
+        ['Giorno', giorno],
+        ['Fascia', fascia],
+        ['Atleti', atleti],
         ['Livello', r.livello],
         ['Nome', r.nome],
         ['Email', r.email],
@@ -79,7 +80,7 @@ Deno.serve(async (req) => {
     <a href="${esc(wa)}" style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:999px">Scrivi su WhatsApp</a>
     <a href="mailto:${esc(r.email)}" style="display:inline-block;margin-left:8px;background:#191022;color:#fff;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:999px">Rispondi via email</a>
   </p>
-  <p style="margin:16px 0 0;font-size:12px;color:#6b7280">Rispondendo a questa email scrivi direttamente a ${esc(r.nome)}. È una richiesta da confermare: sede e orario definitivi vanno comunicati a chi l'ha inviata.</p>
+  <p style="margin:16px 0 0;font-size:12px;color:#6b7280">Rispondendo a questa email scrivi direttamente a ${esc(r.nome)}. È una richiesta da confermare: orario e sede vanno comunicati a chi l'ha inviata.</p>
 </div>`;
 
     const text = [
@@ -100,7 +101,7 @@ Deno.serve(async (req) => {
             from: Deno.env.get('PERSONAL_FROM'),
             to: destinatari,
             reply_to: r.email,
-            subject: `Personal con James: ${r.nome}, ${quando}`,
+            subject: `Personal con James: ${r.nome}, ${giorno}`,
             html,
             text,
         }),

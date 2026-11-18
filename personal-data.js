@@ -1,36 +1,40 @@
-// Personal con James Martins (personal.html): listino e sessioni del weekend.
+// Personal con James Martins (personal.html): listino, fasce orarie e giorni del weekend.
 // File modificabile a mano: la pagina si aggiorna da sola, non serve toccare l'HTML.
 //
-//  listino   → le card dei prezzi e la scelta "Tipo di sessione" nel modulo.
-//              id: breve, senza spazi. È quello che arriva nell'email e nel database:
-//              se ne aggiungi uno nuovo, aggiungilo anche alla lista in supabase/personal.sql.
-//              prezzo: numero in euro (null = "Prezzo su richiesta"); unita: es. "a persona".
-//  sessioni  → le sessioni di ogni settimana, sabato ('sab') e domenica ('dom').
-//              inizio "HH:MM", durata in minuti.
-//  chiusure  → weekend o giorni senza sessioni (festività, tornei): date "AAAA-MM-GG".
-//  dal / al  → periodo in cui si possono richiedere sessioni.
-//  preavviso → ore minime tra la richiesta e l'inizio della sessione.
+//  james / ifb → i due listini (prezzi a persona, campo incluso), per numero di atleti.
+//                Si richiede dal sito solo il personal con James; per i Personal IFB si scrive alla segreteria.
+//                Se cambi i numeri di atleti di James, aggiornali anche in supabase/personal.sql.
+//  fasce       → fasce orarie tra cui scegliere: lo slot preciso lo assegna IFB alla conferma.
+//  anticipo    → giorni minimi tra oggi e la sessione richiesta.
+//  dal / al    → periodo in cui si possono richiedere sessioni.
+//  chiusure    → sabati o domeniche senza sessioni (festività, eventi): date "AAAA-MM-GG".
 
 window.PERSONAL_JAMES = {
     dal: '2026-11-21',
     al: '2027-07-11',
-    preavviso: 24,
+    anticipo: 7,
+    sedi: ['Basiglio', 'Pero', 'Corsico'],
 
-    // DA COMPLETARE con il listino ufficiale
-    listino: [
-        { id: 'individuale', nome: 'Individuale', persone: '1 atleta', durata: 60, prezzo: null, unita: '', desc: 'Lavoro tecnico su misura, tutta l\'attenzione di James su di te.' },
-        { id: 'coppia', nome: 'In coppia', persone: '2 atleti', durata: 90, prezzo: null, unita: 'a persona', desc: 'Per te e il tuo compagno: tecnica, intesa e situazioni di gioco.' },
-        { id: 'gruppo', nome: 'Piccolo gruppo', persone: '3–4 atleti', durata: 90, prezzo: null, unita: 'a persona', desc: 'Esercitazioni a tema e gioco, con correzioni individuali.' },
-    ],
+    james: {
+        nome: 'Personal con James',
+        sigla: 'HPP by JM',
+        coach: 'Con James Martins',
+        durata: 90,
+        quando: 'Sabato e domenica',
+        prezzi: { 1: 130, 2: 75, 3: 55, 4: 45, 6: 30 },
+    },
+    ifb: {
+        nome: 'Personal IFB',
+        coach: 'Con i coach IFB',
+        durata: 60,
+        quando: 'In settimana',
+        prezzi: { 1: 80, 2: 50, 3: 35, 4: 30, 6: 20 },
+    },
 
-    // DA CONFERMARE: orari d'esempio
-    sessioni: [
-        { giorno: 'sab', inizio: '09:30', durata: 90 },
-        { giorno: 'sab', inizio: '11:00', durata: 90 },
-        { giorno: 'sab', inizio: '14:30', durata: 90 },
-        { giorno: 'sab', inizio: '16:00', durata: 90 },
-        { giorno: 'dom', inizio: '09:30', durata: 90 },
-        { giorno: 'dom', inizio: '11:00', durata: 90 },
+    fasce: [
+        { id: 'mattina', nome: 'Mattina', ore: '9–13', icona: 'wb_sunny' },
+        { id: 'pomeriggio', nome: 'Pomeriggio', ore: '13–18', icona: 'light' },
+        { id: 'sera', nome: 'Sera', ore: '18–21', icona: 'nightlight' },
     ],
 
     chiusure: ['2026-12-26', '2026-12-27', '2027-01-02', '2027-01-03', '2027-03-28'],
