@@ -84,12 +84,13 @@ begin
     if p_data is null or extract(isodow from p_data) not in (6, 7) then
         raise exception 'I personal con James sono solo il sabato e la domenica.' using errcode = 'P0001';
     end if;
-    -- Almeno una settimana di anticipo (la pagina usa "anticipo: 7" in personal-data.js)
-    if p_data < v_oggi + 7 then
-        raise exception 'I personal si richiedono almeno una settimana prima: per date più vicine scrivici su WhatsApp.' using errcode = 'P0001';
+    -- La richiesta si apre una settimana prima e resta aperta fino al giorno stesso
+    -- (la pagina usa "apertura: 7" in personal-data.js)
+    if p_data < v_oggi then
+        raise exception 'Questa data è già passata.' using errcode = 'P0001';
     end if;
-    if p_data > v_oggi + 300 then
-        raise exception 'Si possono richiedere solo date dei prossimi mesi.' using errcode = 'P0001';
+    if p_data > v_oggi + 7 then
+        raise exception 'Le richieste si aprono una settimana prima: per questa data torna dal %.', to_char(p_data - 7, 'DD/MM') using errcode = 'P0001';
     end if;
 
     -- Limiti contro invii ripetuti e spam

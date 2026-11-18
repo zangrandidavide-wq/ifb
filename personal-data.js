@@ -5,14 +5,15 @@
 //                Si richiede dal sito solo il personal con James; per i Personal IFB si scrive alla segreteria.
 //                Se cambi i numeri di atleti di James, aggiornali anche in supabase/personal.sql.
 //  fasce       → fasce orarie tra cui scegliere: lo slot preciso lo assegna IFB alla conferma.
-//  anticipo    → giorni minimi tra oggi e la sessione richiesta.
+//  apertura    → quanti giorni prima si apre la richiesta di un sabato o di una domenica
+//                (7 = si può richiedere dalla settimana prima fino al giorno stesso).
 //  dal / al    → periodo in cui si possono richiedere sessioni.
 //  chiusure    → sabati o domeniche senza sessioni (festività, eventi): date "AAAA-MM-GG".
 
 window.PERSONAL_JAMES = {
     dal: '2026-11-21',
     al: '2027-07-11',
-    anticipo: 7,
+    apertura: 7,
     sedi: ['Basiglio', 'Pero', 'Corsico'],
 
     james: {
