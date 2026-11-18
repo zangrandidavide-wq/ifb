@@ -1,4 +1,5 @@
-// Email di avviso per ogni nuova richiesta di Personal con James (tabella personal_richieste).
+// Email di avviso per ogni nuova richiesta di personal (tabella personal_richieste):
+// Personal con James nel weekend (tipo 'james') o Personal IFB in settimana (tipo 'ifb').
 // La chiama il Database Webhook "avvisa-personal" (INSERT su personal_richieste): vedi README.md qui accanto.
 //
 // Secret richiesti (Supabase → Edge Functions → Secrets):
@@ -6,16 +7,34 @@
 //   PERSONAL_FROM         mittente verificato su Resend, "IFB Personal <personal@ifollowbv.it>"
 //   PERSONAL_DESTINATARI  indirizzi da avvisare, separati da virgola
 //   WEBHOOK_SECRET        stringa casuale, uguale all'header x-webhook-secret del Database Webhook
+// Facoltativo:
+//   PERSONAL_EMAIL_ALLENATORI  email dei coach IFB, in JSON con i nomi come in personal-data.js:
+//                              {"Sofia Arcaini":"sofia@esempio.it","Mirko Bernini":"mirko@esempio.it"}
+//                              Se il corsista sceglie un coach che è nell'elenco, l'avviso arriva anche a lui.
 
 const FASCE: Record<string, string> = {
     mattina: 'Mattina (9–13)',
     pomeriggio: 'Pomeriggio (13–18)',
-    sera: 'Sera (18–21)',
+    sera: 'Sera (18–23)',
     indifferente: 'Indifferente',
 };
 
-// Prezzi a persona, 90 minuti, campo incluso (come in personal-data.js)
-const PREZZI: Record<number, number> = { 1: 130, 2: 75, 3: 55, 4: 45, 6: 30 };
+// Prezzi a persona, campo incluso (come in personal-data.js)
+const TIPI: Record<string, { nome: string; durata: number; prezzi: Record<number, number>; colore: string }> = {
+    james: { nome: 'Personal con James', durata: 90, prezzi: { 1: 130, 2: 75, 3: 55, 4: 45, 6: 30 }, colore: '#7f13ec' },
+    ifb: { nome: 'Personal IFB', durata: 60, prezzi: { 1: 80, 2: 50, 3: 35, 4: 30, 6: 20 }, colore: '#0d9488' },
+};
+
+function emailAllenatore(nome: string | null) {
+    if (!nome) return null;
+    try {
+        const elenco = JSON.parse(Deno.env.get('PERSONAL_EMAIL_ALLENATORI') || '{}');
+        return typeof elenco[nome] === 'string' && elenco[nome].includes('@') ? elenco[nome].trim() : null;
+    } catch {
+        console.error('PERSONAL_EMAIL_ALLENATORI non è un JSON valido');
+        return null;
+    }
+}
 
 const esc = (s: unknown) =>
     String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -47,17 +66,22 @@ Deno.serve(async (req) => {
         return new Response('Evento ignorato', { status: 200 });
     }
 
+    const tipo = TIPI[r.tipo] || TIPI.james;
     const destinatari = (Deno.env.get('PERSONAL_DESTINATARI') || '').split(',').map((s) => s.trim()).filter(Boolean);
+    const coachEmail = r.tipo === 'ifb' ? emailAllenatore(r.allenatore) : null;
+    if (coachEmail && !destinatari.includes(coachEmail)) destinatari.push(coachEmail);
+    const PREZZI = tipo.prezzi;
     const giorno = dataLunga(r.data);
     const fascia = FASCE[r.fascia] || r.fascia;
     const n = Number(r.atleti);
     const atleti = `${n} ${n === 1 ? 'atleta' : 'atleti'}` + (PREZZI[n] ? ` · ${PREZZI[n]} € a persona (${PREZZI[n] * n} € in tutto)` : '');
     const quando = `${giorno}, ${fascia.toLowerCase()}`;
-    const wa = `https://wa.me/${numeroWa(r.telefono)}?text=${encodeURIComponent(`Ciao ${r.nome}, siamo IFB: abbiamo ricevuto la tua richiesta per il personal con James (${quando}).`)}`;
+    const wa = `https://wa.me/${numeroWa(r.telefono)}?text=${encodeURIComponent(`Ciao ${r.nome}, siamo IFB: abbiamo ricevuto la tua richiesta per il ${tipo.nome} (${quando}).`)}`;
 
     const righe: [string, string][] = [
         ['Giorno', giorno],
         ['Fascia', fascia],
+        ...(r.tipo === 'ifb' ? [['Coach', r.allenatore || 'Indifferente'] as [string, string]] : []),
         ['Atleti', atleti],
         ['Livello', r.livello],
         ['Nome', r.nome],
@@ -68,9 +92,9 @@ Deno.serve(async (req) => {
 
     const html = `
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;color:#191022">
-  <div style="background:#7f13ec;color:#fff;padding:24px;border-radius:16px 16px 0 0">
+  <div style="background:${tipo.colore};color:#fff;padding:24px;border-radius:16px 16px 0 0">
     <p style="margin:0;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#FFD700;font-weight:bold">Nuova richiesta</p>
-    <h1 style="margin:6px 0 0;font-size:24px">Personal con James</h1>
+    <h1 style="margin:6px 0 0;font-size:24px">${tipo.nome} · ${tipo.durata} min</h1>
     <p style="margin:6px 0 0;font-size:16px">${esc(quando)}</p>
   </div>
   <table style="width:100%;border-collapse:collapse;background:#f7f6f8;border-radius:0 0 16px 16px">
@@ -84,7 +108,7 @@ Deno.serve(async (req) => {
 </div>`;
 
     const text = [
-        `Nuova richiesta - Personal con James`,
+        `Nuova richiesta - ${tipo.nome} (${tipo.durata} min)`,
         '',
         ...righe.map(([k, v]) => `${k}: ${v}`),
         '',
@@ -101,7 +125,7 @@ Deno.serve(async (req) => {
             from: Deno.env.get('PERSONAL_FROM'),
             to: destinatari,
             reply_to: r.email,
-            subject: `Personal con James: ${r.nome}, ${giorno}`,
+            subject: `${tipo.nome}: ${r.nome}, ${giorno}${r.tipo === 'ifb' && r.allenatore ? ` (con ${r.allenatore})` : ''}`,
             html,
             text,
         }),
