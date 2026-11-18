@@ -1,31 +1,13 @@
 // Calendario tornei di tornei.html: card dei tornei pubblicati e modulo di iscrizione.
 // Parla con Supabase via fetch (senza libreria) per tenere la pagina leggera:
 // le uniche due chiamate sono le funzioni tornei_pubblici() e iscrivi_torneo().
-import { SUPABASE_URL, SUPABASE_ANON_KEY, locandinaUrl, SESSO, LIVELLO, barreLivello, formula, dataEOra, esc } from './config.js';
+import { rpc, locandinaUrl, SESSO, LIVELLO, barreLivello, formula, dataEOra, esc } from './config.js';
 import { cardTorneo, statoTorneo, aggiornaCountdown, attivaTilt, COLORE_SESSO } from './card.js';
 
 const grid = document.getElementById('tornei-grid');
 const conteggio = document.getElementById('tornei-conteggio');
 const dialog = document.getElementById('iscrizione-dialog');
 let tornei = [];
-
-async function rpc(name, body = {}) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
-        method: 'POST',
-        headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
-    const data = await res.json().catch(() => null);
-    if (!res.ok) {
-        // I messaggi di iscrivi_torneo() sono già scritti per chi si iscrive (P0001 = "raise exception")
-        throw new Error(data?.code === 'P0001' ? data.message : 'Qualcosa è andato storto. Riprova tra poco.');
-    }
-    return data;
-}
 
 function renderVuoto(icona, titolo, testo) {
     grid.className = 'grid';

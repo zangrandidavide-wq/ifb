@@ -156,6 +156,8 @@ module.exports = {
         },
     }),
 
+    'personal': page({ ...BASE_COLORS, ...ACCENT, ...SAND }),
+
     'privacy': page({ ...BASE_COLORS, ...SAND }),
 
     'rookie-league': page({ ...BASE_COLORS, ...SAND }),

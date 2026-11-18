@@ -28,6 +28,12 @@ const SEDI = [
     { label: 'Corsico', href: 'sedi.html#corsico' },
 ];
 
+// Corsi: i corsi della stagione e i personal del weekend con James
+const CORSI = [
+    { label: 'Corsi e prezzi', href: 'IFB_corsi.html', icon: 'sports_volleyball', desc: 'Corsi per livello e listino' },
+    { label: 'Personal con James', href: 'personal.html', icon: 'event_available', desc: 'Allenamenti nel weekend' },
+];
+
 // Eventi: più pagine distinte. Su desktop sono una tendina, su mobile un piccolo menu sopra la tab bar.
 const EVENTI = [
     { label: 'Tornei & eventi', href: 'tornei.html', icon: 'emoji_events', desc: 'Tornei IFB ed eventi' },
@@ -47,7 +53,7 @@ const STAFF = [
 // Per nascondere temporaneamente una voce basta commentarla.
 const DESKTOP_LINKS = [
     { label: 'Home', href: './', icon: 'home', compactIcon: true },
-    { label: 'Corsi', href: 'IFB_corsi.html' },
+    { label: 'Corsi', href: 'IFB_corsi.html', children: CORSI },
     { label: 'Sedi', href: 'sedi.html', children: SEDI },
     { label: 'Staff', href: 'coaches.html', children: STAFF },
     { label: 'Tornei ed Eventi', href: 'tornei.html', children: EVENTI, highlight: true },
@@ -56,7 +62,7 @@ const DESKTOP_LINKS = [
 // Tab bar mobile: le 4 destinazioni più frequenti + "Altro". Al centro la CTA.
 const MOBILE_TABS = [
     { label: 'Home', href: './', icon: 'home' },
-    { label: 'Corsi', href: 'IFB_corsi.html', icon: 'sports_volleyball' },
+    { label: 'Corsi', icon: 'sports_volleyball', children: CORSI },
     { cta: true },
     { label: 'Eventi', icon: 'emoji_events', children: EVENTI },
     { more: true },
@@ -145,7 +151,7 @@ function renderDesktopLinks(b, page) {
 
 function renderMobileTabs(b, page) {
     const sheetPages = MOBILE_SHEET.flatMap((i) => [i.href, ...(i.children || []).map((c) => c.href.split('#')[0])]);
-    return MOBILE_TABS.map((tab) => {
+    return MOBILE_TABS.map((tab, i) => {
         if (tab.cta) {
             return `
                 <li class="flex justify-center">
@@ -175,7 +181,7 @@ function renderMobileTabs(b, page) {
             // Più pagine sotto la stessa voce: il tocco apre una scelta rapida sopra la tab bar
             return `
             <li>
-                <button id="mobile-events-btn" type="button" aria-expanded="false" aria-controls="mobile-chooser"
+                <button type="button" data-chooser="${i}" aria-expanded="false" aria-controls="mobile-chooser-${i}"
                         class="relative w-full flex flex-col items-center gap-0.5 py-1 text-[10px] font-bold uppercase tracking-wide ${active ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">
                     <span class="material-symbols-outlined text-2xl" style="${active ? "font-variation-settings:'FILL' 1" : ''}" aria-hidden="true">${tab.icon}</span>
                     ${tab.label}
@@ -195,14 +201,17 @@ function renderMobileTabs(b, page) {
     }).join('');
 }
 
+// Voci della tab bar con più pagine: il tocco apre una scelta rapida sopra la voce stessa
 function renderMobileChooser(b, page) {
-    const tab = MOBILE_TABS.find((t) => t.children);
-    if (!tab) return '';
-    const tiles = tab.children.map((c, i, tutte) => {
-        const active = c.href === page;
-        // Numero dispari di voci: l'ultima occupa tutta la riga
-        const largo = tutte.length % 2 === 1 && i === tutte.length - 1;
-        return `
+    const scelte = MOBILE_TABS.map((tab, i) => {
+        if (!tab.children) return '';
+        // Centro della colonna della voce nella tab bar: lì punta la freccetta
+        const x = `${(i + 0.5) * (100 / MOBILE_TABS.length)}%`;
+        const tiles = tab.children.map((c, j, tutte) => {
+            const active = c.href === page;
+            // Numero dispari di voci: l'ultima occupa tutta la riga
+            const largo = tutte.length % 2 === 1 && j === tutte.length - 1;
+            return `
             <li class="${largo ? 'col-span-2' : ''}">
                 <a href="${b}${c.href}" ${active ? 'aria-current="page"' : ''}
                    class="chooser-link flex h-full flex-col rounded-3xl border p-4 active:scale-[.97] transition-transform ${active ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}">
@@ -213,14 +222,16 @@ function renderMobileChooser(b, page) {
                     <span class="mt-1.5 block text-[11px] leading-snug ${active ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}">${c.desc}</span>
                 </a>
             </li>`;
-    }).join('');
-    return `
-    <div id="mobile-chooser-backdrop" class="lg:hidden fixed inset-0 z-30 hidden"></div>
-    <div id="mobile-chooser" aria-label="${tab.label}" inert
-         class="is-closed lg:hidden fixed inset-x-3 z-[45] bottom-[calc(4.25rem+env(safe-area-inset-bottom)+.6rem)] rounded-[1.75rem] bg-background-light/95 dark:bg-slate-950/95 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-2xl shadow-primary/20 p-2.5">
+        }).join('');
+        return `
+    <div id="mobile-chooser-${i}" aria-label="${tab.label}" inert style="transform-origin:${x} 100%"
+         class="mobile-chooser is-closed lg:hidden fixed inset-x-3 z-[45] bottom-[calc(4.25rem+env(safe-area-inset-bottom)+.6rem)] rounded-[1.75rem] bg-background-light/95 dark:bg-slate-950/95 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-2xl shadow-primary/20 p-2.5">
         <ul class="grid grid-cols-2 gap-2.5">${tiles}</ul>
-        <span class="absolute -bottom-1.5 left-[70%] -translate-x-1/2 w-3 h-3 rotate-45 bg-background-light dark:bg-slate-950 border-r border-b border-gray-200 dark:border-gray-800" aria-hidden="true"></span>
+        <span class="absolute -bottom-1.5 -translate-x-1/2 w-3 h-3 rotate-45 bg-background-light dark:bg-slate-950 border-r border-b border-gray-200 dark:border-gray-800" style="left:${x}" aria-hidden="true"></span>
     </div>`;
+    }).join('');
+    if (!scelte) return '';
+    return `<div id="mobile-chooser-backdrop" class="lg:hidden fixed inset-0 z-30 hidden"></div>${scelte}`;
 }
 
 function renderMobileSheet(b, page) {
@@ -288,13 +299,13 @@ function renderNavbar() {
             body { padding-bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
             #cookie-banner { bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
         }
-        #mobile-chooser { transition: opacity .2s ease, transform .3s cubic-bezier(.32,.72,0,1); transform-origin: 70% 100%; }
-        #mobile-chooser.is-closed { opacity: 0; transform: translateY(12px) scale(.96); pointer-events: none; }
-        #mobile-chooser li { transition: opacity .3s ease, transform .35s cubic-bezier(.32,.72,0,1); }
-        #mobile-chooser li:nth-child(2) { transition-delay: .05s; }
-        #mobile-chooser li:nth-child(3) { transition-delay: .1s; }
-        #mobile-chooser.is-closed li { opacity: 0; transform: translateY(10px); }
-        @media (prefers-reduced-motion: reduce) { #mobile-chooser, #mobile-chooser li { transition: none; } }
+        .mobile-chooser { transition: opacity .2s ease, transform .3s cubic-bezier(.32,.72,0,1); }
+        .mobile-chooser.is-closed { opacity: 0; transform: translateY(12px) scale(.96); pointer-events: none; }
+        .mobile-chooser li { transition: opacity .3s ease, transform .35s cubic-bezier(.32,.72,0,1); }
+        .mobile-chooser li:nth-child(2) { transition-delay: .05s; }
+        .mobile-chooser li:nth-child(3) { transition-delay: .1s; }
+        .mobile-chooser.is-closed li { opacity: 0; transform: translateY(10px); }
+        @media (prefers-reduced-motion: reduce) { .mobile-chooser, .mobile-chooser li { transition: none; } }
         #mobile-sheet { transition: transform .3s cubic-bezier(.32,.72,0,1); }
         #mobile-sheet-backdrop { transition: opacity .25s ease; }
         @media (prefers-reduced-motion: reduce) { #mobile-sheet, #mobile-sheet-backdrop { transition: none; } }
@@ -341,7 +352,7 @@ function renderNavbar() {
         </ul>
     </nav>
 
-    <!-- MOBILE: SCELTA RAPIDA "EVENTI" -->
+    <!-- MOBILE: SCELTE RAPIDE "CORSI" ED "EVENTI" -->
     ${renderMobileChooser(b, page)}
 
     <!-- MOBILE: FOGLIO "ALTRO" (contenuto creato al primo tocco) -->
@@ -376,26 +387,34 @@ function renderNavbar() {
     desktopMq.addEventListener('change', syncScrollListener);
     syncScrollListener();
 
-    // Scelta rapida "Eventi" (solo mobile)
-    const evBtn = document.getElementById('mobile-events-btn');
-    const chooser = document.getElementById('mobile-chooser');
+    // Scelte rapide "Corsi" ed "Eventi" (solo mobile): una sola aperta alla volta
+    const chooserBtns = [...document.querySelectorAll('[data-chooser]')];
     const chooserBackdrop = document.getElementById('mobile-chooser-backdrop');
-    function setChooser(open) {
-        if (!evBtn || !chooser) return;
-        chooser.classList.toggle('is-closed', !open);
-        chooser.toggleAttribute('inert', !open);
-        chooserBackdrop.classList.toggle('hidden', !open);
-        evBtn.setAttribute('aria-expanded', String(open));
-    }
-    if (evBtn && chooser) {
-        evBtn.addEventListener('click', () => setChooser(chooser.classList.contains('is-closed')));
-        chooserBackdrop.addEventListener('click', () => setChooser(false));
-        chooser.querySelectorAll('.chooser-link').forEach((a) => a.addEventListener('click', () => setChooser(false)));
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !chooser.classList.contains('is-closed')) { setChooser(false); evBtn.focus(); }
+    let chooserAperto = null;
+    function setChooser(i) {   // i = indice della voce da aprire, null = chiudi tutto
+        chooserAperto = i;
+        chooserBtns.forEach((btn) => {
+            const open = btn.dataset.chooser === i;
+            const el = document.getElementById(`mobile-chooser-${btn.dataset.chooser}`);
+            el.classList.toggle('is-closed', !open);
+            el.toggleAttribute('inert', !open);
+            btn.setAttribute('aria-expanded', String(open));
         });
-        window.addEventListener('scroll', () => setChooser(false), { passive: true });
-        desktopMq.addEventListener('change', (e) => { if (e.matches) setChooser(false); });
+        if (chooserBackdrop) chooserBackdrop.classList.toggle('hidden', i == null);
+    }
+    if (chooserBtns.length) {
+        chooserBtns.forEach((btn) => btn.addEventListener('click', () => setChooser(chooserAperto === btn.dataset.chooser ? null : btn.dataset.chooser)));
+        chooserBackdrop.addEventListener('click', () => setChooser(null));
+        document.querySelectorAll('.chooser-link').forEach((a) => a.addEventListener('click', () => setChooser(null)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && chooserAperto != null) {
+                const btn = chooserBtns.find((x) => x.dataset.chooser === chooserAperto);
+                setChooser(null);
+                btn?.focus();
+            }
+        });
+        window.addEventListener('scroll', () => { if (chooserAperto != null) setChooser(null); }, { passive: true });
+        desktopMq.addEventListener('change', (e) => { if (e.matches) setChooser(null); });
     }
 
     // Foglio "Altro" (solo mobile)
@@ -405,7 +424,7 @@ function renderNavbar() {
     if (!moreBtn || !sheet || !backdrop) return;
 
     function openSheet() {
-        setChooser(false);
+        setChooser(null);
         if (!sheet.childElementCount) {
             sheet.innerHTML = renderMobileSheet(b, page);
             sheet.querySelectorAll('.sheet-link').forEach((a) => a.addEventListener('click', closeSheet));
