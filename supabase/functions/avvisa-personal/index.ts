@@ -7,10 +7,6 @@
 //   PERSONAL_FROM         mittente verificato su Resend, "IFB Personal <personal@ifollowbv.it>"
 //   PERSONAL_DESTINATARI  indirizzi da avvisare, separati da virgola
 //   WEBHOOK_SECRET        stringa casuale, uguale all'header x-webhook-secret del Database Webhook
-// Facoltativo:
-//   PERSONAL_EMAIL_ALLENATORI  email dei coach IFB, in JSON con i nomi come in personal-data.js:
-//                              {"Sofia Arcaini":"sofia@esempio.it","Mirko Bernini":"mirko@esempio.it"}
-//                              Se il corsista sceglie un coach che è nell'elenco, l'avviso arriva anche a lui.
 
 const FASCE: Record<string, string> = {
     mattina: 'Mattina (9–13)',
@@ -24,17 +20,6 @@ const TIPI: Record<string, { nome: string; durata: number; prezzi: Record<number
     james: { nome: 'Personal con James', durata: 90, prezzi: { 1: 130, 2: 75, 3: 55, 4: 45, 6: 30 }, colore: '#7f13ec' },
     ifb: { nome: 'Personal IFB', durata: 60, prezzi: { 1: 80, 2: 50, 3: 35, 4: 30, 6: 20 }, colore: '#0d9488' },
 };
-
-function emailAllenatore(nome: string | null) {
-    if (!nome) return null;
-    try {
-        const elenco = JSON.parse(Deno.env.get('PERSONAL_EMAIL_ALLENATORI') || '{}');
-        return typeof elenco[nome] === 'string' && elenco[nome].includes('@') ? elenco[nome].trim() : null;
-    } catch {
-        console.error('PERSONAL_EMAIL_ALLENATORI non è un JSON valido');
-        return null;
-    }
-}
 
 const esc = (s: unknown) =>
     String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -68,8 +53,6 @@ Deno.serve(async (req) => {
 
     const tipo = TIPI[r.tipo] || TIPI.james;
     const destinatari = (Deno.env.get('PERSONAL_DESTINATARI') || '').split(',').map((s) => s.trim()).filter(Boolean);
-    const coachEmail = r.tipo === 'ifb' ? emailAllenatore(r.allenatore) : null;
-    if (coachEmail && !destinatari.includes(coachEmail)) destinatari.push(coachEmail);
     const PREZZI = tipo.prezzi;
     const giorno = dataLunga(r.data);
     const fascia = FASCE[r.fascia] || r.fascia;
@@ -81,7 +64,7 @@ Deno.serve(async (req) => {
     const righe: [string, string][] = [
         ['Giorno', giorno],
         ['Fascia', fascia],
-        ...(r.tipo === 'ifb' ? [['Coach', r.allenatore || 'Indifferente'] as [string, string]] : []),
+        ...(r.tipo === 'ifb' ? [['Sede', r.sede || 'Indifferente'] as [string, string]] : []),
         ['Atleti', atleti],
         ['Livello', r.livello],
         ['Nome', r.nome],
@@ -125,7 +108,7 @@ Deno.serve(async (req) => {
             from: Deno.env.get('PERSONAL_FROM'),
             to: destinatari,
             reply_to: r.email,
-            subject: `${tipo.nome}: ${r.nome}, ${giorno}${r.tipo === 'ifb' && r.allenatore ? ` (con ${r.allenatore})` : ''}`,
+            subject: `${tipo.nome}: ${r.nome}, ${giorno}${r.tipo === 'ifb' && r.sede ? ` (${r.sede})` : ''}`,
             html,
             text,
         }),

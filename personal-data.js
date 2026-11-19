@@ -1,11 +1,11 @@
-// Personal (personal.html): listini, giorni, fasce orarie e allenatori.
+// Personal (personal.html): listini, giorni, fasce orarie e sedi.
 // File modificabile a mano: la pagina si aggiorna da sola, non serve toccare l'HTML.
 //
 //  james → Personal con James: sabato e domenica, mattina o pomeriggio.
 //  ifb   → Personal IFB con gli altri coach: dal lunedì al venerdì, solo la sera.
-//          allenatori = elenco tra cui scegliere (nome come nella pagina Staff, foto).
+//          Il corsista sceglie la sede (tra quelle in sedi); l'allenatore lo assegna IFB.
 //  In entrambi: prezzi a persona, campo incluso, per numero di atleti.
-//  Se cambi numeri di atleti, fasce o allenatori, aggiornali anche in supabase/personal.sql
+//  Se cambi numeri di atleti, fasce o sedi, aggiornali anche in supabase/personal.sql
 //  (e i prezzi in supabase/functions/avvisa-personal/index.ts).
 //
 //  fasce     → fasce orarie tra cui scegliere: lo slot preciso lo assegna IFB alla conferma.
@@ -41,19 +41,6 @@ window.PERSONAL_JAMES = {
         prezzi: { 1: 80, 2: 50, 3: 35, 4: 30, 6: 20 },
         fasce: [
             { id: 'sera', nome: 'Sera', ore: '18–23', icona: 'nightlight' },
-        ],
-        allenatori: [
-            { nome: 'Sofia Arcaini', foto: 'arcaini.jpeg' },
-            { nome: 'Giovanni Latini', foto: 'giovanni-mobile.webp' },
-            { nome: 'Edgardo Ceccoli', foto: 'eddi.webp' },
-            { nome: 'Davide Lucca', foto: 'noccone.webp' },
-            { nome: 'Davide Zangrandi', foto: 'zangrandi.webp' },
-            { nome: 'Nicolò Passi', foto: 'passi.webp' },
-            { nome: 'Stefania Verrigni', foto: 'verrigni.webp' },
-            { nome: 'Antonino Cappadonna', foto: 'cappa.webp' },
-            { nome: 'Yari Mannino', foto: 'yari.webp' },
-            { nome: 'Alessandro Pesce', foto: 'fish.webp' },
-            { nome: 'Mirko Bernini', foto: 'mirko.webp' },
         ],
     },
 
