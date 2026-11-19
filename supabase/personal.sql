@@ -1,6 +1,6 @@
 -- Personal (personal.html): richieste di sessione.
 --  - sabato e domenica: Personal con James (tipo 'james'), mattina o pomeriggio;
---  - dal lunedì al venerdì: Personal IFB con gli altri coach (tipo 'ifb'), solo la sera, con allenatore facoltativo.
+--  - dal lunedì al venerdì: Personal IFB con gli altri coach (tipo 'ifb'), solo la sera, con la sede a scelta (facoltativa).
 -- Da eseguire una volta in Supabase → SQL Editor (progetto gwqtkuwfipgvegeipygh). Si può rieseguire senza danni.
 --
 -- Come funziona:
@@ -35,11 +35,13 @@ revoke all on public.personal_richieste from anon, authenticated;
 -- Personal IFB in settimana (aggiunti dopo: su una tabella già creata si aggiungono qui)
 alter table public.personal_richieste add column if not exists tipo text not null default 'james';
 alter table public.personal_richieste add column if not exists allenatore text;
+alter table public.personal_richieste add column if not exists sede text;
 alter table public.personal_richieste drop constraint if exists personal_richieste_tipo_check;
 alter table public.personal_richieste add constraint personal_richieste_tipo_check check (tipo in ('james', 'ifb'));
 
--- La versione precedente della funzione non aveva l'allenatore: va tolta, altrimenti ne restano due
+-- Le versioni precedenti della funzione vanno tolte, altrimenti ne restano più di una
 drop function if exists public.richiedi_personal(date, text, int, text, text, text, text, text, boolean);
+drop function if exists public.richiedi_personal(date, text, int, text, text, text, text, text, boolean, text);
 
 create or replace function public.richiedi_personal(
     p_data      date,
@@ -51,7 +53,7 @@ create or replace function public.richiedi_personal(
     p_telefono  text,
     p_note      text default null,
     p_privacy   boolean default false,
-    p_allenatore text default null
+    p_sede      text default null
 ) returns uuid
 language plpgsql
 security definer
@@ -70,7 +72,7 @@ begin
     p_email    := lower(btrim(coalesce(p_email, '')));
     p_telefono := btrim(coalesce(p_telefono, ''));
     p_note     := nullif(btrim(coalesce(p_note, '')), '');
-    p_allenatore := nullif(btrim(coalesce(p_allenatore, '')), '');
+    p_sede     := nullif(btrim(coalesce(p_sede, '')), '');
 
     if length(p_nome) < 2 or length(p_nome) > 80 then
         raise exception 'Scrivi nome e cognome.' using errcode = 'P0001';
@@ -98,23 +100,20 @@ begin
     end if;
 
     -- Sabato e domenica: James, mattina o pomeriggio. Dal lunedì al venerdì: coach IFB, solo la sera.
-    -- (fasce e allenatori come in personal-data.js)
+    -- (fasce e sedi come in personal-data.js)
     if extract(isodow from p_data) in (6, 7) then
         v_tipo := 'james';
         if p_fascia is null or p_fascia not in ('mattina', 'pomeriggio', 'indifferente') then
             raise exception 'Nel weekend si può scegliere la mattina o il pomeriggio.' using errcode = 'P0001';
         end if;
-        p_allenatore := null;
+        p_sede := null;   -- nel weekend la sede la decide IFB
     else
         v_tipo := 'ifb';
         if p_fascia is distinct from 'sera' then
             raise exception 'In settimana i personal sono solo la sera.' using errcode = 'P0001';
         end if;
-        if p_allenatore is not null and p_allenatore not in (
-            'Sofia Arcaini', 'Giovanni Latini', 'Edgardo Ceccoli', 'Davide Lucca', 'Davide Zangrandi', 'Nicolò Passi',
-            'Stefania Verrigni', 'Antonino Cappadonna', 'Yari Mannino', 'Alessandro Pesce', 'Mirko Bernini'
-        ) then
-            raise exception 'Scegli un allenatore dall''elenco.' using errcode = 'P0001';
+        if p_sede is not null and p_sede not in ('Basiglio', 'Pero', 'Corsico') then
+            raise exception 'Scegli una sede dall''elenco.' using errcode = 'P0001';
         end if;
     end if;
     -- La richiesta si apre una settimana prima e resta aperta fino al giorno stesso
@@ -137,8 +136,8 @@ begin
         raise exception 'Stiamo ricevendo molte richieste: riprova tra poco o scrivici su WhatsApp.' using errcode = 'P0001';
     end if;
 
-    insert into personal_richieste (tipo, data, fascia, allenatore, atleti, livello, nome, email, telefono, note)
-    values (v_tipo, p_data, p_fascia, p_allenatore, p_atleti, p_livello, p_nome, p_email, p_telefono, p_note)
+    insert into personal_richieste (tipo, data, fascia, sede, atleti, livello, nome, email, telefono, note)
+    values (v_tipo, p_data, p_fascia, p_sede, p_atleti, p_livello, p_nome, p_email, p_telefono, p_note)
     returning id into v_id;
 
     return v_id;

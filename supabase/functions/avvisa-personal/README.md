@@ -25,7 +25,6 @@ Supabase → **Edge Functions** → **Secrets** (oppure `npx supabase secrets se
 | `PERSONAL_FROM` | mittente su un dominio verificato in Resend, `IFB Personal <personal@ifollowbv.it>` (il dominio ifollowbv.it è già verificato su Resend) |
 | `PERSONAL_DESTINATARI` | `zangrandi.davide@gmail.com,ifollowbv@gmail.com` (per aggiungere James basta aggiungere il suo indirizzo) |
 | `WEBHOOK_SECRET` | una stringa casuale lunga, la stessa del punto 4 |
-| `PERSONAL_EMAIL_ALLENATORI` | *facoltativo*: email dei coach IFB in JSON, con i nomi scritti come in `personal-data.js`, ad esempio `{"Sofia Arcaini":"sofia@esempio.it"}`. Quando un corsista sceglie quel coach per un Personal IFB, l'avviso arriva anche a lui. Si può aggiungere o cambiare in qualsiasi momento, senza ripubblicare la funzione. |
 
 ## 4. Database Webhook
 Supabase → **Database** → **Webhooks** → *Create a new hook*:

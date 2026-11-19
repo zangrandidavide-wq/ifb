@@ -1,7 +1,7 @@
 // Personal (personal.html): listini, calendario settimanale e richiesta di sessione.
 //  - sabato e domenica: Personal con James, mattina o pomeriggio (colore viola);
-//  - dal lunedì al venerdì: Personal IFB con gli altri coach, solo la sera (colore verde acqua).
-// I dati (prezzi, fasce, allenatori, chiusure) sono in personal-data.js. La richiesta va alla funzione
+//  - dal lunedì al venerdì: Personal IFB con gli altri coach, solo la sera, con la sede a scelta (colore verde acqua).
+// I dati (prezzi, fasce, sedi, chiusure) sono in personal-data.js. La richiesta va alla funzione
 // richiedi_personal() su Supabase (supabase/personal.sql), che la salva e fa partire l'email.
 // Non ci sono orari fissi: si sceglie giorno e fascia, lo slot lo assegna IFB alla conferma.
 import { rpc, esc, dataLunga } from './tornei/config.js';
@@ -295,24 +295,21 @@ const label = 'block text-[11px] font-black uppercase tracking-[0.15em] text-gra
 const LIVELLI = ['Principiante', 'Intermedio', 'Avanzato', 'Agonista'];
 const INDIFFERENTE = { id: 'indifferente', nome: 'Indifferente', ore: 'va bene tutto' };
 
-// Scelta dell'allenatore IFB: scorre di lato sul telefono, griglia sugli schermi più larghi
-function sceltaAllenatore(scelta) {
-    const voce = (valore, testa, nome, cognome, checked) => `
-        <label class="${scelta} snap-start shrink-0 w-[5.25rem] sm:w-auto p-2">
-            <input type="radio" name="allenatore" value="${esc(valore)}" ${checked ? 'checked' : ''} class="sr-only" />
-            ${testa}
-            <span class="mt-1.5 block text-[11px] font-black leading-tight text-gray-900">${esc(nome)}</span>
-            <span class="block text-[10px] font-semibold leading-tight text-gray-500">${esc(cognome)}</span>
+// Scelta della sede per i Personal IFB (nel weekend la sede la decide IFB in base alle richieste)
+function sceltaSede(scelta) {
+    const voce = (valore, nome, sotto, icona, checked) => `
+        <label class="${scelta} p-3">
+            <input type="radio" name="sede" value="${esc(valore)}" ${checked ? 'checked' : ''} class="sr-only" />
+            <span class="material-icons text-teal-600" aria-hidden="true">${icona}</span>
+            <span class="block font-black text-gray-900">${esc(nome)}</span>
+            <span class="block text-xs font-semibold text-gray-500">${esc(sotto)}</span>
         </label>`;
     return `
         <fieldset class="min-w-0">
-            <legend class="${label}">Con quale coach? <span class="normal-case tracking-normal font-semibold text-gray-400">· se non hai preferenze lo scegliamo noi</span></legend>
-            <div class="relative mt-2 -mx-5 px-5 scroll-px-5 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-6 gap-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                ${voce('', '<span class="mx-auto w-14 h-14 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center"><span class="material-icons" aria-hidden="true">groups</span></span>', 'Indifferente', 'chi è libero', true)}
-                ${D.ifb.allenatori.map((a) => {
-                    const [nome, ...resto] = a.nome.split(' ');
-                    return voce(a.nome, `<img src="${esc(a.foto)}" alt="" loading="lazy" class="mx-auto w-14 h-14 rounded-full object-cover object-top bg-gray-100" />`, nome, resto.join(' '), false);
-                }).join('')}
+            <legend class="${label}">In quale sede?</legend>
+            <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                ${D.sedi.map((s) => voce(s, s, 'sede IFB', 'location_on', false)).join('')}
+                ${voce('', 'Indifferente', 'va bene tutto', 'map', true)}
             </div>
         </fieldset>`;
 }
@@ -339,7 +336,7 @@ function apriRichiesta(data, fasciaScelta) {
             </div>
             <h2 class="relative mt-5 text-3xl sm:text-4xl font-black uppercase tracking-tight leading-[0.95]">${tipo === 'james' ? 'Allenati con James' : 'Personal IFB'}</h2>
             <p class="relative mt-2 font-bold ${tipo === 'james' ? 'text-secondary' : 'text-teal-300'}">${esc(giorno)}${unica ? ` · ${esc(unica.nome.toLowerCase())}, ${unica.ore}` : ''}</p>
-            <p class="relative mt-1 text-sm text-white/70">È una richiesta: ti contattiamo per confermare orario e sede (${esc(D.sedi.join(', '))}). Si paga dopo la conferma.</p>
+            <p class="relative mt-1 text-sm text-white/70">È una richiesta: ti contattiamo per confermare ${tipo === 'james' ? `orario e sede (${esc(D.sedi.join(', '))})` : 'orario e allenatore'}. Si paga dopo la conferma.</p>
         </div>
         <form class="px-5 sm:px-8 py-7" novalidate>
             <div class="space-y-5">
@@ -355,7 +352,7 @@ function apriRichiesta(data, fasciaScelta) {
                             </label>`).join('')}
                     </div>
                 </fieldset>`}
-                ${tipo === 'ifb' ? sceltaAllenatore(scelta) : ''}
+                ${tipo === 'ifb' ? sceltaSede(scelta) : ''}
                 <fieldset>
                     <legend class="${label}">Quanti atleti? <span class="normal-case tracking-normal font-semibold text-gray-400">· prezzo a persona, campo incluso</span></legend>
                     <div class="mt-2 grid grid-cols-5 gap-2">
@@ -416,7 +413,7 @@ function apriRichiesta(data, fasciaScelta) {
         if (f.get('sito')) return; // bot
         const fascia = fasce.find((x) => x.id === f.get('fascia'));
         const n = Number(f.get('atleti'));
-        const coach = f.get('allenatore') || null;
+        const sede = f.get('sede') || null;
 
         const btn = form.querySelector('[type=submit]');
         btn.disabled = true;
@@ -432,10 +429,10 @@ function apriRichiesta(data, fasciaScelta) {
                 p_telefono: f.get('telefono'),
                 p_note: f.get('note') || null,
                 p_privacy: true,
-                p_allenatore: coach,
+                ...(tipo === 'ifb' ? { p_sede: sede } : {}),
             });
         } catch (e) {
-            const chi = tipo === 'james' ? 'un personal con James' : `un Personal IFB${coach ? ` con ${coach}` : ''}`;
+            const chi = tipo === 'james' ? 'un personal con James' : `un Personal IFB${sede ? ` a ${sede}` : ''}`;
             const testo = `Ciao! Vorrei richiedere ${chi}: ${giorno}, ${fascia.nome.toLowerCase()}, ${atleti(n)}. Livello: ${f.get('livello')}. Sono ${f.get('nome')}.`;
             mostraErrore(e.message, linkWhatsApp(testo));
             btn.disabled = false;
@@ -451,7 +448,7 @@ function apriRichiesta(data, fasciaScelta) {
                     </span>
                     <p class="mt-6 text-[11px] font-black uppercase tracking-[0.25em] text-secondary">Richiesta inviata</p>
                     <h2 class="mt-2 text-4xl font-black uppercase leading-none">Ci sentiamo<br>a breve!</h2>
-                    <p class="mt-4 text-white/75 max-w-sm mx-auto">Abbiamo ricevuto la tua richiesta per <b class="text-white">${esc(giorno)}</b> (${esc(fascia.nome.toLowerCase())}, ${atleti(n)}${coach ? `, con ${esc(coach)}` : ''}). Ti contattiamo al più presto per confermare orario e sede.</p>
+                    <p class="mt-4 text-white/75 max-w-sm mx-auto">Abbiamo ricevuto la tua richiesta per <b class="text-white">${esc(giorno)}</b> (${esc(fascia.nome.toLowerCase())}, ${atleti(n)}${sede ? `, a ${esc(sede)}` : ''}). Ti contattiamo al più presto per confermare ${tipo === 'james' ? 'orario e sede' : 'orario e allenatore'}.</p>
                     <button type="button" data-chiudi class="mt-8 inline-flex bg-secondary text-gray-900 font-black uppercase tracking-wide px-10 py-3.5 rounded-2xl">Chiudi</button>
                 </div>
             </div>`;
