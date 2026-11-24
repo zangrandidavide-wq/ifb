@@ -11,6 +11,8 @@
 //
 // Per aggiungere una tappa copia un blocco qui sotto e cambia i dati.
 // Orari in ora italiana ("2026-11-29T14:00"), il link è quello di "Condividi" nell'app Dink.
+// Dopo ogni modifica cambia il "?v=..." con cui tornei.html e rookie-league.html caricano questo file:
+// Cloudflare tiene in cache gli script per qualche ora.
 
 import { dataLunga, esc } from './config.js';
 
@@ -36,6 +38,8 @@ export const TORNEI_PARTNER = [
         indirizzo: 'Via Guglielmo Pepe, 68 – Paderno Dugnano',
         organizzatore: 'Argo Sport Waves',
         link: 'https://dink.social/events/01a1c59d-32dd-78b7-8ade-451efe036ac6',
+        // Facoltativa: foto a lato della scheda, ritagliata sulla parte importante (viene mostrata dall'alto)
+        immagine: 'rookie-league-paderno.webp',
     },
 ];
 
@@ -88,14 +92,19 @@ function scheda(t) {
     return `
     <article id="${esc(t.id)}" class="scroll-mt-28 overflow-hidden rounded-[2rem] bg-white dark:bg-gray-900 ring-1 ring-gray-100 dark:ring-gray-800 shadow-sm target:ring-2 target:ring-primary">
         <div class="flex flex-col sm:flex-row">
-            <div class="t-art relative shrink-0 sm:w-48 flex sm:flex-col items-center justify-center gap-3 sm:gap-1 px-6 py-5 text-white text-center">
+            ${t.immagine
+        ? `<div class="relative shrink-0 aspect-[4/3] sm:aspect-auto sm:w-72 bg-gray-100 dark:bg-gray-800">
+                <img src="${esc(t.immagine)}" alt="${esc(`Locandina ${t.titolo}`)}" loading="lazy" decoding="async"
+                     class="absolute inset-0 w-full h-full object-cover object-top" />
+            </div>`
+        : `<div class="t-art relative shrink-0 sm:w-48 flex sm:flex-col items-center justify-center gap-3 sm:gap-1 px-6 py-5 text-white text-center">
                 <span class="text-[11px] font-bold uppercase tracking-[0.25em] text-white/80">${esc(t.tappa)}</span>
                 <span class="font-poster text-6xl leading-none">${Number(gg)}</span>
                 <span class="text-sm font-bold uppercase tracking-[0.25em]">${esc(nomeMese)}</span>
-            </div>
+            </div>`}
             <div class="flex-1 p-6 md:p-7 flex flex-col gap-4">
                 <div>
-                    <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-primary">Rookie League 2026/2027</p>
+                    <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-primary">Rookie League 2026/2027 · ${esc(t.tappa)}</p>
                     <h3 class="mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">${esc(t.titolo)}</h3>
                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">In collaborazione con <b class="text-gray-900 dark:text-white">${esc(t.organizzatore)}</b></p>
                 </div>
