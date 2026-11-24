@@ -30,7 +30,7 @@ export const TORNEI_PARTNER = [
         checkIn: '13:00',
         iscrizioniFino: '2026-11-27T12:00',
         formula: '2x2 misto',
-        livello: 'Base / Intermedio',
+        livello: 'Base',
         tipologia: 'Indoor',
         maxSquadre: 16,
         quota: '25 € a persona',
