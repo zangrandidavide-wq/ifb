@@ -1,21 +1,7 @@
 // Generato da tornei_lombardia.py: non modificare a mano.
 // Tornei di beach volley FIPAV in Lombardia (fonte: federvolley.it / myvolley.net).
-window.LOMBARDIA_AGGIORNATO = '2026-11-18';
+window.LOMBARDIA_AGGIORNATO = '2026-11-26';
 window.TORNEI_LOMBARDIA = [
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "bronze", "gen": "F", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Bronze", "codice": "BVLF12537", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "gold", "gen": "M", "comune": "Cellatica", "prov": "BS", "club": "ASD ATLETICO BEACH VOLLEY", "tip": "Campionato Italiano per società Gold", "codice": "BVLM12535", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "bronze", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Bronze", "codice": "BVLM12262", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "silver", "gen": "F", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Silver", "codice": "BVLF12264", "stagione": "2026"},
-    {"data": "2026-11-21", "fine": "2026-11-21", "liv": "silver", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Silver", "codice": "BVLM12263", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "beginner", "gen": "M", "comune": "Botticino", "prov": "BS", "club": "BEACH FLY S.S.D. R.L.", "tip": "Campionato Italiano per società Beginners", "codice": "BVLM12241", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "gold", "gen": "F", "comune": "Botticino", "prov": "BS", "club": "BEACH FLY S.S.D. R.L.", "tip": "Campionato Italiano per società Gold", "codice": "BVLF12243", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "gold", "gen": "M", "comune": "Botticino", "prov": "BS", "club": "BEACH FLY S.S.D. R.L.", "tip": "Campionato Italiano per società Gold", "codice": "BVLM12242", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "bronze", "gen": "F", "comune": "Mariano Comense", "prov": "CO", "club": "BEACH LIFE AND VOLLEY SOUL", "tip": "Campionato Italiano per società Bronze", "codice": "BVLF12659", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "bronze", "gen": "M", "comune": "Mariano Comense", "prov": "CO", "club": "BEACH LIFE AND VOLLEY SOUL", "tip": "Campionato Italiano per società Bronze", "codice": "BVLM12658", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "beginner", "gen": "F", "comune": "Milano", "prov": "MI", "club": "MIBEACH", "tip": "Campionato Italiano per società Beginners", "codice": "BVLF12124", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "beginner", "gen": "M", "comune": "Milano", "prov": "MI", "club": "MIBEACH", "tip": "Campionato Italiano per società Beginners", "codice": "BVLM12123", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "silver", "gen": "F", "comune": "Milano", "prov": "MI", "club": "MIBEACH", "tip": "Campionato Italiano per società Silver", "codice": "BVLF12125", "stagione": "2026"},
-    {"data": "2026-11-22", "fine": "2026-11-22", "liv": "silver", "gen": "M", "comune": "Milano", "prov": "MI", "club": "MIBEACH", "tip": "Campionato Italiano per società Silver", "codice": "BVLM12126", "stagione": "2026"},
     {"data": "2026-11-28", "fine": "2026-11-28", "liv": "beginner", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Beginners", "codice": "BVLM12265", "stagione": "2026"},
     {"data": "2026-11-28", "fine": "2026-11-28", "liv": "bronze", "gen": "F", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Bronze", "codice": "BVLF12266", "stagione": "2026"},
     {"data": "2026-11-28", "fine": "2026-11-28", "liv": "silver", "gen": "M", "comune": "Cremona", "prov": "CR", "club": "CREMONARENA ASD", "tip": "Campionato Italiano per società Silver", "codice": "BVLM12267", "stagione": "2026"},
